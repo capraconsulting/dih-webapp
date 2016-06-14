@@ -1,0 +1,39 @@
+{
+  "name": "dih-webapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.jsx",
+  "scripts": {
+     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --open --hot --inline --host 0.0.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capraconsulting/dih-webapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://jira.capraconsulting.no/secure/RapidBoard.jspa?rapidView=90&projectKey=DIH&view=planning.nodetail"
+  },
+  "homepage": "https://github.com/capraconsulting/dih-webapp#readme",
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "eslint": "^2.12.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.1",
+    "eslint-plugin-jsx-a11y": "^1.4.2",
+    "eslint-plugin-react": "^5.1.1",
+    "node-libs-browser": "^1.0.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "lodash": "^4.13.1",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-router": "^2.4.1"
+  }
+}
