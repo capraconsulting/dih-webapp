@@ -3,7 +3,7 @@ import hotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
 import path from 'path';
 import express from 'express';
-import config from './base.config';
+import config from './dev.config';
 
 const app = express();
 

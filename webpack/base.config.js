@@ -2,7 +2,6 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
-    entry: './src/app.jsx',
     output: {
         path: path.join(__dirname, '..', 'public'),
         filename: 'bundle.js',
