@@ -1,9 +1,12 @@
+const path = require('path');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
     entry: './src/app.jsx',
     output: {
-        filename: 'build/bundle.js'
+        path: path.join(__dirname, '..', 'public'),
+        filename: 'bundle.js',
+        publicPath: ''
     },
     module: {
         loaders: [
@@ -19,6 +22,10 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loaders: ['style', 'css', 'postcss', 'sass']
+            },
+            {
+                test: /\.css$/,
+                loader: ['style', 'css', 'postcss']
             }
         ]
     },

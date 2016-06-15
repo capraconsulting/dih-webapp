@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
-require('../assets/css/app.scss');
+import '../public/styles/app.scss';
 
 function HelloWorld() {
     return (
