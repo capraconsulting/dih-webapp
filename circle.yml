@@ -2,10 +2,9 @@
 machine:
     environment:
         NODE_ENV: test
-
 dependencies:
+    pre:
         - npm install
-
 test:
     override:
         - npm test
