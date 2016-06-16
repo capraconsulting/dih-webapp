@@ -1,9 +1,12 @@
 ## circle.yml
 machine:
+    node:
+        version: 4.2.1
     environment:
         NODE_ENV: test
 dependencies:
     pre:
+        - npm install -g npm
         - npm install
 test:
     override:
