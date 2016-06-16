@@ -1,0 +1,11 @@
+## circle.yml
+machine:
+    environment:
+        NODE_ENV: test
+
+dependencies:
+        - npm install
+
+test:
+    override:
+        - npm test
