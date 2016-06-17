@@ -15,4 +15,4 @@ $ docker run --name dih-webapp -p 3000:3000 -d dih-webapp npm run dev
 ```
 
 The project can now be reached by navigating your browser to
-[http://localhost:49160](http://localhost:49160).
+[http://localhost:3000](http://localhost:3000).
