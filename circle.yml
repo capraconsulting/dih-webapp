@@ -9,8 +9,8 @@ dependencies:
         - npm install -g npm
         - npm install
         - npm run selenium install
-        - npm run dev
-            background: true
 test:
     override:
+        - npm run dev
+            background: true
         - npm test
