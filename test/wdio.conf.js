@@ -1,4 +1,3 @@
-const childProcess = require('child_process');
 
 exports.config = {
     //
@@ -136,14 +135,6 @@ exports.config = {
     // =====
     // Hooks
     // =====
-    onPrepare() {
-        childProcess.execSync('npm run dev > /dev/null 2>&1 &');
-        childProcess.execSync('npm run selenium start > /dev/null 2>&1 &');
-    },
-
-    onComplete() {
-        childProcess.execSync('pkill -f selenium-standalone');
-    }
     // WebdriverIO provides several hooks you can use to interfere with
     // the test process in order to enhance
     // it and to build services around it. You can either apply a single function or an array of
