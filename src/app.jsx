@@ -1,15 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './styles/main.scss';
 
-import '../public/styles/app.scss';
+import Header from './commons/Header.jsx';
+import Sidebar from './commons/Sidebar.jsx';
 
-function HelloWorld() {
+import MyProfile from './sections/my-profile/MyProfile.jsx';
+
+function Main() {
     return (
-        <h1>Hei, Capra!</h1>
+        <div>
+            <Header />
+            <div className="wrapper">
+                <Sidebar />
+                <div className="main-content">
+                    <MyProfile />
+                </div>
+            </div>
+        </div>
     );
 }
 
 ReactDOM.render(
-  React.createElement(HelloWorld, null),
+  React.createElement(Main, null),
   document.getElementById('app')
 );
