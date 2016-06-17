@@ -1,7 +1,9 @@
 @import 'vendor/normalize.css';
 @import 'vendor/skeleton.css';
 
-@import 'base/base.scss';
 @import 'base/constants.scss';
+@import 'base/base.scss';
 
+@import 'commons/header.scss';
 @import 'commons/sidebar.scss';
+@import 'commons/accordion-menu.scss';

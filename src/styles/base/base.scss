@@ -17,6 +17,11 @@ svg {
   height: 100%;
 }
 
+.container {
+  width: 100%;
+  max-width: 100%;
+}
+
 //------------------------------------------------
 //	TYPOGRAPHY
 // -----------------------------------------------
@@ -24,3 +29,25 @@ svg {
 html {
   font-size: 62.5%;
 }
+
+body {
+    font-family: $font-stack;
+}
+
+//------------------------------------------------
+//	SITE LAYOUT
+// -----------------------------------------------
+.wrapper {
+    display: flex;
+    min-height: 100%;
+}
+
+.main-content {
+    padding: 1rem;
+    flex: 1;
+}
+
+//------------------------------------------------
+//	SHAME, SHAME, SHAME
+// -----------------------------------------------
+// Things that I don't know or am to lazy to put in the right place
