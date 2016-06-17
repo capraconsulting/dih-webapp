@@ -11,7 +11,7 @@ $ docker build -t dih-webapp .
 After build, the project can be ran using:
 
 ```bash
-$ docker run -p 49160:3000 -d dih-webapp
+$ docker run --name dih-webapp -p 3000:3000 -d dih-webapp npm run dev
 ```
 
 The project can now be reached by navigating your browser to
