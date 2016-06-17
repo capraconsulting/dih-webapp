@@ -6,18 +6,10 @@ child.spawn('npm', ['run', 'dev'], {
     detached: true
 });
 
-let test;
 setTimeout(() => {
-    test = child.spawn('wdio', ['test/wdio.conf.js'], {});
-    test.stdout.on('data', (data) => {
-        console.log(`${data}`); // eslint-disable-line
-    });
-
-    test.stderr.on('data', (data) => {
-        console.log(`${data}`); // eslint-disable-line
-    });
-
-    test.on('close', (code) => {
-        console.log(`child process exited with code ${code}`); // eslint-disable-line
+    child.exec('wdio test/wdio.conf.js', (err, stdout, stderr) => {
+        console.log(err); // eslint-disable-line
+        console.log(stdout); // eslint-disable-line
+        console.log(stderr); // eslint-disable-line
     });
 }, 5000);
