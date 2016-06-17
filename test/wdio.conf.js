@@ -130,7 +130,7 @@ exports.config = {
         tags: [], // only execute the features or scenarios with tags matching the expression
         timeout: 20000,   // timeout for step definitions
         ignoreUndefinedDefinitions: false // Enable to treat undefined definitions as warnings.
-    },
+    }
     //
     // =====
     // Hooks
