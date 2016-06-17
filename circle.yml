@@ -11,6 +11,4 @@ dependencies:
         - npm run selenium install
 test:
     override:
-        - npm run dev
-            background: true
         - npm test
