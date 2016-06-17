@@ -137,7 +137,6 @@ exports.config = {
     // Hooks
     // =====
     onPrepare() {
-        childProcess.execSync('npm run selenium install');
         childProcess.execSync('npm run selenium start > /dev/null 2>&1 &');
     },
 
