@@ -10,14 +10,14 @@ let test;
 setTimeout(() => {
     test = child.spawn('wdio', ['test/wdio.conf.js'], {});
     test.stdout.on('data', (data) => {
-        console.log(`${data}`);
+        console.log(`${data}`); // eslint-disable-line
     });
 
     test.stderr.on('data', (data) => {
-        console.log(`${data}`);
+        console.log(`${data}`); // eslint-disable-line
     });
 
     test.on('close', (code) => {
-        console.log(`child process exited with code ${code}`);
+        console.log(`child process exited with code ${code}`); // eslint-disable-line
     });
 }, 5000);
