@@ -1,3 +1,5 @@
+const childProcess = require('child_process');
+
 exports.config = {
     //
     // ==================
@@ -101,7 +103,6 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    // services: [],//
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: http://webdriver.io/guide/testrunner/frameworks.html
@@ -130,11 +131,19 @@ exports.config = {
         tags: [], // only execute the features or scenarios with tags matching the expression
         timeout: 20000,   // timeout for step definitions
         ignoreUndefinedDefinitions: false // Enable to treat undefined definitions as warnings.
-    }
+    },
     //
     // =====
     // Hooks
     // =====
+    onPrepare() {
+        childProcess.execSync('npm run selenium install');
+        childProcess.execSync('npm run selenium start > /dev/null 2>&1 &');
+    },
+
+    onComplete() {
+        childProcess.execSync('pkill -f selenium-standalone');
+    }
     // WebdriverIO provides several hooks you can use to interfere with
     // the test process in order to enhance
     // it and to build services around it. You can either apply a single function or an array of

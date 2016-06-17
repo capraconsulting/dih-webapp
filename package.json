@@ -7,6 +7,7 @@
     "dev": "./node_modules/babel-cli/bin/babel-node.js webpack/server",
     "test": "npm run lint && npm run e2e",
     "lint": "eslint --ignore-path .gitignore .",
+    "selenium": "selenium-standalone",
     "e2e": "wdio test/wdio.conf.js"
   },
   "repository": {
@@ -48,6 +49,7 @@
     "style-loader": "^0.13.1",
     "wdio": "^0.3.1",
     "wdio-cucumber-framework": "^0.1.0",
+    "wdio-selenium-standalone-service": "0.0.5",
     "webdriverio": "^4.0.9",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
