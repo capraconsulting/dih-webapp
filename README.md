@@ -1,5 +1,13 @@
 # dih-webapp
 
+## Setup
+
+1. Install Node and Npm.
+2. Run `npm install`
+3. Run `npm run dev`
+
+Reach the app on port 3000.
+
 ## Building with Docker
 
 The initial building of the web app can be done using the following command:
