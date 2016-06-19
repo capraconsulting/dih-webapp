@@ -1,18 +1,44 @@
 import React from 'react';
 
 class NewDestinationForm extends React.Component {
-    render() {
-        return (<form id="newDestinationForm">
-            <label for="destinationName">Name of destination:</label>
-            <input type="text" id="destinationName" ref={input => { this._name = input; } } />
-            <button onClick="{this._handleSubmit.bind(this)}" type="submit">Add</button>
-            </form>
-        );
+    constructor() {
+        super();
+        this.state = {
+            destinationName: ''
+        };
     }
 
-    _handleSubmit(event) {
-        event.preventDefault();
-        // @TODO Push data to remote server
+    handleSubmit(e) {
+        e.preventDefault();
+        const newDestinatioName = this.state.destinationName;
+        if (!newDestinatioName) {
+            return;
+        }
+        // @TODO Push to server
+        this.setState({
+            destinationName: ''
+        });
+    }
+
+    handleTextChange(e) {
+        this.setState({
+            destinationName: e.target.value
+        });
+    }
+
+    render() {
+        return (
+            <form id="newDestinationForm" onSubmit={this.handleSubmit.bind(this)}>
+                <label htmlFor="destinationName">Name of destination:</label>
+                <input
+                    type="text"
+                    id="destinationName"
+                    value={this.state.destinationName}
+                    onChange={this.handleTextChange.bind(this)}
+                />
+                <button type="submit">Add</button>
+            </form>
+        );
     }
 }
 
