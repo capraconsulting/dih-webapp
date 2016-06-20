@@ -25,12 +25,14 @@ deployment:
     prod:
         branch: master
         commands:
+            - npm run build
             - docker build -t dih-webapp .
             - docker tag dih-webapp:latest $EXTERNAL_REGISTRY:latest
             - docker push $EXTERNAL_REGISTRY:latest
     staging:
         branch: dev
         commands:
+            - npm run build
             - docker build -t dih-webapp-dev .
             - docker tag dih-webapp-dev:latest $EXTERNAL_REGISTRY-dev:latest
             - docker push $EXTERNAL_REGISTRY-dev:latest
