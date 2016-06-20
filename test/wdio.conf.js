@@ -1,5 +1,4 @@
 /* eslint-disable no-var */
-var selenium;
 var app;
 
 var config = {
@@ -15,6 +14,7 @@ var config = {
     specs: [
         './test/features/**/*.feature'
     ],
+    services: ['selenium-standalone'],
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
@@ -147,11 +147,6 @@ var config = {
     // Gets executed once before all workers get launched.
     onPrepare() {
         const child = require('child_process');
-
-        selenium = child.spawn('npm', ['run', 'selenium', 'start'], {
-            detached: true,
-            stdio: ['ignore']
-        });
         app = child.spawn('npm', ['run', 'dev'], {
             detached: true,
             stdio: ['ignore']
@@ -207,14 +202,15 @@ var config = {
     // Gets executed after all workers got shut down and the process is about to exit. It is not
     // possible to defer the end of the process using a promise.
     onComplete() {
-        selenium.kill();
         app.kill();
     }
 };
 
 if (process.env.CIRCLECI) {
+    config.services.push('sauce');
     config.user = process.env.SAUCE_USERNAME;
     config.key = process.env.SAUCE_ACCESS_KEY;
+    config.sauceConnect = true;
     config.reporter = 'xunit';
     config.reporterOptions = {
         outputDir: process.env.CIRCLE_TEST_REPORTS
