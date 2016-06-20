@@ -1,4 +1,6 @@
 import React from 'react';
+import router from 'react-router';
+
 import './styles/main.scss';
 
 import Header from './commons/Header.jsx';
@@ -19,5 +21,6 @@ class Main extends React.Component {
         );
     }
 }
+
 
 export default Main;
