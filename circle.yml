@@ -4,11 +4,33 @@ machine:
         version: 6.2.2
     environment:
         NODE_ENV: test
+    services:
+        - docker
+
 dependencies:
     pre:
         - npm install -g npm
         - npm install
         - npm run selenium install
+        - sudo pip install awscli
+        - aws configure set default.region eu-west-1
+        - aws configure set default.output json
+        - eval $(aws ecr get-login --region eu-west-1)
+
 test:
     override:
         - npm test
+
+deployment:
+    prod:
+        branch: master
+        commands:
+            - docker build -t dih-webapp .
+            - docker tag dih-webapp:latest $EXTERNAL_REGISTRY:latest
+            - docker push $EXTERNAL_REGISTRY:latest
+    staging:
+        branch: dev
+        commands:
+            - docker build -t dih-webapp-dev .
+            - docker tag dih-webapp-dev:latest $EXTERNAL_REGISTRY-dev:latest
+            - docker push $EXTERNAL_REGISTRY-dev:latest
