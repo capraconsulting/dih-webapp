@@ -1,5 +1,7 @@
 import React from 'react';
 
+import * as destinationsApi from '../../api/destinations';
+
 class NewDestinationForm extends React.Component {
     constructor() {
         super();
@@ -16,7 +18,7 @@ class NewDestinationForm extends React.Component {
         if (!newDestinatioName) {
             return;
         }
-        // @TODO Push to server
+        destinationsApi.postDestination({ name: this.state.destinationName });
         this.setState({
             destinationName: ''
         });

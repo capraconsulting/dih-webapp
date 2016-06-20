@@ -5,3 +5,10 @@ export function postDestinationSuccess() {
         type: types.ADD_DESTINATION_SUCCESS
     };
 }
+
+export function getDestinationsSuccess(destinations) {
+    return {
+        type: types.GET_DESTINATIONS_SUCCESS,
+        destinations
+    };
+}
