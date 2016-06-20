@@ -1,3 +1,5 @@
+var selenium; // eslint-disable-line
+var app; // eslint-disable-line
 
 exports.config = {
     //
@@ -144,10 +146,17 @@ exports.config = {
     // Gets executed once before all workers get launched.
     onPrepare() {
         const child = require('child_process');
-        child.spawn('npm', ['run', 'dev'], {
-            detached: true
+
+        selenium = child.spawn('npm', ['run', 'selenium', 'start'], {
+            detached: true,
+            stdio: ['ignore']
         });
-    }
+        app = child.spawn('npm', ['run', 'dev'], {
+            detached: true,
+            stdio: ['ignore']
+        });
+        child.execSync('sleep 2');
+    },
     //
     // Gets executed before test execution begins. At this point you can access all global
     // variables, such as `browser`. It is the perfect place to define custom commands.
@@ -196,6 +205,8 @@ exports.config = {
     //
     // Gets executed after all workers got shut down and the process is about to exit. It is not
     // possible to defer the end of the process using a promise.
-    // onComplete: function(exitCode) {
-    // }
+    onComplete() {
+        selenium.kill();
+        app.kill();
+    }
 };

@@ -9,8 +9,6 @@ dependencies:
         - npm install -g npm
         - npm install
         - npm run selenium install
-    post:
-        - babel-node test/start.js
 test:
     override:
         - npm test
