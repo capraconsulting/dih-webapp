@@ -56,7 +56,7 @@ var config = {
     sync: true,
     //
     // Level of logging verbosity: silent | verbose | command | data | result | error
-    logLevel: 'verbose',
+    logLevel: 'result',
     //
     // Enables colors for log output.
     coloredLogs: true,
