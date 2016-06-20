@@ -14,7 +14,8 @@ class SignUpForm extends React.Component {
             firstName: '',
             lastName: '',
             email: '',
-            dateOfBirth: moment().subtract('25', 'years')
+            dateOfBirth: null,
+            message: ''
         };
     }
 
@@ -58,18 +59,27 @@ class SignUpForm extends React.Component {
             return;
         }
 
+        if (moment().subtract(25, 'years').isBefore(newDateOfBirth)) {
+            this.setState({
+                message: 'You must be at least 25 years old to participate!'
+            });
+            return;
+        }
+
         // @TODO Push to server
         this.setState({
             firstName: '',
             lastName: '',
             email: '',
-            dateOfBirth: ''
+            dateOfBirth: null,
+            message: ''
         });
     }
 
     render() {
         return (
             <form id="signUpForm" onSubmit={this.handleSubmit}>
+                <div className="error">{this.state.message}</div>
                 <label htmlFor="firstName">First name:</label>
                 <input
                     type="text"
@@ -91,7 +101,7 @@ class SignUpForm extends React.Component {
                     value={this.state.email}
                     onChange={this.handleEmailChange}
                 />
-                <label htmlFor="dateOfBirth">Date of birth:</label>
+                <label htmlFor="dateOfBirth">Date of birth <em>DD/MM/YYYY</em>:</label>
                 <DataPicker
                     id="dateOfBirth"
                     selected={this.state.dateOfBirth}
