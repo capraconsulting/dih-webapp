@@ -1,17 +1,19 @@
 import React from 'react';
 
-class SignUpLayout extends React.Component {
-    render() {
-        return (
-            <div>
-                <div className="wrapper">
-                    <div className="main-content">
-                        {this.props.children}
-                    </div>
+function SignUpLayout(props) {
+    return (
+        <div>
+            <div className="wrapper">
+                <div className="main-content">
+                    {props.children}
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
+
+SignUpLayout.propTypes = {
+    children: React.PropTypes.object
+};
 
 export default SignUpLayout;
