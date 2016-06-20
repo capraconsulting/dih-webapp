@@ -1,0 +1,2 @@
+// Cestinations
+export const ADD_DESTINATION_SUCCESS = 'ADD_DESTINATION_SUCCESS';
