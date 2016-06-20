@@ -9,6 +9,7 @@ bundle.js
 # Logs and databases #
 ######################
 *.log
+*.log.*
 
 # OS generated files #
 ######################
