@@ -10,7 +10,7 @@ dependencies:
         - npm install
         - npm run selenium install
     post:
-        - java -jar selenium-server-standalone-2.44.0.jar:
+        - npm run selenium start
             background: true
 test:
     override:
