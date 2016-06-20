@@ -3,6 +3,8 @@ import React from 'react';
 class NewDestinationForm extends React.Component {
     constructor() {
         super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
         this.state = {
             destinationName: ''
         };
@@ -28,13 +30,13 @@ class NewDestinationForm extends React.Component {
 
     render() {
         return (
-            <form id="newDestinationForm" onSubmit={this.handleSubmit.bind(this)}>
+            <form id="newDestinationForm" onSubmit={this.handleSubmit}>
                 <label htmlFor="destinationName">Name of destination:</label>
                 <input
                     type="text"
                     id="destinationName"
                     value={this.state.destinationName}
-                    onChange={this.handleTextChange.bind(this)}
+                    onChange={this.handleTextChange}
                 />
                 <button type="submit">Add</button>
             </form>
