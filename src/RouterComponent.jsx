@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 
-import Main from './Main.jsx';
+import MainLayout from './layouts/MainLayout.jsx';
 import MyProfile from './sections/my-profile/MyProfile.jsx';
 import NewDestination from './sections/destinations/NewDestination.jsx';
 
@@ -11,7 +11,7 @@ class RouterComponent extends React.Component {
     render() {
         return (
             <Router history={browserHistory}>
-                <Route path="/" component={Main}>
+                <Route path="/" component={MainLayout}>
                     <Route path="/profile" component={MyProfile} />
                     <Route path="/admin/destinations" component={NewDestination} />
                     <Route path="*" component={NotFound} />

@@ -1,12 +1,10 @@
 import React from 'react';
-import router from 'react-router';
+import '../styles/main.scss';
 
-import './styles/main.scss';
+import Header from '../commons/Header.jsx';
+import Sidebar from '../commons/Sidebar.jsx';
 
-import Header from './commons/Header.jsx';
-import Sidebar from './commons/Sidebar.jsx';
-
-class Main extends React.Component {
+class MainLayout extends React.Component {
     render() {
         return (
             <div>
@@ -23,4 +21,4 @@ class Main extends React.Component {
 }
 
 
-export default Main;
+export default MainLayout;
