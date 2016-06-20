@@ -41,9 +41,14 @@ var config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [{
-        browserName: 'chrome'
-    }],
+    capabilities: [
+        {
+            browserName: 'chrome'
+        },
+        {
+            browserName: 'firefox'
+        }
+    ],
     //
     // ===================
     // Test Configurations
@@ -206,9 +211,11 @@ if (process.env.CIRCLECI) {
     config.user = process.env.SAUCE_USERNAME;
     config.key = process.env.SAUCE_ACCESS_KEY;
     config.sauceConnect = true;
-    config.reporters.push('xunit');
+    config.reporters.push('junit');
     config.reporterOptions = {
-        outputDir: process.env.CIRCLE_TEST_REPORTS
+        junit: {
+            outputDir: process.env.CIRCLE_TEST_REPORTS
+        }
     };
 }
 
