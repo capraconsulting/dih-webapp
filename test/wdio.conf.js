@@ -111,7 +111,7 @@ var config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/guide/testrunner/reporters.html
-    // reporters: ['dot'],//
+    reporters: ['dot'],
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         require: ['./test/steps'], // (file/dir) require files before executing features
@@ -206,7 +206,7 @@ if (process.env.CIRCLECI) {
     config.user = process.env.SAUCE_USERNAME;
     config.key = process.env.SAUCE_ACCESS_KEY;
     config.sauceConnect = true;
-    config.reporter = 'xunit';
+    config.reporters.push('xunit');
     config.reporterOptions = {
         outputDir: process.env.CIRCLE_TEST_REPORTS
     };
