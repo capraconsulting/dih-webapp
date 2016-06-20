@@ -1,7 +1,8 @@
-var selenium; // eslint-disable-line
-var app; // eslint-disable-line
+/* eslint-disable no-var */
+var selenium;
+var app;
 
-exports.config = {
+var config = {
     //
     // ==================
     // Specify Test Files
@@ -210,3 +211,14 @@ exports.config = {
         app.kill();
     }
 };
+
+if (process.env.CIRCLECI) {
+    config.user = process.env.SAUCE_USERNAME;
+    config.key = process.env.SAUCE_ACCESS_KEY;
+    config.reporter = 'xunit';
+    config.reporterOptions = {
+        outputDir: process.env.CIRCLE_TEST_REPORTS
+    };
+}
+
+exports.config = config;
