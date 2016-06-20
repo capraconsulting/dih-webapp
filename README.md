@@ -3,10 +3,10 @@
 ## Setup
 
 1. Install Node and Npm.
-2. Run `npm install`
+2. Setup [dih-api](http://github.com/capraconsulting/dih-api)
+3. Run `npm install`
 3. Run `npm run dev`
-
-Reach the app on port 3000.
+4Reach the app on port 3000.
 
 ## Building with Docker
 
