@@ -10,8 +10,7 @@ dependencies:
         - npm install
         - npm run selenium install
     post:
-        - npm run selenium start
-            background: true
+        - babel-node test/start.js
 test:
     override:
         - npm test
