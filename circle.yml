@@ -1,0 +1,14 @@
+## circle.yml
+machine:
+    node:
+        version: 6.2.2
+    environment:
+        NODE_ENV: test
+dependencies:
+    pre:
+        - npm install -g npm
+        - npm install
+        - npm run selenium install
+test:
+    override:
+        - npm test
