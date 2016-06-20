@@ -1,7 +1,7 @@
 ## circle.yml
 machine:
     node:
-        version: 4.2.1
+        version: latest
     environment:
         NODE_ENV: test
 dependencies:
