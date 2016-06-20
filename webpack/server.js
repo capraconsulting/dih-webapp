@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import path from 'path';
 import express from 'express';
 import config from './dev.config';
+import proxy from 'http-proxy-middleware';
 
 const app = express();
 
@@ -18,6 +19,12 @@ app.use(devMiddleware(compiler, {
 }));
 
 app.use(hotMiddleware(compiler));
+app.use('/api', proxy({
+    target: 'http://localhost:9000',
+    pathRewrite: {
+        '^/api': '/'
+    }
+}));
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 

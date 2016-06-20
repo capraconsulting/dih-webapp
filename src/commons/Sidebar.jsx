@@ -1,5 +1,5 @@
 import React from 'react';
-import SidebarMenuItem from './SidebarMenuItem.jsx';
+import SidebarMenuItem from './SidebarMenuItem';
 
 function Sidebar() {
     return (
