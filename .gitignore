@@ -9,6 +9,7 @@ bundle.js
 # Logs and databases #
 ######################
 *.log
+*.log.*
 
 # OS generated files #
 ######################
@@ -19,6 +20,7 @@ bundle.js
 .Trashes
 ehthumbs.db
 Thumbs.db
+reports
 
 # Packages #
 ############
