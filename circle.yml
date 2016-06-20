@@ -32,5 +32,5 @@ deployment:
         branch: dev
         commands:
             - docker build -t dih-webapp-dev:latest .
-            - docker tag dih-webapp:latest $EXTERNAL_REGISTRY-dev:latest
+            - docker tag dih-webapp-dev:latest $EXTERNAL_REGISTRY-dev:latest
             - docker push $EXTERNAL_REGISTRY-dev:latest
