@@ -15,7 +15,7 @@ class SignUpForm extends React.Component {
             lastName: '',
             email: '',
             dateOfBirth: null,
-            message: ''
+            messages: []
         };
     }
 
@@ -43,26 +43,28 @@ class SignUpForm extends React.Component {
         const newEmail = this.state.email;
         const newDateOfBirth = this.state.dateOfBirth;
 
-        if (!newFirstName) {
-            return;
+        const newErrorMessages = [];
+
+        if (newFirstName.length === 0) {
+            newErrorMessages.push('First name can\'t be blank');
         }
 
-        if (!newLastName) {
-            return;
+        if (newLastName.length === 0) {
+            newErrorMessages.push('Last name can\'t be blank');
         }
 
-        if (!newEmail) {
-            return;
+        if (newEmail.length === 0) {
+            newErrorMessages.push('E-mail name can\'t be blank');
         }
 
-        if (!newDateOfBirth) {
-            return;
+        if (newDateOfBirth === null) {
+            newErrorMessages.push('Date of birth name can\'t be blank');
+        } else if (moment().subtract(25, 'years').isBefore(newDateOfBirth)) {
+            newErrorMessages.push('You must be at least 25 years old to participate');
         }
 
-        if (moment().subtract(25, 'years').isBefore(newDateOfBirth)) {
-            this.setState({
-                message: 'You must be at least 25 years old to participate!'
-            });
+        if (newErrorMessages.length > 0) {
+            this.setState({ messages: newErrorMessages });
             return;
         }
 
@@ -72,14 +74,20 @@ class SignUpForm extends React.Component {
             lastName: '',
             email: '',
             dateOfBirth: null,
-            message: ''
+            messages: []
         });
     }
 
     render() {
         return (
             <form id="signUpForm" onSubmit={this.handleSubmit}>
-                <div className="error">{this.state.message}</div>
+                <div className="error">
+                    <ul>
+                        {this.state.messages.map(message =>
+                            <li>{message}</li>
+                        )}
+                    </ul>
+                </div>
                 <label htmlFor="firstName">First name:</label>
                 <input
                     type="text"
