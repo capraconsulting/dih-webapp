@@ -44,9 +44,6 @@ var config = {
     capabilities: [
         {
             browserName: 'chrome'
-        },
-        {
-            browserName: 'firefox'
         }
     ],
     //
@@ -217,6 +214,9 @@ if (process.env.CIRCLECI) {
             outputDir: process.env.CIRCLE_TEST_REPORTS
         }
     };
+    config.capabilities.push({
+        browserName: 'firefox'
+    });
 }
 
 exports.config = config;

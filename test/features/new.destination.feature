@@ -1,7 +1,8 @@
 Feature: Creating a new destination
-    As a admin
     I want to be able to create new destinations
 
     Scenario: Create a new destination
-          Given I open the page "/"
-          Then  I expect that title is equal to "Dråpen i havet"
+          Given I open the page "new.destination"
+          Then I expect that element "name"
+          When I enter "Lier" in field "name"
+          When I submit the form

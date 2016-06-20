@@ -1,6 +1,6 @@
 import page from './page';
 
-export default Object.create(page, {
+module.exports = Object.create(page, {
 
     name: {
         get() {
@@ -22,7 +22,7 @@ export default Object.create(page, {
 
     open: {
         value() {
-            page.open.call(this, 'admin/destinations/new');
+            page.open.call(this, '/admin/destinations');
         }
     }
 });
