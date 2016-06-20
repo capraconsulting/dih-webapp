@@ -1,18 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-class SidebarMenuItem extends React.Component {
-    render() {
-        return (
-            <Link
-                to={this.props.uri}
-                activeClassName="item-active"
-                className="item"
-            >
-                {this.props.itemName}
-            </Link>
-        );
-    }
+function SidebarMenuItem(props) {
+    return (
+        <Link
+            to={props.uri}
+            activeClassName="item-active"
+            className="item"
+        >
+            {props.itemName}
+        </Link>
+    );
 }
 
 SidebarMenuItem.propTypes = {
