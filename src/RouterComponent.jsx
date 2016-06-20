@@ -1,17 +1,20 @@
 import React from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';
 
 import Main from './Main.jsx';
 import MyProfile from './sections/my-profile/MyProfile.jsx';
 import NewDestination from './sections/destinations/NewDestination.jsx';
+
+import NotFound from './commons/NotFound.jsx';
 
 class RouterComponent extends React.Component {
     render() {
         return (
             <Router history={browserHistory}>
                 <Route path="/" component={Main}>
-                    <IndexRoute component={MyProfile} />
+                    <Route path="/profile" component={MyProfile} />
                     <Route path="/admin/destinations" component={NewDestination} />
+                    <Route path="*" component={NotFound} />
                 </Route>
             </Router>
         );
