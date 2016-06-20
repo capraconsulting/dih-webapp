@@ -9,7 +9,7 @@
     "lint": "eslint --ignore-path .gitignore .",
     "selenium": "selenium-standalone",
     "e2e": "wdio test/wdio.conf.js",
-    "clean" : "rm public/bundle.js",
+    "clean" : "rm -f public/bundle.js",
     "build" : "npm run clean && npm run dist",
     "dist" : "webpack --config webpack/prod.config.js"
   },
