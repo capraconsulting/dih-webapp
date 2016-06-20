@@ -7,7 +7,7 @@ import config from './dev.config';
 
 const app = express();
 
-app.set('host', 'localhost');
+app.set('host', '0.0.0.0');
 app.set('port', 3000);
 
 const compiler = webpack(config);
