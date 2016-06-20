@@ -5,7 +5,10 @@ import '../public/styles/app.scss';
 
 function HelloWorld() {
     return (
-        <h1 className="hello-capra">Hei, Capra!</h1>
+        <div>
+            <h1 className="hello-capra">Hei, Capra!</h1>
+            <h2 className="hello-capra">Hei, Capra!</h2>
+        </div>
     );
 }
 

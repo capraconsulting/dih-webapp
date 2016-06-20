@@ -5,7 +5,7 @@ Feature: Application test
     Scenario: Open the application
         Given I open the page "/"
         Then  I expect that element ".hello-capra" does exist
-        And  I expect that element ".goodbye-capra" does not exist
+        And  I expect that element ".bye-capra" does not exist
 
     Scenario: Check title
         Given I open the page "/"

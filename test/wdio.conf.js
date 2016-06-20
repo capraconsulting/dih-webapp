@@ -142,14 +142,18 @@ exports.config = {
     // WebdriverIO will wait until that promise got resolved to continue.
     //
     // Gets executed once before all workers get launched.
-    // onPrepare: function (config, capabilities) {
-    // },
+    onPrepare() {
+        const child = require('child_process');
+        child.spawn('npm', ['run', 'dev'], {
+            detached: true
+        });
+    }
     //
     // Gets executed before test execution begins. At this point you can access all global
     // variables, such as `browser`. It is the perfect place to define custom commands.
-    before() {
-
-    }
+    // before() {
+    //
+    // }
     //
     // Hook that gets executed before the suite starts
     // beforeSuite: function (suite) {
