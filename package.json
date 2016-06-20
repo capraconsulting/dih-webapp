@@ -61,7 +61,9 @@
   "dependencies": {
     "express": "^4.14.0",
     "lodash": "^4.13.1",
+    "moment": "^2.13.0",
     "react": "^15.1.0",
+    "react-datepicker": "^0.27.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1",
     "skeleton-css": "^2.0.4"

@@ -1,4 +1,6 @@
 import React from 'react';
+import DataPicker from 'react-datepicker';
+import moment from 'moment';
 
 class SignUpForm extends React.Component {
     constructor() {
@@ -12,7 +14,7 @@ class SignUpForm extends React.Component {
             firstName: '',
             lastName: '',
             email: '',
-            dateOfBirth: ''
+            dateOfBirth: moment().subtract('25', 'years')
         };
     }
 
@@ -28,8 +30,8 @@ class SignUpForm extends React.Component {
         this.setState({ email: e.target.value });
     }
 
-    handleDateOfBirthChange(e) {
-        this.setState({ dateOfBirth: e.target.value });
+    handleDateOfBirthChange(date) {
+        this.setState({ dateOfBirth: date });
     }
 
     handleSubmit(e) {
@@ -90,11 +92,11 @@ class SignUpForm extends React.Component {
                     onChange={this.handleEmailChange}
                 />
                 <label htmlFor="dateOfBirth">Date of birth:</label>
-                <input
-                    type="text"
+                <DataPicker
                     id="dateOfBirth"
-                    value={this.state.dateOfBirth}
+                    selected={this.state.dateOfBirth}
                     onChange={this.handleDateOfBirthChange}
+                    locale="en-gb"
                 />
                 <br />
                 <button type="submit">Sign up</button>
