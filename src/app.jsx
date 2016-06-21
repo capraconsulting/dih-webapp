@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/main.scss';
+import { Provider } from 'react-redux';
 
-import RouterComponent from './RouterComponent.jsx';
+import router from './router.jsx';
+import store from './store';
 
 ReactDOM.render(
-    React.createElement(RouterComponent, null),
+    <Provider store={store}>{router}</Provider>,
     document.getElementById('app')
 );

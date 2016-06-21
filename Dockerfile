@@ -1,12 +1,12 @@
-FROM node:6.2
+FROM nginx
 MAINTAINER Adrian Alexander Eriksen (Capra Consulting) <aer@capraconsulting.no>
 
 # Create app directory
-RUN mkdir -p /app
-WORKDIR /app
+RUN mkdir -p /public
+WORKDIR /public
 
 # Copy app source
-COPY . /app
+COPY ./public /public
+COPY ./nginx.conf /etc/nginx/conf.d/dih-webapp.conf
 
 EXPOSE 3000
-RUN npm install
