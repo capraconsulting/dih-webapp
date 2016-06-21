@@ -4,19 +4,35 @@ module.exports = Object.create(page, {
 
     name: {
         get() {
-            return browser.elements('#destinationName');
+            const element = browser.elements('#destinationName');
+            element.waitForExist(2000);
+            return element;
+        }
+    },
+
+    destinations: {
+        get() {
+            return browser.elements('li#destination');
         }
     },
 
     form: {
         get() {
-            return browser.elements('#newDestinationForm');
+            const element = browser.elements('#newDestinationForm');
+            element.waitForExist(2000);
+            return element;
         }
     },
 
     submit: {
         value() {
             this.form.submitForm();
+        }
+    },
+
+    save: {
+        value() {
+            return browser.click('button#submit');
         }
     },
 

@@ -43,7 +43,7 @@ var config = {
     //
     capabilities: [
         {
-            browserName: 'firefox'
+            browserName: 'chrome'
         }
     ],
     //
@@ -172,8 +172,8 @@ var config = {
     // },
     //
     // Function to be executed before a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
-    // beforeTest: function (test) {
-    // },
+    beforeTest() {
+    },
     //
     // Runs before a WebdriverIO command gets executed.
     // beforeCommand: function (commandName, args) {
@@ -184,8 +184,8 @@ var config = {
     // },
     //
     // Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
-    // afterTest: function (test) {
-    // },
+    afterTest() {
+    },
     //
     // Hook that gets executed after the suite has ended
     // afterSuite: function (suite) {

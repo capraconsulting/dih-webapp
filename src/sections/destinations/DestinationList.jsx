@@ -2,9 +2,9 @@ import React from 'react';
 
 function DestinationList(props) {
     return (
-        <div>
+        <div id="destinationsList">
             {props.destinations.map(destination => (
-                <li key={destination.id}>{destination.name}</li>
+                <li id="destination" key={destination.id}>{destination.name}</li>
             ))}
         </div>
     );
