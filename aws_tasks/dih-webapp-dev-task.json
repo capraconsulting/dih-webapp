@@ -1,0 +1,30 @@
+{
+    "containerDefinitions": [
+        {
+            "cpu": 1,
+            "entryPoint": [
+                "npm",
+                "start"
+            ],
+            "essential": true,
+            "image": "036160847874.dkr.ecr.eu-west-1.amazonaws.com/dih-webapp-dev:latest",
+            "logConfiguration": {
+                "logDriver": "json-file"
+            },
+            "memory": 300,
+            "name": "dih-webapp-dev",
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 80,
+                    "protocol": "tcp"
+                }
+            ],
+            "dockerLabels": {
+                "environment": "dev",
+                "name": "dih-api-dev"
+            }
+        }
+    ],
+    "family": "dih-webapp-dev-task"
+}

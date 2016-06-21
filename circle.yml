@@ -29,6 +29,11 @@ deployment:
             - docker build -t dih-webapp .
             - docker tag dih-webapp:latest $EXTERNAL_REGISTRY:latest
             - docker push $EXTERNAL_REGISTRY:latest
+            - ./deploy_task.sh:
+                environment:
+                    AWS_TASK_FILE: file://aws_tasks/dih-webapp-prod-task.json
+                    AWS_SERVICE_NAME: dih-webapp-service
+                    AWS_CLUSTER_NAME: dih-cluster
     staging:
         branch: dev
         commands:
@@ -36,3 +41,8 @@ deployment:
             - docker build -t dih-webapp-dev .
             - docker tag dih-webapp-dev:latest $EXTERNAL_REGISTRY-dev:latest
             - docker push $EXTERNAL_REGISTRY-dev:latest
+            - ./deploy_task.sh:
+                environment:
+                    AWS_TASK_FILE: file://aws_tasks/dih-webapp-dev-task.json
+                    AWS_SERVICE_NAME: dih-webapp-dev
+                    AWS_CLUSTER_NAME: dih-cluster-dev
