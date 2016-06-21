@@ -43,7 +43,7 @@ var config = {
     //
     capabilities: [
         {
-            browserName: 'chrome'
+            browserName: 'firefox'
         }
     ],
     //

@@ -3,6 +3,6 @@ Feature: Creating a new destination
 
     Scenario: Create a new destination
           Given I open the page "new.destination"
-          Then I expect that element "name"
-          When I enter "Lier" in field "name"
-          When I submit the form
+          Then I expect that element "name" is visible
+          When I set "Stavern" to the inputfield "name"
+          Then I expect that inputfield "name" contains "Stavern"

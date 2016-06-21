@@ -45,6 +45,7 @@
     "postcss-loader": "^0.9.1",
     "sass-loader": "^3.2.0",
     "selenium-standalone": "^5.1.1",
+    "serve-static": "^1.11.1",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "wd-selenium-hooks": "^0.1.0",
