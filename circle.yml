@@ -35,7 +35,7 @@ deployment:
                     AWS_SERVICE_NAME: dih-webapp-service
                     AWS_CLUSTER_NAME: dih-cluster
     staging:
-        branch: dev
+        branch: feature/DIH-81
         commands:
             - npm run build
             - docker build -t dih-webapp-dev .
