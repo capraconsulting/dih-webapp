@@ -1,27 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/main.scss';
+import { Provider } from 'react-redux';
 
-import Header from './commons/Header.jsx';
-import Sidebar from './commons/Sidebar.jsx';
-
-import MyProfile from './sections/my-profile/MyProfile.jsx';
-
-function Main() {
-    return (
-        <div>
-            <Header />
-            <div className="wrapper">
-                <Sidebar />
-                <div className="main-content">
-                    <MyProfile />
-                </div>
-            </div>
-        </div>
-    );
-}
+import router from './router.jsx';
+import store from './store';
 
 ReactDOM.render(
-  React.createElement(Main, null),
-  document.getElementById('app')
+    <Provider store={store}>{router}</Provider>,
+    document.getElementById('app')
 );
