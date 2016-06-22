@@ -5,6 +5,7 @@ node_modules/
 # Webpack #
 ###########
 bundle.js
+public/bundle.js
 
 # Logs and databases #
 ######################
