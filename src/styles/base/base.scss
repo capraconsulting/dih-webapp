@@ -31,7 +31,7 @@ html {
 }
 
 body {
-    font-family: $font-stack;
+    background-color: whitesmoke;
 }
 
 //------------------------------------------------
@@ -46,6 +46,31 @@ body {
     padding: 1rem;
     flex: 1;
 }
+
+//------------------------------------------------
+//	PUBLIC LAYOUT
+// -----------------------------------------------
+.layout-public {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.layout-public .ui.card {
+  width: 100%;
+  margin: 20px 10px 10px 10px;
+}
+
+//------------------------------------------------
+//	SEMANTIC OVERRIDES
+// -----------------------------------------------
+.ui.message ul {
+  padding-left: 15px;
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+}
+
 
 //------------------------------------------------
 //	SHAME, SHAME, SHAME

@@ -2,9 +2,12 @@ import React from 'react';
 
 function SignUpLayout(props) {
     return (
-        <div>
-            <div className="wrapper">
-                <div className="main-content">
+        <div className="layout-public">
+            <div className="ui card">
+                <div className="content">
+                    <h2>Sign up</h2>
+                </div>
+                <div className="content">
                     {props.children}
                 </div>
             </div>
