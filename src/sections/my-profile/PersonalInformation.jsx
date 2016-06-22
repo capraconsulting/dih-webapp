@@ -6,9 +6,9 @@ function PersonalInformation() {
             <div className="accordion-header">Personal</div>
             <div className="accordion-content">
                 <div className="row">
-                    <div className="six columns">
+                    <div className="ui input">
                         <label htmlFor="personal-first-name">First name</label>
-                        <input className="u-full-width" type="text" id="personal-first-name" />
+                        <input className="ui input" type="text" id="personal-first-name" />
                     </div>
                     <div className="six columns">
                         <label htmlFor="personal-last-name">Last name</label>
