@@ -31,14 +31,17 @@ class NewDestinationForm extends React.Component {
     render() {
         return (
             <form id="newDestinationForm" onSubmit={event => { this.handleSubmit(event); }}>
-                <label htmlFor="destinationName">Name of destination:</label>
-                <input
-                    type="text"
-                    id="destinationName"
-                    value={this.state.destinationName}
-                    onChange={event => { this.handleTextChange(event); }}
-                />
-                <button type="submit">Add</button>
+                <h3>New destination</h3>
+                <div className="ui action input">
+                    <input
+                        type="text"
+                        id="destinationName"
+                        placeholder="Destination name"
+                        value={this.state.destinationName}
+                        onChange={event => { this.handleTextChange(event); }}
+                    />
+                    <button className="ui button primary" type="submit">Add</button>
+                </div>
             </form>
         );
     }

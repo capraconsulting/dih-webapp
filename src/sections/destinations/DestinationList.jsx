@@ -3,9 +3,12 @@ import React from 'react';
 function DestinationList(props) {
     return (
         <div>
-            {props.destinations.map(destination => (
-                <li key={destination.id}>{destination.name}</li>
-            ))}
+            <h3>All destinations</h3>
+            <ul>
+                {props.destinations.map(destination => (
+                    <li key={destination.id}>{destination.name}</li>
+                ))}
+            </ul>
         </div>
     );
 }

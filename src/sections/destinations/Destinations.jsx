@@ -5,15 +5,19 @@ import NewDestinationForm from './NewDestinationForm';
 
 function Destinations() {
     return (
-        <div className="accordion-menu">
-            <div className="accordion-header">Add new destination</div>
-            <div className="accordion-content">
-                <NewDestinationForm />
+        <div className="ui segments">
+            <div className="ui blue inverted segment header">
+                <h2>Destinations</h2>
             </div>
-
-            <div className="accordion-header">Destinations</div>
-            <div className="accordion-content">
-                <DestinationListContainer />
+            <div className="ui segment">
+                <div className="ui grid">
+                    <div className="eight wide column">
+                        <NewDestinationForm />
+                    </div>
+                    <div className="sixteen wide column">
+                        <DestinationListContainer />
+                    </div>
+                </div>
             </div>
         </div>
     );
