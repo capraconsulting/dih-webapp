@@ -4,7 +4,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import MainLayout from './layouts/MainLayout';
 import SignUpLayout from './layouts/SignUpLayout';
 import MyProfile from './sections/my-profile/MyProfile';
-import DestinationsContainer from './sections/destinations/DestinationsContainer';
+import Destinations from './sections/destinations/Destinations';
 import SignUpForm from './sections/signup/SignUpForm';
 
 import NotFound from './commons/NotFound.jsx';
@@ -16,7 +16,7 @@ export default(
         </Route>
         <Route path="/" component={MainLayout}>
             <Route path="/profile" component={MyProfile} />
-            <Route path="/admin/destinations" component={DestinationsContainer} />
+            <Route path="/admin/destinations" component={Destinations} />
             <Route path="*" component={NotFound} />
         </Route>
     </Router>

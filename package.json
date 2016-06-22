@@ -69,12 +69,13 @@
     "express": "4.14.0",
     "lodash": "4.13.1",
     "moment": "2.13.0",
+    "normalize.css": "4.1.1",
     "react": "15.1.0",
     "react-datepicker": "0.27.0",
     "react-dom": "15.1.0",
     "react-redux": "4.4.5",
     "react-router": "2.4.1",
     "redux": "3.5.2",
-    "skeleton-css": "2.0.4"
+    "semantic-ui-css": "2.1.8"
   }
 }
