@@ -24,10 +24,8 @@ deployment:
     prod:
         branch: master
         commands:
-            - npm run build
-            - ./deploy.sh $BUCKET
+            - BUCKET=$BUCKET npm run deploy
     staging:
         branch: dev
         commands:
-            - npm run build
-            - ./deploy.sh $BUCKET-dev
+            - BUCKET=$BUCKET-dev npm run deploy
