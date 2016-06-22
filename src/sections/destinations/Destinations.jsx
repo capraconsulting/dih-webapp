@@ -3,7 +3,7 @@ import React from 'react';
 import DestinationListContainer from './DestinationListContainer';
 import NewDestinationForm from './NewDestinationForm';
 
-function DestinatonsContainer() {
+function Destinations() {
     return (
         <div className="accordion-menu">
             <div className="accordion-header">Add new destination</div>
@@ -11,7 +11,7 @@ function DestinatonsContainer() {
                 <NewDestinationForm />
             </div>
 
-            <div className="accordion-header">Destinatons</div>
+            <div className="accordion-header">Destinations</div>
             <div className="accordion-content">
                 <DestinationListContainer />
             </div>
@@ -19,4 +19,4 @@ function DestinatonsContainer() {
     );
 }
 
-export default DestinatonsContainer;
+export default Destinations;
