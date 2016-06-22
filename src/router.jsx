@@ -6,6 +6,7 @@ import SignUpLayout from './layouts/SignUpLayout';
 import MyProfile from './sections/my-profile/MyProfile';
 import DestinationsContainer from './sections/destinations/DestinationsContainer';
 import SignUpForm from './sections/signup/SignUpForm';
+import NewTrip from './sections/newTrip/NewTrip';
 
 import NotFound from './commons/NotFound.jsx';
 
@@ -17,6 +18,7 @@ export default(
         <Route path="/" component={MainLayout}>
             <Route path="/profile" component={MyProfile} />
             <Route path="/admin/destinations" component={DestinationsContainer} />
+            <Route path="/trips/new" component={NewTrip} />
             <Route path="*" component={NotFound} />
         </Route>
     </Router>
