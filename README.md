@@ -1,5 +1,11 @@
 # dih-webapp
 
+__Build status:__
+
+| `dev` | `master`|
+| :--  |:--|
+|[![CircleCI](https://circleci.com/gh/capraconsulting/dih-webapp/tree/dev.svg?style=svg&circle-token=a63cb3349231317b6f5e6d298f3f49a82a7f382a)](https://circleci.com/gh/capraconsulting/dih-webapp/tree/dev)|[![CircleCI](https://circleci.com/gh/capraconsulting/dih-webapp/tree/master.svg?style=svg&circle-token=a63cb3349231317b6f5e6d298f3f49a82a7f382a)](https://circleci.com/gh/capraconsulting/dih-webapp/tree/master)|
+
 ## Setup
 
 1. Install Node and Npm.
