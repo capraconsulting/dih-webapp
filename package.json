@@ -9,9 +9,10 @@
     "lint": "eslint --ignore-path .gitignore .",
     "selenium": "selenium-standalone",
     "e2e": "wdio test/wdio.conf.js",
-    "clean" : "rm -f public/bundle.js",
-    "build" : "npm run clean && npm run dist",
-    "dist" : "webpack --config webpack/prod.config.js"
+    "clean": "rm -f public/bundle.js",
+    "build": "npm run clean && npm run dist",
+    "deploy": "npm run build && aws s3 cp ./public s3://$BUCKET --recursive",
+    "dist": "webpack --config webpack/prod.config.js"
   },
   "repository": {
     "type": "git",
