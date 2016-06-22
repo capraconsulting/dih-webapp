@@ -5,8 +5,6 @@ import * as destinationsApi from '../../api/destinations';
 class NewDestinationForm extends React.Component {
     constructor() {
         super();
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleTextChange = this.handleTextChange.bind(this);
         this.state = {
             destinationName: ''
         };
@@ -32,13 +30,13 @@ class NewDestinationForm extends React.Component {
 
     render() {
         return (
-            <form id="newDestinationForm" onSubmit={this.handleSubmit}>
+            <form id="newDestinationForm" onSubmit={event => { this.handleSubmit(event); }}>
                 <label htmlFor="destinationName">Name of destination:</label>
                 <input
                     type="text"
                     id="destinationName"
                     value={this.state.destinationName}
-                    onChange={this.handleTextChange}
+                    onChange={event => { this.handleTextChange(event); }}
                 />
                 <button type="submit">Add</button>
             </form>

@@ -5,11 +5,6 @@ import moment from 'moment';
 class SignUpForm extends React.Component {
     constructor() {
         super();
-        this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-        this.handleLastNameChange = this.handleLastNameChange.bind(this);
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handleDateOfBirthChange = this.handleDateOfBirthChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             firstName: '',
             lastName: '',
@@ -37,6 +32,8 @@ class SignUpForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+
+        console.log(this.state);
 
         const newFirstName = this.state.firstName;
         const newLastName = this.state.lastName;
@@ -80,7 +77,7 @@ class SignUpForm extends React.Component {
 
     render() {
         return (
-            <form id="signUpForm" onSubmit={this.handleSubmit}>
+            <form id="signUpForm" onSubmit={event => { this.handleSubmit(event); }}>
                 <div className="error">
                     <ul>
                         {this.state.messages.map(message =>
@@ -93,27 +90,27 @@ class SignUpForm extends React.Component {
                     type="text"
                     id="firstName"
                     value={this.state.firstName}
-                    onChange={this.handleFirstNameChange}
+                    onChange={event => { this.handleFirstNameChange(event); }}
                 />
                 <label htmlFor="lastName">Last name:</label>
                 <input
                     type="text"
                     id="lastName"
                     value={this.state.lastName}
-                    onChange={this.handleLastNameChange}
+                    onChange={event => { this.handleLastNameChange(event); }}
                 />
                 <label htmlFor="email">E-mail:</label>
                 <input
                     type="email"
                     id="email"
                     value={this.state.email}
-                    onChange={this.handleEmailChange}
+                    onChange={event => { this.handleEmailChange(event); }}
                 />
                 <label htmlFor="dateOfBirth">Date of birth <em>DD/MM/YYYY</em>:</label>
                 <DataPicker
                     id="dateOfBirth"
                     selected={this.state.dateOfBirth}
-                    onChange={this.handleDateOfBirthChange}
+                    onChange={event => { this.handleDateOfBirthChange(event); }}
                     locale="en-gb"
                 />
                 <br />

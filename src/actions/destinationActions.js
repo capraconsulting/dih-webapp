@@ -1,14 +1,14 @@
-import * as types from './actionTypes';
+import { ADD_DESTINATION_SUCCESS, GET_DESTINATIONS_SUCCESS } from './actionTypes';
 
 export function postDestinationSuccess() {
     return {
-        type: types.ADD_DESTINATION_SUCCESS
+        type: ADD_DESTINATION_SUCCESS
     };
 }
 
 export function getDestinationsSuccess(destinations) {
     return {
-        type: types.GET_DESTINATIONS_SUCCESS,
+        type: GET_DESTINATIONS_SUCCESS,
         destinations
     };
 }
