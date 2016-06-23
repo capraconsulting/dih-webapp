@@ -31,6 +31,7 @@ Name your branches in the following way, where `DIH-num` is a task ID on JIRA:
 On the webapp we have end-to-end tests with Selenium. It depends on Java, so install that first. Then get started with:
 
 1. Run `npm install`
+2. Add environment variables for [SuaceLabs](https://saucelabs.com): `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY`;
 2. Run `npm run selenium install`
 3. Run `npm test` to run tests
 
