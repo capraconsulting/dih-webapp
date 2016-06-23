@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const baseConfig = require('./base.config');
 
 module.exports = objectAssign(baseConfig, {
+    devtool: 'source-map',
     entry: [
         './src/app.jsx'
     ],
@@ -16,7 +17,7 @@ module.exports = objectAssign(baseConfig, {
         new webpack.optimize.AggressiveMergingPlugin(),
         new webpack.DefinePlugin({
             __DEV__: false,
-            'process.env.BASE_URL': JSON.stringify('/api')
+            'process.env.BASE_URL': JSON.stringify('http://dev-api.dih.capra.me')
         })
     ]
 });

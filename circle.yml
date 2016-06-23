@@ -24,8 +24,8 @@ deployment:
     prod:
         branch: master
         commands:
-            - BUCKET=$BUCKET npm run deploy
+            - BUCKET=dih.capra.me npm run deploy
     staging:
         branch: dev
         commands:
-            - BUCKET=$BUCKET-dev npm run deploy
+            - BUCKET=dev.dih.capra.me npm run deploy
