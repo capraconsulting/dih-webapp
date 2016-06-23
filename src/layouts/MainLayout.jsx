@@ -4,21 +4,22 @@ import '../styles/main.scss';
 import Header from '../commons/Header.jsx';
 import Sidebar from '../commons/Sidebar.jsx';
 
-class MainLayout extends React.Component {
-    render() {
-        return (
-            <div>
-                <Header />
-                <div className="wrapper">
-                    <Sidebar />
-                    <div className="main-content">
-                        {this.props.children}
-                    </div>
+function MainLayout(props) {
+    return (
+        <div>
+            <Header />
+            <div className="wrapper">
+                <Sidebar />
+                <div className="main-content">
+                    {props.children}
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
+MainLayout.propTypes = {
+    children: React.PropTypes.object
+};
 
 export default MainLayout;

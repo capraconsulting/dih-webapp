@@ -13,7 +13,6 @@ dependencies:
     pre:
         - npm install -g npm
         - npm install
-        - npm run selenium install
         - sudo pip install awscli
         - aws configure set default.region eu-west-1
         - aws configure set default.output json
@@ -31,14 +30,8 @@ deployment:
     prod:
         branch: master
         commands:
-            - npm run build
-            - docker build -t dih-webapp .
-            - docker tag dih-webapp:latest $EXTERNAL_REGISTRY:latest
-            - docker push $EXTERNAL_REGISTRY:latest
+            - BUCKET=dih.capra.me npm run deploy
     staging:
         branch: dev
         commands:
-            - npm run build
-            - docker build -t dih-webapp-dev .
-            - docker tag dih-webapp-dev:latest $EXTERNAL_REGISTRY-dev:latest
-            - docker push $EXTERNAL_REGISTRY-dev:latest
+            - BUCKET=dev.dih.capra.me npm run deploy

@@ -2,13 +2,12 @@ import React from 'react';
 
 function Qualifications() {
     return (
-        <div className="accordion-menu">
-            <div className="accordion-header">Qualifications</div>
-            <div className="accordion-content">
-                <div className="row">
-                    <div className="six columns"></div>
-                    <div className="six columns"></div>
-                </div>
+        <div className="ui segments">
+            <div className="ui blue inverted segment header">
+                <h2>Qualifications</h2>
+            </div>
+            <div className="ui segment">
+
             </div>
         </div>
     );
