@@ -9,9 +9,9 @@
     "lint": "eslint --ignore-path .gitignore .",
     "selenium": "selenium-standalone",
     "e2e": "wdio test/wdio.conf.js",
-    "clean" : "rm -f public/bundle.js",
-    "build" : "npm run clean && npm run dist",
-    "dist" : "webpack --config webpack/prod.config.js"
+    "clean": "rm -f public/bundle.js",
+    "build": "npm run clean && npm run dist",
+    "dist": "webpack --config webpack/prod.config.js"
   },
   "repository": {
     "type": "git",
@@ -74,6 +74,7 @@
     "react-redux": "4.4.5",
     "react-router": "2.4.1",
     "redux": "3.5.2",
+    "redux-form": "^5.2.5",
     "skeleton-css": "2.0.4"
   }
 }
