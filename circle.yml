@@ -17,11 +17,11 @@ dependencies:
         - aws configure set default.region eu-west-1
         - aws configure set default.output json
         - eval $(aws ecr get-login --region eu-west-1)
-        - docker pull 036160847874.dkr.ecr.eu-west-1.amazonaws.com/dih-api-dev:latest
+        - docker pull $EXTERNAL_REGISTRY-dev:latest
 
 test:
     override:
-        - docker run -d --name dih-api-dev --net host -e PG_URL=postgres://ubuntu:@127.0.0.1:5432/circle_test dih-api-dev:latest  npm start
+        - docker run -d --name dih-api-dev --net host -e PG_URL=postgres://ubuntu:@127.0.0.1:5432/circle_test $EXTERNAL_REGISTRY-dev:latest  npm start
         - npm test
         - docker stop dih-api-dev
         - docker rm dih-api-dev
