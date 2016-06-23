@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NewTripForm from './NewTripForm';
+import NewTripFormContainer from './NewTripFormContainer';
 
 
 function NewTrip() {
@@ -8,7 +8,7 @@ function NewTrip() {
         <div className="accordion-menu">
             <div className="accordion-header">Add new trip</div>
             <div className="accordion-content">
-                <NewTripForm />
+                <NewTripFormContainer />
             </div>
         </div>
     );

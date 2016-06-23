@@ -8,17 +8,15 @@ class NewTripFormContainer extends React.Component {
     componentDidMount() {
         destinationsApi.getDestinations();
     }
-    handleSubmit(e) {
-        e.preventDefault();
-        console.log("herp derp");
+    handleSubmit(data) {
+        console.log(data);
     }
 
     render() {
         return (
             <NewTripForm
                 destinations={this.props.destinations}
-                onSubmit={this.handleSubmit.bind(this)}
-                hei="hikk"
+                onSubmit={event => { this.handleSubmit(event); }}
             />
         );
     }
