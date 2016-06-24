@@ -2,7 +2,7 @@ import React from 'react';
 
 function DestinationList(props) {
     return (
-        <div>
+        <div id="destinations">
             <h3>All destinations</h3>
             <ul>
                 {props.destinations.map(destination => (
