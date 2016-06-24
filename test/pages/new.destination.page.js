@@ -5,7 +5,7 @@ module.exports = Object.create(page, {
     name: {
         get() {
             const element = browser.elements('#destinationName');
-            element.waitForExist(2000);
+            element.waitForExist(20000);
             return element;
         }
     },
@@ -19,7 +19,7 @@ module.exports = Object.create(page, {
     form: {
         get() {
             const element = browser.elements('#newDestinationForm');
-            element.waitForExist(2000);
+            element.waitForExist(20000);
             return element;
         }
     },

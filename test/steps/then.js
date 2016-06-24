@@ -5,7 +5,7 @@ chai.Should();
 module.exports = function () { // eslint-disable-line
     this.Then(/^I expect that element "(.*)" does exist$/, (selector) => {
         const elements = browser.elements(selector);
-        elements.waitForExist(2000);
+        elements.waitForExist(20000);
         elements.value.length.should.be.gt(0);
     });
 
@@ -21,14 +21,14 @@ module.exports = function () { // eslint-disable-line
     });
 
     this.Then(/^I expect that "(.*)" contains "(.*)"$/, (field, text) => {
-        this.currentPage[field].waitForText(text, 3000);
+        this.currentPage[field].waitForText(text, 20000);
         const value = this.currentPage[field].getText();
         value.should.contain(text);
     });
 
     this.Then(/^I expect that element "(.*)" does not exist$/, (selector) => {
         const elements = browser.elements(selector);
-        elements.waitForExist(2000, true);
+        elements.waitForExist(20000, true);
         elements.value.length.should.equal(0);
     });
 
