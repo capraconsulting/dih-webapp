@@ -1,5 +1,4 @@
 /* eslint-disable no-var */
-var app;
 
 var config = {
     //
@@ -142,14 +141,14 @@ var config = {
     // WebdriverIO will wait until that promise got resolved to continue.
     //
     // Gets executed once before all workers get launched.
-    onPrepare() {
-        const child = require('child_process');
-        app = child.spawn('npm', ['run', 'dev'], {
-            detached: true,
-            stdio: ['ignore']
-        });
-        child.execSync('sleep 2');
-    },
+    // onPrepare() {
+    //    const child = require('child_process');
+    //    app = child.spawn('npm', ['run', 'dev'], {
+    //        detached: true,
+    //        stdio: ['ignore']
+    //    });
+    //    child.execSync('sleep 2');
+    // },
     //
     // Gets executed before test execution begins. At this point you can access all global
     // variables, such as `browser`. It is the perfect place to define custom commands.
@@ -172,8 +171,8 @@ var config = {
     // },
     //
     // Function to be executed before a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
-    beforeTest() {
-    },
+    // beforeTest() {
+    // },
     //
     // Runs before a WebdriverIO command gets executed.
     // beforeCommand: function (commandName, args) {
@@ -184,8 +183,8 @@ var config = {
     // },
     //
     // Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
-    afterTest() {
-    },
+    // afterTest() {
+    // },
     //
     // Hook that gets executed after the suite has ended
     // afterSuite: function (suite) {
@@ -199,7 +198,8 @@ var config = {
     // Gets executed after all workers got shut down and the process is about to exit. It is not
     // possible to defer the end of the process using a promise.
     onComplete() {
-        app.kill();
+        const child = require('child_process');
+        child.execSync('killall node');
     }
 };
 
