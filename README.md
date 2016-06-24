@@ -34,13 +34,15 @@ Name your branches in the following way, where `DIH-num` is a task ID on JIRA:
 5. Reach the app on port 3000.
 
 ## Tests
-On the webapp we have end-to-end tests with Selenium. It depends on Java, so install that first. Then get started with:
+On the webapp we have end-to-end tests with Selenium, but the tests are run in [SauceLabs](https://saucelabs.com) instead of locally, to ensure that they work the same for everyone.  You want to register at their website, then add the environment variables `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY`. locally. Then get started testing with:
 
 1. Run `npm install`
-2. Add environment variables for [SuaceLabs](https://saucelabs.com): `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY`;
 2. Run `npm run selenium install`
 3. Run `npm test` to run tests
 
+The results can be viewed in your account on Sauce Labs.
+
+`npm test` wil run both linter and end-to-end tests. You can run only end-to-end tests with `npm run test:e2e`.
 
 ## Building with Docker
 
