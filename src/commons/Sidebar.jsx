@@ -10,7 +10,7 @@ function Sidebar() {
                 <SidebarMenuItem uri="/trips/new" itemName="Sign up for a trip" />
                 <a href="#" className="item">Donations</a>
                 <a href="#" className="item">Messages</a>
-                <SidebarMenuItem uri="/admin/destinations" itemName="Admin Destinatons" />
+                <SidebarMenuItem uri="/admin/destinations" itemName="Admin Destinations" />
             </div>
         </aside>
     );
