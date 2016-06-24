@@ -1,9 +1,9 @@
 import React from 'react';
 
-import NewTripFormContainer from './NewTripFormContainer';
+import SignupTripFormContainer from './SignupTripFormContainer';
 
 
-function NewTrip() {
+function SignupTrip() {
     return (
         <div className="ui segments">
             <div className="ui blue inverted segment header">
@@ -12,7 +12,7 @@ function NewTrip() {
             <div className="ui segment">
                 <div className="ui grid">
                     <div className="eight wide column">
-                        <NewTripFormContainer />
+                        <SignupTripFormContainer />
                     </div>
                 </div>
             </div>
@@ -20,4 +20,4 @@ function NewTrip() {
     );
 }
 
-export default NewTrip;
+export default SignupTrip;

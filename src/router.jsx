@@ -3,10 +3,10 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import MainLayout from './layouts/MainLayout';
 import SignUpLayout from './layouts/SignUpLayout';
-import MyProfile from './sections/my-profile/MyProfile';
+import MyProfile from './sections/myProfile/MyProfile';
 import Destinations from './sections/destinations/Destinations';
 import SignUpForm from './sections/signup/SignUpForm';
-import NewTrip from './sections/newTrip/NewTrip';
+import SignupTrip from './sections/signupTrip/SignupTrip';
 
 import NotFound from './commons/NotFound.jsx';
 
@@ -17,7 +17,7 @@ export default(
         </Route>
         <Route path="/" component={MainLayout}>
             <Route path="/profile" component={MyProfile} />
-            <Route path="/trips/new" component={NewTrip} />
+            <Route path="/trips/signup" component={SignupTrip} />
             <Route path="/admin/destinations" component={Destinations} />
             <Route path="*" component={NotFound} />
         </Route>

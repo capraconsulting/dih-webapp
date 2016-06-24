@@ -6,8 +6,8 @@ const BASE_URL = process.env.BASE_URL;
 * postNewTrip
 * @param {data} Object containing 'selectedDestination', 'wishStartDate' and 'wishEndDate'
 */
-export function postNewTrip(data) {
-    const newTripObject = {
+export function postTrip(data) {
+    const tripObject = {
         userId: 1, // TODO: Replace with the logged in user
         destinationId: parseInt(data.selectedDestination, 10),
         wishStartDate: new Date(data.wishStartDate),
@@ -17,7 +17,7 @@ export function postNewTrip(data) {
     };
 
     return axios
-        .post(`${BASE_URL}/trips`, newTripObject)
+        .post(`${BASE_URL}/trips`, tripObject)
         .then(() => {
             console.log('New trip submission Success!');
         })

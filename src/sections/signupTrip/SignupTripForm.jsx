@@ -6,15 +6,14 @@ import moment from 'moment';
 const fields = ['selectedDestination', 'wishStartDate', 'wishEndDate'];
 
 
-function NewTripForm(props) {
+function SignupTripForm(props) {
     const {
         fields: { selectedDestination, wishStartDate, wishEndDate },
         handleSubmit,
-        submitting,
-        resetForm
+        submitting
     } = props;
     return (
-        <form id="newTripForm" className="ui form" onSubmit={handleSubmit}>
+        <form id="signupTripForm" className="ui form" onSubmit={handleSubmit}>
             <label htmlFor="selectedDestination">Destination</label>
             <select
                 {...selectedDestination}
@@ -60,7 +59,6 @@ function NewTripForm(props) {
                 type="submit"
                 className="ui button primary"
                 disabled={submitting}
-                onClick={resetForm}
             >
                 Add
             </button>
@@ -69,15 +67,14 @@ function NewTripForm(props) {
 }
 
 
-NewTripForm.propTypes = {
+SignupTripForm.propTypes = {
     destinations: React.PropTypes.array.isRequired,
     fields: React.PropTypes.object.isRequired,
     handleSubmit: React.PropTypes.func.isRequired,
-    submitting: React.PropTypes.bool.isRequired,
-    resetForm: React.PropTypes.func.isRequired
+    submitting: React.PropTypes.bool.isRequired
 };
 
 export default reduxForm({
-    form: 'NewTripForm',
+    form: 'SignupTripForm',
     fields
-})(NewTripForm);
+})(SignupTripForm);
