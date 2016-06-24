@@ -3,37 +3,53 @@ import DatePicker from 'react-datepicker';
 import { reduxForm } from 'redux-form';
 import moment from 'moment';
 
-const fields = ['selectedDestination', 'fromDate', 'toDate'];
+const fields = ['selectedDestination', 'wishStartDate', 'wishEndDate'];
 
 
 function NewTripForm(props) {
     const {
-        fields: { selectedDestination, fromDate, toDate },
+        fields: { selectedDestination, wishStartDate, wishEndDate },
         handleSubmit } = props;
     return (
         <form id="newTripForm" onSubmit={handleSubmit}>
-            <label htmlFor="tripName">Destination:</label>
-            <select {...selectedDestination} className="ui fluid dropdown" >
+            <label htmlFor="selectedDestination">Destination</label>
+            <select
+                {...selectedDestination}
+                value={selectedDestination.value || ''}
+                className="ui fluid dropdown"
+                id="selectedDestination"
+            >
                 <option value="">Destinations</option>
                 {props.destinations.map(destination => (
-                    <option key={destination.id}>{destination.name}</option>
+                    <option
+                        value={destination.id}
+                        key={destination.id}
+                    >
+                        {destination.name}
+                    </option>
                 ))}
             </select>
+
+            <label htmlFor="wishStartDate">Start date</label>
             <DatePicker
-                {...fromDate}
+                {...wishStartDate}
                 dateFormat="YYYY-MM-DD"
-                value={fromDate.value ? moment(fromDate.value) : null}
-                selected={fromDate.value ? moment(fromDate.value) : null}
-                id="fromDate"
+                placeholderText="YYYY-MM-DD"
+                value={wishStartDate.value ? moment(wishStartDate.value) : null}
+                selected={wishStartDate.value ? moment(wishStartDate.value) : null}
+                id="wishStartDate"
                 locale="en-gb"
             />
 
+            <label htmlFor="wishENdDate">End date</label>
             <DatePicker
-                {...toDate}
+                {...wishEndDate}
                 dateFormat="YYYY-MM-DD"
-                value={toDate.value ? moment(toDate.value) : null}
-                selected={toDate.value ? moment(toDate.value) : null}
-                id="toDate"
+                placeholderText="YYYY-MM-DD"
+                minDate={wishStartDate.value ? moment(wishStartDate.value) : null}
+                value={wishEndDate.value ? moment(wishEndDate.value) : null}
+                selected={wishEndDate.value ? moment(wishEndDate.value) : null}
+                id="wishEndDate"
                 locale="en-gb"
             />
             <button type="submit">Add</button>

@@ -2,21 +2,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import NewTripForm from './NewTripForm';
+import * as tripsApi from '../../api/trips';
 import * as destinationsApi from '../../api/destinations';
+
 
 class NewTripFormContainer extends React.Component {
     componentDidMount() {
         destinationsApi.getDestinations();
     }
     handleSubmit(data) {
-        console.log(data);
+        tripsApi.postNewTrip(data);
     }
 
     render() {
         return (
             <NewTripForm
                 destinations={this.props.destinations}
-                onSubmit={event => { this.handleSubmit(event); }}
+                onSubmit={e => { this.handleSubmit(e); }}
             />
         );
     }
