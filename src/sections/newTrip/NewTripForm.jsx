@@ -9,7 +9,10 @@ const fields = ['selectedDestination', 'wishStartDate', 'wishEndDate'];
 function NewTripForm(props) {
     const {
         fields: { selectedDestination, wishStartDate, wishEndDate },
-        handleSubmit } = props;
+        handleSubmit,
+        submitting,
+        resetForm
+    } = props;
     return (
         <form id="newTripForm" className="ui form" onSubmit={handleSubmit}>
             <label htmlFor="selectedDestination">Destination</label>
@@ -35,13 +38,14 @@ function NewTripForm(props) {
                 {...wishStartDate}
                 dateFormat="YYYY-MM-DD"
                 placeholderText="YYYY-MM-DD"
+                minDate={moment()}
                 value={wishStartDate.value ? moment(wishStartDate.value) : null}
                 selected={wishStartDate.value ? moment(wishStartDate.value) : null}
                 id="wishStartDate"
                 locale="en-gb"
             />
 
-            <label htmlFor="wishENdDate">End date</label>
+            <label htmlFor="wishEndDate">End date</label>
             <DatePicker
                 {...wishEndDate}
                 dateFormat="YYYY-MM-DD"
@@ -52,7 +56,14 @@ function NewTripForm(props) {
                 id="wishEndDate"
                 locale="en-gb"
             />
-            <button className="ui button primary" type="submit">Add</button>
+            <button
+                type="submit"
+                className="ui button primary"
+                disabled={submitting}
+                onClick={resetForm}
+            >
+                Add
+            </button>
         </form>
     );
 }
@@ -61,7 +72,9 @@ function NewTripForm(props) {
 NewTripForm.propTypes = {
     destinations: React.PropTypes.array.isRequired,
     fields: React.PropTypes.object.isRequired,
-    handleSubmit: React.PropTypes.func.isRequired
+    handleSubmit: React.PropTypes.func.isRequired,
+    submitting: React.PropTypes.bool.isRequired,
+    resetForm: React.PropTypes.func.isRequired
 };
 
 export default reduxForm({
