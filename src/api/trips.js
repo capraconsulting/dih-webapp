@@ -19,7 +19,7 @@ export function postTrip(data) {
     return axios
         .post(`${BASE_URL}/trips`, tripObject)
         .then(() => {
-            console.log('New trip submission Success!');
+            // TODO: Notify user that the submission was successful (react-redux-notifications?)
         })
         .catch(e => { console.error(e); });
 }
