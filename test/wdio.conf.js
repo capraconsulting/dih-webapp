@@ -14,7 +14,7 @@ var config = {
     specs: [
         './test/features/**/*.feature'
     ],
-    services: ['selenium-standalone'],
+    services: ['sauce'],
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
@@ -203,11 +203,9 @@ var config = {
     }
 };
 
-config.services.push('sauce');
 config.user = process.env.SAUCE_USERNAME;
 config.key = process.env.SAUCE_ACCESS_KEY;
 config.sauceConnect = true;
-
 if (process.env.CIRCLECI) {
     config.reporters.push('junit');
     config.reporterOptions = {
