@@ -11,12 +11,12 @@ function NewTripForm(props) {
         fields: { selectedDestination, wishStartDate, wishEndDate },
         handleSubmit } = props;
     return (
-        <form id="newTripForm" onSubmit={handleSubmit}>
+        <form id="newTripForm" className="ui form" onSubmit={handleSubmit}>
             <label htmlFor="selectedDestination">Destination</label>
             <select
                 {...selectedDestination}
                 value={selectedDestination.value || ''}
-                className="ui fluid dropdown"
+                className="ui fluid selection dropdown"
                 id="selectedDestination"
             >
                 <option value="">Destinations</option>
@@ -52,7 +52,7 @@ function NewTripForm(props) {
                 id="wishEndDate"
                 locale="en-gb"
             />
-            <button type="submit">Add</button>
+            <button className="ui button primary" type="submit">Add</button>
         </form>
     );
 }

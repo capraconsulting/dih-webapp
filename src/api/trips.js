@@ -19,7 +19,7 @@ export function postNewTrip(data) {
     return axios
         .post(`${BASE_URL}/trips`, newTripObject)
         .then(() => {
-            // console.log('New trip submission Success!');
+            console.log('New trip submission Success!');
         })
         .catch(e => { console.error(e); });
 }
