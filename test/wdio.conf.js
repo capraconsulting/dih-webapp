@@ -74,10 +74,10 @@ var config = {
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response
-    connectionRetryTimeout: 90000,
+    connectionRetryTimeout: 100000,
     //
     // Default request retries count
-    connectionRetryCount: 3,
+    connectionRetryCount: 10,
     //
     // Initialize the browser instance with a WebdriverIO plugin. The object should have the
     // plugin name as key and the desired plugin options as properties. Make sure you have
@@ -213,9 +213,6 @@ if (process.env.CIRCLECI) {
             outputDir: process.env.CIRCLE_TEST_REPORTS
         }
     };
-    config.capabilities.push({
-        browserName: 'firefox'
-    });
 }
 
 exports.config = config;
