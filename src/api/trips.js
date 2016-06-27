@@ -44,7 +44,7 @@ export function getTrips() {
 }
 
 /*
-* setTripStatus
+* putTrip
 * @param {trip} Trip object
 * @return {Promise} axios Promise
 */
