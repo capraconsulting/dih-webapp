@@ -81,7 +81,7 @@ class SignUpForm extends React.Component {
             });
         })
         .catch(err => {
-            errors.push(err.data.message);
+            errors.push(err.message);
             this.setState({ messages: errors });
         });
     }
