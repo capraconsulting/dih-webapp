@@ -38,3 +38,18 @@ export function getTrips() {
         })
         .catch(e => { console.error(e); }); // eslint-disable-line
 }
+
+/*
+* setTripStatus
+* @param {tripId} Unique identifier for a trip
+*/
+export function setTripStatus(tripId) {
+    const newStatusObject = { status: 'ACCEPTED' };
+    return axios
+        .put(`${BASE_URL}/trips/${tripId}`, newStatusObject)
+        .then(() => {
+            getTrips();
+            // TODO: Notify user that the trip was successfully approved
+        })
+        .catch(e => { console.error(e); }); // eslint-disable-line
+}

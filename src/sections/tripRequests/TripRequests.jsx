@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AcceptTripButtonContainer from './AcceptTripButtonContainer';
+
 function TripRequests(props) {
     return (
         <table className="ui single line table">
@@ -21,7 +23,9 @@ function TripRequests(props) {
                         <td>{trip.wishStartDate}</td>
                         <td>{trip.wishEndDate}</td>
                         <td>{trip.status}</td>
-                        <td></td>
+                        <td>
+                            <AcceptTripButtonContainer tripId={trip.id} />
+                        </td>
                     </tr>
                 ))}
             </tbody>
