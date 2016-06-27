@@ -22,34 +22,43 @@ export function postTrip(data) {
     return axios
         .post(`${BASE_URL}/trips`, tripObject)
         .then(() => {
-            // TODO: Notify user that the submission was successful (react-redux-notifications?)
+            // @TODO: Notify user that the submission was successful (react-redux-notifications?)
         })
         .catch(e => { console.error(e); }); // eslint-disable-line
 }
 
 /*
 * getTrips
+* @return {Promise} axios Promise
 */
 export function getTrips() {
     return axios
         .get(`${BASE_URL}/trips`)
         .then(response => {
-            store.dispatch(actions.getTripsSuccess(response.data));
+            store.dispatch(actions.getTripsRequestSuccess(response.data));
         })
-        .catch(e => { console.error(e); }); // eslint-disable-line
+        .catch(e => {
+            store.dispatch(actions.getTripsRequestFailure());
+            console.error(e); // eslint-disable-line
+        });
 }
 
 /*
 * setTripStatus
-* @param {tripId} Unique identifier for a trip
+* @param {trip} Trip object
+* @return {Promise} axios Promise
 */
-export function setTripStatus(tripId) {
-    const newStatusObject = { status: 'ACCEPTED' };
+export function putTrip(trip) {
+    store.dispatch(actions.putTripRequestStart());
     return axios
-        .put(`${BASE_URL}/trips/${tripId}`, newStatusObject)
+        .put(`${BASE_URL}/trips/${trip.id}`, trip)
         .then(() => {
+            store.dispatch(actions.putTripRequestSuccess());
             getTrips();
-            // TODO: Notify user that the trip was successfully approved
+            // @TODO: Notify user that the trip was successfully approved
         })
-        .catch(e => { console.error(e); }); // eslint-disable-line
+        .catch(e => {
+            store.dispatch(actions.putTripRequestFailure());
+            console.error(e);// eslint-disable-line
+        });
 }
