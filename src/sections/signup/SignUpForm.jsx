@@ -2,25 +2,26 @@ import React from 'react';
 import DataPicker from 'react-datepicker';
 import moment from 'moment';
 import _ from 'lodash';
+import { create } from '../../api/users';
 
 class SignUpForm extends React.Component {
     constructor() {
         super();
         this.state = {
-            firstName: '',
-            lastName: '',
+            firstname: '',
+            lastname: '',
             email: '',
-            dateOfBirth: null,
+            birth: null,
             messages: []
         };
     }
 
     handleFirstNameChange(e) {
-        this.setState({ firstName: e.target.value });
+        this.setState({ firstname: e.target.value });
     }
 
     handleLastNameChange(e) {
-        this.setState({ lastName: e.target.value });
+        this.setState({ lastname: e.target.value });
     }
 
     handleEmailChange(e) {
@@ -28,49 +29,60 @@ class SignUpForm extends React.Component {
     }
 
     handleDateOfBirthChange(date) {
-        this.setState({ dateOfBirth: date });
+        this.setState({ birth: date });
     }
 
     handleSubmit(e) {
         e.preventDefault();
 
-        const newFirstName = this.state.firstName;
-        const newLastName = this.state.lastName;
-        const newEmail = this.state.email;
-        const newDateOfBirth = this.state.dateOfBirth;
+        const firstname = this.state.firstname;
+        const lastname = this.state.lastname;
+        const email = this.state.email;
+        const birth = this.state.birth;
 
-        const newErrorMessages = [];
+        const errors = [];
 
-        if (newFirstName.length === 0) {
-            newErrorMessages.push('First name can\'t be blank');
+        if (!firstname.length) {
+            errors.push('First name can\'t be blank');
         }
 
-        if (newLastName.length === 0) {
-            newErrorMessages.push('Last name can\'t be blank');
+        if (!lastname.length) {
+            errors.push('Last name can\'t be blank');
         }
 
-        if (newEmail.length === 0) {
-            newErrorMessages.push('E-mail name can\'t be blank');
+        if (!email.length) {
+            errors.push('E-mail name can\'t be blank');
         }
 
-        if (newDateOfBirth === null) {
-            newErrorMessages.push('Date of birth name can\'t be blank');
-        } else if (moment().subtract(25, 'years').isBefore(newDateOfBirth)) {
-            newErrorMessages.push('You must be at least 25 years old to participate');
+        if (!birth) {
+            errors.push('Date of birth name can\'t be blank');
+        } else if (moment().subtract(25, 'years').isBefore(birth)) {
+            errors.push('You must be at least 25 years old to participate');
         }
 
-        if (newErrorMessages.length > 0) {
-            this.setState({ messages: newErrorMessages });
+        if (errors.length > 0) {
+            this.setState({ messages: errors });
             return;
         }
 
-        // @TODO Push to server
-        this.setState({
-            firstName: '',
-            lastName: '',
-            email: '',
-            dateOfBirth: null,
-            messages: []
+        create({
+            firstname,
+            lastname,
+            email,
+            birth
+        })
+        .then(() => {
+            this.setState({
+                firstname: '',
+                lastname: '',
+                email: '',
+                birth: null,
+                messages: []
+            });
+        })
+        .catch(err => {
+            errors.push(err.data.message);
+            this.setState({ messages: errors });
         });
     }
 
@@ -80,7 +92,7 @@ class SignUpForm extends React.Component {
                 <div className="ui message negative">
                     <ul>
                         {this.state.messages.map(message =>
-                            <li>{message}</li>
+                            <li id="message">{message}</li>
                         )}
                     </ul>
                 </div>
@@ -98,20 +110,20 @@ class SignUpForm extends React.Component {
             >
                 {this.renderErrors()}
                 <div className="field">
-                    <label htmlFor="firstName">First name</label>
+                    <label htmlFor="firstname">First name</label>
                     <input
                         type="text"
-                        id="firstName"
-                        value={this.state.firstName}
+                        id="firstname"
+                        value={this.state.firstname}
                         onChange={event => { this.handleFirstNameChange(event); }}
                     />
                 </div>
                 <div className="field">
-                    <label htmlFor="lastName">Last name</label>
+                    <label htmlFor="lastname">Last name</label>
                     <input
                         type="text"
-                        id="lastName"
-                        value={this.state.lastName}
+                        id="lastname"
+                        value={this.state.lastname}
                         onChange={event => { this.handleLastNameChange(event); }}
                     />
                 </div>
@@ -125,15 +137,15 @@ class SignUpForm extends React.Component {
                     />
                 </div>
                 <div className="field">
-                    <label htmlFor="dateOfBirth">Date of birth (DD/MM/YYYY)</label>
+                    <label htmlFor="birth">Date of birth (DD/MM/YYYY)</label>
                     <DataPicker
-                        id="dateOfBirth"
-                        selected={this.state.dateOfBirth}
+                        id="birth"
+                        selected={this.state.birth}
                         onChange={event => { this.handleDateOfBirthChange(event); }}
                         locale="en-gb"
                     />
                 </div>
-                <button className="ui button primary" type="submit">Sign up</button>
+                <button id="submit" className="ui button primary" type="submit">Sign up</button>
             </form>
         );
     }
