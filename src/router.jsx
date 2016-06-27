@@ -7,8 +7,8 @@ import MyProfile from './sections/myProfile/MyProfile';
 import Destinations from './sections/destinations/Destinations';
 import SignUpForm from './sections/signup/SignUpForm';
 import SignupTrip from './sections/signupTrip/SignupTrip';
+import TripRequestsContainer from './sections/tripRequests/TripRequestsContainer';
 import ConfirmSignUpFormContainer from './sections/signup/ConfirmSignUpFormContainer';
-
 import NotFound from './commons/NotFound.jsx';
 
 export default(
@@ -21,6 +21,7 @@ export default(
             <Route path="/profile" component={MyProfile} />
             <Route path="/trips/signup" component={SignupTrip} />
             <Route path="/admin/destinations" component={Destinations} />
+            <Route path="/admin/trips" component={TripRequestsContainer} />
             <Route path="*" component={NotFound} />
         </Route>
     </Router>

@@ -11,6 +11,7 @@ function Sidebar() {
                 <a href="#" className="item">Donations</a>
                 <a href="#" className="item">Messages</a>
                 <SidebarMenuItem uri="/admin/destinations" itemName="Admin Destinations" />
+                <SidebarMenuItem uri="/admin/trips" itemName="Admin Trip Requests" />
             </div>
         </aside>
     );
