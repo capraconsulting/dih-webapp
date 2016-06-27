@@ -1,5 +1,8 @@
 import React from 'react';
+import DatePicker from 'react-datepicker';
 import { reduxForm } from 'redux-form';
+
+import moment from 'moment';
 
 const fields = ['password', 'passwordConfirmation'];
 
@@ -33,51 +36,61 @@ function ConfirmSignUpForm(props) {
     return (
         <form id="confirmSignUpForm" className="ui form" onSubmit={handleSubmit}>
             <label htmlFor="firstName">First name</label>
-            <input
-                type="text"
-                id="firstName"
-                value="Adrian Alexander"
-                disabled
-            />
-            <label htmlFor="lastName">Last name</label>
-            <input
-                type="text"
-                id="lastName"
-                value="Eriksen"
-                disabled
-            />
-            <label htmlFor="email">E-mail</label>
-            <input
-                type="email"
-                id="email"
-                value="adrian@example.com"
-                disabled
-            />
-            <label htmlFor="dateOfBirth">Date of birth</label>
-            <input
-                type="text"
-                id="dateOfBirth"
-                dateFormat="YYYY-MM-DD"
-                placeholderText="YYYY-MM-DD"
-                value="1993-10-10"
-                disabled
-            />
-            <label htmlFor="password">Password</label>
-            <input
-                type="password"
-                id="password"
-                {...password}
-            />
-            {password.touched && password.error && <div>{password.error}</div>}
-            <label htmlFor="passwordConfirmation">Confirm password</label>
-            <input
-                type="password"
-                id="passwordConfirmation"
-                {...passwordConfirmation}
-            />
-            {passwordConfirmation.touched && passwordConfirmation.error &&
-                <div>{passwordConfirmation.error}</div>}
-            <br />
+            <div className="field">
+                <input
+                    type="text"
+                    id="firstName"
+                    value={props.account.firstname}
+                    disabled
+                />
+            </div>
+            <div className="field">
+                <label htmlFor="lastName">Last name</label>
+                <input
+                    type="text"
+                    id="lastName"
+                    value={props.account.lastname}
+                    disabled
+                />
+            </div>
+            <div className="field">
+                <label htmlFor="email">E-mail</label>
+                <input
+                    type="email"
+                    id="email"
+                    value={props.account.email}
+                    disabled
+                />
+            </div>
+            <div className="field">
+                <label htmlFor="dateOfBirth">Date of birth</label>
+                <DatePicker
+                    id="dateOfBirth"
+                    selected={moment(props.account.birth)}
+                    locale="en-gb"
+                    dateFormat="YYYY-MM-DD"
+                    disabled
+                />
+            </div>
+            <div className="field">
+                <label htmlFor="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    {...password}
+                />
+                {password.touched && password.error && <div>{password.error}</div>}
+            </div>
+            <div className="field">
+                <label htmlFor="passwordConfirmation">Confirm password</label>
+                <input
+                    type="password"
+                    id="passwordConfirmation"
+                    {...passwordConfirmation}
+                />
+                {passwordConfirmation.touched && passwordConfirmation.error &&
+                    <div>{passwordConfirmation.error}</div>}
+            </div>
             <button
                 type="submit"
                 className="ui button primary"
@@ -92,7 +105,8 @@ function ConfirmSignUpForm(props) {
 ConfirmSignUpForm.propTypes = {
     fields: React.PropTypes.object.isRequired,
     handleSubmit: React.PropTypes.func.isRequired,
-    submitting: React.PropTypes.bool.isRequired
+    submitting: React.PropTypes.bool.isRequired,
+    account: React.PropTypes.object.isRequired
 };
 
 export default reduxForm({
