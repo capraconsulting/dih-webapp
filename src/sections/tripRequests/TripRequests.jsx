@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TripStatusDropdown from './AcceptTripButtonContainer';
+import TripStatusDropdown from './TripStatusDropdown';
 
 function TripRequests(props) {
     return (
