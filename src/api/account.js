@@ -20,3 +20,23 @@ export function getAccount(token) {
         })
         .catch(e => { console.error(e); });
 }
+
+/*
+ * putAccount
+ */
+export function putAccount(token, data) {
+    const payload = {
+        password: data.password
+    };
+
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+
+    return axios
+        .put(`${BASE_URL}/account`, payload, config)
+        .then(response => {
+            store.dispatch(actions.putAccountSuccess(response.data));
+        })
+        .catch(e => { console.log(e); });
+}

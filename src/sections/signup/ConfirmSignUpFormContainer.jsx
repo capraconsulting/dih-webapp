@@ -10,8 +10,8 @@ class ConfirmSignUpFormContainer extends React.Component {
         accountApi.getAccount(this.props.location.query.token);
     }
 
-    handleSubmit(data) { // eslint-disable-line
-        // TODO Connect with API call from the future
+    handleSubmit(data) {
+        accountApi.putAccount(this.props.location.query.token, data);
     }
 
     render() {
