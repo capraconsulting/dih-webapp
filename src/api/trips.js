@@ -1,9 +1,12 @@
 import axios from 'axios';
 
+import store from '../store';
+import * as actions from '../actions/tripActions';
+
 const BASE_URL = process.env.BASE_URL;
 
 /*
-* postNewTrip
+* postTrip
 * @param {data} Object containing 'selectedDestination', 'wishStartDate' and 'wishEndDate'
 */
 export function postTrip(data) {
@@ -21,5 +24,17 @@ export function postTrip(data) {
         .then(() => {
             // TODO: Notify user that the submission was successful (react-redux-notifications?)
         })
-        .catch(e => { console.error(e); });
+        .catch(e => { console.error(e); }); // eslint-disable-line
+}
+
+/*
+* getTrips
+*/
+export function getTrips() {
+    return axios
+        .get(`${BASE_URL}/trips`)
+        .then(response => {
+            store.dispatch(actions.getTripsSuccess(response.data));
+        })
+        .catch(e => { console.error(e); }); // eslint-disable-line
 }
