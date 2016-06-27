@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AcceptTripButtonContainer from './AcceptTripButtonContainer';
+import TripStatusDropdown from './AcceptTripButtonContainer';
 
 function TripRequests(props) {
     return (
@@ -22,9 +22,8 @@ function TripRequests(props) {
                         <td>{trip.destinationId}</td>
                         <td>{trip.wishStartDate}</td>
                         <td>{trip.wishEndDate}</td>
-                        <td>{trip.status}</td>
                         <td>
-                            <AcceptTripButtonContainer tripId={trip.id} />
+                            <TripStatusDropdown trip={trip} />
                         </td>
                     </tr>
                 ))}
