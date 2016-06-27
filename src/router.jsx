@@ -8,13 +8,14 @@ import Destinations from './sections/destinations/Destinations';
 import SignUpForm from './sections/signup/SignUpForm';
 import SignupTrip from './sections/signupTrip/SignupTrip';
 import TripRequestsContainer from './sections/tripRequests/TripRequestsContainer';
-
+import ConfirmSignUpFormContainer from './sections/signup/ConfirmSignUpFormContainer';
 import NotFound from './commons/NotFound.jsx';
 
 export default(
     <Router history={browserHistory}>
         <Route path="/signup" component={SignUpLayout}>
             <IndexRoute component={SignUpForm} />
+            <Route path="/signup/confirm" component={ConfirmSignUpFormContainer} />
         </Route>
         <Route path="/" component={MainLayout}>
             <Route path="/profile" component={MyProfile} />
