@@ -3,6 +3,7 @@ import '../styles/main.scss';
 
 import Header from '../commons/Header.jsx';
 import Sidebar from '../commons/Sidebar.jsx';
+import DevTools from '../commons/DevTools';
 
 function MainLayout(props) {
     return (
@@ -14,6 +15,7 @@ function MainLayout(props) {
                     {props.children}
                 </div>
             </div>
+            <DevTools />
         </div>
     );
 }
