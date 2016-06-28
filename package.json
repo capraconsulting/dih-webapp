@@ -77,6 +77,6 @@
     "react-router": "2.5.1",
     "redux": "3.5.2",
     "redux-form": "5.2.5",
-    "semantic-ui-css": "2.1.8"
+    "semantic-ui-css": "2.2.1"
   }
 }
