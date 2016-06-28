@@ -1,7 +1,5 @@
 import React from 'react';
 
-import DevTools from '../commons/DevTools';
-
 function SignUpLayout(props) {
     return (
         <div className="layout-public">
@@ -13,7 +11,6 @@ function SignUpLayout(props) {
                     {props.children}
                 </div>
             </div>
-            <DevTools />
         </div>
     );
 }

@@ -1,11 +1,5 @@
-import { createStore, compose } from 'redux';
-import reducers from './reducers';
-import DevTools from './commons/DevTools';
-
-const enhancer = compose(
-    DevTools.instrument()
-);
-
-const store = createStore(reducers, enhancer);
-
-export default store;
+if (__DEV__) { // eslint-disable-line
+    module.exports = require('./store.dev');
+} else {
+    module.exports = require('./store.prod');
+}
