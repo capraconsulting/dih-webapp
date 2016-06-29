@@ -53,7 +53,7 @@
     "redux-devtools-dock-monitor": "1.1.1",
     "redux-devtools-log-monitor": "1.0.11",
     "sass-loader": "3.2.1",
-    "selenium-standalone": "5.1.1",
+    "selenium-standalone": "5.3.1",
     "source-map-loader": "0.1.5",
     "style-loader": "0.13.1",
     "wd-selenium-hooks": "0.1.0",
