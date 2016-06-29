@@ -1,7 +1,7 @@
 import React from 'react';
-import '../styles/main.scss';
-
 import NotificationSystem from 'react-notification-system';
+
+import '../styles/main.scss';
 
 import Header from '../commons/Header.jsx';
 import Sidebar from '../commons/Sidebar.jsx';
@@ -13,17 +13,12 @@ class MainLayout extends React.Component {
     }
 
     componentDidMount() {
-
         this.notificationSystem = this.refs.notificationSystem;
-        console.log(this.notificationSystem);
     }
 
-    addNotification(event) {
+    addNotification(event, message, level) {
         event.preventDefault();
-        this.notificationSystem.addNotification({
-            message: 'Notification message',
-            level: 'success'
-        });
+        this.notificationSystem.addNotification({ message, level });
     }
 
 
@@ -34,7 +29,7 @@ class MainLayout extends React.Component {
                 <div className="wrapper">
                     <Sidebar />
                     <div className="main-content">
-                        <button onClick={this.addNotification.bind(this)}>Add notification</button>
+                        <button onClick={(e) => this.addNotification(e, 'Dette er en melding!', 'success')}>Add notification</button>
                         {this.props.children}
                     </div>
                 </div>
