@@ -1,6 +1,5 @@
-import { createStore } from 'redux';
-import reducers from './reducers';
-
-const store = createStore(reducers);
-
-export default store;
+if (__DEV__) { // eslint-disable-line
+    module.exports = require('./store.dev');
+} else {
+    module.exports = require('./store.prod');
+}
