@@ -1,7 +1,7 @@
 import React from 'react';
+import 'normalize.css/normalize.css';
 import 'semantic-ui-css/semantic.css';
 import '../styles/main.scss';
-import 'normalize.css/normalize.css';
 
 
 import Header from '../commons/Header.jsx';
