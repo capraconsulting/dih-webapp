@@ -33,4 +33,4 @@ deployment:
     staging:
         branch: dev
         commands:
-            - BUCKET=dev.dih.capra.me npm run deploy
+            - BUCKET=dev.dih.capra.me NODE_ENV=production npm run deploy:staging

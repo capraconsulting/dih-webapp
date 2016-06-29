@@ -30,33 +30,15 @@ Name your branches in the following way, where `DIH-num` is a task ID on JIRA:
 1. Install Node and Npm.
 2. Setup [dih-api](http://github.com/capraconsulting/dih-api).
 3. Run `npm install`.
-4. Run `npm run dev`.
+4. Run `npm run start:dev`.
 5. Reach the app on port 3000.
 
 ## Tests
 On the webapp we have end-to-end tests with Selenium, but the tests are run in [SauceLabs](https://saucelabs.com) instead of locally, to ensure that they work the same for everyone.  You want to register at their website, then add the environment variables `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY`. locally. Then get started testing with:
 
 1. Run `npm install`
-2. Run `npm run selenium install`
-3. Run `npm test` to run tests
+2. Run `npm test` to run tests
 
 The results can be viewed in your account on Sauce Labs.
 
 `npm test` wil run both linter and end-to-end tests. You can run only end-to-end tests with `npm run test:e2e`.
-
-## Building with Docker
-
-The initial building of the web app can be done using the following command:
-
-```bash
-$ docker build -t dih-webapp .
-```
-
-After build, the project can be ran using:
-
-```bash
-$ docker run --name dih-webapp -p 3000:3000 -d dih-webapp npm run dev
-```
-
-The project can now be reached by navigating your browser to
-[http://localhost:3000](http://localhost:3000).

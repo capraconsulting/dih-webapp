@@ -1,5 +1,8 @@
 import React from 'react';
+import 'semantic-ui-css/semantic.css';
 import '../styles/main.scss';
+import 'normalize.css/normalize.css';
+
 
 import Header from '../commons/Header.jsx';
 import Sidebar from '../commons/Sidebar.jsx';
