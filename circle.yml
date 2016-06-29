@@ -21,6 +21,7 @@ dependencies:
 
 test:
     pre:
+        - npm run dist:staging
         - docker run -d --net host -e PG_URL=postgres://ubuntu:@127.0.0.1:5432/circle_test $EXTERNAL_API_REGISTRY-dev:latest npm start
     override:
         - npm test
