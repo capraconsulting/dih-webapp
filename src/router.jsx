@@ -2,8 +2,7 @@ import React from 'react';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import MainLayout from './layouts/MainLayout';
-import LoginLayout from './layouts/LoginLayout';
-import SignUpLayout from './layouts/SignUpLayout';
+import PublicLayout from './layouts/PublicLayout';
 import MyProfile from './sections/myProfile/MyProfile';
 import Destinations from './sections/destinations/Destinations';
 import LoginFormContainer from './sections/login/LoginFormContainer';
@@ -15,13 +14,14 @@ import NotFound from './commons/NotFound.jsx';
 
 export default(
     <Router history={browserHistory}>
-        <Route path="/login" component={LoginLayout}>
-            <IndexRoute component={LoginFormContainer} />
+        <Route component={PublicLayout}>
+            <Route path="/login" component={LoginFormContainer} />
+            <Route path="/signup">
+                <IndexRoute component={SignUpForm} />
+                <Route path="/signup/confirm" component={ConfirmSignUpFormContainer} />
+            </Route>
         </Route>
-        <Route path="/signup" component={SignUpLayout}>
-            <IndexRoute component={SignUpForm} />
-            <Route path="/signup/confirm" component={ConfirmSignUpFormContainer} />
-        </Route>
+
         <Route path="/" component={MainLayout}>
             <Route path="/profile" component={MyProfile} />
             <Route path="/trips/signup" component={SignupTrip} />

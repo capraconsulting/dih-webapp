@@ -12,6 +12,7 @@ function LoginForm(props) {
 
     return (
         <form id="loginForm" className="ui form" onSubmit={handleSubmit}>
+            <h2>Log in</h2>
             <div className="field">
                 <label htmlFor="email">E-mail</label>
                 <input
