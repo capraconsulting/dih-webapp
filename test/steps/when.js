@@ -34,4 +34,8 @@ module.exports = function () { // eslint-disable-line
         const form = this.currentPage[field];
         form.submitForm();
     });
+
+    this.When(/^I press key "(.*)"$/, (key) => {
+        browser.keys(key);
+    });
 };

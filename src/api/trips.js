@@ -1,9 +1,12 @@
 import axios from 'axios';
 
+import store from '../store';
+import * as actions from '../actions/tripActions';
+
 const BASE_URL = process.env.BASE_URL;
 
 /*
-* postNewTrip
+* postTrip
 * @param {data} Object containing 'selectedDestination', 'wishStartDate' and 'wishEndDate'
 */
 export function postTrip(data) {
@@ -19,7 +22,43 @@ export function postTrip(data) {
     return axios
         .post(`${BASE_URL}/trips`, tripObject)
         .then(() => {
-            // TODO: Notify user that the submission was successful (react-redux-notifications?)
+            // @TODO: Notify user that the submission was successful (react-redux-notifications?)
         })
-        .catch(e => { console.error(e); });
+        .catch(e => { console.error(e); }); // eslint-disable-line
+}
+
+/*
+* getTrips
+* @return {Promise} axios Promise
+*/
+export function getTrips() {
+    return axios
+        .get(`${BASE_URL}/trips`)
+        .then(response => {
+            store.dispatch(actions.getTripsRequestSuccess(response.data));
+        })
+        .catch(e => {
+            store.dispatch(actions.getTripsRequestFailure());
+            console.error(e); // eslint-disable-line
+        });
+}
+
+/*
+* putTrip
+* @param {trip} Trip object
+* @return {Promise} axios Promise
+*/
+export function putTrip(trip) {
+    store.dispatch(actions.putTripRequestStart());
+    return axios
+        .put(`${BASE_URL}/trips/${trip.id}`, trip)
+        .then(() => {
+            store.dispatch(actions.putTripRequestSuccess());
+            getTrips();
+            // @TODO: Notify user that the trip was successfully approved
+        })
+        .catch(e => {
+            store.dispatch(actions.putTripRequestFailure());
+            console.error(e);// eslint-disable-line
+        });
 }
