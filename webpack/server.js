@@ -1,5 +1,3 @@
-import devMiddleware from 'webpack-dev-middleware';
-import hotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
 import path from 'path';
 import express from 'express';
@@ -13,12 +11,12 @@ app.set('port', 3000);
 
 const compiler = webpack(config);
 
-app.use(devMiddleware(compiler, {
+app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath
 }));
 
-app.use(hotMiddleware(compiler));
+app.use(require('webpack-hot-middleware')(compiler));
 app.use('/api', proxy({
     target: 'http://localhost:9000',
     pathRewrite: {
@@ -26,10 +24,10 @@ app.use('/api', proxy({
     }
 }));
 
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
 });
 
 app.listen(app.get('port'), app.get('host'), (err) => {
