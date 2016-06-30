@@ -76,7 +76,7 @@
     "react": "15.1.0",
     "react-datepicker": "0.27.0",
     "react-dom": "15.1.0",
-    "react-notification-system": "^0.2.7",
+    "react-notification-system": "~0.2.7",
     "react-redux": "4.4.5",
     "react-router": "2.5.1",
     "redux": "3.5.2",
