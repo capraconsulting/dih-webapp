@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 function DestinationList(props) {
     return (
@@ -6,7 +7,14 @@ function DestinationList(props) {
             <h3>All destinations</h3>
             <ul>
                 {props.destinations.map(destination => (
-                    <li id="destination" key={destination.id}>{destination.name}</li>
+                    <li
+                        id="destination"
+                        key={destination.id}
+                    >
+                        <Link to={`/admin/destinations/${destination.id}`}>
+                            {destination.name}
+                        </Link>
+                    </li>
                 ))}
             </ul>
         </div>

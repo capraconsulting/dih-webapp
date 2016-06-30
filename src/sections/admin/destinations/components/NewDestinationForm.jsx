@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as destinationsApi from '../../api/destinations';
+import * as destinationsApi from '../../../../api/destinations';
 
 class NewDestinationForm extends React.Component {
     constructor() {
