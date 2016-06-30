@@ -6,11 +6,12 @@ function Sidebar() {
         <aside className="sidebar">
             <div className="vertical-menu">
                 <SidebarMenuItem uri="/profile" itemName="My profile" />
-                <a href="#" className="item">My trips</a>
+                <a href="#" className="item"><i className="travel icon"></i>My trips</a>
                 <SidebarMenuItem uri="/trips/signup" itemName="Sign up for a trip" />
                 <a href="#" className="item">Donations</a>
                 <a href="#" className="item">Messages</a>
                 <SidebarMenuItem uri="/admin/destinations" itemName="Admin Destinations" />
+                <SidebarMenuItem uri="/admin/trips" itemName="Admin Trip Requests" />
             </div>
         </aside>
     );

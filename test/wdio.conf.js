@@ -42,7 +42,7 @@ var config = {
     //
     capabilities: [
         {
-            browserName: 'firefox'
+            browserName: 'chrome'
         }
     ],
     //
@@ -202,7 +202,6 @@ var config = {
         child.execSync('killall node');
     }
 };
-
 config.user = process.env.SAUCE_USERNAME;
 config.key = process.env.SAUCE_ACCESS_KEY;
 config.sauceConnect = true;
