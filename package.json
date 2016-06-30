@@ -9,10 +9,9 @@
     "lint": "eslint --ignore-path .gitignore .",
     "selenium": "selenium-standalone",
     "test:e2e": "wdio test/wdio.conf.js",
-    "clean": "rm -f public/bundle.js",
-    "build": "npm run clean && npm run dist",
-    "deploy": "npm run build && aws s3 cp ./public s3://$BUCKET --recursive",
-    "dist": "webpack --config webpack/prod.config.js"
+    "clean": "rm -rf dist",
+    "deploy:staging": "npm run clean && npm run dist:staging && aws s3 cp ./dist s3://$BUCKET --recursive",
+    "dist:staging": "webpack --config webpack/staging.config.js"
   },
   "repository": {
     "type": "git",
@@ -34,7 +33,6 @@
     "babel-preset-react": "6.11.1",
     "babel-preset-stage-0": "6.5.0",
     "chai": "3.5.0",
-    "chai-as-promised": "5.3.0",
     "css-loader": "0.23.1",
     "cucumber": "0.10.2",
     "eslint": "2.13.1",
@@ -43,19 +41,22 @@
     "eslint-plugin-jsx-a11y": "1.5.3",
     "eslint-plugin-react": "5.2.2",
     "express": "4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.21.0",
     "http-proxy-middleware": "0.16.0",
     "node-libs-browser": "1.0.0",
     "node-sass": "3.8.0",
     "object-assign": "4.1.0",
-    "phantomjs-prebuilt": "2.1.7",
     "postcss-loader": "0.9.1",
+    "sass-loader": "4.0.0",
     "redux-devtools": "3.3.1",
     "redux-devtools-dock-monitor": "1.1.1",
     "redux-devtools-log-monitor": "1.0.11",
-    "sass-loader": "3.2.1",
-    "selenium-standalone": "5.1.1",
+    "selenium-standalone": "^5.3.1",
     "source-map-loader": "0.1.5",
     "style-loader": "0.13.1",
+    "url-loader": "^0.5.7",
     "wd-selenium-hooks": "0.1.0",
     "wdio": "0.3.1",
     "wdio-cucumber-framework": "0.1.0",
@@ -65,14 +66,13 @@
     "webdriverio": "4.1.0",
     "webpack": "1.13.1",
     "webpack-dev-middleware": "1.6.1",
-    "webpack-hot-middleware": "2.11.0"
+    "webpack-hot-middleware": "2.12.0"
   },
   "dependencies": {
     "axios": "0.12.0",
-    "express": "4.14.0",
     "lodash": "4.13.1",
     "moment": "2.13.0",
-    "normalize.css": "4.1.1",
+    "normalize.css": "4.2.0",
     "react": "15.1.0",
     "react-datepicker": "0.27.0",
     "react-dom": "15.1.0",
@@ -80,6 +80,6 @@
     "react-router": "2.5.1",
     "redux": "3.5.2",
     "redux-form": "5.3.0",
-    "semantic-ui-css": "2.1.8"
+    "semantic-ui-css": "2.2.1"
   }
 }
