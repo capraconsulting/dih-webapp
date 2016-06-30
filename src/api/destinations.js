@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import store from '../store';
 import * as actions from '../actions/destinationActions';
+import * as notification from '../actions/notificationActions';
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -25,7 +26,9 @@ export function postDestination(destinationObject) {
     return axios
         .post(`${BASE_URL}/destinations`, destinationObject)
         .then(() => {
+            const msg = `«${destinationObject.name}» has been added to destinations.`;
             getDestinations();
+            store.dispatch(notification.addNotification(msg, 'success'));
         })
         .catch(e => { console.error(e); });
 }
