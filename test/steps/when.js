@@ -13,4 +13,8 @@ module.exports = function () { // eslint-disable-line
     this.When(/^I refresh the application$/, () => {
         browser.refresh();
     });
+
+    this.When(/^I press key "(.*)"$/, (key) => {
+        browser.keys(key);
+    });
 };
