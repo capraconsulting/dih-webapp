@@ -35,6 +35,7 @@ function ConfirmSignUpForm(props) {
 
     return (
         <form id="confirmSignUpForm" className="ui form" onSubmit={handleSubmit}>
+            <h2>Sign up</h2>
             <label htmlFor="firstName">First name</label>
             <div className="field">
                 <input

@@ -5,9 +5,6 @@ function SignUpLayout(props) {
         <div className="layout-public">
             <div className="ui card fluid">
                 <div className="content">
-                    <h2>Sign up</h2>
-                </div>
-                <div className="content">
                     {props.children}
                 </div>
             </div>
