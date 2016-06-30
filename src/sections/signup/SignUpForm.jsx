@@ -1,5 +1,8 @@
 import React from 'react';
 import DataPicker from 'react-datepicker';
+// @TODO
+// This should be generalized and moved to a component for better reuse
+import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import _ from 'lodash';
 import { create } from '../../api/users';
