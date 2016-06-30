@@ -5,8 +5,9 @@ import RootLayout from './layouts/Root';
 import MainLayout from './layouts/MainLayout';
 import PublicLayout from './layouts/PublicLayout';
 import MyProfile from './sections/myProfile/MyProfile';
-import Destinations from './sections/destinations/Destinations';
 import LoginFormContainer from './sections/login/LoginFormContainer';
+import Destination from './sections/admin/destinations/Destination';
+import Destinations from './sections/admin/destinations/Destinations';
 import SignUpForm from './sections/signup/SignUpForm';
 import SignupTrip from './sections/signupTrip/SignupTrip';
 import TripRequestsContainer from './sections/tripRequests/TripRequestsContainer';
@@ -27,6 +28,7 @@ export default(
                 <Route path="/profile" component={MyProfile} />
                 <Route path="/trips/signup" component={SignupTrip} />
                 <Route path="/admin/destinations" component={Destinations} />
+                <Route path="/admin/destinations/:destinationId" component={Destination} />
                 <Route path="/admin/trips" component={TripRequestsContainer} />
                 <Route path="*" component={NotFound} />
             </Route>
