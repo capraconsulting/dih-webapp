@@ -1,22 +1,14 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from './actionTypes';
+import { CALL_API } from '../middleware/api';
 
-export function loginRequest(credentials) {
+export function login(data) {
     return {
-        type: LOGIN_REQUEST,
-        credentials
-    };
-}
-
-export function loginSuccess(jwt) {
-    return {
-        type: LOGIN_SUCCESS,
-        jwt
-    };
-}
-
-export function loginFailure(error) {
-    return {
-        type: LOGIN_FAILURE,
-        error
+        [CALL_API]: {
+            method: 'post',
+            url: '/authenticate',
+            types: [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE],
+            authenticated: false,
+            data
+        }
     };
 }

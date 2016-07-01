@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import LoginForm from './LoginForm';
-import { login } from '../../api/authenticate';
+import store from '../../store';
+import { login } from '../../actions/authenticationActions';
 
 class LoginFormContainer extends React.Component {
+
     handleSubmit(data) {
-        login(data);
+        store.dispatch(login(data));
     }
 
     render() {
+        const { isAuthenticated, errorMessage } = this.props;
+
         return (
             <LoginForm
                 onSubmit={e => { this.handleSubmit(e); }}
@@ -15,5 +19,10 @@ class LoginFormContainer extends React.Component {
         );
     }
 }
+
+LoginFormContainer.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string
+};
 
 export default LoginFormContainer;
