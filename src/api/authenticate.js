@@ -10,7 +10,7 @@ const BASE_URL = process.env.BASE_URL;
 * postDesination
 * @param {destinationObject} Object for destination, contains property ǹame
 */
-export function postDestination(credentials) {
+export function login(credentials) {
     loginRequest(credentials);
     return axios
         .post(`${BASE_URL}/authenticate`, credentials)

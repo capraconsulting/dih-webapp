@@ -1,10 +1,10 @@
 import React from 'react';
-
 import LoginForm from './LoginForm';
+import { login } from '../../api/authenticate';
 
 class LoginFormContainer extends React.Component {
-    handleSubmit(data) { // eslint-disable-line
-        // TODO: Implement submission handling
+    handleSubmit(data) {
+        login(data);
     }
 
     render() {

@@ -4,7 +4,8 @@ node_modules/
 
 # Webpack #
 ###########
-dist
+dist/*
+!dist/index.html
 
 # Logs and databases #
 ######################

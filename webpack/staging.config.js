@@ -9,6 +9,9 @@ const config = objectAssign(baseConfig, {
     entry: [
         './src/app.jsx'
     ],
+    output: {
+        filename: '[name]-[hash].js'
+    },
     postcss: () => ([autoprefixer])
 });
 
