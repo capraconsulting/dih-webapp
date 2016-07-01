@@ -15,7 +15,11 @@ export function getDestinations() {
         .then(response => {
             store.dispatch(actions.getDestinationsSuccess(response.data));
         })
-        .catch(e => { console.error(e); });
+        .catch(e => {
+            if (__DEV__) console.error(e); // eslint-disable-line
+            const msg = 'Something went wrong while fetching destinations.';
+            store.dispatch(notification.addNotification(msg, 'error'));
+        });
 }
 
 /*
@@ -30,5 +34,21 @@ export function postDestination(destinationObject) {
             getDestinations();
             store.dispatch(notification.addNotification(msg, 'success'));
         })
-        .catch(e => { console.error(e); });
+        .catch(e => {
+            if (__DEV__) console.error(e); // eslint-disable-line
+
+            let msg;
+            let type;
+
+            if (e.data.name === 'ValidationError' &&
+                e.data.message === 'name must be unique') {
+                msg = 'Destination name must be unique.';
+                type = 'warning';
+            } else {
+                msg = 'Something went wrong while adding destination.';
+                type = 'error';
+            }
+
+            store.dispatch(notification.addNotification(msg, type));
+        });
 }
