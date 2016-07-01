@@ -40,9 +40,8 @@ export function postDestination(destinationObject) {
             let msg;
             let type;
 
-            if (e.data.name === 'ValidationError' &&
-                e.data.message === 'name must be unique') {
-                msg = 'Destination name must be unique.';
+            if (e.data.name === 'ValidationError') {
+                msg = e.data.message;
                 type = 'warning';
             } else {
                 msg = 'Something went wrong while adding destination.';
