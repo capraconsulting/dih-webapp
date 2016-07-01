@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import * as tripsApi from '../../api/trips';
 import { TRIP_STATUSES } from '../../constants';
 import Dropdown from '../../commons/Dropdown';
 

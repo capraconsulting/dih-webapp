@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 import DestinationList from '../components/DestinationList';
 
-import * as destinationsApi from '../../../../api/destinations';
-
 class DestinationListContainer extends React.Component {
 
     componentDidMount() {

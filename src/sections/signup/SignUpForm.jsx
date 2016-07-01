@@ -5,7 +5,6 @@ import DataPicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import _ from 'lodash';
-import { create } from '../../api/users';
 
 class SignUpForm extends React.Component {
     constructor() {

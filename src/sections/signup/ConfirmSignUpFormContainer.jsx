@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 import ConfirmSignUpForm from './ConfirmSignUpForm';
 
-import * as accountApi from '../../api/account';
-
 class ConfirmSignUpFormContainer extends React.Component {
     componentDidMount() {
         accountApi.getAccount(this.props.location.query.token);

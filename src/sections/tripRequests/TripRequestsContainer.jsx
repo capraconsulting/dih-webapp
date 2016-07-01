@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 import TripRequests from './TripRequests';
 
-import * as tripsApi from '../../api/trips';
-
 class TripRequestsContainer extends React.Component {
 
     componentDidMount() {

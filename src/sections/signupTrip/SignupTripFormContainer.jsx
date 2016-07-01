@@ -2,9 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SignupTripForm from './SignupTripForm';
-import * as tripsApi from '../../api/trips';
-import * as destinationsApi from '../../api/destinations';
-
 
 class SignupTripFormContainer extends React.Component {
     componentDidMount() {
