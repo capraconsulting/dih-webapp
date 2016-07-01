@@ -1,21 +1,21 @@
-import { ADD_USER_SUCCESS, ADD_USER_FAILURE, ADD_USER_START } from './actionTypes';
+import { POST_USER_REQUEST, POST_USER_SUCCESS, POST_USER_FAILURE } from './actionTypes';
 
-export function postUserSuccess(user) {
+export function postUserRequest() {
     return {
-        type: ADD_USER_SUCCESS,
-        user
+        type: POST_USER_REQUEST
     };
 }
 
-export function postUserStart() {
+export function postUserSuccess(user) {
     return {
-        type: ADD_USER_START
+        type: POST_USER_SUCCESS,
+        user
     };
 }
 
 export function postUserFailure(error) {
     return {
-        type: ADD_USER_FAILURE,
+        type: POST_USER_FAILURE,
         error
     };
 }
