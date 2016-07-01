@@ -1,13 +1,11 @@
 import React from 'react';
 import Table from '../../../commons/Table';
+import DestinationInfoContainer from './containers/DestinationInfoContainer';
 
 function Destination(props) {
     return (
         <div className="ui segments">
-            <div className="ui blue inverted segment header">
-                <h2>View destination</h2> {/* @TODO Get destination info from API */}
-                <bold>Name:</bold> {props.params.destinationId}
-            </div>
+            <DestinationInfoContainer destinationId={props.params.destinationId} />
             <div className="ui segment">
                 <div className="ui grid">
                     <div className="sixteen wide column">
