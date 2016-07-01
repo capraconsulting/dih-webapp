@@ -1,8 +1,8 @@
-import { ADD_DESTINATION_SUCCESS, GET_DESTINATIONS_SUCCESS } from './actionTypes';
+import { POST_DESTINATION_SUCCESS, GET_DESTINATIONS_SUCCESS } from './actionTypes';
 
 export function postDestinationSuccess() {
     return {
-        type: ADD_DESTINATION_SUCCESS
+        type: POST_DESTINATION_SUCCESS
     };
 }
 
