@@ -11,7 +11,7 @@ const BASE_URL = process.env.BASE_URL;
 */
 export function postTrip(data) {
     const tripObject = {
-        userId: 1, // TODO: Replace with the logged in user
+        userId: 1, // @TODO: Replace with the logged in user
         destinationId: parseInt(data.selectedDestination, 10),
         wishStartDate: new Date(data.wishStartDate),
         wishEndDate: new Date(data.wishEndDate),
@@ -39,6 +39,38 @@ export function getTrips() {
         })
         .catch(e => {
             store.dispatch(actions.getTripsRequestFailure());
+            console.error(e); // eslint-disable-line
+        });
+}
+
+/*
+* getTripsForUser
+* @return {Promise} axios Promise
+*/
+export function getTripsForUser(userId) {
+    return axios
+        .get(`${BASE_URL}/trips?userId=${userId}`)
+        .then(response => {
+            store.dispatch(actions.getTripsForUserSuccess(response.data));
+        })
+        .catch(e => {
+            store.dispatch(actions.getTripsForUserFailure());
+            console.error(e); // eslint-disable-line
+        });
+}
+
+/*
+* getTripsForUser
+* @return {Promise} axios Promise
+*/
+export function getTripsForDestination(destinationId, status) {
+    return axios
+        .get(`${BASE_URL}/trips?destinationId=${destinationId}&status=${status}`)
+        .then(response => {
+            store.dispatch(actions.getTripsForDestinationSuccess(response.data));
+        })
+        .catch(e => {
+            store.dispatch(actions.getTripsForDestinationFailure());
             console.error(e); // eslint-disable-line
         });
 }

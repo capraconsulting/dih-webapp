@@ -1,12 +1,17 @@
-import { GET_TRIPS_REQUEST_SUCCESS } from '../actions/actionTypes';
+import * as actionTypes from '../actions/actionTypes/tripActionTypes';
 
 const initialState = {
-    trips: []
+    trips: [],
+    tripsForDestination: []
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-    case GET_TRIPS_REQUEST_SUCCESS:
+    case actionTypes.GET_TRIPS_REQUEST_SUCCESS:
+        return { ...state, trips: action.trips };
+    case actionTypes.GET_TRIPS_FOR_DESTINATION_SUCCESS:
+        return { ...state, tripsForDestination: action.trips };
+    case actionTypes.GET_TRIPS_FOR_USER_SUCCESS:
         return { ...state, trips: action.trips };
     default:
         return state;

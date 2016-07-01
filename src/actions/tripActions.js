@@ -1,43 +1,76 @@
-import { GET_TRIPS_REQUEST_START,
-    GET_TRIPS_REQUEST_SUCCESS,
-    GET_TRIPS_REQUEST_FAILURE,
-    PUT_TRIP_REQUEST_START,
-    PUT_TRIP_REQUEST_SUCCESS,
-    PUT_TRIP_REQUEST_FAILURE } from './actionTypes';
+import * as actionTypes from './actionTypes/tripActionTypes';
 
 export function getTripsRequestStart() {
     return {
-        type: GET_TRIPS_REQUEST_START
+        type: actionTypes.GET_TRIPS_REQUEST
     };
 }
 
 export function getTripsRequestSuccess(trips) {
     return {
-        type: GET_TRIPS_REQUEST_SUCCESS,
+        type: actionTypes.GET_TRIPS_SUCCESS,
         trips
     };
 }
 
 export function getTripsRequestFailure() {
     return {
-        type: GET_TRIPS_REQUEST_FAILURE
+        type: actionTypes.GET_TRIPS_FAILURE
     };
 }
 
 export function putTripRequestStart() {
     return {
-        type: PUT_TRIP_REQUEST_START
+        type: actionTypes.PUT_TRIP_REQUEST
     };
 }
 
 export function putTripRequestSuccess() {
     return {
-        type: PUT_TRIP_REQUEST_SUCCESS
+        type: actionTypes.PUT_TRIP_SUCCESS
     };
 }
 
 export function putTripRequestFailure() {
     return {
-        type: PUT_TRIP_REQUEST_FAILURE
+        type: actionTypes.PUT_TRIP_FAILURE
+    };
+}
+
+export function getTripsForDestinationStart() {
+    return {
+        type: actionTypes.GET_TRIPS_FOR_DESTINATION_REQUEST
+    };
+}
+
+export function getTripsForDestinationSuccess(trips) {
+    return {
+        type: actionTypes.GET_TRIPS_FOR_DESTINATION_SUCCESS,
+        trips
+    };
+}
+
+export function getTripsForDestinationFailure() {
+    return {
+        type: actionTypes.GET_TRIPS_FOR_DESTINATION_FAILURE
+    };
+}
+
+export function getTripsForUserStart() {
+    return {
+        type: actionTypes.GET_TRIPS_FOR_USER_REQUEST
+    };
+}
+
+export function getTripsForUserSuccess(trips) {
+    return {
+        type: actionTypes.GET_TRIPS_FOR_USER_SUCCESS,
+        trips
+    };
+}
+
+export function getTripsForUserFailure() {
+    return {
+        type: actionTypes.GET_TRIPS_FOR_USER_FAILURE
     };
 }
