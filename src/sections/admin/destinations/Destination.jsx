@@ -8,7 +8,7 @@ class Destination extends React.Component {
     constructor() {
         super();
         this.state = {
-            selectedStatus: TRIP_STATUSES.CLOSED
+            selectedStatus: TRIP_STATUSES.ACTIVE
         };
     }
 
