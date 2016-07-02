@@ -7,6 +7,14 @@ import * as tripsApi from '../../../../api/trips';
 
 class VolunteersAtDestinationContainer extends React.Component {
 
+    shouldComponentUpdate(nextProps) {
+        if (this.props.status === nextProps.status &&
+            _.isEqual(this.props.tripsForDestination, nextProps.tripsForDestination)) {
+            return false;
+        }
+        return true;
+    }
+
     noramlizeTripObjectsForTable(items) {
         const cleanObjects = [];
         _.mapKeys(items, value => {
