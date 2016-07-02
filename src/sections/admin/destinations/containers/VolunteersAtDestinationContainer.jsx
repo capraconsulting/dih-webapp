@@ -34,17 +34,22 @@ class VolunteersAtDestinationContainer extends React.Component {
     render() {
         tripsApi.getTripsForDestination(this.props.destinationId, this.props.status);
         return (
-            <Table
-                columnNames={{
-                    firstname: 'First name',
-                    lastname: 'Last name',
-                    email: 'E-mail',
-                    startDate: 'Start date',
-                    endDate: 'End date',
-                    status: 'Status'
-                }}
-                items={this.noramlizeTripObjectsForTable(this.props.tripsForDestination)}
-            />
+            <div>
+                <p>
+                    There are {this.props.tripsForDestination.length} volunteers in this list.
+                </p>
+                <Table
+                    columnNames={{
+                        firstname: 'First name',
+                        lastname: 'Last name',
+                        email: 'E-mail',
+                        startDate: 'Start date',
+                        endDate: 'End date',
+                        status: 'Status'
+                    }}
+                    items={this.noramlizeTripObjectsForTable(this.props.tripsForDestination)}
+                />
+            </div>
         );
     }
 }
