@@ -7,7 +7,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-    case actionTypes.GET_TRIPS_REQUEST_SUCCESS:
+    case actionTypes.GET_TRIPS_SUCCESS:
         return { ...state, trips: action.trips };
     case actionTypes.GET_TRIPS_FOR_DESTINATION_SUCCESS:
         return { ...state, tripsForDestination: action.trips };

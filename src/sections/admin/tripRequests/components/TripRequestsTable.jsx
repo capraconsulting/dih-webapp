@@ -2,24 +2,25 @@ import React from 'react';
 
 import TripStatusDropdown from './TripStatusDropdown';
 
-function TripRequests(props) {
+function TripRequestsTable(props) {
     return (
         <table className="ui single line table">
             <thead>
-                <tr>
-                    <th>Volunteer</th>
+                <tr key="head">
+                    <th>First name</th>
+                    <th>Last name</th>
                     <th>Destination</th>
                     <th>Start date</th>
                     <th>End date</th>
                     <th>Status</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {props.trips.map(trip => (
                     <tr key={trip.id}>
-                        <td>{trip.userId}</td>
-                        <td>{trip.destinationId}</td>
+                        <td>{trip.user.firstname}</td>
+                        <td>{trip.user.lastname}</td>
+                        <td>{trip.destination.name}</td>
                         <td>{trip.wishStartDate}</td>
                         <td>{trip.wishEndDate}</td>
                         <td>
@@ -32,8 +33,8 @@ function TripRequests(props) {
     );
 }
 
-TripRequests.propTypes = {
+TripRequestsTable.propTypes = {
     trips: React.PropTypes.array.isRequired
 };
 
-export default TripRequests;
+export default TripRequestsTable;

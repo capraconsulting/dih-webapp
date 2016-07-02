@@ -1,7 +1,7 @@
 import React from 'react';
-import * as tripsApi from '../../api/trips';
-import { tripStatusesForDropdown } from '../../helpers';
-import Dropdown from '../../commons/Dropdown';
+import * as tripsApi from '../../../../api/trips';
+import { tripStatusesForDropdown } from '../../../../helpers';
+import Dropdown from '../../../../commons/Dropdown';
 
 
 class TripStatusDropdown extends React.Component {
