@@ -9,6 +9,13 @@ machine:
     services:
         - docker
 
+general:
+    branches:
+        only:
+          - master
+          - dev
+          - test/*
+
 dependencies:
     pre:
         - npm install -g npm
@@ -17,15 +24,19 @@ dependencies:
         - aws configure set default.region eu-west-1
         - aws configure set default.output json
         - eval $(aws ecr get-login --region eu-west-1)
-        - docker pull $EXTERNAL_API_REGISTRY-dev:latest
 
 test:
+    branches:
+        only:
+            - master
+            - dev
     pre:
         - npm run dist:staging
+        - docker pull $EXTERNAL_API_REGISTRY-dev:latest
         - docker run -d --net host -e PG_URL=postgres://ubuntu:@127.0.0.1:5432/circle_test $EXTERNAL_API_REGISTRY-dev:latest npm run start:test
-
     override:
         - npm test
+
 
 deployment:
     prod:
