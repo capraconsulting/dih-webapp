@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
-import { TRIP_STATUSES } from '../../constants';
-import { update, list } from '../../actions/tripActions';
-import Dropdown from '../../commons/Dropdown';
+import { update, list } from '../../../../actions/tripActions';
+import Dropdown from '../../../../commons/Dropdown';
+import { tripStatusesForDropdown } from '../../../../helpers';
 
 const createHandlers = (dispatch) => (
     {
@@ -21,14 +20,8 @@ class TripStatusDropdown extends React.Component {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
         this.state = {
-            options: []
+            options: tripStatusesForDropdown()
         };
-        _.forOwn(TRIP_STATUSES, status => {
-            this.state.options.push({
-                value: status,
-                label: status
-            });
-        });
     }
 
     handleStatusChange(event) {

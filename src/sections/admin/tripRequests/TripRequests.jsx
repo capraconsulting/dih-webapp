@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { list } from '../../actions/tripActions';
-import TripRequests from './TripRequests';
+import TripRequestsTable from './components/TripRequestsTable';
+import { list } from '../../../actions/tripActions';
 
 const createHandlers = (dispatch) => () => dispatch(list());
 
@@ -17,7 +17,7 @@ class TripRequestsContainer extends React.Component {
 
     render() {
         return (
-            <TripRequests trips={this.props.trips} />
+            <TripRequestsTable trips={this.props.trips} />
         );
     }
 }
@@ -27,8 +27,8 @@ const mapStateToProps = store => ({
 });
 
 TripRequestsContainer.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    trips: PropTypes.array.isRequired
+    trips: React.PropTypes.array.isRequired,
+    dispatch: React.PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps)(TripRequestsContainer);

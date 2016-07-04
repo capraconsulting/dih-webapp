@@ -1,4 +1,4 @@
-import * as actions from './actionTypes';
+import * as actions from './actionTypes/tripActionTypes';
 import { CALL_API } from '../middleware/api';
 
 export function list() {
@@ -10,6 +10,21 @@ export function list() {
                 actions.GET_TRIPS_REQUEST,
                 actions.GET_TRIPS_SUCCESS,
                 actions.GET_TRIPS_FAILURE
+            ],
+            authenticated: true
+        }
+    };
+}
+
+export function listForDestinationWithStatus(destinationId, status) {
+    return {
+        [CALL_API]: {
+            method: 'get',
+            url: `/trips?destinationId=${destinationId}&status=${status}`,
+            types: [
+                actions.GET_TRIPS_FOR_DESTINATION_REQUEST,
+                actions.GET_TRIPS_FOR_DESTINATION_SUCCESS,
+                actions.GET_TRIPS_FOR_DESTINATION_FAILURE
             ],
             authenticated: true
         }

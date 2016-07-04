@@ -1,9 +1,18 @@
 import React from 'react';
 
+/*
+* commons.Dropdown
+* @param {props} With properties options, name, onChange, selectedValue
+* options is an array of objects with properties key and value, which are listed
+* in the Dropdown
+* name is the name of the dropdown which will be shown in a label for it
+* onChange is the method that handles dropdown change
+* selectedValue is the value that is initially selected
+*/
 function Dropdown(props) {
     return (
         <div>
-            <label htmlFor="selectedDestination">{props.name}</label>
+            <label htmlFor="dropdown">{props.name}</label>
             <select
                 value={props.selectedValue || ''}
                 className="ui fluid selection dropdown"
