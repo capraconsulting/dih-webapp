@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import store from '../store';
 import * as actions from '../actions/destinationActions';
+import * as notification from '../actions/notificationActions';
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -14,7 +15,11 @@ export function getDestinations() {
         .then(response => {
             store.dispatch(actions.getDestinationsSuccess(response.data));
         })
-        .catch(e => { console.error(e); });
+        .catch(e => {
+            if (__DEV__) console.error(e); // eslint-disable-line
+            const msg = 'Something went wrong while fetching destinations.';
+            store.dispatch(notification.pushNotification(msg, 'error'));
+        });
 }
 
 /*
@@ -25,7 +30,24 @@ export function postDestination(destinationObject) {
     return axios
         .post(`${BASE_URL}/destinations`, destinationObject)
         .then(() => {
+            const msg = `«${destinationObject.name}» has been added to destinations.`;
             getDestinations();
+            store.dispatch(notification.pushNotification(msg, 'success'));
         })
-        .catch(e => { console.error(e); });
+        .catch(e => {
+            if (__DEV__) console.error(e); // eslint-disable-line
+
+            let msg;
+            let type;
+
+            if (e.data.name === 'ValidationError') {
+                msg = e.data.message;
+                type = 'warning';
+            } else {
+                msg = 'Something went wrong while adding destination.';
+                type = 'error';
+            }
+
+            store.dispatch(notification.pushNotification(msg, type));
+        });
 }

@@ -1,24 +1,28 @@
 import React from 'react';
+
 import 'normalize.css/normalize.css';
 import 'semantic-ui-css/semantic.css';
 import '../styles/main.scss';
 
-
 import Header from '../commons/Header.jsx';
 import Sidebar from '../commons/Sidebar.jsx';
+import NotificationContainer from '../commons/NotificationContainer.jsx';
 
-function MainLayout(props) {
-    return (
-        <div>
-            <Header />
-            <div className="wrapper">
-                <Sidebar />
-                <div className="main-content">
-                    {props.children}
+class MainLayout extends React.Component {
+    render() {
+        return (
+            <div>
+                <Header />
+                <div className="wrapper">
+                    <Sidebar />
+                    <div className="main-content">
+                        {this.props.children}
+                    </div>
                 </div>
+                <NotificationContainer props />
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 MainLayout.propTypes = {
