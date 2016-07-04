@@ -35,10 +35,10 @@ export function getTrips() {
     return axios
         .get(`${BASE_URL}/trips`)
         .then(response => {
-            store.dispatch(actions.getTripsRequestSuccess(response.data));
+            store.dispatch(actions.getTripsRequest(response.data));
         })
         .catch(e => {
-            store.dispatch(actions.getTripsRequestFailure());
+            store.dispatch(actions.getTripsFailure());
             console.error(e); // eslint-disable-line
         });
 }

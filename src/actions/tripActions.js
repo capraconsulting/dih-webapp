@@ -1,37 +1,37 @@
 import * as actionTypes from './actionTypes/tripActionTypes';
 
-export function getTripsRequestStart() {
+export function getTripsRequest() {
     return {
         type: actionTypes.GET_TRIPS_REQUEST
     };
 }
 
-export function getTripsRequestSuccess(trips) {
+export function getTripsSuccess(trips) {
     return {
         type: actionTypes.GET_TRIPS_SUCCESS,
         trips
     };
 }
 
-export function getTripsRequestFailure() {
+export function getTripsFailure() {
     return {
         type: actionTypes.GET_TRIPS_FAILURE
     };
 }
 
-export function putTripRequestStart() {
+export function putTripRequest() {
     return {
         type: actionTypes.PUT_TRIP_REQUEST
     };
 }
 
-export function putTripRequestSuccess() {
+export function putTripSuccess() {
     return {
         type: actionTypes.PUT_TRIP_SUCCESS
     };
 }
 
-export function putTripRequestFailure() {
+export function putTripFailure() {
     return {
         type: actionTypes.PUT_TRIP_FAILURE
     };
