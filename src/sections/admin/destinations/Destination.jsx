@@ -6,7 +6,9 @@ function Destination(props) {
         <div className="ui segments">
             <div className="ui blue inverted segment header">
                 <h2>View destination</h2> {/* @TODO Get destination info from API */}
-                <bold>Name:</bold> {props.params.destinationId}
+                <div id="destinationInfo">
+                    <bold>Name:</bold> {props.params.destinationId}
+                </div>
             </div>
             <div className="ui segment">
                 <div className="ui grid">
@@ -14,6 +16,7 @@ function Destination(props) {
                         <h3>Active volunteers at this destination</h3>
                         {/* @TODO get active volunteers on destination from API*/}
                         <Table
+                            id="tripsTable"
                             columnNames={{ name: 'Name', age: 'Age' }}
                             items={[{ id: 1, name: 'Olav', age: 22 },
                             { id: 2, name: 'Ola Nordmann', age: 18 }]}
