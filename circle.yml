@@ -11,7 +11,7 @@ machine:
 
 dependencies:
     pre:
-        - if [[ ! $CI_PULL_REQUEST || $CI_BRANCH != 'master' || $CI_BRANCH != 'dev' ]] ; then npm test ; else /bin/true fi
+        - if [[ -z $CI_PULL_REQUEST || $CI_BRANCH -ne 'master' || $CI_BRANCH -ne 'dev' ]] ; then /bin/true ; fi
         - npm install -g npm
         - npm install
         - sudo pip install awscli
@@ -25,7 +25,8 @@ test:
         - docker pull $EXTERNAL_API_REGISTRY-dev:latest
         - docker run -d --net host -e PG_URL=postgres://ubuntu:@127.0.0.1:5432/circle_test $EXTERNAL_API_REGISTRY-dev:latest npm run start:test
     override:
-        - if [[ $CI_PULL_REQUEST || $CI_BRANCH == 'master' || $CI_BRANCH == 'dev' ]] ; then npm test ; else /bin/true fi
+        - if [[ ! -z $CI_PULL_REQUEST || $CI_BRANCH -eq 'master' || $CI_BRANCH -eq 'dev' ]] ; then npm test; else /bin/true ; fi
+
 
 
 deployment:
