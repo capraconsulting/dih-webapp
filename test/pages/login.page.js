@@ -14,6 +14,18 @@ module.exports = Object.create(page, {
         }
     },
 
+    submit: {
+        value() {
+            return browser.click('button#submit');
+        }
+    },
+
+    messages: {
+        get() {
+            return browser.elements('li#message');
+        }
+    },
+
     open: {
         value() {
             page.open.call(this, '/login');
