@@ -37,7 +37,7 @@ export function putTripFailure() {
     };
 }
 
-export function getTripsForDestinationStart() {
+export function getTripsForDestinationRequest() {
     return {
         type: actionTypes.GET_TRIPS_FOR_DESTINATION_REQUEST
     };
