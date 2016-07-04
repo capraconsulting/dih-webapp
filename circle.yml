@@ -9,11 +9,13 @@ machine:
     services:
         - docker
 
-dependencies:
+general:
     branches:
         only:
-            - master
-            - dev
+          - master
+          - dev
+
+dependencies:
     pre:
         - npm install -g npm
         - npm install
