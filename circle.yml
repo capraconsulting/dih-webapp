@@ -26,10 +26,6 @@ dependencies:
         - eval $(aws ecr get-login --region eu-west-1)
 
 test:
-    branches:
-        only:
-            - master
-            - dev
     pre:
         - npm run dist:staging
         - docker pull $EXTERNAL_API_REGISTRY-dev:latest
