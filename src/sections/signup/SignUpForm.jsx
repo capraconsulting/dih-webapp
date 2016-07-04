@@ -111,6 +111,7 @@ class SignUpForm extends React.Component {
                 className="ui form"
                 onSubmit={event => { this.handleSubmit(event); }}
             >
+                <h2>Sign up</h2>
                 {this.renderErrors()}
                 <div className="field">
                     <label htmlFor="firstname">First name</label>
