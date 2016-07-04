@@ -1,4 +1,6 @@
 import page from './page';
+import * as users from '../fixtures/users.json';
+import { getJwt, setUser } from '../userManager';
 
 module.exports = Object.create(page, {
     firstName: {
@@ -51,7 +53,10 @@ module.exports = Object.create(page, {
 
     open: {
         value() {
-            page.open.call(this, '/signup/confirm');
+            const user = users[0];
+            user.setPassword = true;
+            setUser(user);
+            page.open.call(this, `/signup/confirm?jwt=${getJwt()}`);
         }
     }
 });
