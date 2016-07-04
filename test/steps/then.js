@@ -35,4 +35,16 @@ module.exports = function () { // eslint-disable-line
     this.Then(/^I expect that title is equal to "(.*)"$/, (title) => {
         browser.getTitle().should.equal(title);
     });
+
+    this.Then(/^I expect that selectfield "(.*)" contains "(.*)"$/, (field, text) => {
+        const element = this.currentPage[field];
+        const destinations = element.getText();
+        destinations.should.contain(text);
+    });
+
+    this.Then(/^I expect that option "(.*)" is selected in selectfield "(.*)"$/, (text, field) => {
+        const element = this.currentPage[field];
+        const destinations = element.getText('option:checked');
+        destinations.should.equal(text);
+    });
 };
