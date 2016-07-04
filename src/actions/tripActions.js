@@ -1,44 +1,33 @@
-import {
-    GET_TRIPS_REQUEST,
-    GET_TRIPS_SUCCESS,
-    GET_TRIPS_FAILURE,
-    PUT_TRIP_REQUEST,
-    PUT_TRIP_SUCCESS,
-    PUT_TRIP_FAILURE } from './actionTypes';
+import * as actions from './actionTypes';
+import { CALL_API } from '../middleware/api';
 
-export function getTripsRequest() {
+export function list() {
     return {
-        type: GET_TRIPS_REQUEST
+        [CALL_API]: {
+            method: 'get',
+            url: '/trips',
+            types: [
+                actions.GET_TRIPS_REQUEST,
+                actions.GET_TRIPS_SUCCESS,
+                actions.GET_TRIPS_FAILURE
+            ],
+            authenticated: true
+        }
     };
 }
 
-export function getTripsSuccess(trips) {
+export function update(data) {
     return {
-        type: GET_TRIPS_SUCCESS,
-        trips
-    };
-}
-
-export function getTripsFailure() {
-    return {
-        type: GET_TRIPS_FAILURE
-    };
-}
-
-export function putTripRequest() {
-    return {
-        type: PUT_TRIP_REQUEST
-    };
-}
-
-export function putTripSuccess() {
-    return {
-        type: PUT_TRIP_SUCCESS
-    };
-}
-
-export function putTripFailure() {
-    return {
-        type: PUT_TRIP_FAILURE
+        [CALL_API]: {
+            method: 'put',
+            url: `/trips/${data.id}`,
+            types: [
+                actions.PUT_TRIP_REQUEST,
+                actions.PUT_TRIP_SUCCESS,
+                actions.PUT_TRIP_FAILURE
+            ],
+            authenticated: true,
+            data
+        }
     };
 }

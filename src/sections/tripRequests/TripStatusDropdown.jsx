@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import _ from 'lodash';
+import { connect } from 'react-redux';
 import { TRIP_STATUSES } from '../../constants';
+import { update, list } from '../../actions/tripActions';
 import Dropdown from '../../commons/Dropdown';
 
+const createHandlers = (dispatch) => (
+    {
+        update(data) {
+            return dispatch(update(data));
+        },
+        list() {
+            return dispatch(list());
+        }
+    }
+);
 
 class TripStatusDropdown extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.handlers = createHandlers(this.props.dispatch);
         this.state = {
             options: []
         };
@@ -20,7 +33,8 @@ class TripStatusDropdown extends React.Component {
 
     handleStatusChange(event) {
         this.props.trip.status = event.target.value;
-        tripsApi.putTrip(this.props.trip);
+        this.handlers.update(this.props.trip)
+            .then(() => this.handlers.list());
     }
 
     render() {
@@ -37,7 +51,8 @@ class TripStatusDropdown extends React.Component {
 
 
 TripStatusDropdown.propTypes = {
-    trip: React.PropTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired,
+    trip: PropTypes.object.isRequired
 };
 
-export default TripStatusDropdown;
+export default connect()(TripStatusDropdown);

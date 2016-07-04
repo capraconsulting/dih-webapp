@@ -2,11 +2,9 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 
 const API = axios.create({ baseURL: process.env.BASE_URL });
-API.interceptors.response.use(response => {
-    console.log(response);
-    return Promise.resolve(response);
-}, error => {
-    console.log(error);
+API.interceptors.response.use(response => (
+    Promise.resolve(response)
+), error => {
     if (error.status === 401) {
         browserHistory.push('/login');
     }
