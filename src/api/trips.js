@@ -32,10 +32,11 @@ export function postTrip(data) {
 * @return {Promise} axios Promise
 */
 export function getTrips() {
+    store.dispatch(actions.getTripsRequest());
     return axios
         .get(`${BASE_URL}/trips`)
         .then(response => {
-            store.dispatch(actions.getTripsRequest(response.data));
+            store.dispatch(actions.getTripsSuccess(response.data));
         })
         .catch(e => {
             store.dispatch(actions.getTripsFailure());
@@ -64,6 +65,7 @@ export function getTripsForUser(userId) {
 * @return {Promise} axios Promise
 */
 export function getTripsForDestination(destinationId, status) {
+    store.dispatch(actions.getTripsForDestinationRequest());
     return axios
         .get(`${BASE_URL}/trips?destinationId=${destinationId}&status=${status}`)
         .then(response => {
