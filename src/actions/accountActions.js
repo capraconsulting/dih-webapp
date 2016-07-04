@@ -18,7 +18,7 @@ export function retrieve(headers) {
     };
 }
 
-export function update(data, headers) {
+export function update(data) {
     return {
         [CALL_API]: {
             method: 'put',
@@ -29,8 +29,7 @@ export function update(data, headers) {
                 types.PUT_ACCOUNT_FAILURE
             ],
             authenticated: true,
-            data,
-            headers
+            data
         }
     };
 }

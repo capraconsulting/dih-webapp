@@ -45,12 +45,12 @@ export default store => next => action => {
         return next(action);
     }
 
-    const { method, url, types, authenticated, data, additionalHeaders } = callAPI;
+    const { method, url, types, authenticated, data, headers } = callAPI;
 
     const [requestType, successType, errorType] = types;
 
     next({ type: requestType });
-    return callApi(method, url, authenticated, data, additionalHeaders)
+    return callApi(method, url, authenticated, data, headers)
         .then(res =>
             next({
                 res,

@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-
 import SignupTripForm from './SignupTripForm';
+import { create } from '../../actions/tripActions';
+import { list } from '../../actions/destinationActions';
+
+const createHandlers = (dispatch) => (
+    {
+        create(data) {
+            return dispatch(create(data));
+        },
+        list() {
+            return dispatch(list());
+        }
+    }
+);
 
 class SignupTripFormContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handlers = createHandlers(this.props.dispatch);
+    }
+
     componentDidMount() {
-        destinationsApi.getDestinations();
+        this.handlers.list();
     }
     handleSubmit(data) {
-        tripsApi.postTrip(data);
+        this.handlers.create(data);
     }
 
     render() {
@@ -26,7 +43,8 @@ const mapStateToProps = store => ({
 });
 
 SignupTripFormContainer.propTypes = {
-    destinations: React.PropTypes.array.isRequired
+    dispatch: PropTypes.func.isRequired,
+    destinations: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps)(SignupTripFormContainer);

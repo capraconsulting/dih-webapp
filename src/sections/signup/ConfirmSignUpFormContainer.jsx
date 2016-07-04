@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { retrieve, update } from '../../actions/accountActions';
+import { browserHistory } from 'react-router';
+import { setPassword } from '../../actions/authenticationActions';
+import { retrieve } from '../../actions/accountActions';
 import ConfirmSignUpForm from './ConfirmSignUpForm';
 
 const createHandlers = (dispatch) => (
@@ -9,7 +11,7 @@ const createHandlers = (dispatch) => (
             return dispatch(retrieve(token));
         },
         update(token, data) {
-            return dispatch(update(token, data));
+            return dispatch(setPassword(token, data));
         }
     }
 );
@@ -25,7 +27,10 @@ class ConfirmSignUpFormContainer extends React.Component {
     }
 
     handleSubmit(data) {
-        this.handlers.update(data, { Authorization: `Bearer ${this.props.location.query.token}` });
+        this.handlers.update(data, { Authorization: `Bearer ${this.props.location.query.token}` })
+            .then(() => {
+                if (this.props.isAuthenticated) browserHistory.push('/');
+            });
     }
 
     render() {
@@ -39,11 +44,13 @@ class ConfirmSignUpFormContainer extends React.Component {
 }
 
 const mapStateToProps = store => ({
-    account: store.accountState.account
+    account: store.accountState.account,
+    isAuthenticated: store.authenticationState.isAuthenticated
 });
 
 ConfirmSignUpFormContainer.propTypes = {
     dispatch: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
     account: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
 };

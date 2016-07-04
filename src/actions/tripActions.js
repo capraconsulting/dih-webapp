@@ -16,6 +16,22 @@ export function list() {
     };
 }
 
+export function create(data) {
+    return {
+        [CALL_API]: {
+            method: 'post',
+            url: '/trips',
+            types: [
+                actions.POST_TRIP_REQUEST,
+                actions.POST_TRIP_SUCCESS,
+                actions.POST_TRIP_FAILURE
+            ],
+            authenticated: true,
+            data
+        }
+    };
+}
+
 export function update(data) {
     return {
         [CALL_API]: {

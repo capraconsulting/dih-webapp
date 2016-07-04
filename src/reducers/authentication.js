@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/actionTypes';
+import * as types from '../actions/actionTypes';
 
 const initialState = {
     isFetching: false,
@@ -10,14 +10,15 @@ const initialState = {
 // we would also want a util to check if the token is expired.
 export default function (state = initialState, action) {
     switch (action.type) {
-    case LOGIN_REQUEST:
+    case types.LOGIN_REQUEST:
         return {
             ...state,
             isFetching: true,
             isAuthenticated: false,
             credentials: action.creds
         };
-    case LOGIN_SUCCESS:
+    case types.SET_PASSWORD_SUCCESS:
+    case types.LOGIN_SUCCESS:
         localStorage.setItem('jwt', action.res.jwt);
         return {
             ...state,
@@ -25,7 +26,7 @@ export default function (state = initialState, action) {
             isAuthenticated: true,
             jwt: action.res.jwt
         };
-    case LOGIN_FAILURE:
+    case types.LOGIN_FAILURE:
         return {
             ...state,
             isFetching: false,
