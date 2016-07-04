@@ -11,7 +11,7 @@ const BASE_URL = process.env.BASE_URL;
 */
 export function postTrip(data) {
     const tripObject = {
-        userId: 1, // TODO: Replace with the logged in user
+        userId: 1, // @TODO: Replace with the logged in user
         destinationId: parseInt(data.selectedDestination, 10),
         wishStartDate: new Date(data.wishStartDate),
         wishEndDate: new Date(data.wishEndDate),
@@ -32,13 +32,47 @@ export function postTrip(data) {
 * @return {Promise} axios Promise
 */
 export function getTrips() {
+    store.dispatch(actions.getTripsRequest());
     return axios
         .get(`${BASE_URL}/trips`)
         .then(response => {
-            store.dispatch(actions.getTripsRequestSuccess(response.data));
+            store.dispatch(actions.getTripsSuccess(response.data));
         })
         .catch(e => {
-            store.dispatch(actions.getTripsRequestFailure());
+            store.dispatch(actions.getTripsFailure());
+            console.error(e); // eslint-disable-line
+        });
+}
+
+/*
+* getTripsForUser
+* @return {Promise} axios Promise
+*/
+export function getTripsForUser(userId) {
+    return axios
+        .get(`${BASE_URL}/trips?userId=${userId}`)
+        .then(response => {
+            store.dispatch(actions.getTripsForUserSuccess(response.data));
+        })
+        .catch(e => {
+            store.dispatch(actions.getTripsForUserFailure());
+            console.error(e); // eslint-disable-line
+        });
+}
+
+/*
+* getTripsForUser
+* @return {Promise} axios Promise
+*/
+export function getTripsForDestination(destinationId, status) {
+    store.dispatch(actions.getTripsForDestinationRequest());
+    return axios
+        .get(`${BASE_URL}/trips?destinationId=${destinationId}&status=${status}`)
+        .then(response => {
+            store.dispatch(actions.getTripsForDestinationSuccess(response.data));
+        })
+        .catch(e => {
+            store.dispatch(actions.getTripsForDestinationFailure());
             console.error(e); // eslint-disable-line
         });
 }
@@ -49,16 +83,16 @@ export function getTrips() {
 * @return {Promise} axios Promise
 */
 export function putTrip(trip) {
-    store.dispatch(actions.putTripRequestStart());
+    store.dispatch(actions.putTripRequest());
     return axios
         .put(`${BASE_URL}/trips/${trip.id}`, trip)
         .then(() => {
-            store.dispatch(actions.putTripRequestSuccess());
+            store.dispatch(actions.putTripSuccess());
             getTrips();
             // @TODO: Notify user that the trip was successfully approved
         })
         .catch(e => {
-            store.dispatch(actions.putTripRequestFailure());
+            store.dispatch(actions.putTripFailure());
             console.error(e);// eslint-disable-line
         });
 }

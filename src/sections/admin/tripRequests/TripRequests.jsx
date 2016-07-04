@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import TripRequests from './TripRequests';
+import TripRequestsTable from './components/TripRequestsTable';
 
-import * as tripsApi from '../../api/trips';
+import * as tripsApi from '../../../api/trips';
 
 class TripRequestsContainer extends React.Component {
 
@@ -13,7 +13,7 @@ class TripRequestsContainer extends React.Component {
 
     render() {
         return (
-            <TripRequests trips={this.props.trips} />
+            <TripRequestsTable trips={this.props.trips} />
         );
     }
 }
