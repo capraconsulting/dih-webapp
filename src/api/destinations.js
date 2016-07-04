@@ -18,7 +18,7 @@ export function getDestinations() {
         .catch(e => {
             if (__DEV__) console.error(e); // eslint-disable-line
             const msg = 'Something went wrong while fetching destinations.';
-            store.dispatch(notification.addNotification(msg, 'error'));
+            store.dispatch(notification.pushNotification(msg, 'error'));
         });
 }
 
@@ -32,7 +32,7 @@ export function postDestination(destinationObject) {
         .then(() => {
             const msg = `«${destinationObject.name}» has been added to destinations.`;
             getDestinations();
-            store.dispatch(notification.addNotification(msg, 'success'));
+            store.dispatch(notification.pushNotification(msg, 'success'));
         })
         .catch(e => {
             if (__DEV__) console.error(e); // eslint-disable-line
@@ -48,6 +48,6 @@ export function postDestination(destinationObject) {
                 type = 'error';
             }
 
-            store.dispatch(notification.addNotification(msg, type));
+            store.dispatch(notification.pushNotification(msg, type));
         });
 }

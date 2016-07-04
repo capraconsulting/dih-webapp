@@ -1,8 +1,8 @@
-import { ADD_NOTIFICATION } from './actionTypes';
+import { PUSH_NOTIFICATION } from './actionTypes';
 
-export function addNotification(message, level) {
+export function pushNotification(message, level) {
     return {
-        type: ADD_NOTIFICATION,
+        type: PUSH_NOTIFICATION,
         message,
         level
     };

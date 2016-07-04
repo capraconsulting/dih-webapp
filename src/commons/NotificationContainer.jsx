@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addNotification } from '../actions/notificationActions';
+import { pushNotification } from '../actions/notificationActions';
 import NotificationSystem from 'react-notification-system';
 
 class NotificationContainer extends React.Component {
@@ -33,7 +33,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators({
-            addNotification
+            pushNotification
         }, dispatch)
     };
 }

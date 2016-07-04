@@ -6,7 +6,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-    case types.ADD_NOTIFICATION:
+    case types.PUSH_NOTIFICATION:
         return {
             ...state, notification: { message: action.message, level: action.level }
         };
