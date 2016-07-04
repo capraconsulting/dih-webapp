@@ -56,7 +56,7 @@ export function getTripsForDestinationFailure() {
     };
 }
 
-export function getTripsForUserStart() {
+export function getTripsForUserRequest() {
     return {
         type: actionTypes.GET_TRIPS_FOR_USER_REQUEST
     };
