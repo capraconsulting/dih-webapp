@@ -7,9 +7,9 @@ export function login(data) {
             method: 'post',
             url: '/authenticate',
             types: [
-                types.LOGIN_REQUEST,
-                types.LOGIN_SUCCESS,
-                types.LOGIN_FAILURE
+                types.POST_LOGIN_REQUEST,
+                types.POST_LOGIN_SUCCESS,
+                types.POST_LOGIN_FAILURE
             ],
             authenticated: false,
             data
@@ -23,9 +23,9 @@ export function setPassword(data, headers) {
             method: 'post',
             url: '/authenticate/password',
             types: [
-                types.SET_PASSWORD_REQUEST,
-                types.SET_PASSWORD_SUCCESS,
-                types.SET_PASSWORD_FAILURE
+                types.POST_PASSWORD_REQUEST,
+                types.POST_PASSWORD_SUCCESS,
+                types.POST_PASSWORD_FAILURE
             ],
             authenticated: true,
             data,

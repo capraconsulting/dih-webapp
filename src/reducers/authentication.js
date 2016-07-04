@@ -10,15 +10,15 @@ const initialState = {
 // we would also want a util to check if the token is expired.
 export default function (state = initialState, action) {
     switch (action.type) {
-    case types.LOGIN_REQUEST:
+    case types.POST_LOGIN_REQUEST:
         return {
             ...state,
             isFetching: true,
             isAuthenticated: false,
             credentials: action.creds
         };
-    case types.SET_PASSWORD_SUCCESS:
-    case types.LOGIN_SUCCESS:
+    case types.POST_PASSWORD_SUCCESS:
+    case types.POST_LOGIN_SUCCESS:
         localStorage.setItem('jwt', action.res.jwt);
         return {
             ...state,
@@ -26,7 +26,7 @@ export default function (state = initialState, action) {
             isAuthenticated: true,
             jwt: action.res.jwt
         };
-    case types.LOGIN_FAILURE:
+    case types.POST_LOGIN_FAILURE:
         return {
             ...state,
             isFetching: false,
