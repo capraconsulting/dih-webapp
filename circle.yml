@@ -14,7 +14,7 @@ general:
         only:
           - master
           - dev
-          - test/*
+          - test.*
 
 dependencies:
     pre:
