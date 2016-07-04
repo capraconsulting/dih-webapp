@@ -2,9 +2,11 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 
 const API = axios.create({ baseURL: process.env.BASE_URL });
-API.interceptors.response.use(response =>
-    Promise.resolve(response)
-    , error => {
+API.interceptors.response.use(response => {
+    console.log(response);
+    return Promise.resolve(response);
+}, error => {
+    console.log(error);
     if (error.status === 401) {
         browserHistory.push('/login');
     }
@@ -22,7 +24,6 @@ function callApi(method, url, authenticated, data) {
 
     if (authenticated) {
         if (token) config.headers = { Authorization: `Bearer ${token}` };
-        else throw new Error('No token saved!');
     }
 
     return API.request(config)
@@ -49,7 +50,7 @@ export default store => next => action => {
     return callApi(method, url, authenticated, data)
         .then(res =>
             next({
-                ...res,
+                res,
                 authenticated,
                 type: successType
             })

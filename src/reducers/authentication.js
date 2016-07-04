@@ -18,12 +18,12 @@ export default function (state = initialState, action) {
             credentials: action.creds
         };
     case LOGIN_SUCCESS:
-        localStorage.setItem('jwt', action.jwt);
+        localStorage.setItem('jwt', action.res.jwt);
         return {
             ...state,
             isFetching: false,
             isAuthenticated: true,
-            jwt: action.jwt
+            jwt: action.res.jwt
         };
     case LOGIN_FAILURE:
         return {

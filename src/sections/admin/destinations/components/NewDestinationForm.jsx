@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { create, list } from '../../../../actions/destinationActions';
+import { connect } from 'react-redux';
+
+const createHandlers = (dispatch) => (
+    {
+        create(data) {
+            return dispatch(create(data));
+        },
+        list() {
+            return dispatch(list());
+        }
+    }
+);
 
 class NewDestinationForm extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             destinationName: ''
         };
+        this.handlers = createHandlers(this.props.dispatch);
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        const newDestinatioName = this.state.destinationName;
-        if (!newDestinatioName) {
+        const newDestinationName = this.state.destinationName;
+        if (!newDestinationName) {
             return;
         }
-        destinationsApi.postDestination({ name: this.state.destinationName });
+
+        this.handlers.create({ name: this.state.destinationName })
+            .then(() => this.handlers.list());
         this.setState({
             destinationName: ''
         });
@@ -45,4 +61,9 @@ class NewDestinationForm extends React.Component {
     }
 }
 
-export default NewDestinationForm;
+NewDestinationForm.propTypes = {
+    dispatch: PropTypes.func.isRequired
+};
+
+
+export default connect()(NewDestinationForm);

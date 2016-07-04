@@ -1,4 +1,4 @@
-import { GET_TRIPS_REQUEST_SUCCESS } from '../actions/actionTypes';
+import * as types from '../actions/actionTypes';
 
 const initialState = {
     trips: []
@@ -6,7 +6,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-    case GET_TRIPS_REQUEST_SUCCESS:
+    case types.GET_TRIPS_SUCCESS:
         return { ...state, trips: action.trips };
     default:
         return state;
