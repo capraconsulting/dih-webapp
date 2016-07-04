@@ -2,13 +2,13 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/actionTy
 
 const initialState = {
     isFetching: false,
+    errorMessage: null,
     isAuthenticated: typeof localStorage.getItem('jwt') === 'string'
 };
 // The auth reducer. The starting state sets authentication
 // based on a token being in local storage. In a real app,
 // we would also want a util to check if the token is expired.
 export default function (state = initialState, action) {
-    console.log(action);
     switch (action.type) {
     case LOGIN_REQUEST:
         return {
@@ -30,7 +30,7 @@ export default function (state = initialState, action) {
             ...state,
             isFetching: false,
             isAuthenticated: false,
-            errorMessage: action.message
+            errorMessage: action.error
         };
     default:
         return state;

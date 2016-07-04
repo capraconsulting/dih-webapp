@@ -11,5 +11,5 @@ export default combineReducers({
     destinationState: destinationReducer,
     tripState: tripReducer,
     form: formReducer,
-    authentication: authenticationReducer
+    authenticationState: authenticationReducer
 });
