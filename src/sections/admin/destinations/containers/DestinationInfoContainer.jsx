@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import DestinationInfo from '../components/DestinationInfo';
 
 import * as destinationsApi from '../../../../api/destinations';
+import { browserHistory } from 'react-router';
 
 class DestinationInfoContainer extends React.Component {
 
@@ -18,10 +19,14 @@ class DestinationInfoContainer extends React.Component {
                 return destination;
             }
         }
-        return { name: 'failure' }; // @TODO add notification to user that not valid destination
+        return false;
     }
 
     render() {
+        if (this.findDestination(this.props.destinations, this.props.destinationId) === false) {
+            browserHistory.push('NotFound');
+            return null;
+        }
         return (
             <DestinationInfo
                 destination={
