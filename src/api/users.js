@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store';
-import { postUserSuccess, postUserFailure, postUserStart } from '../actions/userActions';
+import * as actions from '../actions/userActions';
 const BASE_URL = process.env.BASE_URL;
 
 /*
@@ -11,14 +11,14 @@ const BASE_URL = process.env.BASE_URL;
 * firstname, lastname, birth and email
 */
 export function create(user) {
-    store.dispatch(postUserStart());
+    store.dispatch(actions.postUserRequest());
     return axios
         .post(`${BASE_URL}/users`, user)
         .then(response => {
-            store.dispatch(postUserSuccess(response.data));
+            store.dispatch(actions.postUserSuccess(response.data));
         })
         .catch(response => {
-            store.dispatch(postUserFailure(response.data));
+            store.dispatch(actions.postUserFailure(response.data));
             throw new Error(response.data.message);
         });
 }

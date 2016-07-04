@@ -1,43 +1,44 @@
-import { GET_TRIPS_REQUEST_START,
-    GET_TRIPS_REQUEST_SUCCESS,
-    GET_TRIPS_REQUEST_FAILURE,
-    PUT_TRIP_REQUEST_START,
-    PUT_TRIP_REQUEST_SUCCESS,
-    PUT_TRIP_REQUEST_FAILURE } from './actionTypes';
+import {
+    GET_TRIPS_REQUEST,
+    GET_TRIPS_SUCCESS,
+    GET_TRIPS_FAILURE,
+    PUT_TRIP_REQUEST,
+    PUT_TRIP_SUCCESS,
+    PUT_TRIP_FAILURE } from './actionTypes';
 
-export function getTripsRequestStart() {
+export function getTripsRequest() {
     return {
-        type: GET_TRIPS_REQUEST_START
+        type: GET_TRIPS_REQUEST
     };
 }
 
-export function getTripsRequestSuccess(trips) {
+export function getTripsSuccess(trips) {
     return {
-        type: GET_TRIPS_REQUEST_SUCCESS,
+        type: GET_TRIPS_SUCCESS,
         trips
     };
 }
 
-export function getTripsRequestFailure() {
+export function getTripsFailure() {
     return {
-        type: GET_TRIPS_REQUEST_FAILURE
+        type: GET_TRIPS_FAILURE
     };
 }
 
-export function putTripRequestStart() {
+export function putTripRequest() {
     return {
-        type: PUT_TRIP_REQUEST_START
+        type: PUT_TRIP_REQUEST
     };
 }
 
-export function putTripRequestSuccess() {
+export function putTripSuccess() {
     return {
-        type: PUT_TRIP_REQUEST_SUCCESS
+        type: PUT_TRIP_SUCCESS
     };
 }
 
-export function putTripRequestFailure() {
+export function putTripFailure() {
     return {
-        type: PUT_TRIP_REQUEST_FAILURE
+        type: PUT_TRIP_FAILURE
     };
 }

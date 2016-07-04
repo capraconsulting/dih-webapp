@@ -35,10 +35,10 @@ export function getTrips() {
     return axios
         .get(`${BASE_URL}/trips`)
         .then(response => {
-            store.dispatch(actions.getTripsRequestSuccess(response.data));
+            store.dispatch(actions.getTripsSuccess(response.data));
         })
         .catch(e => {
-            store.dispatch(actions.getTripsRequestFailure());
+            store.dispatch(actions.getTripsFailure());
             console.error(e); // eslint-disable-line
         });
 }
@@ -49,16 +49,16 @@ export function getTrips() {
 * @return {Promise} axios Promise
 */
 export function putTrip(trip) {
-    store.dispatch(actions.putTripRequestStart());
+    store.dispatch(actions.putTripRequest());
     return axios
         .put(`${BASE_URL}/trips/${trip.id}`, trip)
         .then(() => {
-            store.dispatch(actions.putTripRequestSuccess());
+            store.dispatch(actions.putTripSuccess());
             getTrips();
             // @TODO: Notify user that the trip was successfully approved
         })
         .catch(e => {
-            store.dispatch(actions.putTripRequestFailure());
+            store.dispatch(actions.putTripFailure());
             console.error(e);// eslint-disable-line
         });
 }
