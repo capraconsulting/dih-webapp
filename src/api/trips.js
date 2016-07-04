@@ -81,16 +81,16 @@ export function getTripsForDestination(destinationId, status) {
 * @return {Promise} axios Promise
 */
 export function putTrip(trip) {
-    store.dispatch(actions.putTripRequestStart());
+    store.dispatch(actions.putTripRequest());
     return axios
         .put(`${BASE_URL}/trips/${trip.id}`, trip)
         .then(() => {
-            store.dispatch(actions.putTripRequestSuccess());
+            store.dispatch(actions.putTripSuccess());
             getTrips();
             // @TODO: Notify user that the trip was successfully approved
         })
         .catch(e => {
-            store.dispatch(actions.putTripRequestFailure());
+            store.dispatch(actions.putTripFailure());
             console.error(e);// eslint-disable-line
         });
 }
