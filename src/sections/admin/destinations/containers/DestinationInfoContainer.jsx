@@ -18,7 +18,7 @@ class DestinationInfoContainer extends React.Component {
                 return destination;
             }
         }
-        return { name: 'failure' }; // @:TODO add notification to user that not valid destination
+        return { name: 'failure' }; // @TODO add notification to user that not valid destination
     }
 
     render() {
