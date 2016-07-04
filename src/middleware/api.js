@@ -11,7 +11,7 @@ API.interceptors.response.use(response => (
     return Promise.reject(error);
 });
 
-function callApi(method, url, authenticated, data) {
+function callApi(method, url, authenticated, data, additionalHeaders) {
     const token = localStorage.getItem('jwt') || null;
 
     const config = {
@@ -22,6 +22,11 @@ function callApi(method, url, authenticated, data) {
 
     if (authenticated) {
         if (token) config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    // Important to override in order to update password
+    if (additionalHeaders) {
+        config.headers = additionalHeaders;
     }
 
     return API.request(config)
@@ -40,12 +45,12 @@ export default store => next => action => {
         return next(action);
     }
 
-    const { method, url, types, authenticated, data } = callAPI;
+    const { method, url, types, authenticated, data, additionalHeaders } = callAPI;
 
     const [requestType, successType, errorType] = types;
 
     next({ type: requestType });
-    return callApi(method, url, authenticated, data)
+    return callApi(method, url, authenticated, data, additionalHeaders)
         .then(res =>
             next({
                 res,

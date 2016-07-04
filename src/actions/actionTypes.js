@@ -15,8 +15,13 @@ Don't use CRUD syntax. Other than that, just do whatever makes sense.
 */
 
 // Accounts
+export const GET_ACCOUNT_REQUEST = 'GET_ACCOUNT_REQUEST';
 export const GET_ACCOUNT_SUCCESS = 'GET_ACCOUNT_SUCCESS';
+export const GET_ACCOUNT_FAILURE = 'GET_ACCOUNT_FAILURE';
+
+export const PUT_ACCOUNT_REQUEST = 'PUT_ACCOUNT_REQUEST';
 export const PUT_ACCOUNT_SUCCESS = 'PUT_ACCOUNT_SUCCESS';
+export const PUT_ACCOUNT_FAILURE = 'PUT_ACCOUNT_FAILURE';
 
 // Destinations
 export const POST_DESTINATION_REQUEST = 'POST_DESTINATION_REQUEST';

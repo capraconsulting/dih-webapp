@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import DataPicker from 'react-datepicker';
+import { connect } from 'react-redux';
 // @TODO
 // This should be generalized and moved to a component for better reuse
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import _ from 'lodash';
 
+import { create } from '../../actions/userActions';
+
+const createHandlers = (dispatch) => (
+    {
+        create(user) {
+            return dispatch(create(user));
+        }
+    }
+);
+
 class SignUpForm extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             firstname: '',
             lastname: '',
@@ -16,6 +27,7 @@ class SignUpForm extends React.Component {
             birth: null,
             messages: []
         };
+        this.handlers = createHandlers(this.props.dispatch);
     }
 
     handleFirstNameChange(e) {
@@ -67,7 +79,7 @@ class SignUpForm extends React.Component {
             return;
         }
 
-        create({
+        this.handlers.create({
             firstname,
             lastname,
             email,
@@ -154,4 +166,9 @@ class SignUpForm extends React.Component {
     }
 }
 
-export default SignUpForm;
+SignUpForm.propTypes = {
+    dispatch: PropTypes.func.isRequired
+};
+
+
+export default connect()(SignUpForm);

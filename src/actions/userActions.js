@@ -1,21 +1,18 @@
-import { POST_USER_REQUEST, POST_USER_SUCCESS, POST_USER_FAILURE } from './actionTypes';
+import * as types from './actionTypes';
+import { CALL_API } from '../middleware/api';
 
-export function postUserRequest() {
+export function create(data) {
     return {
-        type: POST_USER_REQUEST
-    };
-}
-
-export function postUserSuccess(user) {
-    return {
-        type: POST_USER_SUCCESS,
-        user
-    };
-}
-
-export function postUserFailure(error) {
-    return {
-        type: POST_USER_FAILURE,
-        error
+        [CALL_API]: {
+            method: 'post',
+            url: '/users',
+            types: [
+                types.POST_USER_REQUEST,
+                types.POST_USER_SUCCESS,
+                types.POST_USER_FAILURE
+            ],
+            authenticated: true,
+            data
+        }
     };
 }

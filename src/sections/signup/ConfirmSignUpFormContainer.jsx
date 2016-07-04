@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-
+import { retrieve, update } from '../../actions/accountActions';
 import ConfirmSignUpForm from './ConfirmSignUpForm';
 
+const createHandlers = (dispatch) => (
+    {
+        retrieve(token) {
+            return dispatch(retrieve(token));
+        },
+        update(token, data) {
+            return dispatch(update(token, data));
+        }
+    }
+);
+
 class ConfirmSignUpFormContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handlers = createHandlers(this.props.dispatch);
+    }
+
     componentDidMount() {
-        accountApi.getAccount(this.props.location.query.token);
+        this.handlers.retrieve({ Authorization: `Bearer ${this.props.location.query.token}` });
     }
 
     handleSubmit(data) {
-        accountApi.putAccount(this.props.location.query.token, data);
+        this.handlers.update(data, { Authorization: `Bearer ${this.props.location.query.token}` });
     }
 
     render() {
@@ -27,8 +43,9 @@ const mapStateToProps = store => ({
 });
 
 ConfirmSignUpFormContainer.propTypes = {
-    account: React.PropTypes.object.isRequired,
-    location: React.PropTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired,
+    account: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(ConfirmSignUpFormContainer);
