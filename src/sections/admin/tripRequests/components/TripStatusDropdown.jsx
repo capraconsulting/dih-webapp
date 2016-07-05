@@ -1,22 +1,15 @@
 import React from 'react';
-import _ from 'lodash';
-import * as tripsApi from '../../api/trips';
-import { TRIP_STATUSES } from '../../constants';
-import Dropdown from '../../commons/Dropdown';
+import * as tripsApi from '../../../../api/trips';
+import { tripStatusesForDropdown } from '../../../../helpers';
+import Dropdown from '../../../../commons/Dropdown';
 
 
 class TripStatusDropdown extends React.Component {
     constructor() {
         super();
         this.state = {
-            options: []
+            options: tripStatusesForDropdown()
         };
-        _.forOwn(TRIP_STATUSES, status => {
-            this.state.options.push({
-                value: status,
-                label: status
-            });
-        });
     }
 
     handleStatusChange(event) {
