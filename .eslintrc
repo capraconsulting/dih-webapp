@@ -12,7 +12,8 @@
       "browser": true
     },
     "globals": {
-      "browser": true
+      "browser": true,
+      "__DEV__": true
     },
     "rules": {
       "indent": [2, 4],
