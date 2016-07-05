@@ -1,76 +1,64 @@
-import * as actionTypes from './actionTypes/tripActionTypes';
+import * as actions from './actionTypes/tripActionTypes';
+import { CALL_API } from '../middleware/api';
 
-export function getTripsRequest() {
+export function list() {
     return {
-        type: actionTypes.GET_TRIPS_REQUEST
+        [CALL_API]: {
+            method: 'get',
+            url: '/trips',
+            types: [
+                actions.GET_TRIPS_REQUEST,
+                actions.GET_TRIPS_SUCCESS,
+                actions.GET_TRIPS_FAILURE
+            ],
+            authenticated: true
+        }
     };
 }
 
-export function getTripsSuccess(trips) {
+export function listForDestinationWithStatus(destinationId, status) {
     return {
-        type: actionTypes.GET_TRIPS_SUCCESS,
-        trips
+        [CALL_API]: {
+            method: 'get',
+            url: `/trips?destinationId=${destinationId}&status=${status}`,
+            types: [
+                actions.GET_TRIPS_FOR_DESTINATION_REQUEST,
+                actions.GET_TRIPS_FOR_DESTINATION_SUCCESS,
+                actions.GET_TRIPS_FOR_DESTINATION_FAILURE
+            ],
+            authenticated: true
+        }
     };
 }
 
-export function getTripsFailure() {
+export function create(data) {
     return {
-        type: actionTypes.GET_TRIPS_FAILURE
+        [CALL_API]: {
+            method: 'post',
+            url: '/trips',
+            types: [
+                actions.POST_TRIP_REQUEST,
+                actions.POST_TRIP_SUCCESS,
+                actions.POST_TRIP_FAILURE
+            ],
+            authenticated: true,
+            data
+        }
     };
 }
 
-export function putTripRequest() {
+export function update(data) {
     return {
-        type: actionTypes.PUT_TRIP_REQUEST
-    };
-}
-
-export function putTripSuccess() {
-    return {
-        type: actionTypes.PUT_TRIP_SUCCESS
-    };
-}
-
-export function putTripFailure() {
-    return {
-        type: actionTypes.PUT_TRIP_FAILURE
-    };
-}
-
-export function getTripsForDestinationRequest() {
-    return {
-        type: actionTypes.GET_TRIPS_FOR_DESTINATION_REQUEST
-    };
-}
-
-export function getTripsForDestinationSuccess(trips) {
-    return {
-        type: actionTypes.GET_TRIPS_FOR_DESTINATION_SUCCESS,
-        trips
-    };
-}
-
-export function getTripsForDestinationFailure() {
-    return {
-        type: actionTypes.GET_TRIPS_FOR_DESTINATION_FAILURE
-    };
-}
-
-export function getTripsForUserRequest() {
-    return {
-        type: actionTypes.GET_TRIPS_FOR_USER_REQUEST
-    };
-}
-
-export function getTripsForUserSuccess(trips) {
-    return {
-        type: actionTypes.GET_TRIPS_FOR_USER_SUCCESS,
-        trips
-    };
-}
-
-export function getTripsForUserFailure() {
-    return {
-        type: actionTypes.GET_TRIPS_FOR_USER_FAILURE
+        [CALL_API]: {
+            method: 'put',
+            url: `/trips/${data.id}`,
+            types: [
+                actions.PUT_TRIP_REQUEST,
+                actions.PUT_TRIP_SUCCESS,
+                actions.PUT_TRIP_FAILURE
+            ],
+            authenticated: true,
+            data
+        }
     };
 }

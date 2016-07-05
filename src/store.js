@@ -1,5 +1,13 @@
-if (__DEV__) { // eslint-disable-line
-    module.exports = require('./store.dev');
-} else {
-    module.exports = require('./store.prod');
-}
+import reducers from './reducers';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import DevTools from './commons/DevTools';
+import api from './middleware/api';
+
+export default createStore(
+    reducers,
+    compose(
+        applyMiddleware(thunkMiddleware, api),
+        DevTools.instrument()
+    )
+);

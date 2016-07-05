@@ -7,11 +7,20 @@ function LoginForm(props) {
     const {
         fields: { email, password },
         handleSubmit,
-        submitting
+        errorMessage,
+        isFetching
     } = props;
 
+    const formClass = ['ui', 'form'];
+    if (errorMessage) formClass.push('error');
+    else formClass.splice(formClass.indexOf('error'), 0);
+
+    const buttonClass = ['ui', 'button', 'primary', 'fluid'];
+    if (isFetching) buttonClass.push('loading');
+    else buttonClass.splice(buttonClass.indexOf('loading'), 0);
+
     return (
-        <form id="loginForm" className="ui form" onSubmit={handleSubmit}>
+        <form id="loginForm" className={formClass.join(' ')} onSubmit={handleSubmit}>
             <h2>Log in</h2>
             <div className="field">
                 <label htmlFor="email">E-mail</label>
@@ -29,10 +38,13 @@ function LoginForm(props) {
                     {...password}
                 />
             </div>
+            <div className="ui error message">
+                <p>{errorMessage}</p>
+            </div>
             <button
                 type="submit"
-                className="ui button primary"
-                disabled={submitting}
+                className={buttonClass.join(' ')}
+                disabled={isFetching}
             >
                 Log in
             </button>
@@ -42,8 +54,9 @@ function LoginForm(props) {
 
 LoginForm.propTypes = {
     fields: React.PropTypes.object.isRequired,
+    errorMessage: React.PropTypes.string,
     handleSubmit: React.PropTypes.func.isRequired,
-    submitting: React.PropTypes.bool.isRequired
+    isFetching: React.PropTypes.bool.isRequired
 };
 
 export default reduxForm({
