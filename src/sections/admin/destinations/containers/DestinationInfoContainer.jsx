@@ -1,16 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import DestinationInfo from '../components/DestinationInfo';
 
-import * as destinationsApi from '../../../../api/destinations';
-import { browserHistory } from 'react-router';
 
 class DestinationInfoContainer extends React.Component {
 
-    componentDidMount() {
-        destinationsApi.getDestinations();
-    }
 
     findDestination(destinations, destinationId) {
         const id = parseInt(destinationId, 10);
