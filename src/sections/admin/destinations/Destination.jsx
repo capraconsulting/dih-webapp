@@ -1,8 +1,10 @@
 import React from 'react';
+
 import Dropdown from '../../../commons/Dropdown';
 import { TRIP_STATUSES } from '../../../constants';
 import { tripStatusesForDropdown } from '../../../helpers';
 import VolunteersAtDestinationContainer from './containers/VolunteersAtDestinationContainer';
+import DestinationInfoContainer from './containers/DestinationInfoContainer';
 
 class Destination extends React.Component {
     constructor() {
@@ -21,10 +23,7 @@ class Destination extends React.Component {
     render() {
         return (
             <div className="ui segments">
-                <div className="ui blue inverted segment header">
-                    <h2>View destination</h2> {/* @TODO Get destination info from API */}
-                    <bold>Name:</bold> {this.props.params.destinationId}
-                </div>
+                <DestinationInfoContainer destinationId={this.props.params.destinationId} />
                 <div className="ui segment">
                     <div className="ui grid">
                         <div className="sixteen wide column">
