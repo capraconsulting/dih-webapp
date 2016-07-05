@@ -7,7 +7,6 @@ import DestinationInfo from '../components/DestinationInfo';
 
 class DestinationInfoContainer extends React.Component {
 
-
     findDestination(destinations, destinationId) {
         const id = parseInt(destinationId, 10);
         for (const destination of destinations) {

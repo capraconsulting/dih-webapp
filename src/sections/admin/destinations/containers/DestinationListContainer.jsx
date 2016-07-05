@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-
+import { list } from '../../../../actions/destinationActions';
 import DestinationList from '../components/DestinationList';
 
-import * as destinationsApi from '../../../../api/destinations';
+const createHandlers = (dispatch) => () => dispatch(list());
 
 class DestinationListContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handlers = createHandlers(this.props.dispatch);
+    }
 
     componentDidMount() {
-        destinationsApi.getDestinations();
+        this.handlers();
     }
 
     render() {
@@ -23,7 +27,8 @@ const mapStateToProps = store => ({
 });
 
 DestinationListContainer.propTypes = {
-    destinations: React.PropTypes.array.isRequired
+    dispatch: PropTypes.func.isRequired,
+    destinations: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps)(DestinationListContainer);
