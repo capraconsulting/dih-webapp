@@ -4,13 +4,13 @@ module.exports = Object.create(page, {
 
     email: {
         get() {
-            return browser.elements('#email');
+            return browser.element('#email');
         }
     },
 
     password: {
         get() {
-            return browser.elements('#password');
+            return browser.element('#password');
         }
     },
 
@@ -22,7 +22,7 @@ module.exports = Object.create(page, {
 
     messages: {
         get() {
-            return browser.elements('li#message');
+            return browser.element('li#message');
         }
     },
 
