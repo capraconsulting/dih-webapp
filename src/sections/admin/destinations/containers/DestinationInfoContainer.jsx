@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { list } from '../../../../actions/destinationActions';
 import { browserHistory } from 'react-router';
 
 import DestinationInfo from '../components/DestinationInfo';
 
+const createHandlers = (dispatch) => () => dispatch(list());
 
 class DestinationInfoContainer extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handlers = createHandlers(this.props.dispatch);
+    }
+
+    componentWillMount() {
+        this.handlers();
+    }
 
     findDestination(destinations, destinationId) {
         const id = parseInt(destinationId, 10);
@@ -18,14 +29,18 @@ class DestinationInfoContainer extends React.Component {
     }
 
     render() {
-        if (this.findDestination(this.props.destinations, this.props.destinationId) === false) {
-            browserHistory.push('NotFound');
+        console.log(this.props.destinations);
+        const foundDestination = this.findDestination(this.props.destinations
+        , this.props.destinationId);
+        if (foundDestination === false) {
+            // browserHistory.push('NotFound');
+            console.log('fuck');
             return null;
         }
         return (
             <DestinationInfo
                 destination={
-                    this.findDestination(this.props.destinations, this.props.destinationId)
+                    foundDestination
                 }
             />
         );
@@ -37,6 +52,7 @@ const mapStateToProps = store => ({
 });
 
 DestinationInfoContainer.propTypes = {
+    dispatch: PropTypes.func.isRequired,
     destinations: React.PropTypes.array.isRequired,
     destinationId: React.PropTypes.string.isRequired
 };
