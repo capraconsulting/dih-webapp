@@ -1,14 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import TripRequestsTable from './components/TripRequestsTable';
+import { list } from '../../../actions/tripActions';
 
-import * as tripsApi from '../../../api/trips';
+const createHandlers = (dispatch) => () => dispatch(list());
 
 class TripRequestsContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handlers = createHandlers(this.props.dispatch);
+    }
 
     componentDidMount() {
-        tripsApi.getTrips();
+        this.handlers();
     }
 
     render() {
@@ -23,7 +27,8 @@ const mapStateToProps = store => ({
 });
 
 TripRequestsContainer.propTypes = {
-    trips: React.PropTypes.array.isRequired
+    trips: React.PropTypes.array.isRequired,
+    dispatch: React.PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps)(TripRequestsContainer);

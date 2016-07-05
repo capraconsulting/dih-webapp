@@ -1,17 +1,36 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-
+import { browserHistory } from 'react-router';
+import { setPassword } from '../../actions/authenticationActions';
+import { retrieve } from '../../actions/accountActions';
 import ConfirmSignUpForm from './ConfirmSignUpForm';
 
-import * as accountApi from '../../api/account';
+const createHandlers = (dispatch) => (
+    {
+        retrieve(token) {
+            return dispatch(retrieve(token));
+        },
+        update(token, data) {
+            return dispatch(setPassword(token, data));
+        }
+    }
+);
 
 class ConfirmSignUpFormContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handlers = createHandlers(this.props.dispatch);
+    }
+
     componentDidMount() {
-        accountApi.getAccount(this.props.location.query.token);
+        this.handlers.retrieve({ Authorization: `Bearer ${this.props.location.query.token}` });
     }
 
     handleSubmit(data) {
-        accountApi.putAccount(this.props.location.query.token, data);
+        this.handlers.update(data, { Authorization: `Bearer ${this.props.location.query.token}` })
+            .then(() => {
+                if (this.props.isAuthenticated) browserHistory.push('/');
+            });
     }
 
     render() {
@@ -25,12 +44,15 @@ class ConfirmSignUpFormContainer extends React.Component {
 }
 
 const mapStateToProps = store => ({
-    account: store.accountState.account
+    account: store.accountState.account,
+    isAuthenticated: store.authenticationState.isAuthenticated
 });
 
 ConfirmSignUpFormContainer.propTypes = {
-    account: React.PropTypes.object.isRequired,
-    location: React.PropTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    account: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(ConfirmSignUpFormContainer);

@@ -3,23 +3,23 @@ import DatePicker from 'react-datepicker';
 import { reduxForm } from 'redux-form';
 import moment from 'moment';
 
-const fields = ['selectedDestination', 'wishStartDate', 'wishEndDate'];
+const fields = ['destinationId', 'wishStartDate', 'wishEndDate'];
 
 
 function SignupTripForm(props) {
     const {
-        fields: { selectedDestination, wishStartDate, wishEndDate },
+        fields: { destinationId, wishStartDate, wishEndDate },
         handleSubmit,
         submitting
     } = props;
     return (
         <form id="signupTripForm" className="ui form" onSubmit={handleSubmit}>
-            <label htmlFor="selectedDestination">Destination</label>
+            <label htmlFor="destinationId">Destination</label>
             <select
-                {...selectedDestination}
-                value={selectedDestination.value || ''}
+                {...destinationId}
+                value={destinationId.value || ''}
                 className="ui fluid selection dropdown"
-                id="selectedDestination"
+                id="destinationId"
             >
                 <option value="">Destinations</option>
                 {props.destinations.map(destination => (

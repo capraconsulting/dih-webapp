@@ -1,21 +1,18 @@
-import { ADD_USER_SUCCESS, ADD_USER_FAILURE, ADD_USER_START } from './actionTypes';
+import * as types from './actionTypes';
+import { CALL_API } from '../middleware/api';
 
-export function postUserSuccess(user) {
+export function create(data) {
     return {
-        type: ADD_USER_SUCCESS,
-        user
-    };
-}
-
-export function postUserStart() {
-    return {
-        type: ADD_USER_START
-    };
-}
-
-export function postUserFailure(error) {
-    return {
-        type: ADD_USER_FAILURE,
-        error
+        [CALL_API]: {
+            method: 'post',
+            url: '/users',
+            types: [
+                types.POST_USER_REQUEST,
+                types.POST_USER_SUCCESS,
+                types.POST_USER_FAILURE
+            ],
+            authenticated: true,
+            data
+        }
     };
 }

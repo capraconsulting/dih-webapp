@@ -9,6 +9,9 @@ const config = objectAssign(baseConfig, {
     entry: [
         './src/app.jsx'
     ],
+    output: {
+        filename: '[name]-[hash].js'
+    },
     postcss: () => ([autoprefixer])
 });
 
@@ -23,7 +26,7 @@ config.plugins = config.plugins.concat([
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.DefinePlugin({
         __DEV__: false,
-        'process.env.BASE_URL': JSON.stringify('http://dev-api.dih.capra.me'),
+        'process.env.BASE_URL': JSON.stringify('https://dev-api.dih.capra.me'),
         'process.env.NODE_ENV': JSON.stringify('production')
     })
 ]);

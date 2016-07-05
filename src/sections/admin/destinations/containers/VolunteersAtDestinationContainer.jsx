@@ -2,10 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Table from '../../../../commons/Table';
-
-import * as tripsApi from '../../../../api/trips';
+import { listForDestinationWithStatus } from '../../../../actions/tripActions';
 
 class VolunteersAtDestinationContainer extends React.Component {
+
+    constructor(props) {
+        super(props);
+        const createHandlers = (dispatch) => () =>
+            dispatch(listForDestinationWithStatus(this.props.destinationId, this.props.status)
+        );
+        this.handlers = createHandlers(this.props.dispatch);
+    }
+
+    componentDidMount() {
+        this.handlers();
+    }
 
     shouldComponentUpdate(nextProps) {
         if (this.props.status === nextProps.status &&
@@ -32,7 +43,7 @@ class VolunteersAtDestinationContainer extends React.Component {
     }
 
     render() {
-        tripsApi.getTripsForDestination(this.props.destinationId, this.props.status);
+        this.handlers();
         return (
             <div>
                 <p>
@@ -61,7 +72,8 @@ const mapStateToProps = store => ({
 VolunteersAtDestinationContainer.propTypes = {
     tripsForDestination: React.PropTypes.array.isRequired,
     destinationId: React.PropTypes.string.isRequired,
-    status: React.PropTypes.string.isRequired
+    status: React.PropTypes.string.isRequired,
+    dispatch: React.PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps)(VolunteersAtDestinationContainer);
