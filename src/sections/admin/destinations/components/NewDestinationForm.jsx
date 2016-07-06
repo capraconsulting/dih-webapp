@@ -1,6 +1,4 @@
 import React, { PropTypes } from 'react';
-import { create, list } from '../../../../actions/destinationActions';
-import { connect } from 'react-redux';
 
 const createHandlers = (dispatch) => (
     {
@@ -54,7 +52,7 @@ class NewDestinationForm extends React.Component {
                         value={this.state.destinationName}
                         onChange={event => { this.handleTextChange(event); }}
                     />
-                    <button id="submit" className="ui button primary" type="submit">Add</button>
+                    <button id="save" className="ui button primary" type="submit">Add</button>
                 </div>
             </form>
         );
@@ -62,8 +60,9 @@ class NewDestinationForm extends React.Component {
 }
 
 NewDestinationForm.propTypes = {
-    dispatch: PropTypes.func.isRequired
+    destinationName: PropTypes.string.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired
 };
 
-
-export default connect()(NewDestinationForm);
+export default NewDestinationForm;

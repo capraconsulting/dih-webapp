@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/actionTypes/tripActionTypes';
+import * as actionTypes from '../actions/types/trips';
 
 const initialState = {
     isFetching: false,

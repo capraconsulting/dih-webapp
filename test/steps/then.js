@@ -10,6 +10,11 @@ module.exports = function () { // eslint-disable-line
     });
 
     this.Then(/^I expect that element "(.*)" is visible$/, (field) => {
+        const element = this.currentPage[field];
+        element.state.should.equal('success');
+    });
+
+    this.Then(/^I expect that elements "(.*)" is visible$/, (field) => {
         const elements = this.currentPage[field];
         elements.value.length.should.be.gt(0);
     });
