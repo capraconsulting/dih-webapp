@@ -8,7 +8,7 @@ const fields = ['password', 'passwordConfirmation'];
 
 const validate = values => {
     const errors = {};
-
+    if (!values) return errors;
     if (!values.password) {
         errors.password = 'Can\'t be blank';
     } else if (values.password.length < 8) {

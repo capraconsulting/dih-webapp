@@ -1,15 +1,35 @@
-import { GET_ACCOUNT_SUCCESS, PUT_ACCOUNT_SUCCESS } from './actionTypes';
+import * as types from './actionTypes';
+import { CALL_API } from '../middleware/api';
 
-export function getAccountSuccess(account) {
+export function retrieve(headers) {
     return {
-        type: GET_ACCOUNT_SUCCESS,
-        account
+        [CALL_API]: {
+            method: 'get',
+            url: '/account',
+            types: [
+                types.GET_ACCOUNT_REQUEST,
+                types.GET_ACCOUNT_SUCCESS,
+                types.GET_ACCOUNT_FAILURE
+            ],
+            authenticated: true,
+            data: null,
+            headers
+        }
     };
 }
 
-export function putAccountSuccess(account) {
+export function update(data) {
     return {
-        type: PUT_ACCOUNT_SUCCESS,
-        account
+        [CALL_API]: {
+            method: 'put',
+            url: '/account',
+            types: [
+                types.PUT_ACCOUNT_REQUEST,
+                types.PUT_ACCOUNT_SUCCESS,
+                types.PUT_ACCOUNT_FAILURE
+            ],
+            authenticated: true,
+            data
+        }
     };
 }
