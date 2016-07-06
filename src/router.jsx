@@ -11,6 +11,7 @@ import Destinations from './sections/admin/destinations/Destinations';
 import SignUpForm from './sections/signup/SignUpForm';
 import SignupTrip from './sections/signupTrip/SignupTrip';
 import TripRequests from './sections/admin/tripRequests/TripRequests';
+import Users from './sections/admin/users';
 import ConfirmSignUpFormContainer from './sections/signup/ConfirmSignUpFormContainer';
 import NotFound from './commons/NotFound.jsx';
 
@@ -28,6 +29,7 @@ export default(
                 <Route path="/profile" component={MyProfile} />
                 <Route path="/trips/signup" component={SignupTrip} />
                 <Route path="/admin/destinations" component={Destinations} />
+                <Route path="/admin/users" component={Users} />
                 <Route path="/admin/destinations/:destinationId" component={Destination} />
                 <Route path="/admin/trips" component={TripRequests} />
                 <Route path="*" component={NotFound} />
