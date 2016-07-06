@@ -1,5 +1,6 @@
 const objectAssign = require('object-assign');
 const webpack = require('webpack');
+const path = require('path');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const baseConfig = require('./base.config');
@@ -7,10 +8,12 @@ const baseConfig = require('./base.config');
 const config = objectAssign(baseConfig, {
     devtool: 'source-map',
     entry: [
-        './src/app.jsx'
+        './src/index.js'
     ],
     output: {
-        filename: '[name]-[hash].js'
+        filename: '[name]-[hash].js',
+        path: path.join(__dirname, '..', 'dist'),
+        publicPath: '/'
     },
     postcss: () => ([autoprefixer])
 });

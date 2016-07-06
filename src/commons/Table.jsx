@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 /*
 * commons.Table
@@ -34,9 +34,9 @@ function Table(props) {
 }
 
 Table.propTypes = {
-    columnNames: React.PropTypes.object.isRequired,
-    items: React.PropTypes.array.isRequired,
-    key: React.PropTypes.string
+    columnNames: PropTypes.object.isRequired,
+    items: PropTypes.array.isRequired,
+    key: PropTypes.string
 };
 
 export default Table;
