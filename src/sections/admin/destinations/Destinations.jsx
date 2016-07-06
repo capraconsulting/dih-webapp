@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DestinationListContainer from './containers/DestinationListContainer';
-import NewDestinationForm from './components/NewDestinationForm';
+import NewDestinationFormContainer from './containers/NewDestinationFormContainer';
 
 function Destinations() {
     return (
@@ -12,7 +12,7 @@ function Destinations() {
             <div className="ui segment">
                 <div className="ui grid">
                     <div className="eight wide column">
-                        <NewDestinationForm />
+                        <NewDestinationFormContainer />
                     </div>
                     <div className="sixteen wide column">
                         <DestinationListContainer />
