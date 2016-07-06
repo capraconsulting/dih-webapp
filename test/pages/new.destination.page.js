@@ -5,7 +5,7 @@ module.exports = Object.create(page, {
 
     destinationName: {
         get() {
-            const element = browser.element('#destinationName');
+            const element = browser.elements('input#destinationName');
             element.waitForExist(20000);
             return element;
         }

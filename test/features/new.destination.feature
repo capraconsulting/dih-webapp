@@ -11,7 +11,7 @@ Feature: Creating a new destination
         Then I expect that "destinations" contains "Stavern"
 
     Scenario: Destinations should persist in the database
-        Given I open the page "new.destination"
+        Given I open the page "new.destination" as "ADMIN"
         Then I expect that element "destinationName" is visible
         When I set "Lier" to the inputfield "destinationName"
         Then I expect that inputfield "destinationName" contains "Lier"
