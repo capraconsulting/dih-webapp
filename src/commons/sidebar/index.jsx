@@ -39,8 +39,8 @@ function Sidebar(props) {
 }
 
 Sidebar.propTypes = {
-    sidebarOpen: PropTypes.bool,
-    isMobile: PropTypes.bool
+    sidebarOpen: PropTypes.bool.isRequired,
+    isMobile: PropTypes.bool.isRequired
 };
 
 export default Sidebar;

@@ -4,7 +4,7 @@ import './header.scss';
 
 
 const Header = (props) => (
-    <header className={props.isMobile ? 'isMobile' : ''}>
+    <header className={`header ${props.isMobile ? 'isMobile' : ''}`}>
         {props.isMobile &&
             <i className="content big icon" onClick={(e) => props.toggleSidebar(e)} ></i>}
         <div>
@@ -17,10 +17,10 @@ const Header = (props) => (
 );
 
 Header.propTypes = {
-    routes: PropTypes.array,
-    isMobile: PropTypes.bool,
-    params: PropTypes.object,
-    toggleSidebar: PropTypes.func
+    routes: PropTypes.array.isRequired,
+    isMobile: PropTypes.bool.isRequired,
+    params: PropTypes.object.isRequired,
+    toggleSidebar: PropTypes.func.isRequired
 };
 
 export default Header;

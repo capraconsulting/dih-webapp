@@ -1,4 +1,4 @@
-import * as actions from './types/tripActionTypes';
+import * as types from './types/trips';
 import { CALL_API } from '../middleware/api';
 
 export function list() {
@@ -7,9 +7,9 @@ export function list() {
             method: 'get',
             url: '/trips',
             types: [
-                actions.GET_TRIPS_REQUEST,
-                actions.GET_TRIPS_SUCCESS,
-                actions.GET_TRIPS_FAILURE
+                types.GET_TRIPS_REQUEST,
+                types.GET_TRIPS_SUCCESS,
+                types.GET_TRIPS_FAILURE
             ],
             authenticated: true
         }
@@ -22,9 +22,9 @@ export function listForDestinationWithStatus(destinationId, status) {
             method: 'get',
             url: `/trips?destinationId=${destinationId}&status=${status}`,
             types: [
-                actions.GET_TRIPS_FOR_DESTINATION_REQUEST,
-                actions.GET_TRIPS_FOR_DESTINATION_SUCCESS,
-                actions.GET_TRIPS_FOR_DESTINATION_FAILURE
+                types.GET_TRIPS_FOR_DESTINATION_REQUEST,
+                types.GET_TRIPS_FOR_DESTINATION_SUCCESS,
+                types.GET_TRIPS_FOR_DESTINATION_FAILURE
             ],
             authenticated: true
         }
@@ -37,9 +37,9 @@ export function create(data) {
             method: 'post',
             url: '/trips',
             types: [
-                actions.POST_TRIP_REQUEST,
-                actions.POST_TRIP_SUCCESS,
-                actions.POST_TRIP_FAILURE
+                types.POST_TRIP_REQUEST,
+                types.POST_TRIP_SUCCESS,
+                types.POST_TRIP_FAILURE
             ],
             authenticated: true,
             data
@@ -53,9 +53,9 @@ export function update(data) {
             method: 'put',
             url: `/trips/${data.id}`,
             types: [
-                actions.PUT_TRIP_REQUEST,
-                actions.PUT_TRIP_SUCCESS,
-                actions.PUT_TRIP_FAILURE
+                types.PUT_TRIP_REQUEST,
+                types.PUT_TRIP_SUCCESS,
+                types.PUT_TRIP_FAILURE
             ],
             authenticated: true,
             data

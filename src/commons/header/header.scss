@@ -1,10 +1,10 @@
-header {
+header.header {
     position: absolute;
     left: 260px;
     top: 0;
     height: 62px;
     padding: 17px;
-    display: -webkit-inline-box;
+    display: flex;
     width: 100%;
     background: white;
 
