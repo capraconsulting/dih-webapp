@@ -1,6 +1,7 @@
 const objectAssign = require('object-assign');
 const webpack = require('webpack');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const baseConfig = require('./base.config');
@@ -26,6 +27,9 @@ config.plugins = config.plugins.concat([
             warnings: false
         }
     }),
+    new CopyWebpackPlugin([
+        { from: 'assets' }
+    ]),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.DefinePlugin({
         __DEV__: false,
