@@ -35,6 +35,9 @@ Name your branches in the following way, where `DIH-num` is a task ID on JIRA:
 
 The project has implemented Redux DevTools in order to make development more convenient. Install the [Chrome extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) to use Redux DevTools.
 
+## Development
+
+We use [redux devtools](https://github.com/gaearon/redux-devtools), you can toggle this toolbar with `ctrl-h`.
 ## Tests
 On the webapp we have end-to-end tests with Selenium, but the tests are run in [SauceLabs](https://saucelabs.com) instead of locally, to ensure that they work the same for everyone.  You want to register at their website, then add the environment variables `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY`. locally. Then get started testing with:
 
