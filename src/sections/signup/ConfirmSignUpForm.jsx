@@ -80,7 +80,10 @@ function ConfirmSignUpForm(props) {
                     id="password"
                     {...password}
                 />
-                {password.touched && password.error && <div>{password.error}</div>}
+                {password.touched && password.error &&
+                    <div className="errors">
+                        {password.error}
+                    </div>}
             </div>
             <div className="field">
                 <label htmlFor="passwordConfirmation">Confirm password</label>
@@ -90,7 +93,7 @@ function ConfirmSignUpForm(props) {
                     {...passwordConfirmation}
                 />
                 {passwordConfirmation.touched && passwordConfirmation.error &&
-                    <div>{passwordConfirmation.error}</div>}
+                    <div className="errors">{passwordConfirmation.error}</div>}
             </div>
             <button
                 type="submit"
