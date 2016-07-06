@@ -1,29 +1,28 @@
 import page from './page';
-import * as users from '../fixtures/users.json';
-import { getJwt, setUser } from '../userManager';
+import { createJwt } from '../helpers';
 
 module.exports = Object.create(page, {
     firstName: {
         get() {
-            return browser.elements('#firstName');
+            return browser.element('#firstName');
         }
     },
 
     lastName: {
         get() {
-            return browser.elements('#lastName');
+            return browser.element('#lastName');
         }
     },
 
     dateOfBirth: {
         get() {
-            return browser.elements('input#dateOfBirth');
+            return browser.element('input#dateOfBirth');
         }
     },
 
     email: {
         get() {
-            return browser.elements('#email');
+            return browser.element('#email');
         }
     },
 
@@ -53,10 +52,12 @@ module.exports = Object.create(page, {
 
     open: {
         value() {
-            const user = users[0];
-            user.setPassword = true;
-            setUser(user);
-            page.open.call(this, `/signup/confirm?jwt=${getJwt()}`);
+            page.open.call(this, `/signup/confirm?jwt=
+                ${createJwt({ ...
+                    this.currentUser,
+                    setPassword: true })
+                }`
+            );
         }
     }
 });

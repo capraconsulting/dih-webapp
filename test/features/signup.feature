@@ -19,7 +19,7 @@ Feature: Signup new user
 		And I expect that "messages" contains "E-mail name can't be blank"
 		And I expect that "messages" contains "Date of birth name can't be blank"
 
-	Scenario: Sign up
+	Scenario: Sign up should be possible with valid information
 		Given I open the page "signup"
 		When I set "Firstname" to the inputfield "firstname"
 		And I set "Lastname" to the inputfield "lastname"
@@ -28,7 +28,7 @@ Feature: Signup new user
 		And I press key "Enter"
 		And I press the button "submit"
 
-	Scenario: Sign up
+	Scenario: Sign up should not be possible with invalid email
 		Given I open the page "signup"
 		When I set "Firstname" to the inputfield "firstname"
 		And I set "Lastname" to the inputfield "lastname"
