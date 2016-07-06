@@ -5,9 +5,9 @@ import { list } from '../../../../actions/destinationActions';
 import NotFound from '../../../../commons/NotFound';
 import Dropdown from '../../../../commons/Dropdown';
 import { TRIP_STATUSES } from '../../../../constants';
-import VolunteersAtDestinationContainer from './VolunteersAtDestinationContainer';
+import VolunteersAtDestinationContainer from './volunteersAtDestinationContainer';
 import { tripStatusesForDropdown } from '../../../../helpers';
-import DestinationInfo from '../components/DestinationInfo';
+import DestinationInfo from './destinationInfo';
 
 const createHandlers = (dispatch) => () => dispatch(list());
 
