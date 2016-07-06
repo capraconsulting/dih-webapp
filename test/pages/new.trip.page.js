@@ -4,7 +4,7 @@ module.exports = Object.create(page, {
 
     destinationsSelect: {
         get() {
-            return browser.element('#selectedDestination');
+            return browser.element('#destinationId');
         }
     },
 
@@ -16,7 +16,7 @@ module.exports = Object.create(page, {
 
     wishStartDate: {
         get() {
-            const element = browser.elements('#wishStartDate');
+            const element = browser.element('#wishStartDate');
             element.waitForExist(20000);
             return element;
         }
@@ -24,7 +24,7 @@ module.exports = Object.create(page, {
 
     wishEndDate: {
         get() {
-            const element = browser.elements('#wishEndDate');
+            const element = browser.element('#wishEndDate');
             element.waitForExist(20000);
             return element;
         }
@@ -32,7 +32,7 @@ module.exports = Object.create(page, {
 
     destinationsDropdown: {
         value() {
-            return browser.click('select#selectedDestination');
+            return browser.click('select#destinationId');
         }
     },
 

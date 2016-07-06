@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import TripStatusDropdown from './TripStatusDropdown';
 
@@ -21,8 +22,8 @@ function TripRequestsTable(props) {
                         <td>{trip.user.firstname}</td>
                         <td>{trip.user.lastname}</td>
                         <td>{trip.destination.name}</td>
-                        <td>{trip.wishStartDate}</td>
-                        <td>{trip.wishEndDate}</td>
+                        <td>{moment(trip.wishStartDate).format('YYYY-MM-DD')}</td>
+                        <td>{moment(trip.wishEndDate).format('YYYY-MM-DD')}</td>
                         <td>
                             <TripStatusDropdown trip={trip} />
                         </td>

@@ -38,13 +38,14 @@ function LoginForm(props) {
                     {...password}
                 />
             </div>
-            <div className="ui error message">
+            <div id="messages" className="ui error message">
                 <p>{errorMessage}</p>
             </div>
             <button
                 type="submit"
                 className={buttonClass.join(' ')}
                 disabled={isFetching}
+                id="submit"
             >
                 Log in
             </button>

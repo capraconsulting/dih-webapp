@@ -1,4 +1,8 @@
 import React, { PropTypes } from 'react';
+import { create, list } from '../../../../actions/destinationActions';
+import { connect } from 'react-redux';
+
+import NewDestinationForm from '../components/NewDestinationForm';
 
 const createHandlers = (dispatch) => (
     {
@@ -11,7 +15,7 @@ const createHandlers = (dispatch) => (
     }
 );
 
-class NewDestinationForm extends React.Component {
+class NewDestinationFormContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -42,27 +46,18 @@ class NewDestinationForm extends React.Component {
 
     render() {
         return (
-            <form id="newDestinationForm" onSubmit={event => { this.handleSubmit(event); }}>
-                <h3>New destination</h3>
-                <div className="ui action input">
-                    <input
-                        type="text"
-                        id="destinationName"
-                        placeholder="Destination name"
-                        value={this.state.destinationName}
-                        onChange={event => { this.handleTextChange(event); }}
-                    />
-                    <button id="save" className="ui button primary" type="submit">Add</button>
-                </div>
-            </form>
+            <NewDestinationForm
+                destinationName={this.state.destinationName}
+                handleSubmit={e => { this.handleSubmit(e); }}
+                handleChange={e => { this.handleTextChange(e); }}
+            />
         );
     }
 }
 
-NewDestinationForm.propTypes = {
-    destinationName: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired
+NewDestinationFormContainer.propTypes = {
+    dispatch: PropTypes.func.isRequired
 };
 
-export default NewDestinationForm;
+
+export default connect()(NewDestinationFormContainer);

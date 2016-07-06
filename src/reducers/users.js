@@ -1,12 +1,14 @@
-import * as types from '../actions/actionTypes';
+import * as types from '../actions/types/users';
 
 const initialState = {
     isFetching: false,
-    users: []
+    users: [],
+    user: {}
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
+    case types.GET_USER_REQUEST:
     case types.GET_USERS_REQUEST:
         return {
             ...state,
@@ -18,6 +20,13 @@ export default function (state = initialState, action) {
             isFetching: false,
             users: action.res
         };
+    case types.GET_USER_SUCCESS:
+        return {
+            ...state,
+            isFetching: false,
+            user: action.res
+        };
+    case types.GET_USER_FAILURE:
     case types.GET_USERS_FAILURE:
         return {
             ...state,
