@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import Table from '../../../../commons/Table';
 import { listForDestinationWithStatus } from '../../../../actions/tripActions';
+import moment from 'moment';
 
 class VolunteersAtDestinationContainer extends React.Component {
     constructor(props) {
@@ -33,10 +34,10 @@ class VolunteersAtDestinationContainer extends React.Component {
                 status: value.status,
                 firstname: value.user.firstname,
                 lastname: value.user.lastname,
-                birth: value.user.birth,
+                birth: moment(value.user.birth).format('YYYY-MM-DD'),
                 email: value.user.email,
-                startDate: value.startDate,
-                endDate: value.endDate
+                startDate: moment(value.startDate).format('YYYY-MM-DD'),
+                endDate: moment(value.endDate).format('YYYY-MM-DD')
             });
         });
         return cleanObjects;
