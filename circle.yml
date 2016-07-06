@@ -38,8 +38,8 @@ deployment:
     prod:
         branch: master
         commands:
-            - BUCKET=dih.capra.me npm run deploy
+            - BUCKET=dih.capra.me NODE_ENV=production npm run deploy:production
     staging:
         branch: dev
         commands:
-            - BUCKET=dev.dih.capra.me NODE_ENV=production npm run deploy:staging
+            - BUCKET=staging.dih.capra.me NODE_ENV=production npm run deploy:staging
