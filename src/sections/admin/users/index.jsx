@@ -1,18 +1,18 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import Table from '../../../commons/Table';
 import { list } from '../../../actions/userActions';
 
 const createHandlers = (dispatch) => () => dispatch(list());
 
-class UsersTableContainer extends React.Component {
+class UsersTableContainer extends Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
     }
 
     componentDidMount() {
-        this.handlers().then(() => { console.log(this.props.users);})
+        this.handlers();
     }
 
     render() {
@@ -24,6 +24,11 @@ class UsersTableContainer extends React.Component {
                     email: 'E-mail',
                     role: 'Role'
                 }}
+                link={{
+                    columnName: 'firstname',
+                    prefix: '/admin/users/'
+                }}
+                itemKey="id"
                 items={this.props.users}
             />
         );

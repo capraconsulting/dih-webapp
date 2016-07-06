@@ -58,6 +58,7 @@ class VolunteersAtDestinationContainer extends React.Component {
                         endDate: 'End date',
                         status: 'Status'
                     }}
+                    itemKey="id"
                     items={this.noramlizeTripObjectsForTable(this.props.tripsForDestination)}
                 />
             </div>

@@ -1,0 +1,23 @@
+header {
+    position: absolute;
+    left: 260px;
+    top: 0;
+    height: 62px;
+    padding: 17px;
+    display: -webkit-inline-box;
+    width: 100%;
+    background: white;
+
+    i.icon{
+        cursor: pointer;
+        margin-right: 20px;
+    }
+
+    .breadcrumbs{
+        margin-top: 5px;
+    }
+
+    &.isMobile {
+        left: 0px;
+    }
+}

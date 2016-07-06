@@ -24,7 +24,7 @@ app.use('/api', proxy({
     }
 }));
 
-app.use(express.static(path.join(__dirname, '..', 'dist')));
+app.use(express.static(path.join(__dirname, '..', 'assets')));
 
 app.get('*', (req, res, next) => {
     const filename = path.join(compiler.outputPath, 'index.html');

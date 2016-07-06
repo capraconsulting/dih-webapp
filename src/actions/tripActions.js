@@ -1,4 +1,4 @@
-import * as actions from './actionTypes/tripActionTypes';
+import * as actions from './types/tripActionTypes';
 import { CALL_API } from '../middleware/api';
 
 export function list() {
