@@ -1,10 +1,11 @@
 import page from './page';
+import { createJwt } from '../helpers';
 
 module.exports = Object.create(page, {
 
-    name: {
+    destinationName: {
         get() {
-            const element = browser.elements('#destinationName');
+            const element = browser.element('#destinationName');
             element.waitForExist(20000);
             return element;
         }
@@ -32,13 +33,18 @@ module.exports = Object.create(page, {
 
     save: {
         value() {
-            return browser.click('button#submit');
+            return browser.click('button#save');
         }
     },
 
     open: {
         value() {
-            page.open.call(this, '/admin/destinations');
+            page.open.call(this, `/signup/confirm?jwt=
+                ${createJwt({ ...
+                    this.currentUser,
+                    setPassword: true })
+                }`
+            );
         }
     }
 });

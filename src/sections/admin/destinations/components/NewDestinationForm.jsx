@@ -54,7 +54,7 @@ class NewDestinationForm extends React.Component {
                         value={this.state.destinationName}
                         onChange={event => { this.handleTextChange(event); }}
                     />
-                    <button id="submit" className="ui button primary" type="submit">Add</button>
+                    <button id="save" className="ui button primary" type="submit">Add</button>
                 </div>
             </form>
         );

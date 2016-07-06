@@ -3,18 +3,18 @@ Feature: Creating a new destination
     And I want to be able to store the destinations
 
     Scenario: Create a new destination
-        Given I open the page "new.destination"
-        Then I expect that element "name" is visible
-        When I set "Stavern" to the inputfield "name"
-        Then I expect that inputfield "name" contains "Stavern"
+        Given I open the page "new.destination" as "ADMIN"
+        Then I expect that element "destinationName" is visible
+        When I set "Stavern" to the inputfield "destinationName"
+        Then I expect that inputfield "destinationName" contains "Stavern"
         When I press the button "save"
         Then I expect that "destinations" contains "Stavern"
 
-    Scenario: Destinations should presist in the database
+    Scenario: Destinations should persist in the database
         Given I open the page "new.destination"
-        Then I expect that element "name" is visible
-        When I set "Lier" to the inputfield "name"
-        Then I expect that inputfield "name" contains "Lier"
+        Then I expect that element "destinationName" is visible
+        When I set "Lier" to the inputfield "destinationName"
+        Then I expect that inputfield "destinationName" contains "Lier"
         When I press the button "save"
         Then I expect that "destinations" contains "Lier"
         When I refresh the application
