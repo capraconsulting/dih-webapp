@@ -22,7 +22,7 @@ module.exports = Object.create(page, {
 
     messages: {
         get() {
-            return browser.element('li#message');
+            return browser.element('#messages');
         }
     },
 

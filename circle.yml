@@ -26,20 +26,20 @@ dependencies:
         - eval $(aws ecr get-login --region eu-west-1)
 
 test:
-    pre:
-        - npm run dist:staging
-        - docker pull $EXTERNAL_API_REGISTRY-dev:latest
-        - docker run -d --net host -e PG_URL=postgres://ubuntu:@127.0.0.1:5432/circle_test $EXTERNAL_API_REGISTRY-dev:latest npm run start:test
+#    pre:
+#        - npm run dist:staging
+#        - docker pull $EXTERNAL_API_REGISTRY-dev:latest
+#        - docker run -d --net host -e PG_URL=postgres://ubuntu:@127.0.0.1:5432/circle_test $EXTERNAL_API_REGISTRY-dev:latest npm run start:test
     override:
-        - npm test
+        - npm run lint
 
 
 deployment:
     prod:
         branch: master
         commands:
-            - BUCKET=dih.capra.me npm run deploy
+            - BUCKET=dih.capra.me NODE_ENV=production npm run deploy:production
     staging:
         branch: dev
         commands:
-            - BUCKET=dev.dih.capra.me NODE_ENV=production npm run deploy:staging
+            - BUCKET=staging.dih.capra.me NODE_ENV=production npm run deploy:staging

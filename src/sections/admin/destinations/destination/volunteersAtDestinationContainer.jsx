@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import Table from '../../../../commons/Table';
 import { listForDestinationWithStatus } from '../../../../actions/tripActions';
+import moment from 'moment';
 
 class VolunteersAtDestinationContainer extends React.Component {
-
     constructor(props) {
         super(props);
         const createHandlers = (dispatch) => () =>
@@ -26,7 +26,7 @@ class VolunteersAtDestinationContainer extends React.Component {
         return true;
     }
 
-    noramlizeTripObjectsForTable(items) {
+    normalizeTripObjectsForTable(items) {
         const cleanObjects = [];
         _.mapKeys(items, value => {
             cleanObjects.push({
@@ -34,9 +34,10 @@ class VolunteersAtDestinationContainer extends React.Component {
                 status: value.status,
                 firstname: value.user.firstname,
                 lastname: value.user.lastname,
+                birth: moment(value.user.birth).format('YYYY-MM-DD'),
                 email: value.user.email,
-                startDate: value.startDate,
-                endDate: value.endDate
+                startDate: moment(value.startDate).format('YYYY-MM-DD'),
+                endDate: moment(value.endDate).format('YYYY-MM-DD')
             });
         });
         return cleanObjects;
@@ -54,11 +55,13 @@ class VolunteersAtDestinationContainer extends React.Component {
                         firstname: 'First name',
                         lastname: 'Last name',
                         email: 'E-mail',
+                        birth: 'Date of birth',
                         startDate: 'Start date',
                         endDate: 'End date',
                         status: 'Status'
                     }}
-                    items={this.noramlizeTripObjectsForTable(this.props.tripsForDestination)}
+                    itemKey="id"
+                    items={this.normalizeTripObjectsForTable(this.props.tripsForDestination)}
                 />
             </div>
         );

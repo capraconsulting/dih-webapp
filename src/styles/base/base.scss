@@ -39,12 +39,21 @@ body {
 // -----------------------------------------------
 .wrapper {
     display: flex;
-    min-height: 100%;
+    width: 100%;
+    height: 100vh;
 }
 
 .main-content {
     padding: 1rem;
     flex: 1;
+    position: absolute;
+    height: calc(100vh - 60px);
+    width: calc(100% - 260px);
+    left: 0px;
+    top: 60px;
+    &.isMobile {
+        width: 100%;
+    }
 }
 
 //------------------------------------------------
