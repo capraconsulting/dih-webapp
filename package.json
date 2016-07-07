@@ -60,7 +60,7 @@
     "redux-devtools-dock-monitor": "~1.1.1",
     "redux-devtools-log-monitor": "~1.0.11",
     "sass-loader": "~4.0.0",
-    "selenium-standalone": "~5.4.1",
+    "selenium-standalone": "~5.5.0",
     "source-map-loader": "~0.1.5",
     "style-loader": "~0.13.1",
     "url-loader": "~0.5.7",
