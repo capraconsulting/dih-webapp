@@ -28,12 +28,10 @@ export default(
             <Route name="Main" path="/" component={MainLayout}>
                 <Route name="My profile" path="profile" component={MyProfile} />
                 <Route name="My trips" path="trips/signup" component={SignupTrip} />
-                <Route name="Destinations" path="admin/destinations" component={Destinations} />
-                <Route
-                    name="Destination"
-                    path="admin/destinations/:destinationId"
-                    component={Destination}
-                />
+                <Route name="Destinations" path="admin/destinations">
+                    <IndexRoute component={Destinations} />
+                    <Route path=":destinationId" component={Destination} />
+                </Route>
                 <Route name="Users" path="admin/users">
                     <IndexRoute component={Users} />
                     <Route path=":userId" component={User} />
