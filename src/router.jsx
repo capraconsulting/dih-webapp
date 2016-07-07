@@ -1,28 +1,37 @@
 import React from 'react';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+
 import RootLayout from './layouts/Root';
 import MainLayout from './layouts/MainLayout';
 import PublicLayout from './layouts/PublicLayout';
+
+import Login from './sections/login';
+import SignUp from './sections/signup';
+import ConfirmSignUp from './sections/signup/confirm';
+import ForgotPassword from './sections/forgotPassword';
+import ForgotPasswordConfirm from './sections/forgotPassword/confirm';
+
 import MyProfile from './sections/myProfile/MyProfile';
-import LoginFormContainer from './sections/login/LoginFormContainer';
 import Destination from './sections/admin/destinations/Destination';
 import Destinations from './sections/admin/destinations/Destinations';
-import SignUpForm from './sections/signup/SignUpForm';
 import SignupTrip from './sections/signupTrip/SignupTrip';
 import TripRequests from './sections/admin/tripRequests/TripRequests';
 import Users from './sections/admin/users';
 import User from './sections/admin/users/user';
-import ConfirmSignUpFormContainer from './sections/signup/ConfirmSignUpFormContainer';
 import NotFound from './commons/NotFound.jsx';
 
 export default(
     <Router history={browserHistory}>
         <Route component={RootLayout}>
             <Route component={PublicLayout}>
-                <Route path="/login" component={LoginFormContainer} />
+                <Route path="/login" component={Login} />
+                <Route path="/password">
+                    <IndexRoute component={ForgotPassword} />
+                    <Route path="/password/confirm" component={ForgotPasswordConfirm} />
+                </Route>
                 <Route path="/signup">
-                    <IndexRoute component={SignUpForm} />
-                    <Route path="/signup/confirm" component={ConfirmSignUpFormContainer} />
+                    <IndexRoute component={SignUp} />
+                    <Route path="/signup/confirm" component={ConfirmSignUp} />
                 </Route>
             </Route>
             <Route name="Main" path="/" component={MainLayout}>
