@@ -6,7 +6,7 @@ import PublicLayout from './layouts/PublicLayout';
 import MyProfile from './sections/myProfile/MyProfile';
 import LoginFormContainer from './sections/login/LoginFormContainer';
 import Destination from './sections/admin/destinations/destination';
-import Destinations from './sections/admin/destinations/Destinations';
+import Destinations from './sections/admin/destinations';
 import SignUpForm from './sections/signup/SignUpForm';
 import SignupTrip from './sections/signupTrip/SignupTrip';
 import TripRequests from './sections/admin/tripRequests/TripRequests';
