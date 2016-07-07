@@ -8,6 +8,7 @@ const fields = ['startDate', 'endDate', 'hotel', 'notes'];
 function UpdateTripForm(props) {
     const {
         fields: { startDate, endDate, hotel, notes },
+        trip,
         handleSubmit,
         submitting
     } = props;
@@ -21,7 +22,8 @@ function UpdateTripForm(props) {
                     dateFormat="YYYY-MM-DD"
                     placeholderText="YYYY-MM-DD"
                     minDate={moment()}
-                    selected={startDate.value ? moment(startDate.value) : null}
+                    selected={startDate.value ?
+                        moment(startDate.value) : moment(trip.wishStartDate)}
                     id="startDate"
                     locale="en-gb"
                 />
@@ -34,7 +36,8 @@ function UpdateTripForm(props) {
                     dateFormat="YYYY-MM-DD"
                     placeholderText="YYYY-MM-DD"
                     minDate={startDate.value ? moment(startDate.value) : moment()}
-                    selected={endDate.value ? moment(endDate.value) : null}
+                    selected={endDate.value ?
+                        moment(endDate.value) : moment(trip.wishEndDate)}
                     id="endDate"
                     locale="en-gb"
                 />
@@ -69,6 +72,7 @@ function UpdateTripForm(props) {
 }
 
 UpdateTripForm.propTypes = {
+    trip: React.PropTypes.object.isRequired,
     fields: React.PropTypes.object.isRequired,
     handleSubmit: React.PropTypes.func.isRequired,
     submitting: React.PropTypes.bool.isRequired

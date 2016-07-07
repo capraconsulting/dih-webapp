@@ -2,7 +2,7 @@ import React from 'react';
 
 import UpdateTripFormContainer from './UpdateTripFormContainer';
 
-function UpdateTrip() {
+function UpdateTrip(props) {
     return (
         <div className="ui segments">
             <div className="ui blue inverted segment header">
@@ -11,12 +11,18 @@ function UpdateTrip() {
             <div className="ui segment">
                 <div className="ui grid">
                     <div className="eight wide column">
-                        <UpdateTripFormContainer />
+                        <UpdateTripFormContainer
+                            tripId={props.params.tripId}
+                        />
                     </div>
                 </div>
             </div>
         </div>
     );
 }
+
+UpdateTrip.propTypes = {
+    params: React.PropTypes.object.isRequired
+};
 
 export default UpdateTrip;

@@ -29,7 +29,7 @@ export default(
             <Route name="Main" path="/" component={MainLayout}>
                 <Route name="My profile" path="profile" component={MyProfile} />
                 <Route name="My trips" path="trips/signup" component={SignupTrip} />
-                <Route name="Update trip" path="/trips/:id" component={UpdateTrip} />
+                <Route name="Update trip" path="/trips/:tripId" component={UpdateTrip} />
                 <Route name="Destinations" path="admin/destinations" component={Destinations} />
                 <Route
                     name="Destination"
