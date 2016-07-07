@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import UpdateTripForm from './UpdateTripForm';
-import { retrieve } from '../../actions/tripActions';
+import TripForm from './tripForm';
+import { retrieve } from '../../../actions/tripActions';
 
 
-class UpdateTripFormContainer extends React.Component {
+class TripFormContainer extends React.Component {
     constructor(props) {
         super(props);
         const createHandlers = (dispatch) => () =>
@@ -23,7 +23,7 @@ class UpdateTripFormContainer extends React.Component {
 
     render() {
         return (
-            <UpdateTripForm
+            <TripForm
                 trip={this.props.trip}
                 onSubmit={e => { this.handleSubmit(e); }}
             />
@@ -35,10 +35,10 @@ const mapStateToProps = store => ({
     trip: store.tripState.trip
 });
 
-UpdateTripFormContainer.propTypes = {
+TripFormContainer.propTypes = {
     trip: React.PropTypes.object.isRequired,
     dispatch: React.PropTypes.func.isRequired,
     tripId: React.PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps)(UpdateTripFormContainer);
+export default connect(mapStateToProps)(TripFormContainer);

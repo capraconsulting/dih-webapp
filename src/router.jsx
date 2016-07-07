@@ -9,7 +9,7 @@ import Destination from './sections/admin/destinations/destination';
 import Destinations from './sections/admin/destinations/Destinations';
 import SignUpForm from './sections/signup/SignUpForm';
 import SignupTrip from './sections/signupTrip/SignupTrip';
-import UpdateTrip from './sections/updateTrip/UpdateTrip';
+import Trip from './sections/trips/trip';
 import TripRequests from './sections/admin/tripRequests/TripRequests';
 import Users from './sections/admin/users';
 import User from './sections/admin/users/user';
@@ -29,7 +29,7 @@ export default(
             <Route name="Main" path="/" component={MainLayout}>
                 <Route name="My profile" path="profile" component={MyProfile} />
                 <Route name="My trips" path="trips/signup" component={SignupTrip} />
-                <Route name="Update trip" path="/trips/:tripId" component={UpdateTrip} />
+                <Route name="Trip" path="/trips/:tripId" component={Trip} />
                 <Route name="Destinations" path="admin/destinations" component={Destinations} />
                 <Route
                     name="Destination"

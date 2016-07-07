@@ -1,6 +1,6 @@
 import React from 'react';
 
-import UpdateTripFormContainer from './UpdateTripFormContainer';
+import TripFormContainer from './tripFormContainer';
 
 function UpdateTrip(props) {
     return (
@@ -11,7 +11,7 @@ function UpdateTrip(props) {
             <div className="ui segment">
                 <div className="ui grid">
                     <div className="eight wide column">
-                        <UpdateTripFormContainer
+                        <TripFormContainer
                             tripId={props.params.tripId}
                         />
                     </div>

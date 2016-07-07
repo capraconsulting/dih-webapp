@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const fields = ['startDate', 'endDate', 'hotel', 'notes'];
 
-function UpdateTripForm(props) {
+function TripForm(props) {
     const {
         fields: { startDate, endDate, hotel, notes },
         trip,
@@ -14,7 +14,7 @@ function UpdateTripForm(props) {
     } = props;
 
     return (
-        <form id="updateTripForm" className="ui form" onSubmit={handleSubmit}>
+        <form id="tripForm" className="ui form" onSubmit={handleSubmit}>
             <div className="field">
                 <label htmlFor="startDate">Start date</label>
                 <DatePicker
@@ -71,7 +71,7 @@ function UpdateTripForm(props) {
     );
 }
 
-UpdateTripForm.propTypes = {
+TripForm.propTypes = {
     trip: React.PropTypes.object.isRequired,
     fields: React.PropTypes.object.isRequired,
     handleSubmit: React.PropTypes.func.isRequired,
@@ -81,4 +81,4 @@ UpdateTripForm.propTypes = {
 export default reduxForm({
     form: 'UpdateTripForm',
     fields
-})(UpdateTripForm);
+})(TripForm);
