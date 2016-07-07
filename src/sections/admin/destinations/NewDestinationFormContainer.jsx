@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import { create, list } from '../../../../actions/destinationActions';
+import { create, list } from '../../../actions/destinationActions';
 import { connect } from 'react-redux';
 
-import NewDestinationForm from '../components/NewDestinationForm';
+import NewDestinationForm from './NewDestinationForm';
 
 const createHandlers = (dispatch) => (
     {
@@ -21,7 +21,7 @@ class NewDestinationFormContainer extends React.Component {
         this.state = {
             destinationName: ''
         };
-        this.handlers = createHandlers(this.props.dispatch);
+        this.handlers = createHandlers(props.dispatch);
     }
 
     handleSubmit(e) {

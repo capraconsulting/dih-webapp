@@ -1,7 +1,7 @@
 import React from 'react';
 
-import DestinationListContainer from './containers/DestinationListContainer';
-import NewDestinationFormContainer from './containers/NewDestinationFormContainer';
+import DestinationListContainer from './DestinationListContainer';
+import NewDestinationFormContainer from './NewDestinationFormContainer';
 
 function Destinations() {
     return (
