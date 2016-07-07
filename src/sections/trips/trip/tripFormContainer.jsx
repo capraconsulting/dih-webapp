@@ -1,29 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TripForm from './tripForm';
-import { retrieve } from '../../../actions/tripActions';
+import { retrieve, update } from '../../../actions/tripActions';
 
+const createHandlers = (dispatch) => (
+    {
+        retrieve(id) {
+            return dispatch(retrieve(id));
+        },
+        update(data) {
+            return dispatch(update(data));
+        }
+    }
+);
 
 class TripFormContainer extends React.Component {
     constructor(props) {
         super(props);
-        const createHandlers = (dispatch) => () =>
-            dispatch(retrieve(this.props.tripId)
-        );
         this.handlers = createHandlers(this.props.dispatch);
     }
 
     componentDidMount() {
-        this.handlers();
+        this.handlers.retrieve(this.props.tripId);
     }
 
     handleSubmit(data) {
-        console.log(data);
+        this.handlers.update({ ...data, id: this.props.tripId });
     }
 
     render() {
+        const initialTripValues = {
+            initialValues: {
+                startDate: this.props.trip.wishStartDate,
+                endDate: this.props.trip.wishEndDate
+            }
+        };
         return (
             <TripForm
+                {...initialTripValues}
                 trip={this.props.trip}
                 onSubmit={e => { this.handleSubmit(e); }}
             />
