@@ -6,7 +6,7 @@ import PublicLayout from './layouts/PublicLayout';
 import MyProfile from './sections/myProfile/MyProfile';
 import LoginFormContainer from './sections/login/LoginFormContainer';
 import Destination from './sections/admin/destinations/destination';
-import Destinations from './sections/admin/destinations/Destinations';
+import Destinations from './sections/admin/destinations';
 import SignUpForm from './sections/signup/SignUpForm';
 import SignupTrip from './sections/signupTrip/SignupTrip';
 import Trip from './sections/trips/trip';
@@ -30,12 +30,10 @@ export default(
                 <Route name="My profile" path="profile" component={MyProfile} />
                 <Route name="My trips" path="trips/signup" component={SignupTrip} />
                 <Route name="Trip" path="/trips/:tripId" component={Trip} />
-                <Route name="Destinations" path="admin/destinations" component={Destinations} />
-                <Route
-                    name="Destination"
-                    path="admin/destinations/:destinationId"
-                    component={Destination}
-                />
+                <Route name="Destinations" path="admin/destinations">
+                    <IndexRoute component={Destinations} />
+                    <Route path=":destinationId" component={Destination} />
+                </Route>
                 <Route name="Users" path="admin/users">
                     <IndexRoute component={Users} />
                     <Route path=":userId" component={User} />
