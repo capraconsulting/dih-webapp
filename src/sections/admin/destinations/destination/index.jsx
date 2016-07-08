@@ -1,30 +1,34 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-
 import { list } from '../../../../actions/destinationActions';
+import Header from '../../../../commons/pageHeader';
+import Navbar from '../../../../commons/navbar';
 import NotFound from '../../../../commons/NotFound';
-import Dropdown from '../../../../commons/Dropdown';
-import { TRIP_STATUSES } from '../../../../constants';
-import VolunteersAtDestinationContainer from './volunteersAtDestinationContainer';
-import { tripStatusesForDropdown } from '../../../../helpers';
-import DestinationInfo from './destinationInfo';
+import Volunteers from './volunteers';
 
 const createHandlers = (dispatch) => () => dispatch(list());
 
-class DestinationContainer extends React.Component {
-
+class Destination extends Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
         this.state = {
-            selectedStatus: TRIP_STATUSES.ACTIVE
+            pages: [
+                {
+                    name: 'Volunteers',
+                    active: true
+                },
+                {
+                    name: 'Email templates',
+                    active: false
+                }
+            ]
         };
     }
 
     componentDidMount() {
         this.handlers();
     }
-
 
     findDestination(destinations, destinationId) {
         const id = parseInt(destinationId, 10);
@@ -36,63 +40,36 @@ class DestinationContainer extends React.Component {
         return false;
     }
 
-    selectedStatusIsChanged(e) {
-        this.setState({
-            selectedStatus: e.target.value
-        });
-    }
 
     render() {
-        const foundDestination = this.findDestination(this.props.destinations
-        , this.props.params.destinationId);
-        if (foundDestination === false) {
+        const destination = this.findDestination(this.props.destinations
+            , this.props.params.destinationId);
+        if (destination === false) {
             return <NotFound />;
         }
-        return (
-            <div className="ui segments">
-                <DestinationInfo
-                    destination={
-                        foundDestination
-                    }
-                />
-                <div className="ui segment">
-                    <div className="ui grid">
-                        <div className="sixteen wide column">
-                            <div className="eight column">
-                                <h3>Active volunteers at this destination</h3>
-                            </div>
-                            <div className="eight column">
-                                <Dropdown
-                                    name="Select status"
-                                    options={tripStatusesForDropdown()}
-                                    selectedValue={this.state.selectedStatus}
-                                    onChange={e => { this.selectedStatusIsChanged(e); }}
-                                />
-                            </div>
-                        </div>
-                        <div className="sixteen wide column">
-                            <VolunteersAtDestinationContainer
-                                destinationId={this.props.params.destinationId}
-                                status={this.state.selectedStatus}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
 
+        return (
+            <div>
+                <Header
+                    icon="marker"
+                    content={`${destination.name}`}
+                    subContent="Manage destination"
+                />
+                <Navbar pages={this.state.pages} />
+                <Volunteers destinationId={destination.id} />
+            </div>
         );
     }
 }
-
 
 const mapStateToProps = store => ({
     destinations: store.destinationState.destinations
 });
 
-DestinationContainer.propTypes = {
+Destination.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    destinations: React.PropTypes.array.isRequired,
-    params: React.PropTypes.object.isRequired
+    destinations: PropTypes.array.isRequired,
+    params: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps)(DestinationContainer);
+export default connect(mapStateToProps)(Destination);

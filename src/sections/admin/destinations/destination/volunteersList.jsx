@@ -5,7 +5,7 @@ import Table from '../../../../commons/Table';
 import { listForDestinationWithStatus } from '../../../../actions/tripActions';
 import moment from 'moment';
 
-class VolunteersAtDestinationContainer extends React.Component {
+class VolunteersList extends React.Component {
     constructor(props) {
         super(props);
         const createHandlers = (dispatch) => () =>
@@ -32,12 +32,11 @@ class VolunteersAtDestinationContainer extends React.Component {
             cleanObjects.push({
                 id: value.id,
                 status: value.status,
-                firstname: value.user.firstname,
-                lastname: value.user.lastname,
+                name: `${value.user.firstname} ${value.user.lastname} `,
                 birth: moment(value.user.birth).format('YYYY-MM-DD'),
                 email: value.user.email,
-                startDate: moment(value.startDate).format('YYYY-MM-DD'),
-                endDate: moment(value.endDate).format('YYYY-MM-DD')
+                startDate: moment(value.wishStartDate).format('YYYY-MM-DD'),
+                endDate: moment(value.wishEndDate).format('YYYY-MM-DD')
             });
         });
         return cleanObjects;
@@ -52,8 +51,7 @@ class VolunteersAtDestinationContainer extends React.Component {
                 </p>
                 <Table
                     columnNames={{
-                        firstname: 'First name',
-                        lastname: 'Last name',
+                        name: 'Name',
                         email: 'E-mail',
                         birth: 'Date of birth',
                         startDate: 'Start date',
@@ -72,11 +70,11 @@ const mapStateToProps = store => ({
     tripsForDestination: store.tripState.tripsForDestination
 });
 
-VolunteersAtDestinationContainer.propTypes = {
+VolunteersList.propTypes = {
     tripsForDestination: React.PropTypes.array.isRequired,
-    destinationId: React.PropTypes.string.isRequired,
+    destinationId: React.PropTypes.number.isRequired,
     status: React.PropTypes.string.isRequired,
     dispatch: React.PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps)(VolunteersAtDestinationContainer);
+export default connect(mapStateToProps)(VolunteersList);
