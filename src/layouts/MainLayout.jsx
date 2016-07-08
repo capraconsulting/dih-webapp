@@ -1,8 +1,12 @@
 import React from 'react';
+
+import 'normalize.css/normalize.css';
+import 'semantic-ui-css/semantic.css';
 import '../styles/main.scss';
 
 import Header from '../commons/Header.jsx';
 import Sidebar from '../commons/Sidebar.jsx';
+import NotificationContainer from '../commons/NotificationContainer.jsx';
 
 class MainLayout extends React.Component {
     render() {
@@ -15,10 +19,14 @@ class MainLayout extends React.Component {
                         {this.props.children}
                     </div>
                 </div>
+                <NotificationContainer props />
             </div>
         );
     }
 }
 
+MainLayout.propTypes = {
+    children: React.PropTypes.object
+};
 
 export default MainLayout;

@@ -1,5 +1,4 @@
 /* eslint-disable no-var */
-var app;
 
 var config = {
     //
@@ -14,7 +13,7 @@ var config = {
     specs: [
         './test/features/**/*.feature'
     ],
-    services: ['selenium-standalone'],
+    services: ['sauce'],
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
@@ -44,9 +43,6 @@ var config = {
     capabilities: [
         {
             browserName: 'chrome'
-        },
-        {
-            browserName: 'firefox'
         }
     ],
     //
@@ -74,14 +70,14 @@ var config = {
     baseUrl: 'localhost:3000',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 20000,
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response
-    connectionRetryTimeout: 90000,
+    connectionRetryTimeout: 100000,
     //
     // Default request retries count
-    connectionRetryCount: 3,
+    connectionRetryCount: 10,
     //
     // Initialize the browser instance with a WebdriverIO plugin. The object should have the
     // plugin name as key and the desired plugin options as properties. Make sure you have
@@ -145,14 +141,14 @@ var config = {
     // WebdriverIO will wait until that promise got resolved to continue.
     //
     // Gets executed once before all workers get launched.
-    onPrepare() {
-        const child = require('child_process');
-        app = child.spawn('npm', ['run', 'dev'], {
-            detached: true,
-            stdio: ['ignore']
-        });
-        child.execSync('sleep 2');
-    },
+    // onPrepare() {
+    //    const child = require('child_process');
+    //    app = child.spawn('npm', ['run', 'dev'], {
+    //        detached: true,
+    //        stdio: ['ignore']
+    //    });
+    //    child.execSync('sleep 2');
+    // },
     //
     // Gets executed before test execution begins. At this point you can access all global
     // variables, such as `browser`. It is the perfect place to define custom commands.
@@ -175,7 +171,7 @@ var config = {
     // },
     //
     // Function to be executed before a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
-    // beforeTest: function (test) {
+    // beforeTest() {
     // },
     //
     // Runs before a WebdriverIO command gets executed.
@@ -187,7 +183,7 @@ var config = {
     // },
     //
     // Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
-    // afterTest: function (test) {
+    // afterTest() {
     // },
     //
     // Hook that gets executed after the suite has ended
@@ -202,15 +198,14 @@ var config = {
     // Gets executed after all workers got shut down and the process is about to exit. It is not
     // possible to defer the end of the process using a promise.
     onComplete() {
-        app.kill();
+        const child = require('child_process');
+        child.execSync('killall node');
     }
 };
-
+config.user = process.env.SAUCE_USERNAME;
+config.key = process.env.SAUCE_ACCESS_KEY;
+config.sauceConnect = true;
 if (process.env.CIRCLECI) {
-    config.services.push('sauce');
-    config.user = process.env.SAUCE_USERNAME;
-    config.key = process.env.SAUCE_ACCESS_KEY;
-    config.sauceConnect = true;
     config.reporters.push('junit');
     config.reporterOptions = {
         junit: {

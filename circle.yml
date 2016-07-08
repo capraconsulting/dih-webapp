@@ -2,37 +2,44 @@
 machine:
     node:
         version: 6.2.2
+    java:
+        version: openjdk7
     environment:
         NODE_ENV: test
     services:
         - docker
 
+general:
+    branches:
+        only:
+          - master
+          - dev
+          - test.*
+
 dependencies:
     pre:
         - npm install -g npm
         - npm install
-        - npm run selenium install
         - sudo pip install awscli
         - aws configure set default.region eu-west-1
         - aws configure set default.output json
         - eval $(aws ecr get-login --region eu-west-1)
 
 test:
+    pre:
+        - npm run dist:staging
+        - docker pull $EXTERNAL_API_REGISTRY-dev:latest
+        - docker run -d --net host -e PG_URL=postgres://ubuntu:@127.0.0.1:5432/circle_test $EXTERNAL_API_REGISTRY-dev:latest npm run start:test
     override:
         - npm test
+
 
 deployment:
     prod:
         branch: master
         commands:
-            - npm run build
-            - docker build -t dih-webapp .
-            - docker tag dih-webapp:latest $EXTERNAL_REGISTRY:latest
-            - docker push $EXTERNAL_REGISTRY:latest
+            - BUCKET=dih.capra.me NODE_ENV=production npm run deploy:production
     staging:
         branch: dev
         commands:
-            - npm run build
-            - docker build -t dih-webapp-dev .
-            - docker tag dih-webapp-dev:latest $EXTERNAL_REGISTRY-dev:latest
-            - docker push $EXTERNAL_REGISTRY-dev:latest
+            - BUCKET=staging.dih.capra.me NODE_ENV=production npm run deploy:staging
