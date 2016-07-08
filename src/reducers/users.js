@@ -33,8 +33,7 @@ export default function (state = initialState, action) {
             ...state,
             isFetching: false,
             errorMessage: null,
-            successMessage: `Takk for at du har registrert deg!
-            Du skal ha mottat en mail for å fullføre registrerings prosessen!`
+            successMessage: "Thank you! You've received an e-mail with more information."
         };
     case types.GET_USER_FAILURE:
     case types.GET_USERS_FAILURE:
