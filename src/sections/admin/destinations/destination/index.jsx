@@ -4,7 +4,8 @@ import { list } from '../../../../actions/destinationActions';
 import Header from '../../../../commons/pageHeader';
 import Navbar from '../../../../commons/navbar';
 import NotFound from '../../../../commons/NotFound';
-import Volunteers from './volunteers';
+// import Volunteers from './volunteers';
+import EmailTemplates from './emailTemplates';
 
 const createHandlers = (dispatch) => () => dispatch(list());
 
@@ -56,7 +57,8 @@ class Destination extends Component {
                     subContent="Manage destination"
                 />
                 <Navbar pages={this.state.pages} />
-                <Volunteers destinationId={destination.id} />
+                <EmailTemplates destinationId={destination.id} />
+                {/* <Volunteers destinationId={destination.id} /> */}
             </div>
         );
     }
