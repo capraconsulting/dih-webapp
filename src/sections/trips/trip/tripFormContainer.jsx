@@ -30,11 +30,16 @@ class TripFormContainer extends React.Component {
 
     render() {
         const initialTripValues = {
-            initialValues: {
-                startDate: this.props.trip.wishStartDate,
-                endDate: this.props.trip.wishEndDate
-            }
+            initialValues: this.props.trip
         };
+
+        if (!initialTripValues.initialValues.startDate) {
+            initialTripValues.initialValues.startDate = this.props.trip.wishStartDate;
+        }
+        if (!initialTripValues.initialValues.endDate) {
+            initialTripValues.initialValues.endDate = this.props.trip.wishEndDate;
+        }
+
         return (
             <TripForm
                 {...initialTripValues}
