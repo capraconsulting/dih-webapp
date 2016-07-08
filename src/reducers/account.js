@@ -1,4 +1,4 @@
-import * as types from '../actions/actionTypes';
+import * as types from '../actions/types/account';
 
 const initialState = {
     account: {}

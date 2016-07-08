@@ -5,7 +5,7 @@ import Button from '../../commons/Button';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 
-const fields = ['email', 'firstname', 'lastname'];
+const fields = ['email'];
 
 const validate = values => {
     const errors = {};
@@ -14,18 +14,13 @@ const validate = values => {
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
         errors.email = 'Invalid email address';
     }
-    if (!values.lastname) {
-        errors.lastname = 'Required';
-    }
-    if (!values.firstname) {
-        errors.firstname = 'Required';
-    }
     return errors;
 };
 
-function SignUpForm(props) {
+
+function ForgotPasswordForm(props) {
     const {
-        fields: { email, firstname, lastname },
+        fields: { email },
         handleSubmit,
         errorMessage,
         successMessage,
@@ -34,18 +29,12 @@ function SignUpForm(props) {
 
     return (
         <Form
-            id="signUpForm"
+            id="forgotPasswordForm"
             errorMessage={errorMessage}
             successMessage={successMessage}
             handleSubmit={handleSubmit}
-            title="Sign up"
+            title="Forgot Password"
         >
-            <InputField type="text" label="First name">
-                {firstname}
-            </InputField>
-            <InputField type="text" label="Last name">
-                {lastname}
-            </InputField>
             <InputField type="email" label="E-mail">
                 {email}
             </InputField>
@@ -57,24 +46,24 @@ function SignUpForm(props) {
                 loading={isFetching}
                 id="submit"
             >
-                Sign up
+                Reset password
             </Button>
+            <Link to="/signup">Signup</Link>
             <Link to="/login">Login</Link>
-            <Link to="/password">Forgot password</Link>
         </Form>
     );
 }
 
-SignUpForm.propTypes = {
+ForgotPasswordForm.propTypes = {
     fields: PropTypes.object.isRequired,
-    errorMessage: PropTypes.string,
     successMessage: PropTypes.string,
+    errorMessage: PropTypes.string,
     handleSubmit: PropTypes.func.isRequired,
     isFetching: PropTypes.bool.isRequired
 };
 
 export default reduxForm({
-    form: 'SignUpForm',
+    form: 'ForgotPasswordForm',
     fields,
     validate
-})(SignUpForm);
+})(ForgotPasswordForm);
