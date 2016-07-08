@@ -30,5 +30,7 @@ export const TRIP_STATUSES = {
     ACCEPTED: 'ACCEPTED',
     REJECTED: 'REJECTED',
     ACTIVE: 'ACTIVE',
-    CLOSED: 'CLOSED'
+    CLOSED: 'CLOSED',
+    PRESENT: 'PRESENT',
+    LEFT: 'LEFT'
 };
