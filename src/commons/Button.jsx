@@ -1,5 +1,24 @@
 import React, { PropTypes } from 'react';
 
+/*
+* commons.Button
+*
+* id - string: id of the button.
+*
+* type - string: type of the button.
+*
+* color - string: color class from semantic of the button.
+*
+* fluid - boolean: if the button is fluid, aka taking full with of the container.
+*
+* loading - boolean: if the button is loading.
+*
+* disabled - boolean: if the button is disabled.
+*
+* children - string: Name to be on the button
+*
+*/
+
 const createClasses = (props) => {
     const classes = ['ui', 'button'];
     if (props.fluid) classes.push('fluid');
