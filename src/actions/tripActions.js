@@ -31,6 +31,21 @@ export function listForDestinationWithStatus(destinationId, status) {
     };
 }
 
+export function retrieve(id) {
+    return {
+        [CALL_API]: {
+            method: 'get',
+            url: `/trips/${id}`,
+            types: [
+                types.GET_TRIP_REQUEST,
+                types.GET_TRIP_SUCCESS,
+                types.GET_TRIP_FAILURE
+            ],
+            authenticated: true
+        }
+    };
+}
+
 export function create(data) {
     return {
         [CALL_API]: {

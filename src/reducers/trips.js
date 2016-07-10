@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/types/trips';
 
 const initialState = {
     isFetching: false,
+    trip: {},
     trips: [],
     tripsForDestination: []
 };
@@ -20,6 +21,22 @@ export default function (state = initialState, action) {
             trips: action.res
         };
     case actionTypes.GET_TRIPS_FAILURE:
+        return {
+            ...state,
+            isFetching: false
+        };
+    case actionTypes.GET_TRIP_REQUEST:
+        return {
+            ...state,
+            isFetching: true
+        };
+    case actionTypes.GET_TRIP_SUCCESS:
+        return {
+            ...state,
+            isFetching: false,
+            trip: action.res
+        };
+    case actionTypes.GET_TRIP_FAILURE:
         return {
             ...state,
             isFetching: false
