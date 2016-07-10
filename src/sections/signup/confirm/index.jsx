@@ -1,9 +1,8 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
-import { setPassword } from '../../actions/authenticationActions';
-import { retrieve } from '../../actions/accountActions';
+import React, { PropTypes, Component } from 'react';
 import ConfirmSignUpForm from './ConfirmSignUpForm';
+import { connect } from 'react-redux';
+import { setPassword } from '../../../actions/authenticationActions';
+import { retrieve } from '../../../actions/accountActions';
 
 const createHandlers = (dispatch) => (
     {
@@ -16,7 +15,7 @@ const createHandlers = (dispatch) => (
     }
 );
 
-class ConfirmSignUpFormContainer extends React.Component {
+class ConfirmSignUpFormContainer extends Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
@@ -27,16 +26,15 @@ class ConfirmSignUpFormContainer extends React.Component {
     }
 
     handleSubmit(data) {
-        this.handlers.update(data, { Authorization: `Bearer ${this.props.location.query.token}` })
-            .then(() => {
-                if (this.props.isAuthenticated) browserHistory.push('/');
-            });
+        this.handlers.update(data, { Authorization: `Bearer ${this.props.location.query.token}` });
     }
 
     render() {
         return (
             <ConfirmSignUpForm
                 account={this.props.account}
+                errorMessage={this.props.errorMessage}
+                isFetching={this.props.isFetching}
                 onSubmit={e => { this.handleSubmit(e); }}
             />
         );
@@ -45,13 +43,15 @@ class ConfirmSignUpFormContainer extends React.Component {
 
 const mapStateToProps = store => ({
     account: store.accountState.account,
-    isAuthenticated: store.authenticationState.isAuthenticated
+    isFetching: store.authenticationState.isAuthenticated,
+    errorMessage: store.authenticationState.errorMessage
 });
 
 ConfirmSignUpFormContainer.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
     account: PropTypes.object.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string,
     location: PropTypes.object.isRequired
 };
 

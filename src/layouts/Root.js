@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import DevTools from '../commons/DevTools';
 
 
@@ -12,7 +12,7 @@ function Root(props) {
 }
 
 Root.propTypes = {
-    children: React.PropTypes.object
+    children: PropTypes.object
 };
 
 export default Root;
