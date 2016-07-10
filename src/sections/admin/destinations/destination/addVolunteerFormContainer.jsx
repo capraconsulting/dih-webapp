@@ -16,12 +16,17 @@ class AddVolunteerFormContainer extends Component {
         this.handlers();
     }
 
+    handleSubmit(data) {
+        console.log(data);
+    }
+
     render() {
         return (
             <div>
                 <h4>Add volunteer to destination</h4>
                 <AddVolunteerForm
                     users={this.props.users}
+                    onSubmit={e => { this.handleSubmit(e); }}
                 />
             </div>
         );

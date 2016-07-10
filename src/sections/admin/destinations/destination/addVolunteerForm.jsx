@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 
-const fields = ['volunteer'];
+import Form from '../../../../commons/Form';
+
+const fields = ['userId'];
 
 function AddVolunteerForm(props) {
     const {
-        fields: { volunteer },
+        fields: { userId },
+        handleSubmit,
         submitting
     } = props;
 
     return (
-        <form id="addVolunteerForm" className="ui form" >
+        <Form
+            id="addVolunteerForm"
+            handleSubmit={handleSubmit}
+        >
             <div className="field">
                 <label htmlFor="volunteer">Volunteer</label>
                 <select
-                    {...volunteer}
-                    value={volunteer.value || ''}
+                    {...userId}
+                    value={userId.value || ''}
                     className="ui fluid selection dropdown"
                 >
                     {props.users.map(user => (
@@ -35,14 +41,15 @@ function AddVolunteerForm(props) {
             >
                 Add volunteer
             </button>
-        </form>
+        </Form>
     );
 }
 
 AddVolunteerForm.propTypes = {
-    fields: React.PropTypes.object.isRequired,
-    submitting: React.PropTypes.bool.isRequired,
-    users: React.PropTypes.array.isRequired
+    fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    users: PropTypes.array.isRequired
 };
 
 export default reduxForm({
