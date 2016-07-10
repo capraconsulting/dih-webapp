@@ -8,6 +8,7 @@ import { TRIP_STATUSES } from '../../../../constants';
 import VolunteersAtDestinationContainer from './volunteersAtDestinationContainer';
 import { tripStatusesForDropdown } from '../../../../helpers';
 import DestinationInfo from './destinationInfo';
+import AddVolunteerFormContainer from './addVolunteerFormContainer';
 
 const createHandlers = (dispatch) => () => dispatch(list());
 
@@ -68,6 +69,7 @@ class DestinationContainer extends React.Component {
                                     selectedValue={this.state.selectedStatus}
                                     onChange={e => { this.selectedStatusIsChanged(e); }}
                                 />
+                                <AddVolunteerFormContainer />
                             </div>
                         </div>
                         <div className="sixteen wide column">
