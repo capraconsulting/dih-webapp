@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import AddVolunteerForm from './addVolunteerForm';
 import { list } from '../../../../actions/userActions';
 
-const createHandlers = (dispatch) => dispatch(list());
+const createHandlers = (dispatch) => () => dispatch(list());
 
 class AddVolunteerFormContainer extends Component {
     constructor(props) {
@@ -17,7 +17,6 @@ class AddVolunteerFormContainer extends Component {
     }
 
     render() {
-        console.log(this.props.users);
         return (
             <div>
                 <h4>Add volunteer to destination</h4>

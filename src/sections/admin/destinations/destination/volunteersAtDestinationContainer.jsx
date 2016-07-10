@@ -26,6 +26,10 @@ class VolunteersAtDestinationContainer extends React.Component {
         return true;
     }
 
+    componentDidUpdate() {
+        this.handlers();
+    }
+
     normalizeTripObjectsForTable(items) {
         const cleanObjects = [];
         _.mapKeys(items, value => {
@@ -44,7 +48,6 @@ class VolunteersAtDestinationContainer extends React.Component {
     }
 
     render() {
-        this.handlers();
         return (
             <div>
                 <p>
