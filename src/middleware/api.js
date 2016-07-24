@@ -1,4 +1,6 @@
 import axios from 'axios';
+require('promise.prototype.finally');
+import { PUSH_NOTIFICATION } from '../actions/types';
 import { logout } from '../actions/authenticationActions';
 const API = axios.create({ baseURL: process.env.BASE_URL });
 
@@ -20,6 +22,8 @@ export default store => next => action => { // eslint-disable-line
         if (error.status === 401) store.dispatch(logout());
         return Promise.reject(error);
     });
+
+    const notification = { type: PUSH_NOTIFICATION };
 
     const { method, url, types, authenticated, data, headers } = callAPI;
 
@@ -43,17 +47,22 @@ export default store => next => action => { // eslint-disable-line
 
     next({ type: requestType });
     return API.request(config)
-        .then(res =>
-            next({
+        .then(res => {
+            notification.level = 'success';
+            notification.message = `${method.toUpperCase()} ${url} - successfull`;
+            return next({
                 res: res.data,
                 authenticated,
                 type: successType
-            })
-        )
-        .catch(err =>
-            next({
+            });
+        })
+        .catch(err => {
+            notification.level = 'error';
+            notification.message = err.data.message || 'There was an error.';
+            return next({
                 error: err.data.message || 'There was an error.',
                 type: errorType
-            })
-        );
+            });
+        })
+        .finally(() => next(notification));
 };
