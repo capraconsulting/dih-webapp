@@ -51,8 +51,11 @@ body {
     width: calc(100% - 260px);
     left: 0px;
     top: 60px;
+    padding-top: 20px;
     &.isMobile {
         width: 100%;
+        padding: 0px;
+        padding-top: 20px;
     }
 }
 
@@ -78,6 +81,12 @@ body {
 // -----------------------------------------------
 .ui.segments {
   box-shadow: none;
+  border-radius: 0px;
+  border: none;
+}
+
+.ui.segment {
+  border-radius: 0px !important;
 }
 
 .ui.segments .ui.inverted.blue.segment {
