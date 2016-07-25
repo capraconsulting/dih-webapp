@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import _ from 'lodash';
 
+import Header from '../../commons/pageHeader';
 import Table from '../../commons/Table';
 import { listForUser } from '../../actions/tripActions';
 
@@ -12,10 +13,20 @@ class Trips extends React.Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
+        this.state = {
+            loaded: false
+        };
     }
 
-    componentDidMount() {
-        this.handlers(1); // @TODO: Replace hard coded userId with id from account object
+    // This is hack of sorts. Normally "componentDidMount() {this.handlers(...)}" will do the job,
+    // but that won't work in this case. The reason is that when the component intitially mounts,
+    // this.props.account is undefined. Since componentDidMount is only called once,
+    // the content would never be displayed.
+    componentWillReceiveProps(nextProps) {
+        if (!this.state.loaded) {
+            this.handlers(nextProps.account.id);
+            this.setState({ loaded: true });
+        }
     }
 
     normalizeTripObjectsForTable(items) {
@@ -34,17 +45,30 @@ class Trips extends React.Component {
 
     render() {
         return (
-            <div>
-                <Table
-                    columnNames={{
-                        destinationName: 'Destination',
-                        startDate: 'Start date',
-                        endDate: 'End date',
-                        status: 'Status'
-                    }}
-                    itemKey="id"
-                    items={this.normalizeTripObjectsForTable(this.props.tripsForUser)}
-                />
+            <div className="ui segments">
+                <div className="ui segment">
+                    <Header
+                        content="Trips"
+                        subContent={'List of all trips'}
+                        icon="plane"
+                    />
+                </div>
+                <div className="ui blue segment">
+                    <Table
+                        columnNames={{
+                            destinationName: 'Destination',
+                            startDate: 'Start date',
+                            endDate: 'End date',
+                            status: 'Status'
+                        }}
+                        itemKey="id"
+                        link={{
+                            columnName: 'destinationName',
+                            prefix: '/trips/'
+                        }}
+                        items={this.normalizeTripObjectsForTable(this.props.tripsForUser)}
+                    />
+                </div>
             </div>
         );
     }
@@ -52,13 +76,13 @@ class Trips extends React.Component {
 
 const mapStateToProps = store => ({
     tripsForUser: store.tripState.tripsForUser,
-    isFetching: store.authenticationState.isFetching
+    account: store.accountState.account
 });
 
 Trips.propTypes = {
     tripsForUser: PropTypes.array.isRequired,
     dispatch: PropTypes.func.isRequired,
-    isFetching: PropTypes.bool.isRequired
+    account: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(Trips);

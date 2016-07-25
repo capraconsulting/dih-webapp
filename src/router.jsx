@@ -40,8 +40,8 @@ export default(
                 <Route name="My profile" path="profile" component={MyProfile} />
                 <Route name="Trips" path="/trips">
                     <IndexRoute component={Trips} />
-                    <Route name="Trip" path="/trips/trip/:tripId" component={Trip} />
                     <Route name="Sign up" path="/trips/signup" component={SignupTrip} />
+                    <Route name="Trip" path="/trips/:tripId" component={Trip} />
                 </Route>
                 <Route name="Destinations" path="admin/destinations">
                     <IndexRoute component={Destinations} />
