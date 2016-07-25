@@ -14,7 +14,7 @@ import ForgotPasswordConfirm from './sections/forgotPassword/confirm';
 import MyProfile from './sections/myProfile/MyProfile';
 import Destination from './sections/admin/destinations/destination';
 import Destinations from './sections/admin/destinations';
-import SignupTrip from './sections/signupTrip/SignupTrip';
+import SignupTrip from './sections/signupTrip';
 import Trip from './sections/trips/trip';
 import TripRequests from './sections/admin/tripRequests/TripRequests';
 import Users from './sections/admin/users';
@@ -37,8 +37,11 @@ export default(
             </Route>
             <Route name="Main" path="/" component={MainLayout}>
                 <Route name="My profile" path="profile" component={MyProfile} />
-                <Route name="My trips" path="trips/signup" component={SignupTrip} />
-                <Route name="Trip" path="/trips/:tripId" component={Trip} />
+                <Route name="Trips" path="/trips">
+                    <IndexRoute component={Trip} />
+                    <Route name="Trip" path="/trips/trip/:tripId" component={Trip} />
+                    <Route name="Sign up" path="/trips/signup" component={SignupTrip} />
+                </Route>
                 <Route name="Destinations" path="admin/destinations">
                     <IndexRoute component={Destinations} />
                     <Route path=":destinationId" component={Destination} />

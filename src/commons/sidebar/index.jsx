@@ -52,12 +52,12 @@ class Sidebar extends Component {
                 <img src="/logo.png" alt="logo" />
                 Dråpen i Havet
             </div>
-            <SidebarMenuItem uri="/profile" itemName="My profile" />
-            <SidebarMenuGroup groupName="Trips">
+            <SidebarMenuItem uri="/profile" itemName="My profile" icon="child" />
+            <SidebarMenuGroup groupName="Trips" icon="plane">
                 <SidebarMenuItem uri="/trips" itemName="My trips" />
                 <SidebarMenuItem uri="/trips/signup" itemName="Sign up for a trip" />
             </SidebarMenuGroup>
-            {this.props.account.role === 'ADMIN' && <SidebarMenuGroup groupName="Admin">
+            {this.props.account.role === 'ADMIN' && <SidebarMenuGroup groupName="Admin" icon="user">
                 <SidebarMenuItem uri="/admin/users" itemName="Users" />
                 <SidebarMenuItem uri="/admin/destinations" itemName="Destinations" />
                 <SidebarMenuItem uri="/admin/trips" itemName="Trip Requests" />
