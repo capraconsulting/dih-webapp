@@ -12,3 +12,21 @@
         display: inline-block !important;
     }
 }
+
+.item.account {
+    .ui.header {
+        margin-bottom: -5px;
+    }
+    position: absolute !important;
+    bottom: 0px;
+    width: 260px;
+    p.item {
+        margin-bottom: 0px;
+    }
+}
+
+.ui.vertical.menu {
+    i {
+        margin-top: -5px !important;
+    }
+}

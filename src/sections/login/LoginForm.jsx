@@ -1,66 +1,67 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import Form from '../../commons/Form';
+import InputField from '../../commons/Form/InputField';
+import Button from '../../commons/Button';
 import { reduxForm } from 'redux-form';
+import { Link } from 'react-router';
 
 const fields = ['email', 'password'];
 
+const validate = values => {
+    const errors = {};
+    if (!values.email) {
+        errors.email = 'Required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = 'Invalid email address';
+    }
+    if (!values.password) {
+        errors.password = 'Required';
+    } else if (values.password.length < 8) {
+        errors.password = 'Must be 8 characters or more';
+    }
+    return errors;
+};
+
 function LoginForm(props) {
-    const {
-        fields: { email, password },
-        handleSubmit,
-        errorMessage,
-        isFetching
-    } = props;
-
-    const formClass = ['ui', 'form'];
-    if (errorMessage) formClass.push('error');
-    else formClass.splice(formClass.indexOf('error'), 0);
-
-    const buttonClass = ['ui', 'button', 'primary', 'fluid'];
-    if (isFetching) buttonClass.push('loading');
-    else buttonClass.splice(buttonClass.indexOf('loading'), 0);
-
+    const { fields: { email, password }, handleSubmit, errorMessage, isFetching } = props;
     return (
-        <form id="loginForm" className={formClass.join(' ')} onSubmit={handleSubmit}>
-            <h2>Log in</h2>
-            <div className="field">
-                <label htmlFor="email">E-mail</label>
-                <input
-                    type="email"
-                    id="email"
-                    {...email}
-                />
-            </div>
-            <div className="field">
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    {...password}
-                />
-            </div>
-            <div id="messages" className="ui error message">
-                <p>{errorMessage}</p>
-            </div>
-            <button
+        <Form
+            id="loginForm"
+            errorMessage={errorMessage}
+            handleSubmit={handleSubmit}
+            title="Login"
+        >
+            <InputField type="email" label="E-mail">
+                {email}
+            </InputField>
+            <InputField type="password" label="Password">
+                {password}
+            </InputField>
+            <Button
                 type="submit"
-                className={buttonClass.join(' ')}
+                color="primary"
+                fluid
                 disabled={isFetching}
+                loading={isFetching}
                 id="submit"
             >
-                Log in
-            </button>
-        </form>
+                Login
+            </Button>
+            <Link to="/signup">Signup</Link>
+            <Link to="/password">Forgot password</Link>
+        </Form>
     );
 }
 
 LoginForm.propTypes = {
-    fields: React.PropTypes.object.isRequired,
-    errorMessage: React.PropTypes.string,
-    handleSubmit: React.PropTypes.func.isRequired,
-    isFetching: React.PropTypes.bool.isRequired
+    fields: PropTypes.object.isRequired,
+    errorMessage: PropTypes.string,
+    handleSubmit: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool.isRequired
 };
 
 export default reduxForm({
     form: 'LoginForm',
-    fields
+    fields,
+    validate
 })(LoginForm);

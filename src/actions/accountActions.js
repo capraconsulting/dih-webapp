@@ -1,4 +1,4 @@
-import * as types from './actionTypes';
+import * as types from './types/account';
 import { CALL_API } from '../middleware/api';
 
 export function retrieve(headers) {
