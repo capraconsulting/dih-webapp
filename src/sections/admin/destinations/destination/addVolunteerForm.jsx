@@ -1,9 +1,12 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
+import Button from '../../../../commons/Button';
 import Form from '../../../../commons/Form';
+import DateField from '../../../../commons/Form/DateField';
+import SelectField from '../../../../commons/Form/SelectField';
+
 
 const fields = ['userId', 'wishStartDate', 'wishEndDate'];
 
@@ -11,7 +14,7 @@ function AddVolunteerForm(props) {
     const {
         fields: { userId, wishStartDate, wishEndDate },
         handleSubmit,
-        submitting
+        isFetching
     } = props;
 
     return (
@@ -19,59 +22,38 @@ function AddVolunteerForm(props) {
             id="addVolunteerForm"
             handleSubmit={handleSubmit}
         >
-            <div className="field">
-                <label htmlFor="volunteer">Volunteer</label>
-                <select
-                    {...userId}
-                    value={userId.value || ''}
-                    className="ui fluid selection dropdown"
-                >
-                    {props.users.map(user => (
-                        <option
-                            value={user.id}
-                            key={user.id}
-                        >
-                            {user.firstname} {user.lastname}
-                        </option>
-                    ))}
-                </select>
-            </div>
-
-            <div className="field">
-                <label htmlFor="wishStartDate">Start date</label>
-                <DatePicker
-                    {...wishStartDate}
-                    dateFormat="YYYY-MM-DD"
-                    placeholderText="YYYY-MM-DD"
-                    minDate={moment()}
-                    value={wishStartDate.value ? moment(wishStartDate.value) : null}
-                    selected={wishStartDate.value ? moment(wishStartDate.value) : null}
-                    id="wishStartDate"
-                    locale="en-gb"
-                />
-            </div>
-
-            <div className="field">
-                <label htmlFor="wishEndDate">End date</label>
-                <DatePicker
-                    {...wishEndDate}
-                    dateFormat="YYYY-MM-DD"
-                    placeholderText="YYYY-MM-DD"
-                    minDate={wishStartDate.value ? moment(wishStartDate.value) : null}
-                    value={wishEndDate.value ? moment(wishEndDate.value) : null}
-                    selected={wishEndDate.value ? moment(wishEndDate.value) : null}
-                    id="wishEndDate"
-                    locale="en-gb"
-                />
-            </div>
-
-            <button
+            <SelectField
+                label="Volunteer"
+                values={props.users}
+                placeholder="Select an user"
+                allowNullValue
+                valueLabel="email"
+                valueKey="id"
+            >
+                {userId}
+            </SelectField>
+            <DateField
+                label="Start date"
+                minDate={moment()}
+            >
+                {wishStartDate}
+            </DateField>
+            <DateField
+                label="End date"
+                minDate={wishStartDate.value ? moment(wishStartDate.value) : null}
+            >
+                {wishEndDate}
+            </DateField>
+            <Button
                 type="submit"
-                className="ui button primary"
-                disabled={submitting}
+                color="primary"
+                fluid
+                disabled={isFetching}
+                loading={isFetching}
+                id="submit"
             >
                 Add volunteer
-            </button>
+            </Button>
         </Form>
     );
 }
@@ -79,6 +61,7 @@ function AddVolunteerForm(props) {
 AddVolunteerForm.propTypes = {
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool,
     submitting: PropTypes.bool.isRequired,
     users: PropTypes.array.isRequired
 };
