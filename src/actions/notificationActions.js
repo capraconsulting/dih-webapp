@@ -1,4 +1,4 @@
-import { PUSH_NOTIFICATION } from './actionTypes';
+import { PUSH_NOTIFICATION } from './types';
 
 export function pushNotification(message, level) {
     return {

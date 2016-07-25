@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
+import NotificationSystem from 'react-notification-system';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushNotification } from '../actions/notificationActions';
-import NotificationSystem from 'react-notification-system';
 
-class NotificationContainer extends React.Component {
+class NotificationContainer extends Component {
     componentDidMount() {
         this.notificationSystem = this.refs.notificationSystem;
     }
@@ -24,19 +24,13 @@ class NotificationContainer extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        notification: state.notificationState.notification
-    };
-}
+const mapStateToProps = store => ({
+    notification: store.notificationState.notification
+});
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators({
-            pushNotification
-        }, dispatch)
-    };
-}
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({ pushNotification }, dispatch)
+});
 
 export default connect(
     mapStateToProps,
