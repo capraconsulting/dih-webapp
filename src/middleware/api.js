@@ -1,5 +1,4 @@
 import axios from 'axios';
-require('promise.prototype.finally');
 import { PUSH_NOTIFICATION } from '../actions/types';
 import { logout } from '../actions/authenticationActions';
 const API = axios.create({ baseURL: process.env.BASE_URL });
@@ -47,22 +46,20 @@ export default store => next => action => { // eslint-disable-line
 
     next({ type: requestType });
     return API.request(config)
-        .then(res => {
-            notification.level = 'success';
-            notification.message = `${method.toUpperCase()} ${url} - successfull`;
-            return next({
+        .then(res =>
+            next({
                 res: res.data,
                 authenticated,
                 type: successType
-            });
-        })
+            })
+        )
         .catch(err => {
             notification.level = 'error';
             notification.message = err.data.message || 'There was an error.';
+            next(notification);
             return next({
                 error: err.data.message || 'There was an error.',
                 type: errorType
             });
-        })
-        .finally(() => next(notification));
+        });
 };
