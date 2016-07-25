@@ -16,7 +16,7 @@ export function retrieve(id) {
     };
 }
 
-export function create(data) {
+export function update(data) {
     return {
         [CALL_API]: {
             method: 'put',

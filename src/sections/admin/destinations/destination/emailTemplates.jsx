@@ -1,42 +1,44 @@
 import React, { PropTypes, Component } from 'react';
+import Table from '../../../../commons/Table';
 
-import EmailTemplate from './emailTemplate';
+const emails = [
+    {
+        id: 1,
+        name: 'A name 1',
+        description: 'a description belonging to 1'
+    },
+    {
+        id: 2,
+        name: 'A name 2',
+        description: 'a description belonging to 2'
+    },
+    {
+        id: 3,
+        name: 'A name 3',
+        description: 'a description belonging to 3'
+    },
+    {
+        id: 4,
+        name: 'A name 4',
+        description: 'a description belonging to 4'
+    }
+];
 
 class EmailTemplates extends Component {
     render() {
         return (
-            <div>
-                <EmailTemplate
-                    header="Trip accepted"
-                    subHeader="Sent to a volunteer if an admin accepts their trip request"
-                    defaultTemplate="Herp derp"
-                    handleSubmit={(e) => {
-                        e.preventDefault();
-                        console.log('handled!');
-                    }}
-                />
-
-                <EmailTemplate
-                    header="Trip rejected"
-                    subHeader="Sent to a volunteer if an admin rejects their trip request"
-                    defaultTemplate="Herp derp"
-                    handleSubmit={(e) => {
-                        e.preventDefault();
-                        console.log('handled!');
-                    }}
-                />
-
-                <EmailTemplate
-                    header="Trip active"
-                    subHeader="Sent to a volunteer when all necessary information has been filled"
-                    defaultTemplate="Herp derp"
-                    handleSubmit={(e) => {
-                        e.preventDefault();
-                        console.log('handled!');
-                    }}
-                />
-            </div>
-
+            <Table
+                columnNames={{
+                    name: 'Name',
+                    description: 'Description'
+                }}
+                link={{
+                    columnName: 'name',
+                    prefix: '/admin/email/'
+                }}
+                itemKey="id"
+                items={emails}
+            />
         );
     }
 }

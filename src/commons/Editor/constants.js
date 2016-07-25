@@ -26,3 +26,33 @@ export const INLINE_STYLES = [
     { label: 'Underline', style: 'UNDERLINE' },
     { label: 'Monospace', style: 'CODE' }
 ];
+
+
+export const blockTagMap = {
+    'header-one': ['<h1>', '</h1>\n'],
+    'header-two': ['<h1>', '</h1>\n'],
+    unstyled: ['<p>', '</p>\n'],
+    'code-block': ['<pre><code>', '</code></pre>\n'],
+    blockquote: ['<blockquote>', '</blockquote>\n'],
+    'ordered-list-item': ['<li>', '</li>\n'],
+    'unordered-list-item': ['<li>', '</li>\n'],
+    default: ['<p>', '</p>\n']
+};
+
+export const inlineTagMap = {
+    BOLD: ['<strong>', '</strong>'],
+    ITALIC: ['<em>', '</em>'],
+    UNDERLINE: ['<u>', '</u>'],
+    CODE: ['<code>', '</code>'],
+    STRIKETHROUGH: ['<del>', '</del>'],
+    default: ['<span>', '</span>']
+};
+
+export const entityTagMap = {
+    link: ['<a href="<%= href %>">', '</a>']
+};
+
+export const nestedTagMap = {
+    'ordered-list-item': ['<ol>', '</ol>'],
+    'unordered-list-item': ['<ul>', '</ul>']
+};

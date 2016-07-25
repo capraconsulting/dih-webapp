@@ -1,14 +1,14 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component, PropTypes } from 'react';
-import { EditorState, RichUtils, Editor, ContentState, CompositeDecorator } from 'draft-js';
+import Draft from 'draft-js';
 import BlockStyleControls from './BlockStyleControls';
 import InlineStyleControls from './InlineStyleControls';
-import { getBlockStyle, htmlToContent, findEntities } from './helpers';
+import { getBlockStyle, htmlToContent, findEntities, draftRawToHtml } from './helpers';
 import { styleMap } from './constants';
 import Link from './Link';
 import './editor.scss';
 
-const decorator = new CompositeDecorator([{
+const decorator = new Draft.CompositeDecorator([{
     strategy: findEntities.bind(null, 'link'),
     component: Link
 }]);
@@ -16,24 +16,30 @@ const decorator = new CompositeDecorator([{
 class DraftEditor extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
-            editorState: props.html ? EditorState.createWithContent(
-                    ContentState.createFromBlockArray(htmlToContent(props.html)),
-                    decorator
-                ) : EditorState.createEmpty(decorator)
+            editorState: props.html ? Draft.EditorState.createWithContent(
+                Draft.ContentState.createFromBlockArray(htmlToContent(props.html)), decorator
+            ) : Draft.EditorState.createEmpty(decorator)
         };
         this.focus = () => this.refs.editor.focus();
-        this.onChange = (editorState) => this.setState({ editorState });
-
+        this.onChange = (editorState) => {
+            this.setState({ editorState });
+            this.emitHTML(editorState);
+        };
         this.handleKeyCommand = (command) => this._handleKeyCommand(command);
         this.toggleBlockType = (type) => this._toggleBlockType(type);
         this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
     }
 
+    emitHTML(editorState) {
+        const raw = Draft.convertToRaw(editorState.getCurrentContent());
+        const html = draftRawToHtml(raw);
+        this.props.onChange(html);
+    }
+
     _handleKeyCommand(command) {
         const { editorState } = this.state;
-        const newState = RichUtils.handleKeyCommand(editorState, command);
+        const newState = Draft.RichUtils.handleKeyCommand(editorState, command);
         if (newState) {
             this.onChange(newState);
             return true;
@@ -43,7 +49,7 @@ class DraftEditor extends Component {
 
     _toggleBlockType(blockType) {
         this.onChange(
-            RichUtils.toggleBlockType(
+            Draft.RichUtils.toggleBlockType(
                 this.state.editorState,
                 blockType
             )
@@ -52,7 +58,7 @@ class DraftEditor extends Component {
 
     _toggleInlineStyle(inlineStyle) {
         this.onChange(
-            RichUtils.toggleInlineStyle(
+            Draft.RichUtils.toggleInlineStyle(
                 this.state.editorState,
                 inlineStyle
             )
@@ -80,7 +86,7 @@ class DraftEditor extends Component {
                     onToggle={this.toggleInlineStyle}
                 />
                 <div className={className} onClick={this.focus}>
-                    <Editor
+                    <Draft.Editor
                         editorState={editorState}
                         handleKeyCommand={this.handleKeyCommand}
                         blockStyleFn={getBlockStyle}
@@ -96,7 +102,8 @@ class DraftEditor extends Component {
 }
 
 DraftEditor.propTypes = {
-    html: PropTypes.string
+    html: PropTypes.string,
+    onChange: PropTypes.func
 };
 
 export default DraftEditor;

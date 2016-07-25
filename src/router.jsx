@@ -13,17 +13,10 @@ import ForgotPasswordConfirm from './sections/forgotPassword/confirm';
 
 import MyProfile from './sections/myProfile/MyProfile';
 import Destination from './sections/admin/destinations/destination';
-<<<<<<< HEAD
 import DestinationVolunteers from './sections/admin/destinations/destination/volunteers';
 import DestinationEmails from './sections/admin/destinations/destination/emailTemplates';
 import Destinations from './sections/admin/destinations';
-import SignUpForm from './sections/signup/SignUpForm';
-import SignupTrip from './sections/signupTrip/SignupTrip';
-=======
-import Destinations from './sections/admin/destinations';
 import SignupTrip from './sections/signupTrip';
-import Trip from './sections/trips/trip';
->>>>>>> dev
 import TripRequests from './sections/admin/tripRequests/TripRequests';
 import Email from './sections/admin/email';
 import Users from './sections/admin/users';
@@ -58,7 +51,7 @@ export default(
                     <IndexRoute component={Users} />
                     <Route path=":userId" component={User} />
                 </Route>
-                <Route name="Email" path="admin/email" component={Email} />
+                <Route name="Email" path="admin/email/:emailId" component={Email} />
                 <Route name="Trips" path="admin/trips" component={TripRequests} />
                 <Route name="My profile" path="*" component={NotFound} />
             </Route>
