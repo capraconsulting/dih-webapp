@@ -4,8 +4,6 @@ import { list } from '../../../../actions/destinationActions';
 import Header from '../../../../commons/pageHeader';
 import Navbar from '../../../../commons/navbar';
 import NotFound from '../../../../commons/NotFound';
-// import Volunteers from './volunteers';
-import EmailTemplates from './emailTemplates';
 
 const createHandlers = (dispatch) => () => dispatch(list());
 
@@ -17,11 +15,11 @@ class Destination extends Component {
             pages: [
                 {
                     name: 'Volunteers',
-                    active: true
+                    uri: `/admin/destinations/${this.props.params.destinationId}`
                 },
                 {
                     name: 'Email templates',
-                    active: false
+                    uri: `/admin/destinations/${this.props.params.destinationId}/emails`
                 }
             ]
         };
@@ -50,15 +48,14 @@ class Destination extends Component {
         }
 
         return (
-            <div>
+            <div className="ui segment">
                 <Header
                     icon="marker"
                     content={`${destination.name}`}
                     subContent="Manage destination"
                 />
                 <Navbar pages={this.state.pages} />
-                <EmailTemplates destinationId={destination.id} />
-                {/* <Volunteers destinationId={destination.id} /> */}
+                {this.props.children}
             </div>
         );
     }
@@ -69,6 +66,7 @@ const mapStateToProps = store => ({
 });
 
 Destination.propTypes = {
+    children: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
     destinations: PropTypes.array.isRequired,
     params: PropTypes.object.isRequired
