@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const SidebarMenuItem = (props) => (
@@ -8,13 +8,15 @@ const SidebarMenuItem = (props) => (
         className="item"
     >
         {props.itemName}
+        <i className={`large icon ${props.icon}`}></i>
     </Link>
 );
 
 
 SidebarMenuItem.propTypes = {
-    uri: React.PropTypes.string.isRequired,
-    itemName: React.PropTypes.string.isRequired
+    uri: PropTypes.string.isRequired,
+    itemName: PropTypes.string.isRequired,
+    icon: PropTypes.string
 };
 
 export default SidebarMenuItem;
