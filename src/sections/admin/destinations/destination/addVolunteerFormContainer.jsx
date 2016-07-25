@@ -2,9 +2,19 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import AddVolunteerForm from './addVolunteerForm';
+import { create } from '../../../../actions/tripActions';
 import { list } from '../../../../actions/userActions';
 
-const createHandlers = (dispatch) => () => dispatch(list());
+const createHandlers = (dispatch) => (
+    {
+        create(data) {
+            return dispatch(create(data));
+        },
+        list() {
+            return dispatch(list());
+        }
+    }
+);
 
 class AddVolunteerFormContainer extends Component {
     constructor(props) {
@@ -13,11 +23,18 @@ class AddVolunteerFormContainer extends Component {
     }
 
     componentDidMount() {
-        this.handlers();
+        this.handlers.list();
     }
 
     handleSubmit(data) {
-        console.log(data);
+        const alteredData = {
+            ...data,
+            startDate: data.wishStartDate,
+            endDate: data.wishEndDate,
+            destinationId: this.props.destinationId,
+            status: 'ACCEPTED'
+        };
+        this.handlers.create(alteredData);
     }
 
     render() {
@@ -38,6 +55,7 @@ const mapStateToProps = store => ({
 });
 
 AddVolunteerFormContainer.propTypes = {
+    destinationId: React.PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired,
     users: PropTypes.array.isRequired
 };

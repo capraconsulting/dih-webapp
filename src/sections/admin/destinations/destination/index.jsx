@@ -69,7 +69,9 @@ class DestinationContainer extends React.Component {
                                     selectedValue={this.state.selectedStatus}
                                     onChange={e => { this.selectedStatusIsChanged(e); }}
                                 />
-                                <AddVolunteerFormContainer />
+                                <AddVolunteerFormContainer
+                                    destinationId={this.props.params.destinationId}
+                                />
                             </div>
                         </div>
                         <div className="sixteen wide column">
