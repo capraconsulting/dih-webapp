@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import moment from 'moment';
-import Form from '../../commons/Form';
-import Button from '../../commons/Button';
-import TextField from '../../commons/Form/TextField';
-import DateField from '../../commons/Form/DateField';
-import SelectField from '../../commons/Form/SelectField';
+import Form from '../../../commons/Form';
+import Button from '../../../commons/Button';
+import TextField from '../../../commons/Form/TextField';
+import DateField from '../../../commons/Form/DateField';
+import SelectField from '../../../commons/Form/SelectField';
 
 const fields = ['destinationId', 'notes', 'wishStartDate'];
 

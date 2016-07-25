@@ -14,7 +14,7 @@ import ForgotPasswordConfirm from './sections/forgotPassword/confirm';
 import MyProfile from './sections/myProfile/MyProfile';
 import Destination from './sections/admin/destinations/destination';
 import Destinations from './sections/admin/destinations';
-import SignupTrip from './sections/signupTrip';
+import SignupTrip from './sections/trips/signup';
 import Trips from './sections/trips/';
 import Trip from './sections/trips/trip';
 import TripRequests from './sections/admin/tripRequests/TripRequests';
