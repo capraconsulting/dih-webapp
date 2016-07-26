@@ -15,15 +15,15 @@ class User extends Component {
             pages: [
                 {
                     name: 'User info',
-                    active: true
+                    uri: `/admin/users/${this.props.params.userId}`
                 },
                 {
                     name: 'Trips',
-                    active: false
+                    uri: `/admin/users/${this.props.params.userId}/trips`
                 },
                 {
                     name: 'Messages',
-                    active: false
+                    uri: `/admin/users/${this.props.params.userId}/messages`
                 }
             ]
         };
