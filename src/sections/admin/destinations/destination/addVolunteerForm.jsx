@@ -26,7 +26,6 @@ function AddVolunteerForm(props) {
                 label="Volunteer"
                 values={props.users}
                 placeholder="Select an user"
-                allowNullValue
                 valueLabel="email"
                 valueKey="id"
             >
