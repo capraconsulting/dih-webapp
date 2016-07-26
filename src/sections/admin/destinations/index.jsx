@@ -1,26 +1,56 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
+import { list } from '../../../actions/destinationActions';
+import Header from '../../../commons/pageHeader';
+import Table from '../../../commons/Table';
 
-import DestinationListContainer from './DestinationListContainer';
-import NewDestinationFormContainer from './NewDestinationFormContainer';
+const createHandlers = (dispatch) => () => dispatch(list());
 
-function Destinations() {
-    return (
-        <div className="ui segments">
-            <div className="ui blue inverted segment header">
-                <h2>Destinations</h2>
-            </div>
-            <div className="ui segment">
-                <div className="ui grid">
-                    <div className="eight wide column">
-                        <NewDestinationFormContainer />
-                    </div>
-                    <div className="sixteen wide column">
-                        <DestinationListContainer />
-                    </div>
+class Destinations extends Component {
+    constructor(props) {
+        super(props);
+        this.handlers = createHandlers(this.props.dispatch);
+    }
+
+    componentDidMount() {
+        this.handlers();
+    }
+
+    render() {
+        return (
+            <div className="ui segments">
+                <div className="ui segment">
+                    <Header
+                        content="Destinations"
+                        subContent="List of all destinations"
+                        icon="marker"
+                    />
+                </div>
+                <div className="ui blue segment">
+                    <Table
+                        columnNames={{
+                            name: 'Name'
+                        }}
+                        itemKey="id"
+                        link={{
+                            columnName: 'name',
+                            prefix: '/admin/destinations/'
+                        }}
+                        items={this.props.destinations}
+                    />
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
-export default Destinations;
+const mapStateToProps = store => ({
+    destinations: store.destinationState.destinations
+});
+
+Destinations.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    destinations: PropTypes.array.isRequired
+};
+
+export default connect(mapStateToProps)(Destinations);

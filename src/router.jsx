@@ -13,10 +13,12 @@ import ForgotPasswordConfirm from './sections/forgotPassword/confirm';
 
 import MyProfile from './sections/myProfile/MyProfile';
 import Destination from './sections/admin/destinations/destination';
+import DestinationVolunteers from './sections/admin/destinations/destination/volunteers';
+import DestinationEmails from './sections/admin/destinations/destination/emailTemplates';
 import Destinations from './sections/admin/destinations';
 import SignupTrip from './sections/signupTrip';
-import Trip from './sections/trips/trip';
 import TripRequests from './sections/admin/tripRequests/TripRequests';
+import Email from './sections/admin/email';
 import Users from './sections/admin/users';
 import User from './sections/admin/users/user';
 import NotFound from './commons/NotFound.jsx';
@@ -37,19 +39,19 @@ export default(
             </Route>
             <Route name="Main" path="/" component={MainLayout}>
                 <Route name="My profile" path="profile" component={MyProfile} />
-                <Route name="Trips" path="/trips">
-                    <IndexRoute component={Trip} />
-                    <Route name="Trip" path="/trips/trip/:tripId" component={Trip} />
-                    <Route name="Sign up" path="/trips/signup" component={SignupTrip} />
-                </Route>
+                <Route name="My trips" path="trips/signup" component={SignupTrip} />
                 <Route name="Destinations" path="admin/destinations">
                     <IndexRoute component={Destinations} />
-                    <Route path=":destinationId" component={Destination} />
+                    <Route path=":destinationId" component={Destination}>
+                        <IndexRoute component={DestinationVolunteers} />
+                        <Route name="Emails" path="emails" component={DestinationEmails} />
+                    </Route>
                 </Route>
                 <Route name="Users" path="admin/users">
                     <IndexRoute component={Users} />
                     <Route path=":userId" component={User} />
                 </Route>
+                <Route name="Email" path="admin/email/:emailId" component={Email} />
                 <Route name="Trips" path="admin/trips" component={TripRequests} />
                 <Route name="My profile" path="*" component={NotFound} />
             </Route>

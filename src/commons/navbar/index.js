@@ -1,10 +1,18 @@
 import React, { PropTypes } from 'react';
+import { IndexLink } from 'react-router';
 import './navbar.scss';
 
 const navbar = (props) => (
     <div className="ui pointing secondary menu">
         {props.pages.map(page => (
-            <a key={page.name} className={`${page.active ? 'active' : ''} item`} >{page.name}</a>
+            <IndexLink
+                key={page.name}
+                to={page.uri}
+                activeClassName="active"
+                className="item"
+            >
+            {page.name}
+            </IndexLink>
         ))}
     </div>
 );
