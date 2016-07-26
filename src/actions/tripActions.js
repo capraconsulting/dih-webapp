@@ -16,11 +16,11 @@ export function list() {
     };
 }
 
-export function listForDestinationWithStatus(destinationId, status) {
+export function listForDestination(destinationId) {
     return {
         [CALL_API]: {
             method: 'get',
-            url: `/trips?destinationId=${destinationId}&status=${status}`,
+            url: `/trips?destinationId=${destinationId}`,
             types: [
                 types.GET_TRIPS_FOR_DESTINATION_REQUEST,
                 types.GET_TRIPS_FOR_DESTINATION_SUCCESS,

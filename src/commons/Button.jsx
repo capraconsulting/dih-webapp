@@ -23,6 +23,7 @@ const createClasses = (props) => {
     const classes = ['ui', 'button'];
     if (props.fluid) classes.push('fluid');
     if (props.loading) classes.push('loading');
+    if (props.right) classes.push('right floated');
     if (props.color) classes.push(props.color);
     return classes;
 };
@@ -32,6 +33,7 @@ const Button = (props) => (
         type={props.type}
         className={createClasses(props).join(' ')}
         id={props.id}
+        onClick={props.onClick}
         disabled={props.disabled}
     >
         {props.children}
@@ -43,7 +45,9 @@ Button.propTypes = {
     disabled: PropTypes.bool,
     loading: PropTypes.bool,
     fluid: PropTypes.bool,
+    right: PropTypes.bool,
     type: PropTypes.string,
+    onClick: PropTypes.func,
     color: PropTypes.string,
     id: PropTypes.string
 };
