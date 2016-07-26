@@ -38,11 +38,15 @@ class AddVolunteerFormContainer extends Component {
     }
 
     render() {
+        const usersWithFullname = this.props.users.map(user => ({
+            ...user, fullname: `${user.firstname} ${user.lastname}`
+        }));
+
         return (
             <div>
                 <h4>Add volunteer to destination</h4>
                 <AddVolunteerForm
-                    users={this.props.users}
+                    users={usersWithFullname}
                     onSubmit={e => { this.handleSubmit(e); }}
                 />
             </div>
