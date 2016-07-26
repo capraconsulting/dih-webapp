@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import SignupTripForm from './SignupTripForm';
-import Header from '../../commons/pageHeader';
-import { create } from '../../actions/tripActions';
-import { list } from '../../actions/destinationActions';
+import Header from '../../../commons/pageHeader';
+import { create } from '../../../actions/tripActions';
+import { list } from '../../../actions/destinationActions';
 
 const createHandlers = dispatch => ({
     create(data) {
