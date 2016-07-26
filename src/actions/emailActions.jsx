@@ -5,7 +5,7 @@ export function retrieve(id) {
     return {
         [CALL_API]: {
             method: 'get',
-            url: `/emails/${id}`,
+            url: `/mailtemplates/${id}`,
             types: [
                 types.GET_EMAIL_REQUEST,
                 types.GET_EMAIL_SUCCESS,
@@ -20,7 +20,7 @@ export function update(data) {
     return {
         [CALL_API]: {
             method: 'put',
-            url: `/emails/${data.id}`,
+            url: `/mailtemplates/${data.id}`,
             types: [
                 types.PUT_EMAIL_REQUEST,
                 types.PUT_EMAIL_SUCCESS,

@@ -28,7 +28,10 @@ class Email extends Component {
     }
 
     componentDidMount() {
-        this.handlers.retrieve(this.props.params.emailId);
+        this.handlers.retrieve(this.props.params.emailId)
+            .then(() => {
+                this.setState({ loaded: true });
+            });
     }
 
     onChange(html) {
@@ -60,14 +63,19 @@ class Email extends Component {
                 <div className="ui segment">
                     <Header
                         icon="mail"
-                        content={this.props.email.name}
-                        subContent={this.props.email.description}
+                        content="Edit email template"
+                        subContent={`Edit your desired template,
+                        press save to store your template as it is.`}
                     />
                 </div>
                 <div className="ui blue clearing segment">
-                    <Editor onChange={(html => this.onChange(html))} html={this.props.email.html} />
-                    <Button onClick={(e) => this.onSave(e)} color="green" right >Lagre</Button>
-                    <Button onClick={(e) => this.onBack(e)} right >Tilbake</Button>
+                    {this.state.loaded &&
+                        <Editor
+                            onChange={(html => this.onChange(html))}
+                            html={this.props.email.html}
+                        />}
+                    <Button onClick={(e) => this.onSave(e)} color="green" right >Save</Button>
+                    <Button onClick={(e) => this.onBack(e)} right >Back</Button>
                 </div>
             </div>
         );

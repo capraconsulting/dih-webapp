@@ -1,50 +1,49 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Table from '../../../../commons/Table';
 
-const emails = [
-    {
-        id: 1,
-        name: 'A name 1',
-        description: 'a description belonging to 1'
-    },
-    {
-        id: 2,
-        name: 'A name 2',
-        description: 'a description belonging to 2'
-    },
-    {
-        id: 3,
-        name: 'A name 3',
-        description: 'a description belonging to 3'
-    },
-    {
-        id: 4,
-        name: 'A name 4',
-        description: 'a description belonging to 4'
-    }
-];
-
-class EmailTemplates extends Component {
-    render() {
-        return (
-            <Table
-                columnNames={{
-                    name: 'Name',
-                    description: 'Description'
-                }}
-                link={{
-                    columnName: 'name',
-                    prefix: '/admin/email/'
-                }}
-                itemKey="id"
-                items={emails}
-            />
-        );
-    }
-}
-
-EmailTemplates.propTypes = {
-    destinationId: PropTypes.number.isRequired
+const createTemplatesList = (destination) => {
+    if (!destination.id) return [];
+    return [
+        {
+            id: destination.acceptedStatusMailTemplateId,
+            name: 'accepted email',
+            description: 'Email sent for users approved a trip.'
+        },
+        {
+            id: destination.pendingStatusMailTemplateId,
+            name: 'Pending email',
+            description: 'Email sent for users approved a trip.'
+        },
+        {
+            id: destination.rejectedStatusMailTemplateId,
+            name: 'Rejected email',
+            description: 'Email sent for users approved a trip.'
+        }
+    ];
 };
 
-export default EmailTemplates;
+const EmailTemplates = (props) => (
+    <Table
+        columnNames={{
+            name: 'Name',
+            description: 'Description'
+        }}
+        link={{
+            columnName: 'name',
+            prefix: '/admin/email/'
+        }}
+        itemKey="id"
+        items={createTemplatesList(props.destination)}
+    />
+);
+
+const mapStateToProps = store => ({
+    destination: store.destinationState.destination
+});
+
+EmailTemplates.propTypes = {
+    destination: PropTypes.object.isRequired
+};
+
+export default connect(mapStateToProps)(EmailTemplates);

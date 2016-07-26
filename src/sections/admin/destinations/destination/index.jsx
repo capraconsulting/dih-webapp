@@ -1,11 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { list } from '../../../../actions/destinationActions';
+import { retrieve } from '../../../../actions/destinationActions';
 import Header from '../../../../commons/pageHeader';
 import Navbar from '../../../../commons/navbar';
-import NotFound from '../../../../commons/NotFound';
 
-const createHandlers = (dispatch) => () => dispatch(list());
+const createHandlers = (dispatch) => (id) => dispatch(retrieve(id));
 
 class Destination extends Component {
     constructor(props) {
@@ -26,32 +25,15 @@ class Destination extends Component {
     }
 
     componentDidMount() {
-        this.handlers();
+        this.handlers(this.props.params.destinationId);
     }
-
-    findDestination(destinations, destinationId) {
-        const id = parseInt(destinationId, 10);
-        for (const destination of destinations) {
-            if (destination.id === id) {
-                return destination;
-            }
-        }
-        return false;
-    }
-
 
     render() {
-        const destination = this.findDestination(this.props.destinations
-            , this.props.params.destinationId);
-        if (destination === false) {
-            return <NotFound />;
-        }
-
         return (
             <div className="ui segment">
                 <Header
                     icon="marker"
-                    content={`${destination.name}`}
+                    content={this.props.destination.name}
                     subContent="Manage destination"
                 />
                 <Navbar pages={this.state.pages} />
@@ -62,13 +44,13 @@ class Destination extends Component {
 }
 
 const mapStateToProps = store => ({
-    destinations: store.destinationState.destinations
+    destination: store.destinationState.destination
 });
 
 Destination.propTypes = {
     children: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    destinations: PropTypes.array.isRequired,
+    destination: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired
 };
 

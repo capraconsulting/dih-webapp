@@ -1,51 +1,63 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
+import moment from 'moment';
+import { connect } from 'react-redux';
+import Table from '../../../../commons/Table';
+import { listForDestination } from '../../../../actions/tripActions';
 
-import Dropdown from '../../../../commons/Dropdown';
-import { TRIP_STATUSES } from '../../../../constants';
-import VolunteersList from './volunteersList';
-import { tripStatusesForDropdown } from '../../../../helpers';
+const createHandlers = (dispatch) => (id) => dispatch(listForDestination(id));
 
-class Volunteers extends React.Component {
+class Volunteers extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedStatus: TRIP_STATUSES.ACTIVE
-        };
+        this.handlers = createHandlers(this.props.dispatch);
     }
 
-    handleChange(e) {
-        this.setState({
-            selectedStatus: e.target.value
+    componentDidMount() {
+        this.handlers(this.props.params.destinationId);
+    }
+
+    normalizeTripObjectsForTable(items) {
+        const cleanObjects = [];
+        items.forEach(value => {
+            cleanObjects.push({
+                id: value.id,
+                status: value.status,
+                name: `${value.user.firstname} ${value.user.lastname} `,
+                startDate: moment(value.wishStartDate).format('YYYY-MM-DD'),
+                endDate: moment(value.wishEndDate).format('YYYY-MM-DD')
+            });
         });
+        return cleanObjects;
     }
 
     render() {
         return (
-            <div className="ui segment">
-                <div className="ui grid">
-                    <div className="sixteen wide column">
-                        <h3>Active volunteers at this destination</h3>
-                        <Dropdown
-                            name="Select status"
-                            options={tripStatusesForDropdown()}
-                            selectedValue={this.state.selectedStatus}
-                            onChange={e => { this.handleChange(e); }}
-                        />
-                    </div>
-                    <div className="sixteen wide column">
-                        <VolunteersList
-                            destinationId={this.props.destinationId}
-                            status={this.state.selectedStatus}
-                        />
-                    </div>
-                </div>
-            </div>
+            <Table
+                columnNames={{
+                    name: 'Name',
+                    startDate: 'Start date',
+                    endDate: 'End date',
+                    status: 'Status'
+                }}
+                itemKey="id"
+                link={{
+                    columnName: 'name',
+                    prefix: '/admin/users/'
+                }}
+                items={this.normalizeTripObjectsForTable(this.props.tripsForDestination)}
+            />
         );
     }
 }
 
+const mapStateToProps = store => ({
+    tripsForDestination: store.tripState.tripsForDestination
+});
+
 Volunteers.propTypes = {
-    destinationId: PropTypes.number.isRequired
+    tripsForDestination: React.PropTypes.array.isRequired,
+    params: PropTypes.object.isRequired,
+    dispatch: React.PropTypes.func.isRequired
 };
 
-export default Volunteers;
+export default connect(mapStateToProps)(Volunteers);
