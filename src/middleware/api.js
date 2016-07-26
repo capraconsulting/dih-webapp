@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { PUSH_NOTIFICATION } from '../actions/types';
 import { logout } from '../actions/authenticationActions';
 const API = axios.create({ baseURL: process.env.BASE_URL });
 
@@ -20,6 +21,8 @@ export default store => next => action => { // eslint-disable-line
         if (error.status === 401) store.dispatch(logout());
         return Promise.reject(error);
     });
+
+    const notification = { type: PUSH_NOTIFICATION };
 
     const { method, url, types, authenticated, data, headers } = callAPI;
 
@@ -50,10 +53,13 @@ export default store => next => action => { // eslint-disable-line
                 type: successType
             })
         )
-        .catch(err =>
-            next({
+        .catch(err => {
+            notification.level = 'error';
+            notification.message = err.data.message || 'There was an error.';
+            next(notification);
+            return next({
                 error: err.data.message || 'There was an error.',
                 type: errorType
-            })
-        );
+            });
+        });
 };
