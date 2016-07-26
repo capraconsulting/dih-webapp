@@ -19,6 +19,10 @@ class Destination extends Component {
                 {
                     name: 'Email templates',
                     uri: `/admin/destinations/${this.props.params.destinationId}/emails`
+                },
+                {
+                    name: 'Add volunteer',
+                    uri: `/admin/destinations/${this.props.params.destinationId}/addvolunteer`
                 }
             ]
         };

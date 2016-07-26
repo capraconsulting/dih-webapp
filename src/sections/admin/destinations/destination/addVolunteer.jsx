@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import AddVolunteerForm from './addVolunteerForm';
 import { create } from '../../../../actions/tripActions';
 import { list } from '../../../../actions/userActions';
+import { pushNotification } from '../../../../actions/notificationActions';
+
+import { TRIP_STATUSES } from '../../../../constants';
 
 const createHandlers = (dispatch) => (
     {
@@ -12,11 +15,14 @@ const createHandlers = (dispatch) => (
         },
         list() {
             return dispatch(list());
+        },
+        notification(message, level) {
+            return dispatch(pushNotification(message, level));
         }
     }
 );
 
-class AddVolunteerFormContainer extends Component {
+class AddVolunteer extends Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
@@ -31,10 +37,15 @@ class AddVolunteerFormContainer extends Component {
             ...data,
             startDate: data.wishStartDate,
             endDate: data.wishEndDate,
-            destinationId: this.props.destinationId,
-            status: 'ACCEPTED'
+            destinationId: this.props.params.destinationId,
+            status: TRIP_STATUSES.ACCEPTED
         };
-        this.handlers.create(alteredData);
+        this.handlers.create(alteredData)
+            .then(response => {
+                const message = 'Volunteer added';
+                const { error } = response;
+                if (!error) this.handlers.notification(message, 'success');
+            });
     }
 
     render() {
@@ -44,7 +55,6 @@ class AddVolunteerFormContainer extends Component {
 
         return (
             <div>
-                <h4>Add volunteer to destination</h4>
                 <AddVolunteerForm
                     users={usersWithFullname}
                     onSubmit={e => { this.handleSubmit(e); }}
@@ -58,10 +68,10 @@ const mapStateToProps = store => ({
     users: store.userState.users
 });
 
-AddVolunteerFormContainer.propTypes = {
-    destinationId: React.PropTypes.string.isRequired,
+AddVolunteer.propTypes = {
     dispatch: PropTypes.func.isRequired,
+    params: PropTypes.object.isRequired,
     users: PropTypes.array.isRequired
 };
 
-export default connect(mapStateToProps)(AddVolunteerFormContainer);
+export default connect(mapStateToProps)(AddVolunteer);
