@@ -13,9 +13,6 @@ import React, { PropTypes } from 'react';
 * placeholder - string: the placeholder of input field.
 *
 * disabled - boolean: if the button is disabled.
-*
-* initialValue - string: the inital value.
-*
 */
 
 const createClasses = (props) => {
@@ -33,7 +30,7 @@ const InputField = (props) => (
             placeholder={props.placeholder}
             type={props.type}
             id={props.type}
-            value={props.children.value || props.initialValue}
+            value={props.children.value}
         />
         {props.children.touched && props.children.error &&
             <div className="inline-error">{props.children.error}</div>}
@@ -45,7 +42,6 @@ InputField.propTypes = {
     children: PropTypes.object.isRequired,
     type: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    initialValue: PropTypes.string,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string
 };

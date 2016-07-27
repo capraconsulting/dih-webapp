@@ -18,8 +18,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 * minDate - moment: minimum date possible to select.
 *
 * maxDate - moment: maximum date possible to select.
-*
-* initialValue - string: the initial value.
 */
 
 const createClasses = (props) => {
@@ -39,8 +37,7 @@ const DateField = (props) => (
             minDate={props.minDate}
             maxDate={props.maxDate}
             disabled={props.disabled}
-            selected={props.children.value ?
-                moment(props.children.value, 'YYYY-MM-DD') : props.initialValue}
+            selected={props.children.value ? moment(props.children.value, 'YYYY-MM-DD') : null}
             locale="en-gb"
         />
         {props.children.touched && props.children.error &&
@@ -54,8 +51,7 @@ DateField.propTypes = {
     placeholder: PropTypes.string,
     minDate: PropTypes.object,
     maxDate: PropTypes.object,
-    disabled: PropTypes.boolean,
-    initialValue: PropTypes.object
+    disabled: PropTypes.bool
 };
 
 export default DateField;

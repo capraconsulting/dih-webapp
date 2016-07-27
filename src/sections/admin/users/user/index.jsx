@@ -1,10 +1,26 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { retrieve } from '../../../../actions/userActions';
+import { retrieve, update, destroy } from '../../../../actions/userActions';
+import { pushNotification } from '../../../../actions/notificationActions';
 import Header from '../../../../commons/pageHeader';
 import Navbar from '../../../../commons/navbar';
 
-const createHandlers = (dispatch) => (id) => dispatch(retrieve(id));
+const createHandlers = (dispatch) => (
+    {
+        retrieve(id) {
+            return dispatch(retrieve(id));
+        },
+        update(user) {
+            return dispatch(update(user));
+        },
+        destroy(user) {
+            return dispatch(destroy(user));
+        },
+        notification(message, level) {
+            return dispatch(pushNotification(message, level));
+        }
+    }
+);
 
 class User extends Component {
     constructor(props) {
@@ -33,19 +49,31 @@ class User extends Component {
     }
 
     componentDidMount() {
-        this.handlers(this.props.params.userId);
+        this.handlers.retrieve(this.props.params.userId);
+    }
+
+    onUpdate(user) {
+        this.handlers.update({ id: this.props.params.userId, ...user })
+            .then(response => {
+                const message = 'User changes saved!';
+                const { error } = response;
+                if (!error) this.handlers.notification(message, 'success');
+            });
     }
 
     render() {
         return (
-            <div className="ui segment">
+            <div className="ui segment clearing">
                 <Header
                     icon="user"
                     content={`${this.props.user.firstname} ${this.props.user.lastname}`}
                     subContent="Manage userprofile"
                 />
                 <Navbar pages={this.state.pages} />
-                {React.cloneElement(this.props.children, { user: this.props.user })}
+                {React.cloneElement(this.props.children, {
+                    initialValues: this.props.user,
+                    onSubmit: (e) => this.onUpdate(e)
+                })}
             </div>
         );
     }

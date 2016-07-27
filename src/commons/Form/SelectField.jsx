@@ -19,9 +19,6 @@ import React, { PropTypes } from 'react';
 * placeholder - string: the placeholder of input field.
 *
 * disabled - boolean: if the button is disabled.
-*
-* initialValue - string: the initialValue (optional).
-*
 */
 
 const createClasses = (props) => {
@@ -35,7 +32,7 @@ const SelectField = (props) => (
         <label>{props.label}</label>
         <select
             {...props.children}
-            value={props.children.value || props.initialValue}
+            value={props.children.value}
             disabled={props.disabled}
             className={createClasses(props).join(' ')}
         >
@@ -57,11 +54,10 @@ SelectField.propTypes = {
     values: PropTypes.array.isRequired,
     valueKey: PropTypes.string.isRequired,
     valueLabel: PropTypes.string.isRequired,
-    allowNullValue: PropTypes.bool.isRequired,
+    allowNullValue: PropTypes.bool,
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
-    placeholder: PropTypes.string,
-    initialValue: PropTypes.string
+    placeholder: PropTypes.string
 };
 
 export default SelectField;

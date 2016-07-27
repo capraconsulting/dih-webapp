@@ -15,7 +15,6 @@ import React, { PropTypes } from 'react';
 * placeholder - string: the placeholder of input field.
 *
 * disabled - boolean: if the button is disabled.
-*
 */
 
 const createClasses = (props) => {
@@ -26,15 +25,14 @@ const createClasses = (props) => {
 
 const TextField = (props) => (
     <div className={createClasses(props).join(' ')}>
-        <label htmlFor={props.type}>{props.label}</label>
+        <label htmlFor={props.label}>{props.label}</label>
         <textarea
             {...props.children}
             rows={props.rows}
             disabled={props.disabled}
             placeholder={props.placeholder}
-            type={props.type}
-            id={props.type}
-            value={props.children.value || props.initialValue}
+            id={props.label}
+            value={props.children.value || ''}
         />
         {props.children.touched && props.children.error &&
             <div className="inline-error">{props.children.error}</div>}
@@ -44,12 +42,10 @@ const TextField = (props) => (
 
 TextField.propTypes = {
     children: PropTypes.object.isRequired,
-    type: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     rows: PropTypes.number,
     disabled: PropTypes.bool,
-    placeholder: PropTypes.string,
-    initialValue: PropTypes.string
+    placeholder: PropTypes.string
 };
 
 export default TextField;
