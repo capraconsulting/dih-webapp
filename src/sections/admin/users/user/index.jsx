@@ -35,7 +35,7 @@ class User extends Component {
 
     render() {
         return (
-            <div>
+            <div className="ui segment">
                 <Header
                     icon="user"
                     content={`${this.props.user.firstname} ${this.props.user.lastname}`}
