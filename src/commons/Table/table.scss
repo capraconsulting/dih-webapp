@@ -1,0 +1,8 @@
+.ui.sortable.table thead th {
+    border-right: none;
+    border-left: none;
+}
+
+.ui.sortable.table thead th.sorted {
+    background-color: transparent;
+}

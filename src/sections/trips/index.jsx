@@ -4,7 +4,7 @@ import moment from 'moment';
 import _ from 'lodash';
 
 import Header from '../../commons/pageHeader';
-import Table from '../../commons/Table';
+import Table from '../../commons/table';
 import { listForUser } from '../../actions/tripActions';
 
 const createHandlers = (dispatch) => (userId) => dispatch(listForUser(userId));
