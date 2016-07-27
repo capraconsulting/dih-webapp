@@ -29,11 +29,11 @@ class User extends Component {
         this.state = {
             pages: [
                 {
-                    name: 'User info',
+                    name: 'Info',
                     uri: `/admin/users/${this.props.params.userId}`
                 },
                 {
-                    name: 'Edit user',
+                    name: 'Edit',
                     uri: `/admin/users/${this.props.params.userId}/edit`
                 },
                 {
@@ -72,6 +72,7 @@ class User extends Component {
                 <Navbar pages={this.state.pages} />
                 {React.cloneElement(this.props.children, {
                     initialValues: this.props.user,
+                    user: this.props.user,
                     onSubmit: (e) => this.onUpdate(e)
                 })}
             </div>

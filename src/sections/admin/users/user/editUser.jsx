@@ -52,8 +52,8 @@ function EditUserForm(props) {
                 </TextField>
                 <Button
                     type="submit"
-                    color="primary"
-                    fluid
+                    color="green"
+                    right
                     disabled={isFetching}
                     loading={isFetching}
                     id="submit"
