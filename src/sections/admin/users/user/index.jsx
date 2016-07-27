@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { retrieve } from '../../../../actions/userActions';
 import Header from '../../../../commons/pageHeader';
 import Navbar from '../../../../commons/navbar';
-import UserInfo from './userInfo';
 
 const createHandlers = (dispatch) => (id) => dispatch(retrieve(id));
 
@@ -16,6 +15,10 @@ class User extends Component {
                 {
                     name: 'User info',
                     uri: `/admin/users/${this.props.params.userId}`
+                },
+                {
+                    name: 'Edit user',
+                    uri: `/admin/users/${this.props.params.userId}/edit`
                 },
                 {
                     name: 'Trips',
@@ -42,7 +45,7 @@ class User extends Component {
                     subContent="Manage userprofile"
                 />
                 <Navbar pages={this.state.pages} />
-                <UserInfo user={this.props.user} />
+                {React.cloneElement(this.props.children, { user: this.props.user })}
             </div>
         );
     }
@@ -55,7 +58,8 @@ const mapStateToProps = store => ({
 User.propTypes = {
     dispatch: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
-    params: PropTypes.object.isRequired
+    params: PropTypes.object.isRequired,
+    children: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(User);

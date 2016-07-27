@@ -24,6 +24,8 @@ import TripRequests from './sections/admin/tripRequests/TripRequests';
 import Email from './sections/admin/email';
 import Users from './sections/admin/users';
 import User from './sections/admin/users/user';
+import UserInfo from './sections/admin/users/user/userInfo';
+import EditUser from './sections/admin/users/user/editUser';
 import NotFound from './commons/NotFound.jsx';
 
 export default(
@@ -61,7 +63,10 @@ export default(
                 </Route>
                 <Route name="Users" path="admin/users">
                     <IndexRoute component={Users} />
-                    <Route path=":userId" component={User} />
+                    <Route path=":userId" component={User}>
+                        <IndexRoute component={UserInfo} />
+                        <Route name="edit" component={EditUser} />
+                    </Route>
                 </Route>
                 <Route name="Email" path="admin/email/:emailId" component={Email} />
                 <Route name="Trips" path="admin/trips" component={TripRequests} />
