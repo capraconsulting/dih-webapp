@@ -28,12 +28,13 @@ const TextField = (props) => (
     <div className={createClasses(props).join(' ')}>
         <label htmlFor={props.type}>{props.label}</label>
         <textarea
+            {...props.children}
             rows={props.rows}
             disabled={props.disabled}
             placeholder={props.placeholder}
             type={props.type}
             id={props.type}
-            {...props.children}
+            value={props.children.value || props.initialValue}
         />
         {props.children.touched && props.children.error &&
             <div className="inline-error">{props.children.error}</div>}
@@ -47,7 +48,8 @@ TextField.propTypes = {
     label: PropTypes.string.isRequired,
     rows: PropTypes.number,
     disabled: PropTypes.bool,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    initialValue: PropTypes.string
 };
 
 export default TextField;

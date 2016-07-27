@@ -65,12 +65,12 @@ export default(
                     <IndexRoute component={Users} />
                     <Route path=":userId" component={User}>
                         <IndexRoute component={UserInfo} />
-                        <Route name="edit" component={EditUser} />
+                        <Route name="edit" path="edit" component={EditUser} />
                     </Route>
                 </Route>
                 <Route name="Email" path="admin/email/:emailId" component={Email} />
                 <Route name="Trips" path="admin/trips" component={TripRequests} />
-                <Route name="My profile" path="*" component={NotFound} />
+                <Route name="Not found" path="*" component={NotFound} />
             </Route>
         </Route>
     </Router>

@@ -14,6 +14,8 @@ import React, { PropTypes } from 'react';
 *
 * disabled - boolean: if the button is disabled.
 *
+* initialValue - string: the inital value.
+*
 */
 
 const createClasses = (props) => {
@@ -26,11 +28,12 @@ const InputField = (props) => (
     <div className={createClasses(props).join(' ')}>
         <label htmlFor={props.type}>{props.label}</label>
         <input
+            {...props.children}
             disabled={props.disabled}
             placeholder={props.placeholder}
             type={props.type}
             id={props.type}
-            {...props.children}
+            value={props.children.value || props.initialValue}
         />
         {props.children.touched && props.children.error &&
             <div className="inline-error">{props.children.error}</div>}
@@ -42,6 +45,7 @@ InputField.propTypes = {
     children: PropTypes.object.isRequired,
     type: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    initialValue: PropTypes.string,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string
 };

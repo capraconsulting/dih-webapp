@@ -18,6 +18,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 * minDate - moment: minimum date possible to select.
 *
 * maxDate - moment: maximum date possible to select.
+*
+* initialValue - string: the initial value.
 */
 
 const createClasses = (props) => {
@@ -30,15 +32,16 @@ const DateField = (props) => (
     <div className={createClasses(props).join(' ')}>
         <label>{props.label}</label>
         <DataPicker
+            {...props.children}
             className="form-control"
             dateFormat="YYYY-MM-DD"
             placeholder={props.placeholder}
             minDate={props.minDate}
             maxDate={props.maxDate}
             disabled={props.disabled}
-            selected={props.children.value ? moment(props.children.value, 'YYYY-MM-DD') : null}
+            selected={props.children.value ?
+                moment(props.children.value, 'YYYY-MM-DD') : props.initialValue}
             locale="en-gb"
-            {...props.children}
         />
         {props.children.touched && props.children.error &&
             <div className="inline-error">{props.children.error}</div>}
@@ -50,7 +53,9 @@ DateField.propTypes = {
     label: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     minDate: PropTypes.object,
-    maxDate: PropTypes.object
+    maxDate: PropTypes.object,
+    disabled: PropTypes.boolean,
+    initialValue: PropTypes.object
 };
 
 export default DateField;
