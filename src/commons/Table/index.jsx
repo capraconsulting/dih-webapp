@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router';
+
+import SearchField from './searchField';
 import './table.scss';
 
 /*
@@ -46,7 +48,8 @@ class Table extends Component {
         super(props);
         this.state = {
             sorted: this.props.itemKey,
-            order: 'ascending'
+            order: 'ascending',
+            searchText: ''
         };
     }
 
@@ -64,36 +67,57 @@ class Table extends Component {
     }
 
     sort(array) {
-        const sorted = _.sortBy(array, this.state.sorted);
+        const searchResultArray = this.search(array);
+        const sorted = _.sortBy(searchResultArray, this.state.sorted);
         if (this.state.order === 'descending') return _.reverse(sorted);
         return sorted;
     }
 
+    search(array) {
+        const searchText = this.state.searchText.toLowerCase();
+        if (searchText.length === 0) return array;
+
+        return _.filter(array, data => {
+            const search = _.values(data).join().toLowerCase();
+            return new RegExp(searchText).test(search);
+        });
+    }
+
+    handleSearchChange(searchText) {
+        this.setState({ searchText });
+    }
+
     render() {
         return (
-            <table className="ui fixed single sortable line very basic table unstackable">
-                <thead>
-                    <tr>
-                    {Object.keys(this.props.columnNames).map(columnNameKey => (
-                        <th
-                            onClick={() => this.toggleSort(columnNameKey)}
-                            className={(this.state.sorted === columnNameKey) ? `sorted ${this.state.order}` : ''}
-                        >
-                            {this.props.columnNames[columnNameKey]}
-                        </th>
-                    ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.sort(this.props.items).map(item =>
-                        createRow(
-                            this.props.columnNames,
-                            this.props.itemKey,
-                            item,
-                            this.props.link))
-                    }
-                </tbody>
-            </table>
+            <div>
+                <SearchField
+                    value={this.state.searchText}
+                    onChange={data => this.handleSearchChange(data)}
+                />
+                <table className="ui fixed single sortable line very basic table unstackable">
+                    <thead>
+                        <tr>
+                        {Object.keys(this.props.columnNames).map(columnNameKey => (
+                            <th
+                                onClick={() => this.toggleSort(columnNameKey)}
+                                className={(this.state.sorted === columnNameKey) ? `sorted ${this.state.order}` : ''}
+                            >
+                                {this.props.columnNames[columnNameKey]}
+                            </th>
+                        ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.sort(this.props.items).map(item =>
+                            createRow(
+                                this.props.columnNames,
+                                this.props.itemKey,
+                                item,
+                                this.props.link))
+                        }
+                    </tbody>
+                </table>
+            </div>
         );
     }
 }
