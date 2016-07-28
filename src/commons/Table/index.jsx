@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 
 import SearchField from './searchField';
 import Filter from './filter';
+import DateInterval from './dateInterval';
 import './table.scss';
 
 /*
@@ -116,6 +117,7 @@ class Table extends Component {
                         onChange={data => this.handleFilterChange(data)}
                     />
                 }
+                <DateInterval />
 
                 <table className="ui fixed single sortable line very basic table unstackable">
                     <thead>

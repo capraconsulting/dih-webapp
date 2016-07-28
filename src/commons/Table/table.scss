@@ -7,8 +7,13 @@
     background-color: transparent;
 }
 
-.ui.labeled.icon.top.right.dropdown.button.visible.active {
+.ui.labeled.icon.top.right.dropdown.button.visible.active,
+.ui.icon.dropdown.button.visible.active {
     .menu.visible {
         display: block !important;
     }
+}
+
+i.close.icon {
+    margin-left: 10px !important;
 }

@@ -23,8 +23,8 @@ class UsersTableContainer extends Component {
             // { color: 'empty', label: 'Active', value: TRIP_STATUSES.ACTIVE, group: 'Trip status', field: 'status' },
             { color: 'yellow', label: 'Moderator', value: USER_ROLES.MODERATOR, group: 'Filter by user role', field: 'role' },
             // { color: 'black', label: 'Rejected', value: TRIP_STATUSES.REJECTED, group: 'Trip status', field: 'status' },
-            { color: 'red', label: 'Admin', value: USER_ROLES.ADMIN, group: 'Filter by user role', field: 'role' },
-            // { color: 'purple', label: 'Pending', value: TRIP_STATUSES.PENDING, group: 'Trip status', field: 'status' }
+            // { color: 'purple', label: 'Pending', value: TRIP_STATUSES.PENDING, group: 'Trip status', field: 'status' },
+            { color: 'red', label: 'Admin', value: USER_ROLES.ADMIN, group: 'Filter by user role', field: 'role' }
         ];
 
         return (
