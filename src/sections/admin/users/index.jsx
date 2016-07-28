@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import Header from '../../../commons/pageHeader';
 import Table from '../../../commons/Table';
 import { list } from '../../../actions/userActions';
 
@@ -17,20 +18,31 @@ class UsersTableContainer extends Component {
 
     render() {
         return (
-            <Table
-                columnNames={{
-                    firstname: 'First name',
-                    lastname: 'Last name',
-                    email: 'E-mail',
-                    role: 'Role'
-                }}
-                link={{
-                    columnName: 'firstname',
-                    prefix: '/admin/users/'
-                }}
-                itemKey="id"
-                items={this.props.users}
-            />
+            <div className="ui segments">
+                <div className="ui segment">
+                    <Header
+                        content="Users"
+                        subContent="List of all users"
+                        icon="users"
+                    />
+                </div>
+                <div className="ui blue segment">
+                    <Table
+                        columnNames={{
+                            firstname: 'First name',
+                            lastname: 'Last name',
+                            email: 'E-mail',
+                            role: 'Role'
+                        }}
+                        link={{
+                            columnName: 'firstname',
+                            prefix: '/admin/users/'
+                        }}
+                        itemKey="id"
+                        items={this.props.users}
+                    />
+                </div>
+            </div>
         );
     }
 }
