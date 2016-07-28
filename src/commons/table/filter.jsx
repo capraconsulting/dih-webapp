@@ -37,6 +37,7 @@ class Filter extends Component {
             activeFilter: filter
         });
         this.toggleMenu();
+        this.props.onChange(filter);
     }
 
     clearFilter(e) {
@@ -45,6 +46,7 @@ class Filter extends Component {
         this.setState({
             activeFilter: null
         });
+        this.props.onChange(null);
     }
 
     prepareFilterData() {
@@ -119,7 +121,8 @@ class Filter extends Component {
 }
 
 Filter.propTypes = {
-    filters: PropTypes.array.isRequired
+    filters: PropTypes.array.isRequired,
+    onChange: PropTypes.func.isRequired
 };
 
 export default Filter;
