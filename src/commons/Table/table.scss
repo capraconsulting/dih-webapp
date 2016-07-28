@@ -6,3 +6,9 @@
 .ui.sortable.table thead th.sorted {
     background-color: transparent;
 }
+
+.ui.labeled.icon.top.right.dropdown.button.visible.active {
+    .menu.visible {
+        display: block !important;
+    }
+}

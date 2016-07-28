@@ -3,7 +3,9 @@ import _ from 'lodash';
 import { Link } from 'react-router';
 
 import SearchField from './searchField';
+import Filter from './filter';
 import './table.scss';
+import { USER_ROLES, TRIP_STATUSES } from '../../constants';
 
 /*
 * commons.Table
@@ -21,6 +23,15 @@ import './table.scss';
 * prefix and a columnName name, to create a link with the prefix url  followed by the
 * itemKey value for the object.
 */
+
+const filterValues = [
+    { color: 'green', label: 'User', value: USER_ROLES.USER, group: 'Filter by user role', field: 'role' },
+    { color: 'empty', label: 'Active', value: TRIP_STATUSES.ACTIVE, group: 'Trip status', field: 'status' },
+    { color: 'yellow', label: 'Moderator', value: USER_ROLES.MODERATOR, group: 'Filter by user role', field: 'role' },
+    { color: 'black', label: 'Rejected', value: TRIP_STATUSES.REJECTED, group: 'Trip status', field: 'status' },
+    { color: 'red', label: 'Admin', value: USER_ROLES.ADMIN, group: 'Filter by user role', field: 'role' },
+    { color: 'purple', label: 'Pending', value: TRIP_STATUSES.PENDING, group: 'Trip status', field: 'status' }
+];
 
 const createElement = (item, columnNameKey, itemKey, link) => {
     let element = (<td>{item[columnNameKey]}</td>);
@@ -94,6 +105,7 @@ class Table extends Component {
                     value={this.state.searchText}
                     onChange={data => this.handleSearchChange(data)}
                 />
+                <Filter filters={filterValues} />
                 <table className="ui fixed single sortable line very basic table unstackable">
                     <thead>
                         <tr>
