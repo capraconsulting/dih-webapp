@@ -75,20 +75,16 @@ class Table extends Component {
     filterDate(array) {
         const { fromDate, toDate } = this.state;
 
-        return array.filter(data => {
-            const arrayStartDate = moment(data.startDate);
-            const arrayEndDate = moment(data.endDate);
+        return array.filter(row => {
+            const rowStartDate = moment(row.startDate);
+            const rowEndDate = moment(row.endDate);
 
             if (fromDate && toDate) {
-                return arrayStartDate.isSameOrAfter(fromDate)
-                    && arrayEndDate.isSameOrBefore(toDate);
+                return rowStartDate.isSameOrAfter(fromDate)
+                    && rowEndDate.isSameOrBefore(toDate);
             }
-            if (fromDate && !toDate) {
-                return arrayStartDate.isSameOrAfter(fromDate);
-            }
-            if (!fromDate && toDate) {
-                return arrayEndDate.isSameOrBefore(toDate);
-            }
+            if (fromDate && !toDate) return rowStartDate.isSameOrAfter(fromDate);
+            if (!fromDate && toDate) return rowEndDate.isSameOrBefore(toDate);
             return true;
         });
     }

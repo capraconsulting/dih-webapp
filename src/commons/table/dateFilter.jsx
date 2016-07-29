@@ -10,13 +10,6 @@ class DateFilter extends Component {
         };
     }
 
-    toggleDatePicker() {
-        this.setState({
-            visible: !this.state.visible,
-            active: !this.state.active
-        });
-    }
-
     createButtonClasses() {
         const classes = ['ui', 'icon', 'dropdown', 'button'];
         if (this.state.visible) classes.push('visible');
@@ -29,6 +22,18 @@ class DateFilter extends Component {
         const classes = ['menu'];
         if (this.state.visible) classes.push('visible');
         return classes;
+    }
+
+    toggleDatePicker() {
+        this.setState({
+            visible: !this.state.visible,
+            active: !this.state.active
+        });
+    }
+
+    selectDate(data) {
+        this.props.onChange(data);
+        this.toggleDatePicker();
     }
 
     clearDate(e) {
@@ -51,12 +56,15 @@ class DateFilter extends Component {
                 <i className="calendar icon"></i>&nbsp;
                 {label}
                 {date && <i className="close icon" onClick={e => this.clearDate(e)} />}
-                <div className={this.createMenuClasses().join(' ')}>
+                <div
+                    className={this.createMenuClasses().join(' ')}
+                    onClick={e => e.stopPropagation()}
+                >
                     <DatePicker
                         inline
                         maxDate={this.props.maxDate}
                         minDate={this.props.minDate}
-                        onChange={this.props.onChange}
+                        onChange={e => this.selectDate(e)}
                         selected={date}
                     />
                 </div>
