@@ -46,3 +46,18 @@ export function create(data) {
         }
     };
 }
+
+export function update(data) {
+    return {
+        [CALL_API]: {
+            method: 'put',
+            url: `/users/${data.id}`,
+            types: [
+                types.PUT_USER_REQUEST,
+                types.PUT_USER_SUCCESS,
+                types.PUT_USER_FAILURE
+            ],
+            authenticated: true
+        }
+    };
+}

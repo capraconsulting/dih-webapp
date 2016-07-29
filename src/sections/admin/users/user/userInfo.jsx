@@ -4,7 +4,7 @@ import ListItem from '../../../../commons/list/listItem';
 import FluidListItem from '../../../../commons/list/fluidListItem';
 import moment from 'moment';
 
-const userInfo = (props) => (
+const UserInfo = (props) => (
     <List>
         <ListItem
             name="First name"
@@ -49,9 +49,9 @@ const userInfo = (props) => (
     </List>
 );
 
-userInfo.propTypes = {
+UserInfo.propTypes = {
     user: PropTypes.object
 };
 
 
-export default userInfo;
+export default UserInfo;
