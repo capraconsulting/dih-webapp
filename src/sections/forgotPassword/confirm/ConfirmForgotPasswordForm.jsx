@@ -5,10 +5,13 @@ import Button from '../../../commons/Button';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 
-const fields = ['password'];
+const fields = ['password', 'controlPassword'];
 
 const validate = values => {
     const errors = {};
+    if (values.password !== values.controlPassword) {
+        errors.controlPassword = 'Has to be the same as the password field.';
+    }
     if (!values.password) {
         errors.password = 'Required';
     } else if (values.password.length < 8) {
@@ -19,7 +22,7 @@ const validate = values => {
 
 function ConfirmForgotPasswordForm(props) {
     const {
-        fields: { password },
+        fields: { password, controlPassword },
         handleSubmit,
         errorMessage,
         successMessage,
@@ -36,6 +39,9 @@ function ConfirmForgotPasswordForm(props) {
         >
             <InputField type="password" label="Password">
                 {password}
+            </InputField>
+            <InputField type="password" label="Repeat password">
+                {controlPassword}
             </InputField>
             <Button
                 type="submit"
@@ -58,7 +64,7 @@ ConfirmForgotPasswordForm.propTypes = {
     errorMessage: React.PropTypes.string,
     successMessage: React.PropTypes.string,
     handleSubmit: React.PropTypes.func.isRequired,
-    isFetching: React.PropTypes.bool.isRequired
+    isFetching: React.PropTypes.bool
 };
 
 export default reduxForm({
