@@ -22,7 +22,7 @@ class DateInterval extends Component {
 
     render() {
         return (
-            <div className="ui buttons">
+            <div className="ui buttons dateIntervalButton">
                 <DateFilter
                     datePrefix="From"
                     date={this.state.fromDate}

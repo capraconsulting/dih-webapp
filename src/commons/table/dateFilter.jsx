@@ -11,7 +11,7 @@ class DateFilter extends Component {
     }
 
     createButtonClasses() {
-        const classes = ['ui', 'icon', 'dropdown', 'button datefilter'];
+        const classes = ['ui', 'icon', 'dropdown', 'button', 'dateFilterButton'];
         if (this.state.visible) classes.push('visible');
         if (this.state.active) classes.push('active');
         if (this.props.date) classes.push('grey');

@@ -19,7 +19,16 @@ class Filter extends Component {
     }
 
     createButtonClasses() {
-        const classes = ['ui', 'labeled', 'icon', 'top', 'right', 'dropdown', 'button'];
+        const classes = [
+            'ui',
+            'labeled',
+            'icon',
+            'top',
+            'right',
+            'dropdown',
+            'button',
+            'filterButton'
+        ];
         if (this.state.visible) classes.push('visible');
         if (this.state.active) classes.push('active');
         return classes;

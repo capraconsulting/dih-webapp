@@ -7,11 +7,11 @@ class SearchField extends Component {
 
     render() {
         return (
-            <div className="ui icon input">
+            <div className="ui icon input search">
                 <i className="search icon"></i>
                 <input
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Search"
                     value={this.props.value}
                     ref="searchInput"
                     onChange={e => this.handleChange(e)}

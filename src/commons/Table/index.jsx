@@ -23,6 +23,14 @@ import './table.scss';
 * link: is an object describing the links to be created on the table, it needs a
 * prefix and a columnName name, to create a link with the prefix url  followed by the
 * itemKey value for the object.
+*
+* search (optional): Boolean. Add as a parameter if you want the table to be searchable
+*
+* filters (optional): Array. Lets the user view a subset of the table by selecting a filter
+* Array must contain {label, value, color, field, group}.
+*
+* dateFields (optional): Object. Will display  'date interval' datepickers. dateFields must be
+* strucutured {from: 'fromFieldName', to: 'toFieldName'}
 */
 
 class Table extends Component {
@@ -140,9 +148,9 @@ class Table extends Component {
         );
     }
 
-    render() {
+    renderFiltersBar() {
         return (
-            <div>
+            <div className="filterBar">
                 {this.props.search &&
                     <SearchField
                         value={this.state.searchText}
@@ -156,6 +164,7 @@ class Table extends Component {
                         onChange={data => this.handleFilterChange(data)}
                     />
                 }
+
                 {this.props.dateFields &&
                     <DateInterval
                         onChange={
@@ -163,7 +172,14 @@ class Table extends Component {
                         }
                     />
                 }
+            </div>
+        );
+    }
 
+    render() {
+        return (
+            <div>
+                {this.renderFiltersBar()}
                 <table className="ui fixed single sortable line very basic table unstackable">
                     <thead>
                         <tr>

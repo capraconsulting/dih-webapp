@@ -18,3 +18,24 @@ i.close.icon {
     margin-left: 10px !important;
     margin-right: 0 !important;
 }
+
+.filterBar {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -10px;
+}
+
+.search {
+    flex-grow: 1;
+}
+
+.search,
+.filterButton,
+.dateIntervalButton {
+    margin-right: 10px !important; // Must be opposite of margin-right in .filterBar
+    margin-bottom: 10px !important;
+}
+
+.dateFilterButton:not(:last-child) {
+    border-right: 1px solid #d5d5d5 !important;
+}
