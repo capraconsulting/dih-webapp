@@ -18,6 +18,7 @@ import DestinationEmails from './sections/admin/destinations/destination/emailTe
 import DestinationAddVolunteer from './sections/admin/destinations/destination/addVolunteer';
 import Destinations from './sections/admin/destinations';
 import DestinationsList from './sections/admin/destinations/destinationsList';
+import AddDestination from './sections/admin/destinations/addDestination';
 import SignupTrip from './sections/trips/signup';
 import Trips from './sections/trips/';
 import Trip from './sections/trips/trip';
@@ -53,6 +54,7 @@ export default(
                 <Route name="Destinations" path="admin/destinations">
                     <Route component={Destinations}>
                         <IndexRoute component={DestinationsList} />
+                        <Route path="new" component={AddDestination} name="Add destination" />
                     </Route>
                     <Route path=":destinationId" component={Destination}>
                         <IndexRoute component={DestinationVolunteers} />

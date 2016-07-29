@@ -10,17 +10,13 @@ class Destinations extends Component {
                 {
                     name: 'Destinations',
                     uri: '/admin/destinations'
+                },
+                {
+                    name: 'Add destination',
+                    uri: '/admin/destinations/new'
                 }
-                // {
-                //    name: 'Add destination',
-                //    uri: '/admin/destinations/new'
-                // }
             ]
         };
-    }
-
-    componentDidMount() {
-        this.handlers();
     }
 
     render() {
