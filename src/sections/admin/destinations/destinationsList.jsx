@@ -19,7 +19,8 @@ class DestinationsList extends Component {
         return (
             <Table
                 columnNames={{
-                    name: 'Name'
+                    name: 'Name',
+                    minimumTripDurationInDays: 'Minimum trip duration'
                 }}
                 itemKey="id"
                 link={{

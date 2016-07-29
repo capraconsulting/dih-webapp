@@ -5,7 +5,7 @@ import Button from '../../../commons/Button';
 import Form from '../../../commons/Form';
 import InputField from '../../../commons/Form/InputField';
 
-const fields = ['name'];
+const fields = ['name', 'minimumTripDurationInDays'];
 
 const validate = values => {
     const errors = {};
@@ -17,7 +17,7 @@ const validate = values => {
 
 function AddDestinationForm(props) {
     const {
-        fields: { name },
+        fields: { name, minimumTripDurationInDays },
         errorMessage,
         handleSubmit,
         isFetching
@@ -31,6 +31,9 @@ function AddDestinationForm(props) {
         >
             <InputField label="Name" type="text">
                 {name}
+            </InputField>
+            <InputField label="Minium trip duration (in days)" type="number">
+                {minimumTripDurationInDays}
             </InputField>
             <Button
                 type="submit"
