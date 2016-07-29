@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router';
+import moment from 'moment';
 
 import SearchField from './searchField';
 import Filter from './filter';
@@ -52,7 +53,9 @@ class Table extends Component {
             sorted: this.props.itemKey,
             order: 'ascending',
             searchText: '',
-            activeFilter: null
+            activeFilter: null,
+            fromDate: null,
+            toDate: null
         };
     }
 
@@ -69,6 +72,27 @@ class Table extends Component {
         });
     }
 
+    filterDate(array) {
+        const { fromDate, toDate } = this.state;
+
+        return array.filter(data => {
+            const arrayStartDate = moment(data.startDate);
+            const arrayEndDate = moment(data.endDate);
+
+            if (fromDate && toDate) {
+                return arrayStartDate.isSameOrAfter(fromDate)
+                    && arrayEndDate.isSameOrBefore(toDate);
+            }
+            if (fromDate && !toDate) {
+                return arrayStartDate.isSameOrAfter(fromDate);
+            }
+            if (!fromDate && toDate) {
+                return arrayEndDate.isSameOrBefore(toDate);
+            }
+            return true;
+        });
+    }
+
     filter(array) {
         const { field, value } = this.state.activeFilter;
         return _.filter(array, [field, value]);
@@ -77,6 +101,7 @@ class Table extends Component {
     sort(array) {
         let filteredArray = array;
         if (this.state.activeFilter) filteredArray = this.filter(array);
+        if (this.state.fromDate || this.state.toDate) filteredArray = this.filterDate(filteredArray);
         const searchResultArray = this.search(filteredArray);
         const sorted = _.sortBy(searchResultArray, this.state.sorted);
         if (this.state.order === 'descending') return _.reverse(sorted);
@@ -101,6 +126,10 @@ class Table extends Component {
         this.setState({ activeFilter });
     }
 
+    handleDateFilterChange(fromDate, toDate) {
+        this.setState({ fromDate, toDate });
+    }
+
     render() {
         return (
             <div>
@@ -117,7 +146,9 @@ class Table extends Component {
                         onChange={data => this.handleFilterChange(data)}
                     />
                 }
-                <DateInterval />
+                <DateInterval
+                    onChange={(fromDate, toDate) => this.handleDateFilterChange(fromDate, toDate)}
+                />
 
                 <table className="ui fixed single sortable line very basic table unstackable">
                     <thead>
