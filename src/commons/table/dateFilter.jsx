@@ -11,7 +11,7 @@ class DateFilter extends Component {
     }
 
     createButtonClasses() {
-        const classes = ['ui', 'icon', 'dropdown', 'button'];
+        const classes = ['ui', 'icon', 'dropdown', 'button datefilter'];
         if (this.state.visible) classes.push('visible');
         if (this.state.active) classes.push('active');
         if (this.props.date) classes.push('grey');
@@ -74,11 +74,11 @@ class DateFilter extends Component {
 }
 
 DateFilter.propTypes = {
+    datePrefix: PropTypes.string.isRequired,
     date: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     minDate: PropTypes.object,
-    maxDate: PropTypes.object,
-    datePrefix: PropTypes.string
+    maxDate: PropTypes.object
 };
 
 export default DateFilter;

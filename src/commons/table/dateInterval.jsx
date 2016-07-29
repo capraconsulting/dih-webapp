@@ -24,16 +24,16 @@ class DateInterval extends Component {
         return (
             <div className="ui buttons">
                 <DateFilter
-                    onChange={data => this.updateDate(data, 'fromDate')}
                     datePrefix="From"
-                    maxDate={this.state.toDate}
                     date={this.state.fromDate}
+                    maxDate={this.state.toDate}
+                    onChange={data => this.updateDate(data, 'fromDate')}
                 />
                 <DateFilter
-                    onChange={data => this.updateDate(data, 'toDate')}
                     datePrefix="To"
-                    minDate={this.state.fromDate}
                     date={this.state.toDate}
+                    minDate={this.state.fromDate}
+                    onChange={data => this.updateDate(data, 'toDate')}
                 />
             </div>
         );
