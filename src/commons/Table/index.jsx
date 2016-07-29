@@ -25,27 +25,6 @@ import './table.scss';
 * itemKey value for the object.
 */
 
-const createElement = (item, columnNameKey, itemKey, link) => {
-    let element = (<td>{item[columnNameKey]}</td>);
-    if (link && link.columnName === columnNameKey) {
-        element = (
-            <td>
-                <Link to={link.prefix + item[itemKey]} activeClassName="item-active">
-                    {item[columnNameKey]}
-                </Link>
-            </td>
-        );
-    }
-    return element;
-};
-
-const createRow = (columnNames, itemKey, item, link) => (
-    <tr key={item[itemKey]}>
-        {Object.keys(columnNames).map(columnNameKey =>
-            createElement(item, columnNameKey, itemKey, link))}
-    </tr>
-);
-
 class Table extends Component {
     constructor(props) {
         super(props);
@@ -59,17 +38,9 @@ class Table extends Component {
         };
     }
 
-    toggleSort(columnName) {
-        let { sorted, order } = this.state;
-        if (columnName === sorted) {
-            order = (order === 'ascending' ? 'descending' : 'ascending');
-        } else {
-            sorted = columnName;
-        }
-        this.setState({
-            sorted,
-            order
-        });
+    filter(array) {
+        const { field, value } = this.state.activeFilter;
+        return _.filter(array, [field, value]);
     }
 
     filterDate(array) {
@@ -89,21 +60,6 @@ class Table extends Component {
         });
     }
 
-    filter(array) {
-        const { field, value } = this.state.activeFilter;
-        return _.filter(array, [field, value]);
-    }
-
-    sort(array) {
-        let filteredArray = array;
-        if (this.state.activeFilter) filteredArray = this.filter(array);
-        if (this.state.fromDate || this.state.toDate) filteredArray = this.filterDate(filteredArray);
-        const searchResultArray = this.search(filteredArray);
-        const sorted = _.sortBy(searchResultArray, this.state.sorted);
-        if (this.state.order === 'descending') return _.reverse(sorted);
-        return sorted;
-    }
-
     search(array) {
         const searchText = this.state.searchText.toLowerCase();
         if (searchText.length === 0) return array;
@@ -112,6 +68,28 @@ class Table extends Component {
             const search = _.values(data).join().toLowerCase();
             return new RegExp(searchText).test(search);
         });
+    }
+
+    sort(array) {
+        let sorted = _.sortBy(array, this.state.sorted);
+        if (this.state.order === 'descending') sorted = _.reverse(sorted);
+        return sorted;
+    }
+
+    applyFilters(initialArray) {
+        let array = initialArray;
+
+        // Filter
+        if (this.state.activeFilter) array = this.filter(array);
+
+        // Date interval
+        if (this.state.fromDate || this.state.toDate) array = this.filterDate(array);
+
+        // Search
+        array = this.search(array);
+
+        // Sort
+        return this.sort(array);
     }
 
     handleSearchChange(searchText) {
@@ -124,6 +102,42 @@ class Table extends Component {
 
     handleDateFilterChange(fromDate, toDate) {
         this.setState({ fromDate, toDate });
+    }
+
+    toggleSort(columnName) {
+        let { sorted, order } = this.state;
+        if (columnName === sorted) {
+            order = (order === 'ascending' ? 'descending' : 'ascending');
+        } else {
+            sorted = columnName;
+        }
+        this.setState({
+            sorted,
+            order
+        });
+    }
+
+    renderCell(item, columnNameKey, itemKey, link) {
+        let element = (<td>{item[columnNameKey]}</td>);
+        if (link && link.columnName === columnNameKey) {
+            element = (
+                <td>
+                    <Link to={link.prefix + item[itemKey]} activeClassName="item-active">
+                        {item[columnNameKey]}
+                    </Link>
+                </td>
+            );
+        }
+        return element;
+    }
+
+    renderRow(columnNames, itemKey, item, link) {
+        return (
+            <tr key={item[itemKey]}>
+                {Object.keys(columnNames).map(columnNameKey =>
+                    this.renderCell(item, columnNameKey, itemKey, link))}
+            </tr>
+        );
     }
 
     render() {
@@ -167,8 +181,8 @@ class Table extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.sort(this.props.items).map(item =>
-                            createRow(
+                        {this.applyFilters(this.props.items).map(item =>
+                            this.renderRow(
                                 this.props.columnNames,
                                 this.props.itemKey,
                                 item,
