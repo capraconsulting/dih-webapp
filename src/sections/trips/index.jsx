@@ -44,6 +44,7 @@ class Trips extends React.Component {
     }
 
     render() {
+        const dateFields = { from: 'startDate', to: 'endDate' };
         return (
             <div className="ui segments">
                 <div className="ui segment">
@@ -67,6 +68,7 @@ class Trips extends React.Component {
                             prefix: '/trips/'
                         }}
                         items={this.normalizeTripObjectsForTable(this.props.tripsForUser)}
+                        dateFields={dateFields}
                     />
                 </div>
             </div>

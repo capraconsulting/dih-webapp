@@ -76,8 +76,8 @@ class Table extends Component {
         const { fromDate, toDate } = this.state;
 
         return array.filter(row => {
-            const rowStartDate = moment(row.startDate);
-            const rowEndDate = moment(row.endDate);
+            const rowStartDate = moment(row[this.props.dateFields.from]);
+            const rowEndDate = moment(row[this.props.dateFields.to]);
 
             if (fromDate && toDate) {
                 return rowStartDate.isSameOrAfter(fromDate)
@@ -142,9 +142,13 @@ class Table extends Component {
                         onChange={data => this.handleFilterChange(data)}
                     />
                 }
-                <DateInterval
-                    onChange={(fromDate, toDate) => this.handleDateFilterChange(fromDate, toDate)}
-                />
+                {this.props.dateFields &&
+                    <DateInterval
+                        onChange={
+                            (fromDate, toDate) => this.handleDateFilterChange(fromDate, toDate)
+                        }
+                    />
+                }
 
                 <table className="ui fixed single sortable line very basic table unstackable">
                     <thead>
@@ -183,7 +187,17 @@ Table.propTypes = {
     itemKey: PropTypes.string.isRequired,
     link: PropTypes.object,
     search: PropTypes.bool,
-    filters: PropTypes.array
+    filters: PropTypes.arrayOf(PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+        color: PropTypes.string.isRequired,
+        field: PropTypes.string.isRequired,
+        group: PropTypes.string.isRequired
+    })),
+    dateFields: PropTypes.shape({
+        from: PropTypes.string.isRequired,
+        to: PropTypes.string.isRequired
+    })
 };
 
 export default Table;

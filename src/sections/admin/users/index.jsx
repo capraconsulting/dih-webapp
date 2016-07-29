@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Table from '../../../commons/table';
 import { list } from '../../../actions/userActions';
 
-import { USER_ROLES, TRIP_STATUSES } from '../../../constants';
+import { USER_ROLES } from '../../../constants';
 
 const createHandlers = (dispatch) => () => dispatch(list());
 
@@ -20,10 +20,7 @@ class UsersTableContainer extends Component {
     render() {
         const filterValues = [
             { color: 'green', label: 'User', value: USER_ROLES.USER, group: 'Filter by user role', field: 'role' },
-            // { color: 'empty', label: 'Active', value: TRIP_STATUSES.ACTIVE, group: 'Trip status', field: 'status' },
             { color: 'yellow', label: 'Moderator', value: USER_ROLES.MODERATOR, group: 'Filter by user role', field: 'role' },
-            // { color: 'black', label: 'Rejected', value: TRIP_STATUSES.REJECTED, group: 'Trip status', field: 'status' },
-            // { color: 'purple', label: 'Pending', value: TRIP_STATUSES.PENDING, group: 'Trip status', field: 'status' },
             { color: 'red', label: 'Admin', value: USER_ROLES.ADMIN, group: 'Filter by user role', field: 'role' }
         ];
 
