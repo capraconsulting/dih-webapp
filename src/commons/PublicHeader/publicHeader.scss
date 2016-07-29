@@ -1,0 +1,44 @@
+.site-header, .header-style3 .site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    padding: 0px 15px;
+    .site-logo {
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        padding-left: 0;
+        display: inline-block;
+    }
+
+    .dd-menu{
+        display: inline-block;
+        float: right;
+        margin-top: 5px;
+        margin: 0px;
+
+        li {
+            font-size: 13px;
+            position: relative;
+            display: inline-block;
+            float: left;
+            margin-left: 25px;
+            margin-top: 12px;
+            font-family: "Lato", sans-serif;
+
+            a {
+                display: block;
+                color: black;
+                line-height: 50px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+
+                &:hover {
+                    color: #5e5e5e;
+                }
+            }
+        }
+    }
+}
