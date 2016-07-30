@@ -48,8 +48,8 @@ class Trips extends React.Component {
             <div className="ui segments">
                 <div className="ui segment">
                     <Header
-                        content="Trips"
-                        subContent="List of all trips"
+                        content="My trips"
+                        subContent="View and edit your trips"
                         icon="plane"
                     />
                 </div>
