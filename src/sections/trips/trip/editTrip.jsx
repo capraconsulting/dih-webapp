@@ -19,7 +19,7 @@ const fields = [
     'departureDate'
 ];
 
-function TripForm(props) {
+function EditTrip(props) {
     const {
         fields: {
             startDate,
@@ -185,7 +185,7 @@ function TripForm(props) {
     );
 }
 
-TripForm.propTypes = {
+EditTrip.propTypes = {
     trip: React.PropTypes.object.isRequired,
     fields: React.PropTypes.object.isRequired,
     handleSubmit: React.PropTypes.func.isRequired,
@@ -195,4 +195,4 @@ TripForm.propTypes = {
 export default reduxForm({
     form: 'UpdateTripForm',
     fields
-})(TripForm);
+})(EditTrip);
