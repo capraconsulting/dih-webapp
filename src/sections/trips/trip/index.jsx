@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../../../commons/pageHeader';
 import Navbar from '../../../commons/navbar';
 import { retrieve, update } from '../../../actions/tripActions';
+import { retrieve as retrieveDestination } from '../../../actions/destinationActions';
 import { pushNotification } from '../../../actions/notificationActions';
 
 const createHandlers = (dispatch) => (
@@ -16,6 +17,9 @@ const createHandlers = (dispatch) => (
         },
         notification(message, level) {
             return dispatch(pushNotification(message, level));
+        },
+        retrieveDestination(id) {
+            return dispatch(retrieveDestination(id));
         }
     }
 );
@@ -39,7 +43,8 @@ class Trip extends React.Component {
     }
 
     componentDidMount() {
-        this.handlers.retrieve(this.props.params.tripId);
+        this.handlers.retrieve(this.props.params.tripId)
+        .then(() => this.handlers.retrieveDestination(this.props.trip.destinationId));
     }
 
     onUpdate(trip) {
@@ -58,6 +63,7 @@ class Trip extends React.Component {
             <div className="ui segment clearing">
                 <Header
                     icon="plane"
+                    content={`Trip to ${this.props.destination.name}`}
                     subContent="Manage your trip"
                 />
                 <Navbar pages={this.state.pages} />
@@ -72,13 +78,15 @@ class Trip extends React.Component {
 }
 
 const mapStateToProps = store => ({
-    trip: store.tripState.trip
+    trip: store.tripState.trip,
+    destination: store.destinationState.destination
 });
 
 Trip.propTypes = {
     dispatch: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired,
     trip: PropTypes.object.isRequired,
+    destination: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired
 };
 
