@@ -13,6 +13,7 @@ import ForgotPasswordConfirm from './sections/forgotPassword/confirm';
 
 import MyProfile from './sections/myProfile/MyProfile';
 import Destination from './sections/admin/destinations/destination';
+import EditDestination from './sections/admin/destinations/destination/editDestination';
 import DestinationVolunteers from './sections/admin/destinations/destination/volunteers';
 import DestinationEmails from './sections/admin/destinations/destination/emailTemplates';
 import DestinationAddVolunteer from './sections/admin/destinations/destination/addVolunteer';
@@ -53,6 +54,7 @@ export default(
                     <IndexRoute component={Destinations} />
                     <Route path=":destinationId" component={Destination}>
                         <IndexRoute component={DestinationVolunteers} />
+                        <Route name="Edit destination" path="edit" component={EditDestination} />
                         <Route name="Emails" path="emails" component={DestinationEmails} />
                         <Route
                             name="Add volunteer"

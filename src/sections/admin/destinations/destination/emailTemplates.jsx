@@ -7,7 +7,7 @@ const createTemplatesList = (destination) => {
     return [
         {
             id: destination.acceptedStatusMailTemplateId,
-            name: 'accepted email',
+            name: 'Accepted email',
             description: 'Email sent for users approved a trip.'
         },
         {
