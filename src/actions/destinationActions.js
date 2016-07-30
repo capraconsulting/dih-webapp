@@ -46,3 +46,19 @@ export function create(data) {
         }
     };
 }
+
+export function update(data) {
+    return {
+        [CALL_API]: {
+            method: 'put',
+            url: `/destinations/${data.id}`,
+            types: [
+                types.PUT_DESTINATION_REQUEST,
+                types.PUT_DESTINATION_SUCCESS,
+                types.PUT_DESTINATION_FAILURE
+            ],
+            authenticated: true,
+            data
+        }
+    };
+}
