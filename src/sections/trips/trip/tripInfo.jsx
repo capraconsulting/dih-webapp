@@ -6,29 +6,33 @@ import ListItem from '../../../commons/list/listItem';
 import FluidListItem from '../../../commons/list/fluidListItem';
 import moment from 'moment';
 
+const MOMENT_FORMAT = 'dddd, MMMM Do YYYY';
+
 const TripInfo = (props) => (
     <List>
         <ListItem
             name="Start date"
             icon="calendar"
-            content={props.trip.startDate ? moment(props.trip.startDate).calendar() : 'Not set'}
+            content={props.trip.startDate ?
+                moment(props.trip.startDate).format(MOMENT_FORMAT) : 'Not set'}
         />
         <ListItem
             name="End date"
             icon="calendar"
-            content={props.trip.endDate ? moment(props.trip.endDate).calendar() : 'Not set'}
+            content={props.trip.endDate ?
+                moment(props.trip.endDate).format(MOMENT_FORMAT) : 'Not set'}
         />
         <ListItem
             name="Date of departure towards destinaton"
             icon="calendar"
             content={props.trip.departureDate ?
-                moment(props.trip.departureDate).calendar() : 'Not set'}
+                moment(props.trip.departureDate).format(MOMENT_FORMAT) : 'Not set'}
         />
         <ListItem
             name="Date of arrival at destination"
             icon="calendar"
             content={props.trip.arrivalDate ?
-                moment(props.trip.arrivalDate).calendar() : 'Not set'}
+                moment(props.trip.arrivalDate).format(MOMENT_FORMAT) : 'Not set'}
         />
         <ListItem
             name="Method of travel"
