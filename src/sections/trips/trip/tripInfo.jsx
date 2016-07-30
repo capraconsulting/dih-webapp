@@ -11,22 +11,24 @@ const TripInfo = (props) => (
         <ListItem
             name="Start date"
             icon="calendar"
-            content={moment(props.trip.startDate).calendar()}
+            content={props.trip.startDate ? moment(props.trip.startDate).calendar() : 'Not set'}
         />
         <ListItem
             name="End date"
             icon="calendar"
-            content={moment(props.trip.endDate).calendar()}
+            content={props.trip.endDate ? moment(props.trip.endDate).calendar() : 'Not set'}
         />
         <ListItem
             name="Date of departure towards destinaton"
             icon="calendar"
-            content={moment(props.trip.departureDate).calendar()}
+            content={props.trip.departureDate ?
+                moment(props.trip.departureDate).calendar() : 'Not set'}
         />
         <ListItem
             name="Date of arrival at destination"
             icon="calendar"
-            content={moment(props.trip.arrivalDate).calendar()}
+            content={props.trip.arrivalDate ?
+                moment(props.trip.arrivalDate).calendar() : 'Not set'}
         />
         <ListItem
             name="Method of travel"
