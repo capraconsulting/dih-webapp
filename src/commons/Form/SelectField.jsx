@@ -19,6 +19,8 @@ import React, { PropTypes } from 'react';
 * placeholder - string: the placeholder of input field.
 *
 * disabled - boolean: if the button is disabled.
+*
+* onInput - function: called when selected value is changed
 */
 
 const createClasses = (props) => {
@@ -35,6 +37,7 @@ const SelectField = (props) => (
             value={props.children.value}
             disabled={props.disabled}
             className={createClasses(props).join(' ')}
+            onInput={props.onInput}
         >
             <option value="" disabled={!props.allowNullValue}>
                 {props.placeholder}
@@ -57,7 +60,8 @@ SelectField.propTypes = {
     allowNullValue: PropTypes.bool,
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    onInput: PropTypes.func
 };
 
 export default SelectField;
