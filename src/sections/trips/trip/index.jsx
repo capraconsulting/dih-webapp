@@ -24,6 +24,24 @@ const createHandlers = (dispatch) => (
     }
 );
 
+/*
+* setEmptyDatesToNull - takes a trip objects and sets date values to null if they're an empty string
+* Used so that unset values get a clean datepicker, while they're still null if user does not
+* change the value.
+*
+* @function setEmptyDatesToNull
+* @param  {Object} dirtyTrip Trip that may have empty stringed dates
+* @param  {Object} trip Trip with no empty stringed dates
+*/
+function setEmptyDatesToNull(dirtyTrip) {
+    const trip = dirtyTrip;
+    if (trip.startDate === '') trip.startDate = null;
+    if (trip.endDate === '') trip.endDate = null;
+    if (trip.arrivalDate === '') trip.arrivalDate = null;
+    if (trip.departureDate === '') trip.departureDate = null;
+    return trip;
+}
+
 class Trip extends React.Component {
     constructor(props) {
         super(props);
@@ -48,7 +66,8 @@ class Trip extends React.Component {
     }
 
     onUpdate(trip) {
-        this.handlers.update({ ...trip, id: this.props.params.tripId })
+        const cleanTrip = setEmptyDatesToNull(trip);
+        this.handlers.update({ ...cleanTrip, id: this.props.params.tripId })
         .then(response => {
             const message = 'Trip changes saved!';
             const { error } = response;
@@ -76,6 +95,7 @@ class Trip extends React.Component {
         );
     }
 }
+
 
 const mapStateToProps = store => ({
     trip: store.tripState.trip,

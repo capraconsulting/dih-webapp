@@ -33,7 +33,6 @@ function EditTrip(props) {
             arrivalDate,
             departureDate
         },
-        trip,
         handleSubmit,
         submitting
     } = props;
@@ -87,7 +86,7 @@ function EditTrip(props) {
                     placeholderText="YYYY-MM-DD"
                     minDate={moment()}
                     selected={startDate.value ?
-                        moment(startDate.value) : moment(trip.wishStartDate)}
+                        moment(startDate.value) : ''}
                     id="startDate"
                     locale="en-gb"
                 />
@@ -101,7 +100,7 @@ function EditTrip(props) {
                     placeholderText="YYYY-MM-DD"
                     minDate={startDate.value ? moment(startDate.value) : moment()}
                     selected={endDate.value ?
-                        moment(endDate.value) : moment(trip.wishEndDate)}
+                        moment(endDate.value) : ''}
                     id="endDate"
                     locale="en-gb"
                 />
@@ -115,7 +114,7 @@ function EditTrip(props) {
                     placeholderText="YYYY-MM-DD"
                     minDate={departureDate.value ? moment(departureDate.value) : moment()}
                     selected={departureDate.value ?
-                        moment(departureDate.value) : moment(trip.departureDate)}
+                        moment(departureDate.value) : ''}
                     allowNullValue
                     id="departureDate"
                     locale="en-gb"
@@ -130,7 +129,7 @@ function EditTrip(props) {
                     placeholderText="YYYY-MM-DD"
                     minDate={moment()}
                     selected={arrivalDate.value ?
-                        moment(arrivalDate.value) : moment(trip.arrivalDate)}
+                        moment(arrivalDate.value) : ''}
                     allowNullValue
                     id="arrivalDate"
                     locale="en-gb"
