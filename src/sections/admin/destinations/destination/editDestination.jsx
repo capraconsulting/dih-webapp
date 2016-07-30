@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import EditDestinationForm from './editDestinationForm';
+import DeactivateDestinationForm from './deactivateDestinationForm';
 import { retrieve, update } from '../../../../actions/destinationActions';
 import { pushNotification } from '../../../../actions/notificationActions';
 
@@ -48,6 +50,15 @@ class EditDestination extends Component {
                     initialValues={this.props.destination}
                     destination={this.props.destination}
                     onSubmit={e => { this.handleSubmit(e); }}
+                />
+                <DeactivateDestinationForm
+                    initialValues={this.props.destination}
+                    destination={this.props.destination}
+                    onSubmit={() => {
+                        const destination = this.props.destination;
+                        destination.endDate = moment();
+                        this.handleSubmit(destination);
+                    }}
                 />
             </div>
         );
