@@ -34,6 +34,7 @@ config.plugins = config.plugins.concat([
     new webpack.DefinePlugin({
         __DEV__: false,
         'process.env.BASE_URL': JSON.stringify('https://api.staging.dih.capra.me'),
+        'process.env.RAVEN_DSN': JSON.stringify('https://d5a9b88a5e204ea99cc58f8a187c817c@sentry.dih.capra.me/3'),
         'process.env.NODE_ENV': JSON.stringify('production')
     })
 ]);
