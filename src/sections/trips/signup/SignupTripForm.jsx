@@ -41,7 +41,10 @@ function SignupTripForm(props) {
             >
                 {destinationId}
             </SelectField>
-            <DateField label="Date you wish to start your trip" minDate={moment()}>
+            <DateField
+                label="Date you wish to start your trip"
+                minDate={moment()}
+            >
                 {wishStartDate}
             </DateField>
             <DateField
