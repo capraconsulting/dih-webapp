@@ -7,7 +7,7 @@ import TextField from '../../../commons/Form/TextField';
 import DateField from '../../../commons/Form/DateField';
 import SelectField from '../../../commons/Form/SelectField';
 
-const fields = ['destinationId', 'notes', 'wishStartDate'];
+const fields = ['destinationId', 'notes', 'wishStartDate', 'wishEndDate'];
 
 const validate = values => { // eslint-disable-line
     const errors = {};
@@ -17,7 +17,7 @@ const validate = values => { // eslint-disable-line
 
 function SignupTripForm(props) {
     const {
-        fields: { destinationId, notes, wishStartDate },
+        fields: { destinationId, notes, wishStartDate, wishEndDate },
         handleSubmit,
         errorMessage,
         successMessage,
@@ -41,8 +41,14 @@ function SignupTripForm(props) {
             >
                 {destinationId}
             </SelectField>
-            <DateField label="From date" minDate={moment()}>
+            <DateField label="Date you wish to start your trip" minDate={moment()}>
                 {wishStartDate}
+            </DateField>
+            <DateField
+                label="Date you wish to end your trip (optional)"
+                minDate={moment()}
+            >
+                {wishEndDate}
             </DateField>
             <TextField type="text" rows={3} label="Additional information / questions">
                 {notes}
