@@ -7,7 +7,7 @@ import store from './store';
 if (!__DEV__) {
     require('raven-js')
         .config(process.env.RAVEN_DSN, {
-            release: require('../package.json').version,
+            release: process.env.VERSION,
             tags: {
                 environment: process.env.NODE_ENV
             }
