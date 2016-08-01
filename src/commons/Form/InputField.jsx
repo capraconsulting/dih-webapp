@@ -13,7 +13,6 @@ import React, { PropTypes } from 'react';
 * placeholder - string: the placeholder of input field.
 *
 * disabled - boolean: if the button is disabled.
-*
 */
 
 const createClasses = (props) => {
@@ -26,11 +25,12 @@ const InputField = (props) => (
     <div className={createClasses(props).join(' ')}>
         <label htmlFor={props.type}>{props.label}</label>
         <input
+            {...props.children}
             disabled={props.disabled}
             placeholder={props.placeholder}
             type={props.type}
             id={props.type}
-            {...props.children}
+            value={props.children.value}
         />
         {props.children.touched && props.children.error &&
             <div className="inline-error">{props.children.error}</div>}
