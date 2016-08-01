@@ -58,7 +58,8 @@ class User extends Component {
                 const message = 'User changes saved!';
                 const { error } = response;
                 if (!error) this.handlers.notification(message, 'success');
-            });
+            })
+            .then(() => this.handlers.retrieve(this.props.params.userId));
     }
 
     render() {
@@ -73,7 +74,7 @@ class User extends Component {
                 {React.cloneElement(this.props.children, {
                     initialValues: this.props.user,
                     user: this.props.user,
-                    onSubmit: (e) => this.onUpdate(e)
+                    onSubmit: e => this.onUpdate(e)
                 })}
             </div>
         );
