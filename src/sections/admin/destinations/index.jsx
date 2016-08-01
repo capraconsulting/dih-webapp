@@ -1,99 +1,43 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-import moment from 'moment';
 import { list } from '../../../actions/destinationActions';
 import Header from '../../../commons/pageHeader';
-import Table from '../../../commons/table';
-
-const createHandlers = (dispatch) => () => dispatch(list());
+import Navbar from '../../../commons/navbar';
 
 class Destinations extends Component {
     constructor(props) {
         super(props);
-        this.handlers = createHandlers(this.props.dispatch);
-    }
-
-    componentDidMount() {
-        this.handlers();
-    }
-
-    normalizeTripObjectsForTable(items) {
-        const cleanObjects = [];
-        _.mapKeys(items, value => {
-            cleanObjects.push({
-                id: value.id,
-                name: value.name,
-                minimumTripDurationInDays: value.minimumTripDurationInDays,
-                countOfActiveVolunteers: value.countOfActiveVolunteers,
-                isActive: value.isActive ? 'yes' : 'no',
-                startDate: value.startDate ?
-                    moment(value.startDate).format('YYYY-MM-DD') : 'Not set',
-                endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Not set'
-            });
-        });
-        return cleanObjects;
+        this.state = {
+            pages: [
+                {
+                    name: 'Destinations',
+                    uri: '/admin/destinations'
+                },
+                {
+                    name: 'Add destination',
+                    uri: '/admin/destinations/new'
+                }
+            ]
+        };
     }
 
     render() {
-        const dateFields = { from: 'startDate', to: 'endDate' };
-        const filterValues = [
-            {
-                value: 'no',
-                label: 'Show inactive only',
-                color: 'red',
-                group: 'Filter by destination status',
-                field: 'isActive'
-            },
-            {
-                value: 'yes',
-                label: 'Show active only',
-                color: 'green',
-                group: 'Filter by destination status',
-                field: 'isActive'
-            }
-        ];
         return (
-            <div className="ui segments">
-                <div className="ui segment">
-                    <Header
-                        content="Destinations"
-                        subContent="List of all destinations"
-                        icon="marker"
-                    />
-                </div>
-                <div className="ui blue segment">
-                    <Table
-                        filters={filterValues}
-                        columnNames={{
-                            name: 'Name',
-                            startDate: 'Active from',
-                            endDate: 'Active to',
-                            isActive: 'Active?',
-                            minimumTripDurationInDays: 'Minimum trip duration (days)',
-                            countOfActiveVolunteers: 'Volunteers at destination'
-                        }}
-                        dateFields={dateFields}
-                        itemKey="id"
-                        link={{
-                            columnName: 'name',
-                            prefix: '/admin/destinations/'
-                        }}
-                        items={this.normalizeTripObjectsForTable(this.props.destinations)}
-                    />
-                </div>
+            <div className="ui segment">
+                <Header
+                    content="Destinations"
+                    subContent="View and edit destinations"
+                    icon="marker"
+                />
+                <Navbar pages={this.state.pages} />
+                {this.props.children}
             </div>
         );
     }
 }
 
-const mapStateToProps = store => ({
-    destinations: store.destinationState.destinations
-});
-
 Destinations.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    destinations: PropTypes.array.isRequired
+    children: PropTypes.object
 };
 
-export default connect(mapStateToProps)(Destinations);
+export default Destinations;
