@@ -16,6 +16,7 @@ import Destination from './sections/admin/destinations/destination';
 import DestinationVolunteers from './sections/admin/destinations/destination/volunteers';
 import DestinationEmails from './sections/admin/destinations/destination/emailTemplates';
 import DestinationAddVolunteer from './sections/admin/destinations/destination/addVolunteer';
+import DestinationCoordinators from './sections/admin/destinations/destination/coordinators';
 import Destinations from './sections/admin/destinations';
 import DestinationsTable from './sections/admin/destinations/destinationsTable';
 import AddDestination from './sections/admin/destinations/addDestination';
@@ -63,6 +64,11 @@ export default(
                             name="Add volunteer"
                             path="addvolunteer"
                             component={DestinationAddVolunteer}
+                        />
+                        <Route
+                            name="Manage coordinators"
+                            path="coordinators"
+                            component={DestinationCoordinators}
                         />
                     </Route>
                 </Route>

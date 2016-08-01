@@ -23,6 +23,10 @@ class Destination extends Component {
                 {
                     name: 'Add volunteer',
                     uri: `/admin/destinations/${this.props.params.destinationId}/addvolunteer`
+                },
+                {
+                    name: 'Manage coordinators',
+                    uri: `/admin/destinations/${this.props.params.destinationId}/coordinators`
                 }
             ]
         };
