@@ -89,7 +89,7 @@ class Trip extends React.Component {
                 {React.cloneElement(this.props.children, {
                     initialValues: this.props.trip,
                     trip: this.props.trip,
-                    onSubmit: (e) => this.onUpdate(e)
+                    onSubmit: e => this.onUpdate(e)
                 })}
             </div>
         );
