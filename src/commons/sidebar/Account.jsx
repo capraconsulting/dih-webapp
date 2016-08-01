@@ -10,9 +10,6 @@ const Account = (props) => (
             </div>
         </h4>
         <div className="menu">
-            <p className="item">
-                Settings
-            </p>
             <a onClick={props.onLogout} className="item">
                 Logout
             </a>

@@ -109,6 +109,18 @@ body {
   width: 100%;
 }
 
+.react-datepicker {
+  font-weight: 400;
+  font-family: 'Lato', sans-serif !important;
+}
+
+.react-datepicker .react-datepicker__day--outside-month {
+  color: #888;
+}
+
+.react-datepicker .react-datepicker__day--disabled {
+  color: #ccc !important;
+}
 
 //------------------------------------------------
 //	SHAME, SHAME, SHAME
