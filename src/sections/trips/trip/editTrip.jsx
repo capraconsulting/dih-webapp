@@ -86,7 +86,8 @@ function EditTrip(props) {
                 errorMessage={errorMessage}
             >
                 <DateField
-                    label="Start date - set by admin. Contact us if you have problems!"
+                    label="Start date. This can only be changed by an admin.
+                    Contact us if you have problems!"
                     minDate={moment()}
                     id="startDate"
                     allowNullValue

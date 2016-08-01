@@ -6,7 +6,7 @@ import ListItem from '../../../commons/list/listItem';
 import FluidListItem from '../../../commons/list/fluidListItem';
 import moment from 'moment';
 
-const MOMENT_FORMAT = 'dddd, MMMM Do YYYY';
+const MOMENT_FORMAT = 'YYYY-MM-DD';
 
 const TripInfo = (props) => (
     <List>

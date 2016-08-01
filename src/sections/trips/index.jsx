@@ -38,7 +38,7 @@ class Trips extends React.Component {
                 status: value.status,
                 destinationName: value.destination.name,
                 startDate: moment(value.startDate).format('YYYY-MM-DD'),
-                endDate: moment(value.endDate).format('YYYY-MM-DD')
+                endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Not set'
             });
         });
         return cleanObjects;
