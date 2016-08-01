@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import Header from '../../../commons/pageHeader';
@@ -74,7 +75,8 @@ class Trip extends React.Component {
             if (!error) this.handlers.notification(message, 'success');
             if (error) this.handlers.notification('There was a problem. Try again later.', 'error');
         })
-        .then(() => this.handlers.retrieve(this.props.params.tripId));
+        .then(() => this.handlers.retrieve(this.props.params.tripId))
+        .then(() => browserHistory.push(`/trips/${this.props.params.tripId}`));
     }
 
     render() {
