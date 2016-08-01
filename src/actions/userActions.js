@@ -57,7 +57,8 @@ export function update(data) {
                 types.PUT_USER_SUCCESS,
                 types.PUT_USER_FAILURE
             ],
-            authenticated: true
+            authenticated: true,
+            data
         }
     };
 }

@@ -32,7 +32,7 @@ function EditUserForm(props) {
                 <InputField label="Last name" type="text">
                     {lastname}
                 </InputField>
-                <InputField label="Email" type="email">
+                <InputField label="E-mail" type="email">
                     {email}
                 </InputField>
                 <SelectField
@@ -44,10 +44,10 @@ function EditUserForm(props) {
                 >
                     {role}
                 </SelectField>
-                <DateField label="birth">
+                <DateField label="Date of birth">
                     {birth}
                 </DateField>
-                <TextField rows={3} label="notes">
+                <TextField rows={3} label="Notes">
                     {notes}
                 </TextField>
                 <Button

@@ -17,7 +17,7 @@ const UserInfo = (props) => (
             content={props.user.lastname}
         />
         <ListItem
-            name="email"
+            name="E-mail"
             icon="at"
             content={props.user.email}
         />
