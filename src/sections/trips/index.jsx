@@ -102,7 +102,7 @@ class Trips extends React.Component {
             <div className="ui segments">
                 <div className="ui segment">
                     <Header
-                        content="My trips"
+                        content="Trips"
                         subContent="View and edit your trips"
                         icon="plane"
                     />
