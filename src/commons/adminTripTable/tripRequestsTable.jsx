@@ -17,8 +17,8 @@ class TripRequestsTable extends Component {
             headers.lastname = 'Last name';
         }
         headers.destination = 'Destination';
-        headers.wishStartDate = 'Start date';
-        headers.wishEndDate = 'End date';
+        headers.startDate = 'Start date';
+        headers.endDate = 'End date';
         headers.status = 'Status';
         return headers;
     }
@@ -28,8 +28,8 @@ class TripRequestsTable extends Component {
             const row = {
                 id: trip.id,
                 destination: trip.destination.name,
-                wishStartDate: moment(trip.wishStartDate).format('YYYY-MM-DD'),
-                wishEndDate: moment(trip.wishEndDate).format('YYYY-MM-DD'),
+                startDate: moment(trip.startDate).format('YYYY-MM-DD'),
+                endDate: trip.endDate ? moment(trip.endDate).format('YYYY-MM-DD') : 'Not set',
                 status: <TripStatusDropdown trip={trip} />
             };
 

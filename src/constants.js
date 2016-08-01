@@ -24,6 +24,8 @@ export const USER_ROLES = {
  * @property {string} REJECTED - The trip is rejected by an admin
  * @property {string} ACTIVE - The trip is currently in progress by a user
  * @property {string} CLOSED - The trip is closed, hence the user has completed this trip
+ * @property {string} PRESENT - User is present at destination
+ * @property {string} LEFT - User has left destination
  */
 export const TRIP_STATUSES = {
     PENDING: 'PENDING',
@@ -33,4 +35,16 @@ export const TRIP_STATUSES = {
     CLOSED: 'CLOSED',
     PRESENT: 'PRESENT',
     LEFT: 'LEFT'
+};
+
+/**
+ * The possible methods of travel for a trip.
+ * @type {object}
+ * @property {string} PLANE - The user will arrive by plane, should trigger specific fields.
+ * @property {string} OTHER - The uset will arrive by other method than listed, should trigger
+ * a free text field.
+ */
+exports.TRAVEL_METHODS = {
+    PLANE: 'PLANE',
+    OTHER: 'OTHER'
 };
