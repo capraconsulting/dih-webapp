@@ -29,7 +29,7 @@ class User extends Component {
         this.state = {
             pages: [
                 {
-                    name: 'Info',
+                    name: 'View',
                     uri: `/admin/users/${this.props.params.userId}`
                 },
                 {
