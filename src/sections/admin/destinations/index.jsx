@@ -24,7 +24,7 @@ class Destinations extends Component {
             <div className="ui segment">
                 <Header
                     content="Destinations"
-                    subContent="List of all destinations"
+                    subContent="View and edit destinations"
                     icon="marker"
                 />
                 <Navbar pages={this.state.pages} />
