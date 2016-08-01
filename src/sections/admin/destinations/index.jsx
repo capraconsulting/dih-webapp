@@ -1,56 +1,41 @@
 import React, { PropTypes, Component } from 'react';
-import { connect } from 'react-redux';
-import { list } from '../../../actions/destinationActions';
 import Header from '../../../commons/pageHeader';
-import Table from '../../../commons/table';
-
-const createHandlers = (dispatch) => () => dispatch(list());
+import Navbar from '../../../commons/navbar';
 
 class Destinations extends Component {
     constructor(props) {
         super(props);
-        this.handlers = createHandlers(this.props.dispatch);
-    }
-
-    componentDidMount() {
-        this.handlers();
+        this.state = {
+            pages: [
+                {
+                    name: 'Destinations',
+                    uri: '/admin/destinations'
+                },
+                {
+                    name: 'Add destination',
+                    uri: '/admin/destinations/new'
+                }
+            ]
+        };
     }
 
     render() {
         return (
-            <div className="ui segments">
-                <div className="ui segment">
-                    <Header
-                        content="Destinations"
-                        subContent="List of all destinations"
-                        icon="marker"
-                    />
-                </div>
-                <div className="ui blue segment">
-                    <Table
-                        columnNames={{
-                            name: 'Name'
-                        }}
-                        itemKey="id"
-                        link={{
-                            columnName: 'name',
-                            prefix: '/admin/destinations/'
-                        }}
-                        items={this.props.destinations}
-                    />
-                </div>
+            <div className="ui segment">
+                <Header
+                    content="Destinations"
+                    subContent="List of all destinations"
+                    icon="marker"
+                />
+                <Navbar pages={this.state.pages} />
+                {this.props.children}
             </div>
         );
     }
 }
 
-const mapStateToProps = store => ({
-    destinations: store.destinationState.destinations
-});
-
 Destinations.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    destinations: PropTypes.array.isRequired
+    children: PropTypes.object
 };
 
-export default connect(mapStateToProps)(Destinations);
+export default Destinations;
