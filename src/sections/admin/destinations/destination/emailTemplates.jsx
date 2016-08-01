@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Table from '../../../../commons/Table';
+import Table from '../../../../commons/table';
 
 const createTemplatesList = (destination) => {
     if (!destination.id) return [];
