@@ -1,8 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import Table from '../../../commons/table';
 import Header from '../../../commons/pageHeader';
-import Table from '../../../commons/Table';
+
 import { list } from '../../../actions/userActions';
+
+import { USER_ROLES } from '../../../constants';
 
 const createHandlers = (dispatch) => () => dispatch(list());
 
@@ -17,6 +20,30 @@ class UsersTableContainer extends Component {
     }
 
     render() {
+        const filterValues = [
+            {
+                value: USER_ROLES.USER,
+                label: 'User',
+                color: 'green',
+                group: 'Filter by user role',
+                field: 'role'
+            },
+            {
+                value: USER_ROLES.MODERATOR,
+                label: 'Moderator',
+                color: 'yellow',
+                group: 'Filter by user role',
+                field: 'role'
+            },
+            {
+                value: USER_ROLES.ADMIN,
+                label: 'Admin',
+                color: 'red',
+                group: 'Filter by user role',
+                field: 'role'
+            }
+        ];
+
         return (
             <div className="ui segments">
                 <div className="ui segment">
@@ -28,6 +55,8 @@ class UsersTableContainer extends Component {
                 </div>
                 <div className="ui blue segment">
                     <Table
+                        search
+                        filters={filterValues}
                         columnNames={{
                             firstname: 'First name',
                             lastname: 'Last name',
