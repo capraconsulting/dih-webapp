@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import moment from 'moment';
-import DataPicker from 'react-datepicker';
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 /*
@@ -29,7 +29,7 @@ const createClasses = (props) => {
 const DateField = (props) => (
     <div className={createClasses(props).join(' ')}>
         <label>{props.label}</label>
-        <DataPicker
+        <DatePicker
             {...props.children}
             className="form-control"
             dateFormat="YYYY-MM-DD"

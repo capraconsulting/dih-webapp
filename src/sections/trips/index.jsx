@@ -4,8 +4,9 @@ import moment from 'moment';
 import _ from 'lodash';
 
 import Header from '../../commons/pageHeader';
-import Table from '../../commons/Table';
+import Table from '../../commons/table';
 import { listForUser } from '../../actions/tripActions';
+import { TRIP_STATUSES } from '../../constants';
 
 const createHandlers = (dispatch) => (userId) => dispatch(listForUser(userId));
 
@@ -44,6 +45,59 @@ class Trips extends React.Component {
     }
 
     render() {
+        const dateFields = { from: 'startDate', to: 'endDate' };
+        const filters = [
+            {
+                color: 'empty',
+                label: 'Pending',
+                value: TRIP_STATUSES.PENDING,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'olive',
+                label: 'Accepted',
+                value: TRIP_STATUSES.ACCEPTED,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'green',
+                label: 'Active',
+                value: TRIP_STATUSES.ACTIVE,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'teal',
+                label: 'Present',
+                value: TRIP_STATUSES.PRESENT,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'blue',
+                label: 'Left',
+                value: TRIP_STATUSES.LEFT,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'red',
+                label: 'Rejected',
+                value: TRIP_STATUSES.REJECTED,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'black',
+                label: 'Closed',
+                value: TRIP_STATUSES.CLOSED,
+                group: 'Trip status',
+                field: 'status'
+            }
+        ];
+
         return (
             <div className="ui segments">
                 <div className="ui segment">
@@ -67,6 +121,9 @@ class Trips extends React.Component {
                             prefix: '/trips/'
                         }}
                         items={this.normalizeTripObjectsForTable(this.props.tripsForUser)}
+                        search
+                        filters={filters}
+                        dateFields={dateFields}
                     />
                 </div>
             </div>
