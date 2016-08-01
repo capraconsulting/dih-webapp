@@ -22,6 +22,8 @@ import AddDestination from './sections/admin/destinations/addDestination';
 import SignupTrip from './sections/trips/signup';
 import Trips from './sections/trips/';
 import Trip from './sections/trips/trip';
+import EditTrip from './sections/trips/trip/editTrip';
+import TripInfo from './sections/trips/trip/tripInfo';
 import TripRequests from './sections/admin/tripRequests/TripRequests';
 import Email from './sections/admin/email';
 import Users from './sections/admin/users';
@@ -48,8 +50,11 @@ export default(
                 <Route name="My profile" path="profile" component={MyProfile} />
                 <Route name="Trips" path="/trips">
                     <IndexRoute component={Trips} />
-                    <Route name="Sign up" path="/trips/signup" component={SignupTrip} />
-                    <Route name="Trip" path="/trips/:tripId" component={Trip} />
+                    <Route name="Sign up" path="signup" component={SignupTrip} />
+                    <Route path=":tripId" component={Trip}>
+                        <IndexRoute component={TripInfo} />
+                        <Route name="edit" path="edit" component={EditTrip} />
+                    </Route>
                 </Route>
                 <Route name="Destinations" path="admin/destinations">
                     <Route component={Destinations}>

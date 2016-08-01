@@ -7,25 +7,22 @@ import Form from '../../../../commons/Form';
 import DateField from '../../../../commons/Form/DateField';
 import SelectField from '../../../../commons/Form/SelectField';
 
-const fields = ['userId', 'wishStartDate', 'wishEndDate'];
+const fields = ['userId', 'startDate', 'endDate'];
 
 const validate = values => {
     const errors = {};
     if (!values.userId) {
         errors.userId = 'Required';
     }
-    if (!values.wishStartDate) {
-        errors.wishStartDate = 'Required';
-    }
-    if (!values.wishEndDate) {
-        errors.wishEndDate = 'Required';
+    if (!values.startDate) {
+        errors.startDate = 'Required';
     }
     return errors;
 };
 
 function AddVolunteerForm(props) {
     const {
-        fields: { userId, wishStartDate, wishEndDate },
+        fields: { userId, startDate, endDate },
         handleSubmit,
         errorMessage,
         isFetching
@@ -50,13 +47,13 @@ function AddVolunteerForm(props) {
                 label="Start date"
                 minDate={moment()}
             >
-                {wishStartDate}
+                {startDate}
             </DateField>
             <DateField
                 label="End date"
-                minDate={wishStartDate.value ? moment(wishStartDate.value) : null}
+                minDate={startDate.value ? moment(startDate.value) : null}
             >
-                {wishEndDate}
+                {endDate}
             </DateField>
             <Button
                 type="submit"

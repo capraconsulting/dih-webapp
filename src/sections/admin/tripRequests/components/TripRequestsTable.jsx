@@ -22,8 +22,9 @@ function TripRequestsTable(props) {
                         <td>{trip.user.firstname}</td>
                         <td>{trip.user.lastname}</td>
                         <td>{trip.destination.name}</td>
-                        <td>{moment(trip.wishStartDate).format('YYYY-MM-DD')}</td>
-                        <td>{moment(trip.wishEndDate).format('YYYY-MM-DD')}</td>
+                        <td>{moment(trip.startDate).format('YYYY-MM-DD')}</td>
+                        <td>{trip.endDate ?
+                            moment(trip.endDate).format('YYYY-MM-DD') : 'Not set'}</td>
                         <td>
                             <TripStatusDropdown trip={trip} />
                         </td>

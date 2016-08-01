@@ -32,7 +32,9 @@ class SignupTripFormContainer extends Component {
         this.setState({
             isFetching: true
         });
-        this.handlers.create(data)
+        const trip = data;
+        trip.wishStartDate = data.startDate; // Cannot be null, but not used anymore
+        this.handlers.create(trip)
             .then(response => {
                 let success = null;
                 const { error } = response;
