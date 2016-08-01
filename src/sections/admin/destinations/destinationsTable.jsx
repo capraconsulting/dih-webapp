@@ -28,7 +28,7 @@ class DestinationsList extends Component {
                 isActive: value.isActive ? 'yes' : 'no',
                 startDate: value.startDate ?
                     moment(value.startDate).format('YYYY-MM-DD') : 'Not set',
-                endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Not set'
+                endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Forever'
             });
         });
         return cleanObjects;
@@ -54,13 +54,14 @@ class DestinationsList extends Component {
         ];
         return (
             <Table
+                search
                 filters={filterValues}
                 columnNames={{
                     name: 'Name',
                     countOfActiveVolunteers: 'Volunteers at destination',
+                    isActive: 'Active?',
                     startDate: 'Active from',
                     endDate: 'Active to',
-                    isActive: 'Active?',
                     minimumTripDurationInDays: 'Minimum trip duration (days)'
                 }}
                 dateFields={dateFields}
