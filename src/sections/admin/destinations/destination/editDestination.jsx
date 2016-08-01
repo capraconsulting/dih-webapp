@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import EditDestinationForm from './editDestinationForm';
-import DeactivateDestinationForm from './deactivateDestinationForm';
 import { retrieve, update } from '../../../../actions/destinationActions';
 import { pushNotification } from '../../../../actions/notificationActions';
 
@@ -32,8 +31,13 @@ class EditDestination extends Component {
     }
 
     handleSubmit(data) {
+        const destination = data;
+        if (data.isActive !== this.props.destination.isActive) {
+            if (data.isActive) destination.endDate = null;
+            else if (!data.isActive) destination.endDate = moment();
+        }
         this.handlers.update({
-            ...data,
+            ...destination,
             id: this.props.destination.id
         })
         .then(response => {
@@ -50,15 +54,6 @@ class EditDestination extends Component {
                     initialValues={this.props.destination}
                     destination={this.props.destination}
                     onSubmit={e => { this.handleSubmit(e); }}
-                />
-                <DeactivateDestinationForm
-                    initialValues={this.props.destination}
-                    destination={this.props.destination}
-                    onSubmit={() => {
-                        const destination = this.props.destination;
-                        destination.endDate = moment();
-                        this.handleSubmit(destination);
-                    }}
                 />
             </div>
         );

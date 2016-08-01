@@ -6,12 +6,13 @@ import Form from '../../../../commons/Form';
 import Button from '../../../../commons/Button';
 import DateField from '../../../../commons/Form/DateField';
 import InputField from '../../../../commons/Form/InputField';
+import ToggleField from '../../../../commons/Form/ToggleField';
 
-const fields = ['name', 'minimumTripDurationInDays', 'startDate', 'endDate'];
+const fields = ['name', 'minimumTripDurationInDays', 'startDate', 'endDate', 'isActive'];
 
 function EditDestinationForm(props) {
     const {
-        fields: { name, minimumTripDurationInDays, startDate, endDate },
+        fields: { name, minimumTripDurationInDays, startDate, endDate, isActive },
         handleSubmit,
         errorMessage,
         isFetching
@@ -42,12 +43,20 @@ function EditDestinationForm(props) {
                 >
                     {endDate}
                 </DateField>
+                <ToggleField
+                    id="isActiveToggle"
+                    label="Toggle this destination to be active or inactive.
+                    Users can only sign up for active destinations."
+                >
+                    {isActive}
+                </ToggleField>
                 <Button
                     type="submit"
                     color="green"
                     disabled={isFetching}
                     loading={isFetching}
                     id="submit"
+                    right
                 >
                     Save changes
                 </Button>
