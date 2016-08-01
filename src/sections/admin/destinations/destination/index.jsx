@@ -17,12 +17,16 @@ class Destination extends Component {
                     uri: `/admin/destinations/${this.props.params.destinationId}`
                 },
                 {
-                    name: 'Email templates',
-                    uri: `/admin/destinations/${this.props.params.destinationId}/emails`
-                },
-                {
                     name: 'Add volunteer',
                     uri: `/admin/destinations/${this.props.params.destinationId}/addvolunteer`
+                },
+                {
+                    name: 'Edit destination',
+                    uri: `/admin/destinations/${this.props.params.destinationId}/edit`
+                },
+                {
+                    name: 'Email templates',
+                    uri: `/admin/destinations/${this.props.params.destinationId}/emails`
                 }
             ]
         };
