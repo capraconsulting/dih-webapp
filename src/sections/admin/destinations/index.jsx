@@ -67,11 +67,11 @@ class Destinations extends Component {
                         filters={filterValues}
                         columnNames={{
                             name: 'Name',
-                            startDate: 'Date destination becomes active',
-                            endDate: 'Date destination becomes inactive',
-                            isActive: 'Destination active?',
+                            startDate: 'Active from',
+                            endDate: 'Active to',
+                            isActive: 'Active?',
                             minimumTripDurationInDays: 'Minimum trip duration (days)',
-                            countOfActiveVolunteers: 'Number of active volunteers at destination'
+                            countOfActiveVolunteers: 'Volunteers at destination'
                         }}
                         dateFields={dateFields}
                         itemKey="id"
