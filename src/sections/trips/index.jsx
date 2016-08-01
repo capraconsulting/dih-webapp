@@ -45,16 +45,59 @@ class Trips extends React.Component {
     }
 
     render() {
-        const filters = [
-            { color: 'empty', label: 'Pending', value: TRIP_STATUSES.PENDING, group: 'Trip status', field: 'status' }, // eslint-disable-line
-            { color: 'olive', label: 'Accepted', value: TRIP_STATUSES.ACCEPTED, group: 'Trip status', field: 'status' }, // eslint-disable-line
-            { color: 'green', label: 'Active', value: TRIP_STATUSES.ACTIVE, group: 'Trip status', field: 'status' }, // eslint-disable-line
-            { color: 'teal', label: 'Present', value: TRIP_STATUSES.PRESENT, group: 'Trip status', field: 'status' }, // eslint-disable-line
-            { color: 'blue', label: 'Left', value: TRIP_STATUSES.LEFT, group: 'Trip status', field: 'status' }, // eslint-disable-line
-            { color: 'red', label: 'Rejected', value: TRIP_STATUSES.REJECTED, group: 'Trip status', field: 'status' }, // eslint-disable-line
-            { color: 'black', label: 'Closed', value: TRIP_STATUSES.CLOSED, group: 'Trip status', field: 'status' } // eslint-disable-line
-        ];
         const dateFields = { from: 'startDate', to: 'endDate' };
+        const filters = [
+            {
+                color: 'empty',
+                label: 'Pending',
+                value: TRIP_STATUSES.PENDING,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'olive',
+                label: 'Accepted',
+                value: TRIP_STATUSES.ACCEPTED,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'green',
+                label: 'Active',
+                value: TRIP_STATUSES.ACTIVE,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'teal',
+                label: 'Present',
+                value: TRIP_STATUSES.PRESENT,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'blue',
+                label: 'Left',
+                value: TRIP_STATUSES.LEFT,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'red',
+                label: 'Rejected',
+                value: TRIP_STATUSES.REJECTED,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'black',
+                label: 'Closed',
+                value: TRIP_STATUSES.CLOSED,
+                group: 'Trip status',
+                field: 'status'
+            }
+        ];
+
         return (
             <div className="ui segments">
                 <div className="ui segment">

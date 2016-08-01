@@ -21,9 +21,27 @@ class UsersTableContainer extends Component {
 
     render() {
         const filterValues = [
-            { color: 'green', label: 'User', value: USER_ROLES.USER, group: 'Filter by user role', field: 'role' }, // eslint-disable-line
-            { color: 'yellow', label: 'Moderator', value: USER_ROLES.MODERATOR, group: 'Filter by user role', field: 'role' }, // eslint-disable-line
-            { color: 'red', label: 'Admin', value: USER_ROLES.ADMIN, group: 'Filter by user role', field: 'role' } // eslint-disable-line
+            {
+                value: USER_ROLES.USER,
+                label: 'User',
+                color: 'green',
+                group: 'Filter by user role',
+                field: 'role'
+            },
+            {
+                value: USER_ROLES.MODERATOR,
+                label: 'Moderator',
+                color: 'yellow',
+                group: 'Filter by user role',
+                field: 'role'
+            },
+            {
+                value: USER_ROLES.ADMIN,
+                label: 'Admin',
+                color: 'red',
+                group: 'Filter by user role',
+                field: 'role'
+            }
         ];
 
         return (
