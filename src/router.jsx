@@ -65,7 +65,7 @@ export default(
                     <IndexRoute component={Users} />
                     <Route path=":userId" component={User}>
                         <IndexRoute component={UserInfo} />
-                        <Route name="edit" path="edit" component={EditUser} />
+                        <Route name="Edit" path="edit" component={EditUser} />
                     </Route>
                 </Route>
                 <Route name="Email" path="admin/email/:emailId" component={Email} />
