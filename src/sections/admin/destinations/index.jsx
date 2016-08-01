@@ -1,6 +1,4 @@
 import React, { PropTypes, Component } from 'react';
-import { connect } from 'react-redux';
-import { list } from '../../../actions/destinationActions';
 import Header from '../../../commons/pageHeader';
 import Navbar from '../../../commons/navbar';
 
