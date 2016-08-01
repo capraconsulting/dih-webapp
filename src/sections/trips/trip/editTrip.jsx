@@ -86,16 +86,17 @@ function EditTrip(props) {
                 errorMessage={errorMessage}
             >
                 <DateField
-                    label="Start date"
+                    label="Start date - set by admin. Contact us if you have problems!"
                     minDate={moment()}
                     id="startDate"
                     allowNullValue
+                    disabled
                 >
                     {startDate}
                 </DateField>
 
                 <DateField
-                    label="End date"
+                    label="End date (optional)"
                     minDate={startDate.value ? moment(startDate.value) : moment()}
                     id="endDate"
                     allowNullValue
@@ -105,7 +106,7 @@ function EditTrip(props) {
 
                 <DateField
                     label="Date of departure towards the destination"
-                    minDate={departureDate.value ? moment(departureDate.value) : moment()}
+                    minDate={moment()}
                     allowNullValue
                     id="departureDate"
                 >
