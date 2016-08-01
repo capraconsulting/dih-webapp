@@ -17,6 +17,22 @@ class Destinations extends Component {
     }
 
     render() {
+        const filterValues = [
+            {
+                value: false,
+                label: 'Show inactive',
+                color: 'red',
+                group: 'Filter by destination status',
+                field: 'isActive'
+            },
+            {
+                value: true,
+                label: 'Show active',
+                color: 'green',
+                group: 'Filter by destination status',
+                field: 'isActive'
+            }
+        ];
         return (
             <div className="ui segments">
                 <div className="ui segment">
@@ -28,6 +44,7 @@ class Destinations extends Component {
                 </div>
                 <div className="ui blue segment">
                     <Table
+                        filters={filterValues}
                         columnNames={{
                             name: 'Name'
                         }}
