@@ -48,11 +48,11 @@ export default(
                 <Route name="My profile" path="profile" component={MyProfile} />
                 <Route name="Trips" path="/trips">
                     <IndexRoute component={Trips} />
+                    <Route name="Sign up" path="signup" component={SignupTrip} />
                     <Route path=":tripId" component={Trip}>
                         <IndexRoute component={TripInfo} />
                         <Route name="edit" path="edit" component={EditTrip} />
                     </Route>
-                    <Route name="Sign up" path="/signup" component={SignupTrip} />
                 </Route>
                 <Route name="Destinations" path="admin/destinations">
                     <IndexRoute component={Destinations} />
