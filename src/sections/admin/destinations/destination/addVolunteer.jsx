@@ -35,8 +35,8 @@ class AddVolunteer extends Component {
     handleSubmit(data) {
         const alteredData = {
             ...data,
-            startDate: data.wishStartDate,
-            endDate: data.wishEndDate,
+            startDate: data.startDate,
+            endDate: data.endDate,
             destinationId: this.props.params.destinationId,
             status: TRIP_STATUSES.ACCEPTED
         };
