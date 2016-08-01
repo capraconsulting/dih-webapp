@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
+import moment from 'moment';
 import { list } from '../../../actions/destinationActions';
 import Header from '../../../commons/pageHeader';
 import Table from '../../../commons/table';
@@ -16,18 +18,36 @@ class Destinations extends Component {
         this.handlers();
     }
 
+    normalizeTripObjectsForTable(items) {
+        const cleanObjects = [];
+        _.mapKeys(items, value => {
+            cleanObjects.push({
+                id: value.id,
+                name: value.name,
+                minimumTripDurationInDays: value.minimumTripDurationInDays,
+                countOfActiveVolunteers: value.countOfActiveVolunteers,
+                isActive: value.isActive ? 'yes' : 'no',
+                startDate: value.startDate ?
+                    moment(value.startDate).format('YYYY-MM-DD') : 'Not set',
+                endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Not set'
+            });
+        });
+        return cleanObjects;
+    }
+
     render() {
+        const dateFields = { from: 'startDate', to: 'endDate' };
         const filterValues = [
             {
-                value: false,
-                label: 'Show inactive',
+                value: 'no',
+                label: 'Show inactive only',
                 color: 'red',
                 group: 'Filter by destination status',
                 field: 'isActive'
             },
             {
-                value: true,
-                label: 'Show active',
+                value: 'yes',
+                label: 'Show active only',
                 color: 'green',
                 group: 'Filter by destination status',
                 field: 'isActive'
@@ -46,14 +66,20 @@ class Destinations extends Component {
                     <Table
                         filters={filterValues}
                         columnNames={{
-                            name: 'Name'
+                            name: 'Name',
+                            startDate: 'Date destination becomes active',
+                            endDate: 'Date destination becomes inactive',
+                            isActive: 'Destination active?',
+                            minimumTripDurationInDays: 'Minimum trip duration (days)',
+                            countOfActiveVolunteers: 'Number of active volunteers at destination'
                         }}
+                        dateFields={dateFields}
                         itemKey="id"
                         link={{
                             columnName: 'name',
                             prefix: '/admin/destinations/'
                         }}
-                        items={this.props.destinations}
+                        items={this.normalizeTripObjectsForTable(this.props.destinations)}
                     />
                 </div>
             </div>
