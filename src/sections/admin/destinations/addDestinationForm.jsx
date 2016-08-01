@@ -32,7 +32,11 @@ function AddDestinationForm(props) {
             <InputField label="Name" type="text">
                 {name}
             </InputField>
-            <InputField label="Minium trip duration (in days)" type="number">
+            <InputField
+                label="Minium trip duration (in days)"
+                type="number"
+                placeholder="10"
+            >
                 {minimumTripDurationInDays}
             </InputField>
             <Button
