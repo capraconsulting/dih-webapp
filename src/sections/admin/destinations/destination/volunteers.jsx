@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import Table from '../../../../commons/Table';
+import Table from '../../../../commons/table';
 import { listForDestination } from '../../../../actions/tripActions';
 
 const createHandlers = (dispatch) => (id) => dispatch(listForDestination(id));
