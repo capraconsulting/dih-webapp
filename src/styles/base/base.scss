@@ -66,13 +66,13 @@ body {
   max-width: 400px;
   margin: 0 auto;
   display: flex;
-  height: 80vh;
+  flex-flow: column;
+  height: 90vh;
   align-items: center;
   justify-content: center;
 }
 
 .layout-public .ui.card {
-  flex: 1;
   margin: 20px 10px 10px 10px;
 }
 

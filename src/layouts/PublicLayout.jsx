@@ -1,19 +1,15 @@
 import React from 'react';
 import PublicHeader from '../commons/PublicHeader';
-import PublicFooter from '../commons/PublicFooter';
 
 function SignUpLayout(props) {
     return (
-        <div>
+        <div className="layout-public">
             <PublicHeader />
-            <div className="layout-public">
-                <div className="ui card fluid">
-                    <div className="content">
-                        {props.children}
-                    </div>
+            <div className="ui card fluid">
+                <div className="content">
+                    {props.children}
                 </div>
             </div>
-            <PublicFooter />
         </div>
     );
 }
