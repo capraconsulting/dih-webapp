@@ -20,6 +20,8 @@ import './table.scss';
 *
 * itemKey: needs to be a key on the objects, and needs to be unique.
 *
+* linkKey (optional): if you want to use another key than itemKey for links, specify here
+*
 * link: is an object describing the links to be created on the table, it needs a
 * prefix and a columnName name, to create a link with the prefix url  followed by the
 * itemKey value for the object.
@@ -44,6 +46,11 @@ class Table extends Component {
             fromDate: null,
             toDate: null
         };
+    }
+
+    getLinkId() {
+        if (this.props.linkKey) return this.props.linkKey;
+        return this.props.itemKey;
     }
 
     filter(array) {
@@ -130,7 +137,7 @@ class Table extends Component {
         if (link && link.columnName === columnNameKey) {
             element = (
                 <td>
-                    <Link to={link.prefix + item[itemKey]} activeClassName="item-active">
+                    <Link to={link.prefix + item[this.getLinkId()]} activeClassName="item-active">
                         {item[columnNameKey]}
                     </Link>
                 </td>
@@ -215,6 +222,7 @@ Table.propTypes = {
     columnNames: PropTypes.object.isRequired,
     items: PropTypes.array.isRequired,
     itemKey: PropTypes.string.isRequired,
+    linkKey: PropTypes.string,
     link: PropTypes.object,
     search: PropTypes.bool,
     filters: PropTypes.arrayOf(PropTypes.shape({

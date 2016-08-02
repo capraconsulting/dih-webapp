@@ -44,7 +44,8 @@ class TripRequestsTable extends Component {
     prepareTableContent(trips) {
         return trips.map(trip => {
             const row = {
-                id: trip.userId,
+                id: trip.id,
+                userId: trip.uiserId,
                 startDate: moment(trip.startDate).format('YYYY-MM-DD'),
                 endDate: trip.endDate ? moment(trip.endDate).format('YYYY-MM-DD') : 'Not set',
                 status: <TripStatusDropdown trip={trip} />
@@ -74,6 +75,7 @@ class TripRequestsTable extends Component {
                 columnNames={this.prepareTableHeaders()}
                 items={this.prepareTableContent(trips)}
                 itemKey="id"
+                linkKey="userId"
                 link={{
                     columnName: 'firstname',
                     prefix: '/admin/users/'
