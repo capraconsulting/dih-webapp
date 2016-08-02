@@ -46,7 +46,9 @@ function EditDestinationForm(props) {
                 <ToggleField
                     id="isActiveToggle"
                     label="Toggle this destination to be active or inactive.
-                    Users can only sign up for active destinations."
+                    Users can only sign up for active destinations.
+                    Toggling this changes the end date."
+                    name="Active"
                 >
                     {isActive}
                 </ToggleField>

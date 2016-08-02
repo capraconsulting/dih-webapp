@@ -38,7 +38,7 @@ class Destination extends Component {
 
     render() {
         return (
-            <div className="ui segment">
+            <div className="ui segment clearing">
                 <Header
                     icon="marker"
                     content={this.props.destination.name}
