@@ -17,12 +17,12 @@ const ToggleField = props => (
     <div className="field">
         <label htmlFor={props.id}>{props.name}</label>
         <div className="ui toggle checkbox">
-            <label>{props.label}</label>
             <input
                 {...props.children}
                 type="checkbox"
                 id={props.id}
             />
+            <label>{props.label}</label>
         </div>
     </div>
 );
@@ -31,7 +31,7 @@ const ToggleField = props => (
 ToggleField.propTypes = {
     children: PropTypes.object.isRequired,
     label: PropTypes.string,
-    name: PropTypes.name,
+    name: PropTypes.string,
     id: PropTypes.string.isRequired
 };
 
