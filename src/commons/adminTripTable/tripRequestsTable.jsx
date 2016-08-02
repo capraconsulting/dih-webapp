@@ -5,18 +5,36 @@ import Table from '../../commons/table';
 import TripStatusDropdown from './tripStatusDropdown';
 
 class TripRequestsTable extends Component {
-    filterTripsByUser(user) {
-        if (!user) return this.props.trips;
-        return this.props.trips.filter(trip => trip.user.id === user.id);
+    getTrips() {
+        let trips = this.props.trips;
+        if (this.props.userId) {
+            trips = this.filterTripsByUser(trips, this.props.userId);
+        }
+        if (this.props.destinationId) {
+            trips = this.filterTripsByDestination(trips, this.props.destinationId);
+        }
+        return trips;
+    }
+
+    filterTripsByUser(trips, userId) {
+        return trips.filter(trip => trip.user.id === userId);
+    }
+
+    filterTripsByDestination(trips, destinationId) {
+        return trips.filter(trip => trip.destinationId === destinationId);
     }
 
     prepareTableHeaders() {
         const headers = {};
-        if (!this.props.user) {
+        if (!this.props.userId) {
             headers.firstname = 'First name';
             headers.lastname = 'Last name';
         }
-        headers.destination = 'Destination';
+
+        if (!this.props.destinationId) {
+            headers.destination = 'Destination';
+        }
+
         headers.startDate = 'Start date';
         headers.endDate = 'End date';
         headers.status = 'Status';
@@ -27,15 +45,18 @@ class TripRequestsTable extends Component {
         return trips.map(trip => {
             const row = {
                 id: trip.id,
-                destination: trip.destination.name,
                 startDate: moment(trip.startDate).format('YYYY-MM-DD'),
                 endDate: trip.endDate ? moment(trip.endDate).format('YYYY-MM-DD') : 'Not set',
                 status: <TripStatusDropdown trip={trip} />
             };
 
-            if (!this.props.user) {
+            if (!this.props.userId) {
                 row.firstname = trip.user.firstname;
                 row.lastname = trip.user.lastname;
+            }
+
+            if (!this.props.destinationId) {
+                row.destination = trip.destination.name;
             }
 
             return row;
@@ -43,8 +64,8 @@ class TripRequestsTable extends Component {
     }
 
     render() {
-        const trips = this.filterTripsByUser(this.props.user);
-        const dateFields = { from: 'wishStartDate', to: 'wishEndDate' };
+        const trips = this.getTrips();
+        const dateFields = { from: 'startDate', to: 'endDate' };
 
         return (
             <Table
@@ -65,7 +86,8 @@ class TripRequestsTable extends Component {
 
 TripRequestsTable.propTypes = {
     trips: PropTypes.array.isRequired,
-    user: PropTypes.object
+    userId: PropTypes.number,
+    destinationId: PropTypes.number
 };
 
 export default TripRequestsTable;

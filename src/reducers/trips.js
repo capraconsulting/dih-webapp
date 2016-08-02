@@ -4,32 +4,24 @@ const initialState = {
     isFetching: false,
     trip: {},
     trips: [],
-    tripsForDestination: [],
     tripsForUser: []
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
+    case actionTypes.GET_TRIP_REQUEST:
     case actionTypes.GET_TRIPS_REQUEST:
+    case actionTypes.GET_TRIPS_FOR_USER_REQUEST:
         return {
             ...state,
             isFetching: true
         };
-    case actionTypes.GET_TRIPS_SUCCESS:
-        return {
-            ...state,
-            isFetching: false,
-            trips: action.res
-        };
+    case actionTypes.GET_TRIP_FAILURE:
     case actionTypes.GET_TRIPS_FAILURE:
+    case actionTypes.GET_TRIPS_FOR_USER_FAILURE:
         return {
             ...state,
             isFetching: false
-        };
-    case actionTypes.GET_TRIP_REQUEST:
-        return {
-            ...state,
-            isFetching: true
         };
     case actionTypes.GET_TRIP_SUCCESS:
         return {
@@ -37,41 +29,16 @@ export default function (state = initialState, action) {
             isFetching: false,
             trip: action.res
         };
-    case actionTypes.GET_TRIP_FAILURE:
+    case actionTypes.GET_TRIPS_SUCCESS:
         return {
             ...state,
-            isFetching: false
-        };
-    case actionTypes.GET_TRIPS_FOR_DESTINATION_REQUEST:
-        return {
-            ...state,
-            isFetching: true
-        };
-    case actionTypes.GET_TRIPS_FOR_DESTINATION_SUCCESS:
-        return {
-            ...state,
-            tripsForDestination: action.res,
-            isFetching: false
-        };
-    case actionTypes.GET_TRIPS_FOR_DESTINATION_FAILURE:
-        return {
-            ...state,
-            isFetching: false
-        };
-    case actionTypes.GET_TRIPS_FOR_USER_REQUEST:
-        return {
-            ...state,
-            isFetching: true
+            isFetching: false,
+            trips: action.res
         };
     case actionTypes.GET_TRIPS_FOR_USER_SUCCESS:
         return {
             ...state,
             tripsForUser: action.res,
-            isFetching: false
-        };
-    case actionTypes.GET_TRIPS_FOR_USER_FAILURE:
-        return {
-            ...state,
             isFetching: false
         };
     default:
