@@ -44,7 +44,7 @@ class TripRequestsTable extends Component {
     prepareTableContent(trips) {
         return trips.map(trip => {
             const row = {
-                id: trip.id,
+                id: trip.userId,
                 startDate: moment(trip.startDate).format('YYYY-MM-DD'),
                 endDate: trip.endDate ? moment(trip.endDate).format('YYYY-MM-DD') : 'Not set',
                 status: <TripStatusDropdown trip={trip} />
