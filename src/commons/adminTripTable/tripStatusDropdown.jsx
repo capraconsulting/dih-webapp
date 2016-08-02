@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { update, list } from '../../../../actions/tripActions';
-import Dropdown from '../../../../commons/Dropdown';
-import { tripStatusesForDropdown } from '../../../../helpers';
+import { update, list } from '../../actions/tripActions';
+import Dropdown from '../Dropdown';
+import { tripStatusesForDropdown } from '../../helpers';
 
 const createHandlers = (dispatch) => (
     {

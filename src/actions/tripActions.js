@@ -16,21 +16,6 @@ export function list() {
     };
 }
 
-export function listForDestination(destinationId) {
-    return {
-        [CALL_API]: {
-            method: 'get',
-            url: `/trips?destinationId=${destinationId}`,
-            types: [
-                types.GET_TRIPS_FOR_DESTINATION_REQUEST,
-                types.GET_TRIPS_FOR_DESTINATION_SUCCESS,
-                types.GET_TRIPS_FOR_DESTINATION_FAILURE
-            ],
-            authenticated: true
-        }
-    };
-}
-
 export function listForUser(userId) {
     return {
         [CALL_API]: {
