@@ -34,7 +34,7 @@ function SignupTripForm(props) {
             <SelectField
                 label="Destination"
                 values={props.destinations}
-                placeholder="No destination preferance"
+                placeholder="No destination preference"
                 allowNullValue
                 valueLabel="name"
                 valueKey="id"
