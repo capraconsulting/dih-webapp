@@ -1,10 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
+import _ from 'lodash';
+
 import Table from '../../../commons/table';
 import Header from '../../../commons/pageHeader';
-
 import { list } from '../../../actions/userActions';
-
 import { USER_ROLES } from '../../../constants';
 
 const createHandlers = (dispatch) => () => dispatch(list());
@@ -19,7 +20,18 @@ class UsersTableContainer extends Component {
         this.handlers();
     }
 
+    normalizeTripObjectsForTable(items) {
+        const cleanObjects = [];
+        _.mapKeys(items, value => {
+            const user = value;
+            user.birth = moment(value.birth).format('YYYY-MM-DD');
+            cleanObjects.push(user);
+        });
+        return cleanObjects;
+    }
+
     render() {
+        const dateFields = { from: 'birth', to: 'birth' };
         const filterValues = [
             {
                 value: USER_ROLES.USER,
@@ -57,9 +69,11 @@ class UsersTableContainer extends Component {
                     <Table
                         search
                         filters={filterValues}
+                        dateFields={dateFields}
                         columnNames={{
                             firstname: 'First name',
                             lastname: 'Last name',
+                            birth: 'Date of birth',
                             email: 'E-mail',
                             role: 'Role'
                         }}
@@ -68,7 +82,7 @@ class UsersTableContainer extends Component {
                             prefix: '/admin/users/'
                         }}
                         itemKey="id"
-                        items={this.props.users}
+                        items={this.normalizeTripObjectsForTable(this.props.users)}
                     />
                 </div>
             </div>
