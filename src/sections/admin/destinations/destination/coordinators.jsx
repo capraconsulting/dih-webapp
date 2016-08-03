@@ -5,8 +5,25 @@ import { USER_ROLES } from '../../../../constants';
 
 import AddCoordinatorForm from './addCoordinatorForm';
 import { list } from '../../../../actions/userActions';
+import { retrieve, update } from '../../../../actions/destinationActions';
+import { pushNotification } from '../../../../actions/notificationActions';
 
-const createHandlers = (dispatch) => () => dispatch(list());
+const createHandlers = (dispatch) => (
+    {
+        list() {
+            return dispatch(list());
+        },
+        retrieve(id) {
+            return dispatch(retrieve(id));
+        },
+        update(destination) {
+            return dispatch(update(destination));
+        },
+        notification(message, level) {
+            return dispatch(pushNotification(message, level));
+        }
+    }
+);
 
 class Coordinators extends Component {
     constructor(props) {
@@ -15,7 +32,8 @@ class Coordinators extends Component {
     }
 
     componentDidMount() {
-        this.handlers();
+        this.handlers.list();
+        this.handlers.retrieve(this.props.params.destinationId);
     }
 
     filterModerators(items) {
@@ -32,7 +50,20 @@ class Coordinators extends Component {
     }
 
     handleSubmit(data) {
-        console.log(data);
+        const users = [];
+        users.push(data);
+
+        console.log({ users });
+
+        this.handlers.update({
+            users,
+            id: this.props.destination.id
+        })
+        .then(response => {
+            const message = 'Coordinator added';
+            const { error } = response;
+            if (!error) this.handlers.notification(message, 'success');
+        });
     }
 
     render() {
@@ -41,6 +72,7 @@ class Coordinators extends Component {
             <div>
                 <AddCoordinatorForm
                     moderators={moderators}
+                    onSubmit={e => { this.handleSubmit(e); }}
                 />
             </div>
         );
@@ -48,11 +80,14 @@ class Coordinators extends Component {
 }
 
 const mapStateToProps = store => ({
+    destination: store.destinationState.destination,
     users: store.userState.users
 });
 
 Coordinators.propTypes = {
+    destination: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
+    params: PropTypes.object.isRequired,
     users: React.PropTypes.array
 };
 
