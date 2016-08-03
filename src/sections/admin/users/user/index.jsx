@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { retrieve, update, destroy } from '../../../../actions/userActions';
 import { retrieve as retrieveAccount } from '../../../../actions/accountActions';
 import { pushNotification } from '../../../../actions/notificationActions';
@@ -69,7 +70,8 @@ class User extends Component {
                 if (this.props.account.id === userId) {
                     this.handlers.retrieveAccount(); // Update sidebar
                 }
-            });
+            })
+            .then(() => browserHistory.push(`/admin/users/${userId}`));
     }
 
     render() {

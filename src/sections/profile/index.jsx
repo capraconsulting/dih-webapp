@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { update, retrieve } from '../../actions/accountActions';
 import { pushNotification } from '../../actions/notificationActions';
 import Header from '../../commons/pageHeader';
@@ -43,7 +44,8 @@ class Profile extends Component {
     onUpdate(data) {
         this.handlers.update(data)
         .then(() => this.handlers.retrieve())
-        .then(() => this.handlers.notification('Profile is updated.', 'success'));
+        .then(() => this.handlers.notification('Profile is updated.', 'success'))
+        .then(() => browserHistory.push('/profile'));
     }
 
     render() {
