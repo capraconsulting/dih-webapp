@@ -17,16 +17,20 @@ class Destination extends Component {
                     uri: `/admin/destinations/${this.props.params.destinationId}`
                 },
                 {
-                    name: 'Email templates',
-                    uri: `/admin/destinations/${this.props.params.destinationId}/emails`
-                },
-                {
                     name: 'Add volunteer',
                     uri: `/admin/destinations/${this.props.params.destinationId}/addvolunteer`
                 },
                 {
                     name: 'Manage coordinators',
                     uri: `/admin/destinations/${this.props.params.destinationId}/coordinators`
+                },
+                {
+                    name: 'Edit destination',
+                    uri: `/admin/destinations/${this.props.params.destinationId}/edit`
+                },
+                {
+                    name: 'Email templates',
+                    uri: `/admin/destinations/${this.props.params.destinationId}/emails`
                 }
             ]
         };
@@ -38,7 +42,7 @@ class Destination extends Component {
 
     render() {
         return (
-            <div className="ui segment">
+            <div className="ui segment clearing">
                 <Header
                     icon="marker"
                     content={this.props.destination.name}

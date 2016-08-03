@@ -63,7 +63,7 @@ class SignupTripFormContainer extends Component {
                 </div>
                 <div className="ui blue segment">
                     <SignupTripForm
-                        destinations={this.props.destinations}
+                        destinations={this.props.destinations.filter(val => (val.isActive))}
                         onSubmit={e => { this.handleSubmit(e); }}
                         errorMessage={this.state.errorMessage}
                         isFetching={this.state.isFetching}
