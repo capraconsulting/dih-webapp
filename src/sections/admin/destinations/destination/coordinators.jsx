@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
@@ -40,22 +39,22 @@ class Coordinators extends Component {
     }
 
     filterModerators(items) {
-        const cleanObjects = [];
-        _.mapKeys(items, value => {
-            if (value.role === USER_ROLES.MODERATOR || value.role === USER_ROLES.ADMIN) {
-                cleanObjects.push({
-                    id: value.id,
-                    name: `${value.firstname} ${value.lastname}`
-                });
+        if (!items) return [];
+        return items.filter(value => (
+            value.role === USER_ROLES.MODERATOR || value.role === USER_ROLES.ADMIN
+        ))
+        .map(value => (
+            {
+                id: value.id,
+                name: `${value.firstname} ${value.lastname}`
             }
-        });
-        return cleanObjects;
+        ));
     }
 
     normalizeCoordinatorObjectsForTable(items) {
-        const cleanObjects = [];
-        _.mapKeys(items, value => {
-            cleanObjects.push({
+        if (!items) return []; // Prevents a TypeError, don't touch, it works now!
+        return items.map(value => (
+            {
                 id: value.id,
                 firstname: value.firstname,
                 lastname: value.lastname,
@@ -63,9 +62,8 @@ class Coordinators extends Component {
                     moment(value.destinationCoordinator.startDate).format('YYYY-MM-DD') : 'Not set',
                 endDate: value.destinationCoordinator.endDate ?
                     moment(value.destinationCoordinator.endDate).format('YYYY-MM-DD') : 'Forever'
-            });
-        });
-        return cleanObjects;
+            }
+        ));
     }
 
     handleSubmit(data) {
@@ -118,7 +116,7 @@ Coordinators.propTypes = {
     destination: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired,
-    users: React.PropTypes.array
+    users: React.PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps)(Coordinators);
