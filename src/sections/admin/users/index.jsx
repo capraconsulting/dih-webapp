@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import _ from 'lodash';
 
 import Table from '../../../commons/table';
 import Header from '../../../commons/pageHeader';
@@ -22,7 +21,7 @@ class UsersTableContainer extends Component {
 
     normalizeTripObjectsForTable(items) {
         const cleanObjects = [];
-        _.mapKeys(items, value => {
+        items.forEach(value => {
             const user = value;
             user.birth = moment(value.birth).format('YYYY-MM-DD');
             cleanObjects.push(user);
