@@ -19,14 +19,13 @@ class UsersTableContainer extends Component {
         this.handlers();
     }
 
-    normalizeTripObjectsForTable(items) {
-        const cleanObjects = [];
-        items.forEach(value => {
+    prepareTableContent(items) {
+        const cleanObjects = items;
+        return cleanObjects.map(value => {
             const user = value;
-            user.birth = moment(value.birth).format('YYYY-MM-DD');
-            cleanObjects.push(user);
+            user.birth = value.birth ? moment(value.birth).format('YYYY-MM-DD') : 'Not set';
+            return user;
         });
-        return cleanObjects;
     }
 
     render() {
@@ -81,7 +80,7 @@ class UsersTableContainer extends Component {
                             prefix: '/admin/users/'
                         }}
                         itemKey="id"
-                        items={this.normalizeTripObjectsForTable(this.props.users)}
+                        items={this.prepareTableContent(this.props.users)}
                     />
                 </div>
             </div>
