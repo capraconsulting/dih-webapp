@@ -11,7 +11,8 @@ import ConfirmSignUp from './sections/signup/confirm';
 import ForgotPassword from './sections/forgotPassword';
 import ForgotPasswordConfirm from './sections/forgotPassword/confirm';
 import Profile from './sections/profile';
-import ProfileInfo from './sections/profile/profileInfo';
+import ViewUser from './commons/user/viewUser';
+import EditUser from './commons/user/editUser';
 import Destination from './sections/admin/destinations/destination';
 import EditDestination from './sections/admin/destinations/destination/editDestination';
 import DestinationVolunteers from './sections/admin/destinations/destination/volunteers';
@@ -29,8 +30,6 @@ import TripInfo from './sections/trips/trip/tripInfo';
 import Email from './sections/admin/email';
 import Users from './sections/admin/users';
 import User from './sections/admin/users/user';
-import ViewUser from './sections/admin/users/user/viewUser';
-import EditUser from './sections/admin/users/user/editUser';
 import TripsForUser from './sections/admin/users/user/tripsForUser';
 import NotFound from './commons/NotFound.jsx';
 
@@ -50,7 +49,8 @@ export default(
             </Route>
             <Route name="Main" path="/" component={MainLayout}>
                 <Route name="My profile" path="/profile" component={Profile} >
-                    <IndexRoute name="View profile" component={ProfileInfo} />
+                    <IndexRoute name="View profile" component={ViewUser} />
+                    <Route name="Edit profile" path="edit" component={EditUser} />
                 </Route>
                 <Route name="Trips" path="/trips">
                     <IndexRoute component={Trips} />

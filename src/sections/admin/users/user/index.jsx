@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { retrieve, update, destroy } from '../../../../actions/userActions';
+import { retrieve as retrieveAccount } from '../../../../actions/accountActions';
 import { pushNotification } from '../../../../actions/notificationActions';
 import Header from '../../../../commons/pageHeader';
 import Navbar from '../../../../commons/navbar';
@@ -18,6 +19,9 @@ const createHandlers = (dispatch) => (
         },
         notification(message, level) {
             return dispatch(pushNotification(message, level));
+        },
+        retrieveAccount() {
+            return dispatch(retrieveAccount());
         }
     }
 );
@@ -53,13 +57,19 @@ class User extends Component {
     }
 
     onUpdate(user) {
-        this.handlers.update({ id: this.props.params.userId, ...user })
+        const userId = parseInt(this.props.params.userId, 10);
+        this.handlers.update({ id: userId, ...user })
             .then(response => {
                 const message = 'User changes saved!';
                 const { error } = response;
                 if (!error) this.handlers.notification(message, 'success');
             })
-            .then(() => this.handlers.retrieve(this.props.params.userId));
+            .then(() => this.handlers.retrieve(this.props.params.userId))
+            .then(() => {
+                if (this.props.account.id === userId) {
+                    this.handlers.retrieveAccount(); // Update sidebar
+                }
+            });
     }
 
     render() {
@@ -74,6 +84,7 @@ class User extends Component {
                 {React.cloneElement(this.props.children, {
                     initialValues: this.props.user,
                     user: this.props.user,
+                    showAdminFields: true,
                     onSubmit: e => this.onUpdate(e)
                 })}
             </div>
@@ -82,12 +93,14 @@ class User extends Component {
 }
 
 const mapStateToProps = store => ({
-    user: store.userState.user
+    user: store.userState.user,
+    account: store.accountState.account
 });
 
 User.propTypes = {
     dispatch: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
+    account: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired
 };

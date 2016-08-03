@@ -40,8 +40,10 @@ class Profile extends Component {
         this.handlers.retrieve();
     }
 
-    onSubmit(data) {
-        this.handlers.update(data);
+    onUpdate(data) {
+        this.handlers.update(data)
+        .then(() => this.handlers.retrieve())
+        .then(() => this.handlers.notification('Profile is updated.', 'success'));
     }
 
     render() {
@@ -55,7 +57,8 @@ class Profile extends Component {
                 <Navbar pages={this.state.pages} />
                 {React.cloneElement(this.props.children, {
                     initialValues: this.props.account,
-                    account: this.props.account,
+                    user: this.props.account,
+                    showAdminFields: false,
                     onSubmit: e => this.onUpdate(e)
                 })}
             </div>

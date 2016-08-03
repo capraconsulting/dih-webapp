@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import moment from 'moment';
 
-import List from './list';
-import ListItem from './list/listItem';
-import FluidListItem from './list/fluidListItem';
+import List from '../list';
+import ListItem from '../list/listItem';
+import FluidListItem from '../list/fluidListItem';
 
 const renderIfAdmin = (props, element) => {
     if (props.showAdminFields) {
@@ -12,7 +12,7 @@ const renderIfAdmin = (props, element) => {
     return '';
 };
 
-const UserInfo = (props) => (
+const ViewUser = (props) => (
     <List>
         <ListItem
             name="First name"
@@ -38,7 +38,7 @@ const UserInfo = (props) => (
         )}
 
         <ListItem
-            name="Age"
+            name="Born"
             icon="birthday"
             content={moment(props.user.birth).fromNow()}
         />
@@ -67,10 +67,10 @@ const UserInfo = (props) => (
     </List>
 );
 
-UserInfo.propTypes = {
+ViewUser.propTypes = {
     user: PropTypes.object.isRequired,
     showAdminFields: PropTypes.bool
 };
 
 
-export default UserInfo;
+export default ViewUser;
