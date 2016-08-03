@@ -90,7 +90,7 @@ function EditUser(props) {
                 </TextField>
 
                 {renderIfAdmin(props,
-                    <TextField rows={3} label="Notes">
+                    <TextField rows={3} label="Notes (only seen by administrators)">
                         {notes}
                     </TextField>
                 )}

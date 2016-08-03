@@ -61,7 +61,7 @@ const ViewUser = (props) => (
         )}
         {renderIfAdmin(props,
             <FluidListItem
-                name="Notes"
+                name="Notes (only seen by administrators)"
                 icon="info circle"
                 content={props.user.notes}
             />
