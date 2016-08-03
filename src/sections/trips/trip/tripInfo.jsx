@@ -23,12 +23,6 @@ const TripInfo = (props) => (
                 moment(props.trip.endDate).format(MOMENT_FORMAT) : 'Not set'}
         />
         <ListItem
-            name="Date of departure towards destinaton"
-            icon="calendar"
-            content={props.trip.departureDate ?
-                moment(props.trip.departureDate).format(MOMENT_FORMAT) : 'Not set'}
-        />
-        <ListItem
             name="Date of arrival at destination"
             icon="calendar"
             content={props.trip.arrivalDate ?

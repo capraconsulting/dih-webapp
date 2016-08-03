@@ -39,7 +39,6 @@ function setEmptyDatesToNull(dirtyTrip) {
     if (trip.startDate === '') trip.startDate = null;
     if (trip.endDate === '') trip.endDate = null;
     if (trip.arrivalDate === '') trip.arrivalDate = null;
-    if (trip.departureDate === '') trip.departureDate = null;
     return trip;
 }
 
