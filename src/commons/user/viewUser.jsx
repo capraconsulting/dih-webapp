@@ -38,9 +38,9 @@ const ViewUser = (props) => (
         )}
 
         <ListItem
-            name="Born"
+            name="Age"
             icon="birthday"
-            content={moment(props.user.birth).fromNow()}
+            content={moment(props.user.birth).fromNow(true)}
         />
         <ListItem
             name="Birthday"
