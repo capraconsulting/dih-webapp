@@ -10,8 +10,8 @@ import SignUp from './sections/signup';
 import ConfirmSignUp from './sections/signup/confirm';
 import ForgotPassword from './sections/forgotPassword';
 import ForgotPasswordConfirm from './sections/forgotPassword/confirm';
-
-import MyProfile from './sections/myProfile/MyProfile';
+import Profile from './sections/profile';
+import ProfileInfo from './sections/profile/profileInfo';
 import Destination from './sections/admin/destinations/destination';
 import EditDestination from './sections/admin/destinations/destination/editDestination';
 import DestinationVolunteers from './sections/admin/destinations/destination/volunteers';
@@ -29,7 +29,7 @@ import TripInfo from './sections/trips/trip/tripInfo';
 import Email from './sections/admin/email';
 import Users from './sections/admin/users';
 import User from './sections/admin/users/user';
-import UserInfo from './sections/admin/users/user/userInfo';
+import ViewUser from './sections/admin/users/user/viewUser';
 import EditUser from './sections/admin/users/user/editUser';
 import TripsForUser from './sections/admin/users/user/tripsForUser';
 import NotFound from './commons/NotFound.jsx';
@@ -49,7 +49,9 @@ export default(
                 </Route>
             </Route>
             <Route name="Main" path="/" component={MainLayout}>
-                <Route name="My profile" path="profile" component={MyProfile} />
+                <Route name="My profile" path="/profile" component={Profile} >
+                    <IndexRoute name="View profile" component={ProfileInfo} />
+                </Route>
                 <Route name="Trips" path="/trips">
                     <IndexRoute component={Trips} />
                     <Route name="Sign up" path="signup" component={SignupTrip} />
@@ -77,7 +79,7 @@ export default(
                 <Route name="Users" path="admin/users">
                     <IndexRoute component={Users} />
                     <Route path=":userId" component={User}>
-                        <IndexRoute component={UserInfo} />
+                        <IndexRoute component={ViewUser} />
                         <Route name="Edit" path="edit" component={EditUser} />
                         <Route name="Trips" path="trips" component={TripsForUser} />
                     </Route>
