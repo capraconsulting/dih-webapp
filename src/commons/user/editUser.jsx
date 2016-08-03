@@ -9,7 +9,7 @@ import SelectField from '../Form/SelectField';
 import TextField from '../Form/TextField';
 import { USER_ROLES } from '../../constants';
 
-const fields = ['firstname', 'lastname', 'email', 'role', 'birth', 'notes'];
+const fields = ['firstname', 'lastname', 'email', 'role', 'birth', 'notes', 'volunteerInfo'];
 
 const renderIfAdmin = (props, element) => {
     if (props.showAdminFields) {
@@ -20,7 +20,7 @@ const renderIfAdmin = (props, element) => {
 
 function EditUser(props) {
     const {
-        fields: { firstname, lastname, email, role, birth, notes },
+        fields: { firstname, lastname, email, role, birth, notes, volunteerInfo },
         handleSubmit,
         errorMessage,
         isFetching
@@ -58,6 +58,13 @@ function EditUser(props) {
                 <DateField label="Date of birth">
                     {birth}
                 </DateField>
+                <TextField
+                    rows={3}
+                    label="Occupation and experience"
+                    placeholder="What do you work with, and what experience do you have?"
+                >
+                    {volunteerInfo}
+                </TextField>
 
                 {renderIfAdmin(props,
                     <TextField rows={3} label="Notes">

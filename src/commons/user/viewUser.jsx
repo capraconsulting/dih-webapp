@@ -47,7 +47,11 @@ const ViewUser = (props) => (
             icon="birthday"
             content={moment(props.user.birth).calendar()}
         />
-
+        <FluidListItem
+            name="Occupation and experience"
+            icon="student"
+            content={props.user.volunteerInfo}
+        />
         {renderIfAdmin(props,
             <ListItem
                 name="Created"
