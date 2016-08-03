@@ -47,18 +47,18 @@ const ViewUser = (props) => (
             icon="birthday"
             content={moment(props.user.birth).calendar()}
         />
+        {renderIfAdmin(props,
+            <ListItem
+                name="Date account was created"
+                icon="add user"
+                content={moment(props.user.createdAt).calendar()}
+            />
+        )}
         <FluidListItem
             name="Occupation and experience"
             icon="student"
             content={props.user.volunteerInfo}
         />
-        {renderIfAdmin(props,
-            <ListItem
-                name="Created"
-                icon="add user"
-                content={moment(props.user.createdAt).calendar()}
-            />
-        )}
         {renderIfAdmin(props,
             <FluidListItem
                 name="Notes (only seen by administrators)"
