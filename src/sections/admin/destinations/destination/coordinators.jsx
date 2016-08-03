@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import moment from 'moment';
+
 import { USER_ROLES } from '../../../../constants';
 
 import AddCoordinatorForm from './addCoordinatorForm';
+import Table from '../../../../commons/table';
 import { list } from '../../../../actions/userActions';
 import { retrieve, update } from '../../../../actions/destinationActions';
 import { pushNotification } from '../../../../actions/notificationActions';
@@ -49,20 +52,37 @@ class Coordinators extends Component {
         return cleanObjects;
     }
 
+    normalizeCoordinatorObjectsForTable(items) {
+        const cleanObjects = [];
+        _.mapKeys(items, value => {
+            cleanObjects.push({
+                id: value.id,
+                firstname: value.firstname,
+                lastname: value.lastname,
+                startDate: value.destinationCoordinator.startDate ?
+                    moment(value.destinationCoordinator.startDate).format('YYYY-MM-DD') : 'Not set',
+                endDate: value.destinationCoordinator.endDate ?
+                    moment(value.destinationCoordinator.endDate).format('YYYY-MM-DD') : 'Forever'
+            });
+        });
+        return cleanObjects;
+    }
+
     handleSubmit(data) {
-        const users = [];
-        users.push(data);
-
-        console.log({ users });
-
-        this.handlers.update({
-            users,
+        const payload = {
+            users: [data],
             id: this.props.destination.id
-        })
+        };
+        payload.users[0].userId = parseInt(payload.users[0].userId, 10);
+
+        this.handlers.update(payload)
         .then(response => {
             const message = 'Coordinator added';
             const { error } = response;
-            if (!error) this.handlers.notification(message, 'success');
+            if (!error) {
+                this.handlers.notification(message, 'success');
+                this.handlers.retrieve(this.props.params.destinationId);
+            }
         });
     }
 
@@ -70,6 +90,16 @@ class Coordinators extends Component {
         const moderators = this.filterModerators(this.props.users);
         return (
             <div>
+                <Table
+                    columnNames={{
+                        firstname: 'First name',
+                        lastname: 'Last name',
+                        startDate: 'Active from',
+                        endDate: 'Active to'
+                    }}
+                    itemKey="id"
+                    items={this.normalizeCoordinatorObjectsForTable(this.props.destination.users)}
+                />
                 <AddCoordinatorForm
                     moderators={moderators}
                     onSubmit={e => { this.handleSubmit(e); }}
