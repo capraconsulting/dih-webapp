@@ -67,7 +67,7 @@ export const login = (data) => dispatch => {
     return axios(config)
         .then(res => {
             localStorage.setItem('jwt', res.data.jwt);
-            browserHistory.push('/');
+            browserHistory.push('/profile');
             return dispatch(receiveLogin(res.data));
         })
         .catch(err => dispatch(loginError(err.data.message)));
