@@ -8,8 +8,31 @@ import InputField from '../Form/InputField';
 import SelectField from '../Form/SelectField';
 import TextField from '../Form/TextField';
 import { USER_ROLES } from '../../constants';
+import { emailIsValid } from '../../helpers';
 
 const fields = ['firstname', 'lastname', 'email', 'role', 'birth', 'notes', 'volunteerInfo'];
+
+const validate = values => {
+    const errors = {};
+    if (!values.email) {
+        errors.email = 'Required';
+    } else if (!emailIsValid(values.email)) {
+        errors.email = 'Invalid email address';
+    }
+    if (!values.lastname) {
+        errors.lastname = 'Required';
+    }
+    if (!values.firstname) {
+        errors.firstname = 'Required';
+    }
+    if (!values.birth) {
+        errors.birth = 'Required';
+    }
+    if (!values.volunteerInfo) {
+        errors.volunteerInfo = 'Required. Please tell us about yourself!';
+    }
+    return errors;
+};
 
 const renderIfAdmin = (props, element) => {
     if (props.showAdminFields) {
@@ -98,5 +121,6 @@ EditUser.propTypes = {
 
 export default reduxForm({
     form: 'editUserForm',
-    fields
+    fields,
+    validate
 })(EditUser);
