@@ -33,19 +33,21 @@ class Coordinators extends Component {
     }
 
     render() {
+        const dateFields = { from: 'startDate', to: 'endDate' };
+
         return (
-            <div>
-                <Table
-                    columnNames={{
-                        firstname: 'First name',
-                        lastname: 'Last name',
-                        startDate: 'Active from',
-                        endDate: 'Active to'
-                    }}
-                    itemKey="id"
-                    items={this.normalizeCoordinatorObjectsForTable(this.props.destination.users)}
-                />
-            </div>
+            <Table
+                search
+                dateFields={dateFields}
+                columnNames={{
+                    firstname: 'First name',
+                    lastname: 'Last name',
+                    startDate: 'Active from',
+                    endDate: 'Active to'
+                }}
+                itemKey="id"
+                items={this.normalizeCoordinatorObjectsForTable(this.props.destination.users)}
+            />
         );
     }
 }
