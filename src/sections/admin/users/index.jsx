@@ -1,10 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
+
 import Table from '../../../commons/table';
 import Header from '../../../commons/pageHeader';
-
 import { list } from '../../../actions/userActions';
-
 import { USER_ROLES } from '../../../constants';
 
 const createHandlers = (dispatch) => () => dispatch(list());
@@ -19,7 +19,16 @@ class UsersTableContainer extends Component {
         this.handlers();
     }
 
+    prepareTableContent(items) {
+        return items.map(value => {
+            const user = value;
+            user.birth = value.birth ? moment(value.birth).format('YYYY-MM-DD') : 'Not set';
+            return user;
+        });
+    }
+
     render() {
+        const dateFields = { from: 'birth', to: 'birth' };
         const filterValues = [
             {
                 value: USER_ROLES.USER,
@@ -57,9 +66,11 @@ class UsersTableContainer extends Component {
                     <Table
                         search
                         filters={filterValues}
+                        dateFields={dateFields}
                         columnNames={{
                             firstname: 'First name',
                             lastname: 'Last name',
+                            birth: 'Date of birth',
                             email: 'E-mail',
                             role: 'Role'
                         }}
@@ -68,7 +79,7 @@ class UsersTableContainer extends Component {
                             prefix: '/admin/users/'
                         }}
                         itemKey="id"
-                        items={this.props.users}
+                        items={this.prepareTableContent(this.props.users)}
                     />
                 </div>
             </div>
