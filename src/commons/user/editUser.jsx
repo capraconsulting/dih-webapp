@@ -123,7 +123,7 @@ function EditUser(props) {
                 <Button
                     type="submit"
                     color="green"
-                    right
+                    fluid
                     disabled={isFetching}
                     loading={isFetching}
                     id="submit"
