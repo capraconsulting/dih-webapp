@@ -87,7 +87,7 @@ export default(
                 </Route>
                 <Route name="Email" path="admin/email/:emailId" component={Email} />
                 <Route name="Trips" path="admin/trips">
-                    <IndexRoute component="TripRequests" />
+                    <IndexRoute component={TripRequests} />
                     <Route path=":tripId" component={AdminTrip} />
                 </Route>
                 <Route name="Not found" path="*" component={NotFound} />

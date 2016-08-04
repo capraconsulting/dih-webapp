@@ -3,8 +3,23 @@ import { connect } from 'react-redux';
 
 import Header from '../../../../commons/pageHeader';
 import { retrieve } from '../../../../actions/tripActions';
+import { retrieve as retrieveDestination } from '../../../../actions/destinationActions';
+import { retrieve as retrieveUser } from '../../../../actions/userActions';
 
-const createHandlers = (dispatch) => (id) => dispatch(retrieve(id));
+
+const createHandlers = (dispatch) => (
+    {
+        retrieve(id) {
+            return dispatch(retrieve(id));
+        },
+        retrieveDestination(id) {
+            return dispatch(retrieveDestination(id));
+        },
+        retrieveUser(id) {
+            return dispatch(retrieveUser(id));
+        }
+    }
+);
 
 class Trip extends Component {
     constructor(props) {
@@ -13,17 +28,22 @@ class Trip extends Component {
     }
 
     componentDidMount() {
-        this.handlers(this.props.params.tripId);
+        this.handlers.retrieve(this.props.params.tripId)
+        .then(() => {
+            this.handlers.retrieveDestination(this.props.trip.destinationId);
+            this.handlers.retrieveUser(this.props.trip.userId);
+        });
     }
 
     render() {
-        console.log(this.props.trip);
+        const headerTitle = `Trip to ${this.props.destination.name}`;
+
         return (
             <div className="ui segments">
                 <div className="ui segment">
                     <Header
                         icon="plane"
-                        content="Trip to [Destination name]"
+                        content={headerTitle}
                         subContent="Manage trip"
                     />
                 </div>
@@ -35,13 +55,17 @@ class Trip extends Component {
 }
 
 const mapStateToProps = store => ({
-    trip: store.tripState.trip
+    destination: store.destinationState.destination,
+    trip: store.tripState.trip,
+    user: store.userState.user
 });
 
 Trip.propTypes = {
+    destination: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired,
-    trip: PropTypes.object.isRequired
+    trip: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(Trip);
