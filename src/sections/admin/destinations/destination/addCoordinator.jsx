@@ -51,6 +51,7 @@ class AddCoordinator extends Component {
             id: this.props.params.destinationId
         };
         payload.users[0].userId = parseInt(payload.users[0].userId, 10);
+        if (!payload.users[0].endDate) payload.users[0].endDate = null;
 
         this.handlers.update(payload)
         .then(response => {
