@@ -7,7 +7,7 @@ import DateField from '../Form/DateField';
 import InputField from '../Form/InputField';
 import SelectField from '../Form/SelectField';
 import TextField from '../Form/TextField';
-import ToggleFIeld from '../Form/ToggleField';
+import ToggleField from '../Form/ToggleField';
 import { USER_ROLES } from '../../constants';
 import { emailIsValid } from '../../helpers';
 
@@ -99,7 +99,7 @@ function EditUser(props) {
                 )}
 
                 {renderIfAdmin(props,
-                    <ToggleFIeld
+                    <ToggleField
                         name="Guidelines for A Drop in the Ocean"
                         label={`User confirmation of reading the guidelines.
                         <a target="_blank" href="http://www.drapenihavet.no/wp-content/uploads/2016/07/Guidelines-for-volunteer-workers-July.16.pdf">
@@ -107,9 +107,9 @@ function EditUser(props) {
                         id="readTerms"
                     >
                         {readTerms}
-                    </ToggleFIeld>
+                    </ToggleField>
                 ,
-                    <ToggleFIeld
+                    <ToggleField
                         name="Guidelines for A Drop in the Ocean"
                         label={`I confirm that I have read the guidelines for A Drop in the Ocean.
                         <a target="_blank" href="http://www.drapenihavet.no/wp-content/uploads/2016/07/Guidelines-for-volunteer-workers-July.16.pdf">
@@ -117,7 +117,7 @@ function EditUser(props) {
                         id="readTerms"
                     >
                         {readTerms}
-                    </ToggleFIeld>
+                    </ToggleField>
                 )}
 
                 <Button
