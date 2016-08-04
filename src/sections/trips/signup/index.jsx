@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import SignupTripForm from './SignupTripForm';
 import Header from '../../../commons/pageHeader';
 import { create } from '../../../actions/tripActions';
@@ -28,12 +29,21 @@ class SignupTripFormContainer extends Component {
         this.handlers.list();
     }
 
+    userAllowedToSignUp() {
+        const account = this.props.account;
+        if (!account.readTerms || !account.firstname ||
+            !account.lastname || !account.birth || !account.volunteerInfo) {
+            return false;
+        }
+        return true;
+    }
+
     handleSubmit(data) {
         this.setState({
             isFetching: true
         });
         const trip = data;
-        trip.wishStartDate = data.startDate; // Cannot be null, but not used anymore
+        trip.wishStartDate = data.startDate; // Cannot be null. Field is not used anymore.
         this.handlers.create(trip)
             .then(response => {
                 let success = null;
@@ -50,6 +60,31 @@ class SignupTripFormContainer extends Component {
             });
     }
 
+    renderSignUpForTripForm() {
+        if (this.userAllowedToSignUp()) {
+            return (
+                <SignupTripForm
+                    destinations={this.props.destinations.filter(val => (val.isActive))}
+                    onSubmit={e => { this.handleSubmit(e); }}
+                    errorMessage={this.state.errorMessage}
+                    isFetching={this.state.isFetching}
+                    successMessage={this.state.successMessage}
+                />
+            );
+        }
+        return (
+            <div>
+                <h3>
+                    To register for a trip, you'll have to complete your profile.
+                </h3>
+                <h3>
+                    Go to <Link to="/profile/edit">your profile</Link> and
+                    add more information, then come back here.
+                </h3>
+            </div>
+        );
+    }
+
     render() {
         return (
             <div className="ui segments">
@@ -62,13 +97,7 @@ class SignupTripFormContainer extends Component {
                     />
                 </div>
                 <div className="ui blue segment">
-                    <SignupTripForm
-                        destinations={this.props.destinations.filter(val => (val.isActive))}
-                        onSubmit={e => { this.handleSubmit(e); }}
-                        errorMessage={this.state.errorMessage}
-                        isFetching={this.state.isFetching}
-                        successMessage={this.state.successMessage}
-                    />
+                    {this.renderSignUpForTripForm()}
                 </div>
             </div>
         );
@@ -76,12 +105,14 @@ class SignupTripFormContainer extends Component {
 }
 
 const mapStateToProps = store => ({
-    destinations: store.destinationState.destinations
+    destinations: store.destinationState.destinations,
+    account: store.accountState.account
 });
 
 SignupTripFormContainer.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    destinations: PropTypes.array.isRequired
+    destinations: PropTypes.array.isRequired,
+    account: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(SignupTripFormContainer);
