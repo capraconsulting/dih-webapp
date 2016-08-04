@@ -20,8 +20,7 @@ class UsersTableContainer extends Component {
     }
 
     prepareTableContent(items) {
-        const cleanObjects = items;
-        return cleanObjects.map(value => {
+        return items.map(value => {
             const user = value;
             user.birth = value.birth ? moment(value.birth).format('YYYY-MM-DD') : 'Not set';
             return user;
