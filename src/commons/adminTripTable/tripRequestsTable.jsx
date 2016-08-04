@@ -45,7 +45,7 @@ class TripRequestsTable extends Component {
         return trips.map(trip => {
             const row = {
                 id: trip.id,
-                userId: trip.uiserId,
+                userId: trip.userId,
                 startDate: moment(trip.startDate).format('YYYY-MM-DD'),
                 endDate: trip.endDate ? moment(trip.endDate).format('YYYY-MM-DD') : 'Not set',
                 status: <TripStatusDropdown trip={trip} />
@@ -64,6 +64,29 @@ class TripRequestsTable extends Component {
         });
     }
 
+    linkKey() {
+        if (!this.props.userId) {
+            return 'userId';
+        }
+
+        return 'id';
+    }
+
+    linkElement() {
+        if (!this.props.userId) {
+            return {
+                columnName: 'firstname',
+                prefix: '/admin/users/',
+                suffix: '/trips'
+            };
+        }
+
+        return {
+            columnName: 'destination',
+            prefix: '/admin/trips/'
+        };
+    }
+
     render() {
         const trips = this.getTrips();
         const dateFields = { from: 'startDate', to: 'endDate' };
@@ -75,11 +98,8 @@ class TripRequestsTable extends Component {
                 columnNames={this.prepareTableHeaders()}
                 items={this.prepareTableContent(trips)}
                 itemKey="id"
-                linkKey="userId"
-                link={{
-                    columnName: 'firstname',
-                    prefix: '/admin/users/'
-                }}
+                linkKey={this.linkKey()}
+                link={this.linkElement()}
             />
         );
     }
