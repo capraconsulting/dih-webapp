@@ -62,7 +62,7 @@ function AddCoordinatorForm(props) {
                 loading={isFetching}
                 id="submit"
             >
-                Update coordinators
+                Add coordinator
             </Button>
         </Form>
     );
