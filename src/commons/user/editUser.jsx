@@ -102,7 +102,7 @@ function EditUser(props) {
                     <ToggleField
                         name="Guidelines for A Drop in the Ocean"
                         label={`User confirmation of reading the guidelines.
-                        <a target="_blank" href="http://www.drapenihavet.no/wp-content/uploads/2016/07/Guidelines-for-volunteer-workers-July.16.pdf">
+                        <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/wp-content/uploads/2016/07/Guidelines-for-volunteer-workers-July.16.pdf">
                         Click here to read the guidelines</a>.`}
                         id="readTerms"
                     >
@@ -112,7 +112,7 @@ function EditUser(props) {
                     <ToggleField
                         name="Guidelines for A Drop in the Ocean"
                         label={`I confirm that I have read the guidelines for A Drop in the Ocean.
-                        <a target="_blank" href="http://www.drapenihavet.no/wp-content/uploads/2016/07/Guidelines-for-volunteer-workers-July.16.pdf">
+                        <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/wp-content/uploads/2016/07/Guidelines-for-volunteer-workers-July.16.pdf">
                         Click here to read the guidelines</a>.`}
                         id="readTerms"
                     >

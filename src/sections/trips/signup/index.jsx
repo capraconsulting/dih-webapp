@@ -31,11 +31,8 @@ class SignupTripFormContainer extends Component {
 
     userAllowedToSignUp() {
         const account = this.props.account;
-        if (!account.readTerms || !account.firstname ||
-            !account.lastname || !account.birth || !account.volunteerInfo) {
-            return false;
-        }
-        return true;
+        return account.readTerms && account.firstname &&
+               account.lastname && account.birth && account.volunteerInfo;
     }
 
     handleSubmit(data) {
