@@ -60,6 +60,13 @@ const ViewUser = (props) => (
             content={props.user.volunteerInfo}
         />
         {renderIfAdmin(props,
+            <ListItem
+                name="Has the user confirmed that he/she has read the guidelines?"
+                icon="book"
+                content={props.user.readTerms ? 'Yes' : 'No'}
+            />
+        )}
+        {renderIfAdmin(props,
             <FluidListItem
                 name="Notes (only seen by administrators)"
                 icon="info circle"
