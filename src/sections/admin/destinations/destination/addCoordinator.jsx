@@ -46,12 +46,15 @@ class AddCoordinator extends Component {
     }
 
     handleSubmit(data) {
+        const user = data;
+        user.userId = parseInt(user.userId, 10);
+
+        if (!user.endDate) user.endDate = null;
+
         const payload = {
-            users: [data],
+            users: [user],
             id: this.props.params.destinationId
         };
-        payload.users[0].userId = parseInt(payload.users[0].userId, 10);
-        if (!payload.users[0].endDate) payload.users[0].endDate = null;
 
         this.handlers.update(payload)
         .then(response => {
