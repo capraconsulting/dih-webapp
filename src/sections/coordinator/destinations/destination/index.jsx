@@ -1,8 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+
+import { USER_ROLES } from '../../../../constants';
 import { retrieve } from '../../../../actions/destinationActions';
 import Header from '../../../../commons/pageHeader';
-import Navbar from '../../../../commons/navbar';
+import AdminTripTable from '../../../../commons/adminTripTable';
 
 const createHandlers = (dispatch) => (id) => dispatch(retrieve(id));
 
@@ -10,18 +12,6 @@ class Destination extends Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
-        this.state = {
-            pages: [
-                {
-                    name: 'Volunteers',
-                    uri: `/coordinator/destinations/${this.props.params.destinationId}`
-                },
-                {
-                    name: 'Add volunteer',
-                    uri: `/coordinator/destinations/${this.props.params.destinationId}/addvolunteer`
-                }
-            ]
-        };
     }
 
     componentDidMount() {
@@ -30,14 +20,20 @@ class Destination extends Component {
 
     render() {
         return (
-            <div className="ui segment clearing">
-                <Header
-                    icon="marker"
-                    content={this.props.destination.name}
-                    subContent="Manage destination"
-                />
-                <Navbar pages={this.state.pages} />
-                {this.props.children}
+            <div className="ui segments">
+                <div className="ui segment">
+                    <Header
+                        icon="marker"
+                        content={this.props.destination.name}
+                        subContent="Manage destination"
+                    />
+                </div>
+                <div className="ui segment">
+                    <AdminTripTable
+                        destinationId={parseInt(this.props.params.destinationId, 10)}
+                        role={USER_ROLES.MODERATOR}
+                    />
+                </div>
             </div>
         );
     }

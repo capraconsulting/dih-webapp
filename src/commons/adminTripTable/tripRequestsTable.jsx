@@ -53,7 +53,7 @@ class TripRequestsTable extends Component {
         return trips.map(trip => {
             const row = {
                 id: trip.id,
-                userId: trip.uiserId,
+                userId: trip.userId,
                 startDate: moment(trip.startDate).format('YYYY-MM-DD'),
                 endDate: trip.endDate ? moment(trip.endDate).format('YYYY-MM-DD') : 'Not set',
                 status: <TripStatusDropdown trip={trip} />
