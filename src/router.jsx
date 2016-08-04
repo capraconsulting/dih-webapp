@@ -25,6 +25,8 @@ import TripInfo from './sections/trips/trip/tripInfo';
 
 // Coordinator
 import CoordinatorDestinations from './sections/coordinator/destinations';
+import CoordinatorDestination from './sections/coordinator/destinations/destination';
+import CoordinatorVolunteers from './sections/coordinator/destinations/destination/volunteers';
 
 // admin
 import Users from './sections/admin/users';
@@ -74,6 +76,9 @@ export default(
                 </Route>
                 <Route name="Destinations" path="coordinator/destinations">
                     <IndexRoute component={CoordinatorDestinations} />
+                    <Route path=":destinationId" component={CoordinatorDestination}>
+                        <IndexRoute component={CoordinatorVolunteers} />
+                    </Route>
                 </Route>
                 <Route name="Destinations" path="admin/destinations">
                     <Route component={Destinations}>

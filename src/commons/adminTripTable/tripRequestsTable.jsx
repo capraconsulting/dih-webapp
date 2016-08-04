@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 
+import { USER_ROLES } from '../../constants';
 import Table from '../../commons/table';
 import TripStatusDropdown from './tripStatusDropdown';
 
@@ -41,6 +42,13 @@ class TripRequestsTable extends Component {
         return headers;
     }
 
+    prepareLinkPrefix() {
+        if (this.props.role === USER_ROLES.MODERATOR) {
+            return '/coordinator/users/';
+        }
+        return '/admin/users/';
+    }
+
     prepareTableContent(trips) {
         return trips.map(trip => {
             const row = {
@@ -78,7 +86,7 @@ class TripRequestsTable extends Component {
                 linkKey="userId"
                 link={{
                     columnName: 'firstname',
-                    prefix: '/admin/users/'
+                    prefix: this.prepareLinkPrefix()
                 }}
             />
         );
@@ -89,7 +97,8 @@ class TripRequestsTable extends Component {
 TripRequestsTable.propTypes = {
     trips: PropTypes.array.isRequired,
     userId: PropTypes.number,
-    destinationId: PropTypes.number
+    destinationId: PropTypes.number,
+    role: PropTypes.string
 };
 
 export default TripRequestsTable;
