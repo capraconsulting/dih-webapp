@@ -51,40 +51,11 @@ class Trip extends Component {
                         content={headerTitle}
                         subContent="Manage trip"
                     />
-                </div>
-                <div className="ui segment">
-                    <List>
-                        <ListItem
-                            name="First name"
-                            icon="user"
-                            content={this.props.user.firstname}
-                        />
-                        <ListItem
-                            name="Last name"
-                            icon="user"
-                            content={this.props.user.lastname}
-                        />
-                        <ListItem
-                            name="E-mail"
-                            icon="at"
-                            content={this.props.user.email}
-                        />
-                        <ListItem
-                            name="Age"
-                            icon="birthday"
-                            content={moment(this.props.user.birth).fromNow(true)}
-                        />
-                        <ListItem
-                            name="Birthday"
-                            icon="birthday"
-                            content={moment(this.props.user.birth).calendar()}
-                        />
-                        <FluidListItem
-                            name="Occupation and experience"
-                            icon="student"
-                            content={this.props.user.volunteerInfo}
-                        />
-                    </List>
+                    {React.cloneElement(this.props.children, {
+                        initialValues: this.props.trip,
+                        trip: this.props.trip,
+                        onSubmit: e => this.onUpdate(e)
+                    })}
                 </div>
             </div>
         );
@@ -98,6 +69,7 @@ const mapStateToProps = store => ({
 });
 
 Trip.propTypes = {
+    children: PropTypes.object.isRequired,
     destination: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired,
