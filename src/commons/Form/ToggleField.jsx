@@ -7,7 +7,7 @@ import React, { PropTypes } from 'react';
 *
 * name - string: Name for toggle, placed above it.
 *
-* label - string: Label for toggle, placed to the right of the toggle.
+* label - string: Label for toggle, placed to the right of the toggle. It allows HTML.
 *
 * children - object: A redux form object.
 *
@@ -22,7 +22,7 @@ const ToggleField = props => (
                 type="checkbox"
                 id={props.id}
             />
-            <label>{props.label}</label>
+            <label dangerouslySetInnerHTML={{ __html: props.label }} />
         </div>
     </div>
 );
