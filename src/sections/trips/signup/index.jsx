@@ -1,10 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import moment from 'moment';
 import SignupTripForm from './SignupTripForm';
 import Header from '../../../commons/pageHeader';
 import { create } from '../../../actions/tripActions';
 import { list } from '../../../actions/destinationActions';
+import { pushNotification } from '../../../actions/notificationActions';
 
 const createHandlers = dispatch => ({
     create(data) {
@@ -12,6 +14,9 @@ const createHandlers = dispatch => ({
     },
     list() {
         return dispatch(list());
+    },
+    notification(message, level) {
+        return dispatch(pushNotification(message, level));
     }
 });
 
@@ -41,20 +46,37 @@ class SignupTripFormContainer extends Component {
         });
         const trip = data;
         trip.wishStartDate = data.startDate; // Cannot be null. Field is not used anymore.
-        this.handlers.create(trip)
-            .then(response => {
-                let success = null;
-                const { error } = response;
-                if (!error) {
-                    success = `We have registered your trip request and
-                    will respond by email as soon as possible.`;
-                }
+        if (trip.endDate) {
+            const timeDiff = moment(trip.endDate).diff(moment(trip.startDate), 'days');
+            const destId = parseInt(trip.destinationId, 10);
+            const destination = this.props.destinations.filter(e => e.id === destId)[0];
+            if (destination && timeDiff < destination.minimumTripDurationInDays) {
+                const msg = `Trip duration has to be longer
+                than ${destination.minimumTripDurationInDays} days for this destination.
+                If you're unsure of the length of your stay, don't set any end date, and
+                explain your situation in the "Additional information" field at the bottom.`;
                 this.setState({
-                    errorMessage: error,
                     isFetching: false,
-                    successMessage: success
+                    errorMessage: msg,
+                    successMessage: null
                 });
+                return;
+            }
+        }
+        this.handlers.create(trip)
+        .then(response => {
+            let success = null;
+            const { error } = response;
+            if (!error) {
+                success = `We have registered your trip request and
+                will respond by email as soon as possible.`;
+            }
+            this.setState({
+                errorMessage: error,
+                isFetching: false,
+                successMessage: success
             });
+        });
     }
 
     renderSignUpForTripForm() {
