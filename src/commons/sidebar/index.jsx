@@ -60,7 +60,7 @@ class Sidebar extends Component {
             {this.props.account.role === 'ADMIN' && <SidebarMenuGroup groupName="Admin" icon="user">
                 <SidebarMenuItem uri="/admin/users" itemName="Users" />
                 <SidebarMenuItem uri="/admin/destinations" itemName="Destinations" />
-                <SidebarMenuItem uri="/admin/trips" itemName="Trip Requests" />
+                <SidebarMenuItem uri="/admin/trips" itemName="Trips" />
             </SidebarMenuGroup>}
             <Account account={this.props.account} onLogout={e => { this.handleLogout(e); }} />
         </div>);
