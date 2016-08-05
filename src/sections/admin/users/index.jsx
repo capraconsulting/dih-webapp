@@ -1,26 +1,37 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import Table from '../../../commons/table';
 import Header from '../../../commons/pageHeader';
 
 import { list } from '../../../actions/userActions';
+import { addRecipients } from '../../../actions/messageActions';
 
 import { USER_ROLES } from '../../../constants';
 
-const createHandlers = (dispatch) => () => dispatch(list());
+const createHandlers = (dispatch) => (
+    {
+        list() {
+            return dispatch(list());
+        },
+        addRecipients(users) {
+            return dispatch(addRecipients(users));
+        }
+    }
+);
 
 class UsersTableContainer extends Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
-    }
-
-    componentDidMount() {
-        this.handlers();
-    }
-
-    render() {
-        const filterValues = [
+        this.actions = [
+            {
+                name: 'Send message',
+                icon: 'send',
+                action: this.sendMessage = this.sendMessage.bind(this)
+            }
+        ];
+        this.filterValues = [
             {
                 value: USER_ROLES.USER,
                 label: 'User',
@@ -43,7 +54,18 @@ class UsersTableContainer extends Component {
                 field: 'role'
             }
         ];
+    }
 
+    componentDidMount() {
+        this.handlers.list();
+    }
+
+    sendMessage(selected) {
+        this.handlers.addRecipients(selected);
+        browserHistory.push('/admin/message/compose');
+    }
+
+    render() {
         return (
             <div className="ui segments">
                 <div className="ui segment">
@@ -56,7 +78,10 @@ class UsersTableContainer extends Component {
                 <div className="ui blue segment">
                     <Table
                         search
-                        filters={filterValues}
+                        select
+                        selected={this.selected}
+                        actions={this.actions}
+                        filters={this.filterValues}
                         columnNames={{
                             firstname: 'First name',
                             lastname: 'Last name',

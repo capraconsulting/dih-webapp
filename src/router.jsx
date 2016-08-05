@@ -28,6 +28,11 @@ import EditTrip from './sections/trips/trip/editTrip';
 import TripInfo from './sections/trips/trip/tripInfo';
 import Email from './sections/admin/email';
 import Users from './sections/admin/users';
+import Message from './sections/admin/message';
+import RecipientsMessage from './sections/admin/message/recipients';
+import ComposeMessage from './sections/admin/message/compose';
+import MessageSummary from './sections/admin/message/summary';
+import MessageSend from './sections/admin/message/send';
 import User from './sections/admin/users/user';
 import UserInfo from './sections/admin/users/user/userInfo';
 import EditUser from './sections/admin/users/user/editUser';
@@ -81,6 +86,12 @@ export default(
                         <Route name="Edit" path="edit" component={EditUser} />
                         <Route name="Trips" path="trips" component={TripsForUser} />
                     </Route>
+                </Route>
+                <Route name="message" path="admin/message" component={Message}>
+                    <Route name="recipients" path="recipients" component={RecipientsMessage} />
+                    <Route name="compose" path="compose" component={ComposeMessage} />
+                    <Route name="summary" path="summary" component={MessageSummary} />
+                    <Route name="send" path="send" component={MessageSend} />
                 </Route>
                 <Route name="Email" path="admin/email/:emailId" component={Email} />
                 <Route name="Trips" path="admin/trips" component={TripRequests} />
