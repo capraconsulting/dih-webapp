@@ -68,14 +68,6 @@ class TripRequestsTable extends Component {
         });
     }
 
-    linkKey() {
-        if (!this.props.userId) {
-            return 'userId';
-        }
-
-        return 'id';
-    }
-
     linkElement() {
         if (!this.props.userId) {
             return {
@@ -102,7 +94,7 @@ class TripRequestsTable extends Component {
                 columnNames={this.prepareTableHeaders()}
                 items={this.prepareTableContent(trips)}
                 itemKey="id"
-                linkKey={this.linkKey()}
+                linkKey={this.props.userId ? 'id' : 'userId'}
                 link={this.linkElement()}
             />
         );
