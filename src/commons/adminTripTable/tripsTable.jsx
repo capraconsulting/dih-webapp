@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 
-import { USER_ROLES } from '../../constants';
+import { USER_ROLES, TRIP_STATUSES } from '../../constants';
 import Table from '../../commons/table';
 import TripStatusDropdown from './tripStatusDropdown';
 
@@ -50,7 +50,12 @@ class TripRequestsTable extends Component {
     }
 
     prepareTableContent(trips) {
-        return trips.map(trip => {
+        let filteredTrips = trips;
+        if (this.props.requestsOnly) {
+            filteredTrips = trips.filter(trip => (trip.status === TRIP_STATUSES.PENDING));
+        }
+
+        return filteredTrips.map(trip => {
             const row = {
                 id: trip.id,
                 userId: trip.userId,
@@ -98,7 +103,8 @@ TripRequestsTable.propTypes = {
     trips: PropTypes.array.isRequired,
     userId: PropTypes.number,
     destinationId: PropTypes.number,
-    role: PropTypes.string
+    role: PropTypes.string,
+    requestsOnly: PropTypes.bool
 };
 
 export default TripRequestsTable;

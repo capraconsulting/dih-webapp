@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import TripRequestsTable from './tripRequestsTable';
+import TripsTable from './tripsTable';
 import { list } from '../../actions/tripActions';
 
 /*
@@ -29,11 +29,12 @@ class AdminTripTable extends Component {
 
     render() {
         return (
-            <TripRequestsTable
+            <TripsTable
                 trips={this.props.trips}
                 userId={this.props.userId}
                 destinationId={this.props.destinationId}
                 role={this.props.role}
+                requestsOnly={this.props.requestsOnly}
             />
         );
     }
@@ -48,7 +49,8 @@ AdminTripTable.propTypes = {
     dispatch: PropTypes.func.isRequired,
     userId: PropTypes.number,
     destinationId: PropTypes.number,
-    role: PropTypes.string
+    role: PropTypes.string,
+    requestsOnly: PropTypes.bool
 };
 
 export default connect(mapStateToProps)(AdminTripTable);
