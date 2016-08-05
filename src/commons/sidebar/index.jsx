@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+
+import { USER_ROLES } from '../../constants';
 import { retrieve } from '../../actions/accountActions';
 import { logout } from '../../actions/authenticationActions';
 import Account from './Account';
@@ -60,13 +62,13 @@ class Sidebar extends Component {
                 <SidebarMenuItem uri="/trips/signup" itemName="Sign up for a trip" />
             </SidebarMenuGroup>
 
-            {this.props.account.role === 'MODERATOR' &&
+            {this.props.account.role === USER_ROLES.MODERATOR &&
                 <SidebarMenuGroup groupName="Coordinator" icon="comments">
                     <SidebarMenuItem uri="/coordinator/destinations" itemName="My destinations" />
                 </SidebarMenuGroup>
             }
 
-            {this.props.account.role === 'ADMIN' &&
+            {this.props.account.role === USER_ROLES.ADMIN &&
                 <SidebarMenuGroup groupName="Admin" icon="user">
                     <SidebarMenuItem uri="/admin/users" itemName="Users" />
                     <SidebarMenuItem uri="/admin/destinations" itemName="Destinations" />
