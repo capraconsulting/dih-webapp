@@ -40,7 +40,7 @@ class AddVolunteer extends Component {
             endDate: data.endDate,
             wishStartDate: data.startDate, // Cannot be null. Not used.
             destinationId: this.props.params.destinationId,
-            status: TRIP_STATUSES.ACCEPTED,
+            status: TRIP_STATUSES.PENDING,
             notes: data.notes
         };
         this.handlers.create(alteredData)
@@ -48,8 +48,8 @@ class AddVolunteer extends Component {
             const message = 'Volunteer added';
             const { error } = response;
             if (!error) this.handlers.notification(message, 'success');
-        })
-        .then(() => browserHistory.push(`/admin/destinations/${this.props.params.destinationId}`));
+            browserHistory.push(`/admin/destinations/${this.props.params.destinationId}`);
+        });
     }
 
     render() {
