@@ -30,7 +30,8 @@ class Trips extends React.Component {
     }
 
     normalizeTripObjectsForTable(items) {
-        return items.map(value => (
+        return items.filter(value => (value.status !== TRIP_STATUSES.CLOSED))
+        .map(value => (
             {
                 id: value.id,
                 status: value.status,
@@ -83,13 +84,6 @@ class Trips extends React.Component {
                 color: 'red',
                 label: 'Rejected',
                 value: TRIP_STATUSES.REJECTED,
-                group: 'Trip status',
-                field: 'status'
-            },
-            {
-                color: 'black',
-                label: 'Closed',
-                value: TRIP_STATUSES.CLOSED,
                 group: 'Trip status',
                 field: 'status'
             }
