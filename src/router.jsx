@@ -17,10 +17,12 @@ import ForgotPasswordConfirm from './sections/forgotPassword/confirm';
 import Profile from './sections/profile';
 import ViewUser from './commons/user/viewUser';
 import EditUser from './commons/user/editUser';
+
 import SignupTrip from './sections/trips/signup';
 import Trips from './sections/trips/';
 import Trip from './sections/trips/trip';
 import EditTrip from './sections/trips/trip/editTrip';
+import CancelTrip from './sections/trips/trip/cancelTrip';
 import TripInfo from './sections/trips/trip/tripInfo';
 
 // Coordinator
@@ -41,6 +43,8 @@ import DestinationEmails from './sections/admin/destinations/destination/emailTe
 import DestinationAddVolunteer from './sections/admin/destinations/destination/addVolunteer';
 import DestinationsTable from './sections/admin/destinations/destinationsTable';
 import AddDestination from './sections/admin/destinations/addDestination';
+import DestinationCoordinators from './sections/admin/destinations/destination/coordinators';
+import DestinationAddCoordinator from './sections/admin/destinations/destination/addCoordinator';
 import Email from './sections/admin/email';
 
 import TripRequests from './sections/admin/trips';
@@ -71,7 +75,8 @@ export default(
                     <Route name="Sign up" path="signup" component={SignupTrip} />
                     <Route path=":tripId" component={Trip}>
                         <IndexRoute component={TripInfo} />
-                        <Route name="edit" path="edit" component={EditTrip} />
+                        <Route name="Edit" path="edit" component={EditTrip} />
+                        <Route name="Cancel" path="cancel" component={CancelTrip} />
                     </Route>
                 </Route>
                 <Route name="Destinations" path="coordinator/destinations">
@@ -93,6 +98,14 @@ export default(
                             path="addvolunteer"
                             component={DestinationAddVolunteer}
                         />
+                        <Route name="Coordinators" path="coordinators">
+                            <IndexRoute component={DestinationCoordinators} />
+                            <Route
+                                name="Add coordinator"
+                                path="new"
+                                component={DestinationAddCoordinator}
+                            />
+                        </Route>
                     </Route>
                 </Route>
                 <Route name="Users" path="admin/users">

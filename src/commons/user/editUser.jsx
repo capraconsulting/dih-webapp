@@ -7,10 +7,13 @@ import DateField from '../Form/DateField';
 import InputField from '../Form/InputField';
 import SelectField from '../Form/SelectField';
 import TextField from '../Form/TextField';
+import ToggleField from '../Form/ToggleField';
 import { USER_ROLES } from '../../constants';
 import { emailIsValid } from '../../helpers';
 
-const fields = ['firstname', 'lastname', 'email', 'role', 'birth', 'notes', 'volunteerInfo'];
+const fields = [
+    'firstname', 'lastname', 'email', 'role', 'birth', 'notes', 'volunteerInfo', 'readTerms'
+];
 
 const validate = values => {
     const errors = {};
@@ -34,16 +37,16 @@ const validate = values => {
     return errors;
 };
 
-const renderIfAdmin = (props, element) => {
+const renderIfAdmin = (props, elementForAdmin, elementForUser) => {
     if (props.showAdminFields) {
-        return element;
+        return elementForAdmin;
     }
-    return '';
+    return elementForUser || '';
 };
 
 function EditUser(props) {
     const {
-        fields: { firstname, lastname, email, role, birth, notes, volunteerInfo },
+        fields: { firstname, lastname, email, role, birth, notes, volunteerInfo, readTerms },
         handleSubmit,
         errorMessage,
         isFetching
@@ -93,6 +96,28 @@ function EditUser(props) {
                     <TextField rows={3} label="Notes (only seen by administrators)">
                         {notes}
                     </TextField>
+                )}
+
+                {renderIfAdmin(props,
+                    <ToggleField
+                        name="Guidelines for A Drop in the Ocean"
+                        label={`User confirmation of reading the guidelines.
+                        <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/wp-content/uploads/2016/07/Guidelines-for-volunteer-workers-July.16.pdf">
+                        Click here to read the guidelines</a>.`}
+                        id="readTerms"
+                    >
+                        {readTerms}
+                    </ToggleField>
+                ,
+                    <ToggleField
+                        name="Guidelines for A Drop in the Ocean"
+                        label={`I confirm that I have read the guidelines for A Drop in the Ocean.
+                        <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/wp-content/uploads/2016/07/Guidelines-for-volunteer-workers-July.16.pdf">
+                        Click here to read the guidelines</a>.`}
+                        id="readTerms"
+                    >
+                        {readTerms}
+                    </ToggleField>
                 )}
 
                 <Button

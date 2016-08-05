@@ -18,7 +18,9 @@ export default store => next => action => { // eslint-disable-line
     API.interceptors.response.use(response => (
         Promise.resolve(response)
     ), error => {
-        if (error.status === 401) store.dispatch(logout());
+        if (error.status >= 400 && error.status < 500) {
+            store.dispatch(logout()); // Errors lead to logout
+        }
         return Promise.reject(error);
     });
 
