@@ -18,16 +18,21 @@ import EditDestination from './sections/admin/destinations/destination/editDesti
 import DestinationVolunteers from './sections/admin/destinations/destination/volunteers';
 import DestinationEmails from './sections/admin/destinations/destination/emailTemplates';
 import DestinationAddVolunteer from './sections/admin/destinations/destination/addVolunteer';
+import DestinationCoordinators from './sections/admin/destinations/destination/coordinators';
+import DestinationAddCoordinator from './sections/admin/destinations/destination/addCoordinator';
 import Destinations from './sections/admin/destinations';
 import DestinationsTable from './sections/admin/destinations/destinationsTable';
 import AddDestination from './sections/admin/destinations/addDestination';
 import SignupTrip from './sections/trips/signup';
 import Trips from './sections/trips/';
 import Trip from './sections/trips/trip';
-import TripRequests from './sections/admin/trips';
 import AdminTrip from './sections/admin/trips/trip';
-import EditTrip from './sections/trips/trip/editTrip';
 import TripInfo from './commons/trip/tripInfo';
+import AdminTrips from './sections/admin/trips';
+import AdminTripsAll from './sections/admin/trips/allTrips';
+import AdminTripsRequests from './sections/admin/trips/tripRequests';
+import EditTrip from './sections/trips/trip/editTrip';
+import CancelTrip from './sections/trips/trip/cancelTrip';
 import Email from './sections/admin/email';
 import Users from './sections/admin/users';
 import User from './sections/admin/users/user';
@@ -58,7 +63,8 @@ export default(
                     <Route name="Sign up" path="signup" component={SignupTrip} />
                     <Route path=":tripId" component={Trip}>
                         <IndexRoute component={TripInfo} />
-                        <Route name="edit" path="edit" component={EditTrip} />
+                        <Route name="Edit" path="edit" component={EditTrip} />
+                        <Route name="Cancel" path="cancel" component={CancelTrip} />
                     </Route>
                 </Route>
                 <Route name="Destinations" path="admin/destinations">
@@ -75,6 +81,14 @@ export default(
                             path="addvolunteer"
                             component={DestinationAddVolunteer}
                         />
+                        <Route name="Coordinators" path="coordinators">
+                            <IndexRoute component={DestinationCoordinators} />
+                            <Route
+                                name="Add coordinator"
+                                path="new"
+                                component={DestinationAddCoordinator}
+                            />
+                        </Route>
                     </Route>
                 </Route>
                 <Route name="Users" path="admin/users">
@@ -86,11 +100,12 @@ export default(
                     </Route>
                 </Route>
                 <Route name="Email" path="admin/email/:emailId" component={Email} />
-                <Route name="Trips" path="admin/trips">
-                    <IndexRoute component={TripRequests} />
-                    <Route path=":tripId" component={AdminTrip}>
-                        <IndexRoute component={TripInfo} />
-                    </Route>
+                <Route name="Trips" path="admin/trips" component={AdminTrips}>
+                    <IndexRoute component={AdminTripsAll} />
+                    <Route name="Trip requests" path="requests" component={AdminTripsRequests} />
+                </Route>
+                <Route path="admin/trips/:tripId" component={AdminTrip}>
+                    <IndexRoute component={TripInfo} />
                 </Route>
                 <Route name="Not found" path="*" component={NotFound} />
             </Route>
