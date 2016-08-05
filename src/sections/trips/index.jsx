@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import _ from 'lodash';
 
 import Header from '../../commons/pageHeader';
 import Table from '../../commons/table';
@@ -31,17 +30,15 @@ class Trips extends React.Component {
     }
 
     normalizeTripObjectsForTable(items) {
-        const cleanObjects = [];
-        _.mapKeys(items, value => {
-            cleanObjects.push({
+        return items.map(value => (
+            {
                 id: value.id,
                 status: value.status,
                 destinationName: value.destination.name,
                 startDate: moment(value.startDate).format('YYYY-MM-DD'),
                 endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Not set'
-            });
-        });
-        return cleanObjects;
+            }
+        ));
     }
 
     render() {
