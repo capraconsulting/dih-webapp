@@ -149,7 +149,7 @@ function EditTrip(props) {
                 <Button
                     type="submit"
                     color="green"
-                    right
+                    fluid
                     loading={isFetching}
                     id="submit"
                 >
