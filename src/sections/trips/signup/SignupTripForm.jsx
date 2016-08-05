@@ -9,6 +9,8 @@ import SelectField from '../../../commons/Form/SelectField';
 
 const fields = ['destinationId', 'notes', 'startDate', 'endDate'];
 
+let selectedDestination;
+
 const validate = values => { // eslint-disable-line
     const errors = {};
     if (!values.startDate) errors.startDate = 'Required';
@@ -24,6 +26,32 @@ function SignupTripForm(props) {
         isFetching
     } = props;
 
+
+    let dateFields = '';
+    const renderDateFields = () => {
+        const maxDate = (selectedDestination && selectedDestination.endDate) ?
+                moment(selectedDestination.endDate) : null;
+        dateFields = (
+            <div>
+                <DateField
+                    label="Date you wish to start your trip"
+                    minDate={moment()}
+                    maxDate={maxDate || moment(endDate.value)}
+                >
+                    {startDate}
+                </DateField>
+                <DateField
+                    label="Date you wish to end your trip (optional)"
+                    minDate={moment(startDate.value) || moment()}
+                    maxDate={maxDate}
+                >
+                    {endDate}
+                </DateField>
+            </div>
+        );
+    };
+
+    renderDateFields();
     return (
         <Form
             id="signUpTripForm"
@@ -38,21 +66,16 @@ function SignupTripForm(props) {
                 allowNullValue
                 valueLabel="name"
                 valueKey="id"
+                onInput={(event) => {
+                    const destId = parseInt(event.target.value, 10);
+                    selectedDestination = props.destinations.filter(e => e.id === destId)[0];
+                    renderDateFields(); // Updates date limits based on destination
+                }}
             >
                 {destinationId}
             </SelectField>
-            <DateField
-                label="Date you wish to start your trip"
-                minDate={moment()}
-            >
-                {startDate}
-            </DateField>
-            <DateField
-                label="Date you wish to end your trip (optional)"
-                minDate={moment()}
-            >
-                {endDate}
-            </DateField>
+            {dateFields}
+
             <TextField type="text" rows={3} label="Additional information / questions">
                 {notes}
             </TextField>
