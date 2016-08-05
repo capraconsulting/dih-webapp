@@ -11,6 +11,11 @@ const MOMENT_FORMAT = 'YYYY-MM-DD';
 const TripInfo = (props) => (
     <List>
         <ListItem
+            name="Status"
+            icon="circle"
+            content={props.trip.status}
+        />
+        <ListItem
             name="Start date"
             icon="calendar"
             content={props.trip.startDate ?
