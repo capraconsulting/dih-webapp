@@ -13,20 +13,10 @@ class Trips extends React.Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
-        this.state = {
-            loaded: false
-        };
     }
 
-    // This is hack of sorts. Normally "componentDidMount() {this.handlers(...)}" will do the job,
-    // but that won't work in this case. The reason is that when the component intitially mounts,
-    // this.props.account is undefined. Since componentDidMount is only called once,
-    // the content would never be displayed.
-    componentWillReceiveProps(nextProps) {
-        if (!this.state.loaded) {
-            this.handlers(nextProps.account.id);
-            this.setState({ loaded: true });
-        }
+    componentDidMount() {
+        this.handlers(this.props.account.id);
     }
 
     normalizeTripObjectsForTable(items) {
