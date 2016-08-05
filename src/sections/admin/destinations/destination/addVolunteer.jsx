@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import AddVolunteerForm from './addVolunteerForm';
 import { create } from '../../../../actions/tripActions';
@@ -37,15 +38,17 @@ class AddVolunteer extends Component {
             ...data,
             startDate: data.startDate,
             endDate: data.endDate,
+            wishStartDate: data.startDate, // Cannot be null. Not used.
             destinationId: this.props.params.destinationId,
             status: TRIP_STATUSES.ACCEPTED
         };
         this.handlers.create(alteredData)
-            .then(response => {
-                const message = 'Volunteer added';
-                const { error } = response;
-                if (!error) this.handlers.notification(message, 'success');
-            });
+        .then(response => {
+            const message = 'Volunteer added';
+            const { error } = response;
+            if (!error) this.handlers.notification(message, 'success');
+        })
+        .then(() => browserHistory.push(`/admin/destinations/${this.props.params.destinationId}`));
     }
 
     render() {
