@@ -26,6 +26,7 @@ export const USER_ROLES = {
  * @property {string} CLOSED - The trip is closed, hence the user has completed this trip
  * @property {string} PRESENT - User is present at destination
  * @property {string} LEFT - User has left destination
+ * @property {string} NOSHOW - User did not show up at destination
  */
 export const TRIP_STATUSES = {
     PENDING: 'PENDING',
@@ -34,7 +35,8 @@ export const TRIP_STATUSES = {
     ACTIVE: 'ACTIVE',
     CLOSED: 'CLOSED',
     PRESENT: 'PRESENT',
-    LEFT: 'LEFT'
+    LEFT: 'LEFT',
+    NOSHOW: 'NO SHOW'
 };
 
 /**
