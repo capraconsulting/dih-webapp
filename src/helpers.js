@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 import { TRIP_STATUSES } from './constants';
 
 export function tripStatusesForDropdown() {
@@ -14,4 +15,31 @@ export function tripStatusesForDropdown() {
 
 export function emailIsValid(email) {
     return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+}
+
+/*
+ * getErrorMessageForTripSubmission
+ * @param trip Object - trip object to be validated.
+ * @param destination Object - destination the trip is regarding.
+ * @returns msg String - Error message that can be shown to the user, or null.
+ */
+export function getErrorMessageForTripSubmission(trip, destination) {
+    let msg = null;
+    // Destination won't be acitve
+    if (destination.endDate && moment(destination.endDate) <= moment(trip.startDate)) {
+        msg = `The destination will be inactive at that poiint.
+        As of now it seems we will end it at ${destination.endDate}.
+        Please select a start date that corresponds with that, but do
+        not hesitate to add any note regarding the time period in the
+        "Additional information" field`;
+    } else if (trip.endDate) { // Trip too short
+        const timeDiff = moment(trip.endDate).diff(moment(trip.startDate), 'days');
+        if (destination && timeDiff < destination.minimumTripDurationInDays) {
+            msg = `Trip duration has to be longer
+            than ${destination.minimumTripDurationInDays} days for this destination.
+            If you're unsure of the length of your stay, don't set any end date, and
+            explain your situation in the "Additional information" field at the bottom.`;
+        }
+    }
+    return msg;
 }
