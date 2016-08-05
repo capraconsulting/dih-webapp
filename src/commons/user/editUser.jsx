@@ -81,7 +81,10 @@ function EditUser(props) {
                     </SelectField>
                 )}
 
-                <DateField label="Date of birth">
+                <DateField
+                    label="Date of birth"
+                    placeholder="YYYY-MM-DD"
+                >
                     {birth}
                 </DateField>
                 <TextField
