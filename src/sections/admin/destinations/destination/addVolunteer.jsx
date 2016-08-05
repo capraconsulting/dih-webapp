@@ -40,7 +40,8 @@ class AddVolunteer extends Component {
             endDate: data.endDate,
             wishStartDate: data.startDate, // Cannot be null. Not used.
             destinationId: this.props.params.destinationId,
-            status: TRIP_STATUSES.ACCEPTED
+            status: TRIP_STATUSES.ACCEPTED,
+            notes: data.notes
         };
         this.handlers.create(alteredData)
         .then(response => {
