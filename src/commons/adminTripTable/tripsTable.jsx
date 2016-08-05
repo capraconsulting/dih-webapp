@@ -3,6 +3,7 @@ import moment from 'moment';
 
 import Table from '../../commons/table';
 import TripStatusDropdown from './tripStatusDropdown';
+import { TRIP_STATUSES } from '../../constants';
 
 class TripRequestsTable extends Component {
     getTrips() {
@@ -42,7 +43,12 @@ class TripRequestsTable extends Component {
     }
 
     prepareTableContent(trips) {
-        return trips.map(trip => {
+        let filteredTrips = trips;
+        if (this.props.requestsOnly) {
+            filteredTrips = trips.filter(trip => (trip.status === TRIP_STATUSES.PENDING));
+        }
+
+        return filteredTrips.map(trip => {
             const row = {
                 id: trip.id,
                 userId: trip.uiserId,
@@ -89,7 +95,8 @@ class TripRequestsTable extends Component {
 TripRequestsTable.propTypes = {
     trips: PropTypes.array.isRequired,
     userId: PropTypes.number,
-    destinationId: PropTypes.number
+    destinationId: PropTypes.number,
+    requestsOnly: PropTypes.bool
 };
 
 export default TripRequestsTable;
