@@ -28,8 +28,7 @@ class TripRequestsTable extends Component {
     prepareTableHeaders() {
         const headers = {};
         if (!this.props.userId) {
-            headers.firstname = 'First name';
-            headers.lastname = 'Last name';
+            headers.fullName = 'Name';
         }
 
         if (!this.props.destinationId) {
@@ -58,8 +57,7 @@ class TripRequestsTable extends Component {
             };
 
             if (!this.props.userId) {
-                row.firstname = trip.user.firstname;
-                row.lastname = trip.user.lastname;
+                row.fullName = trip.user.fullName;
             }
 
             if (!this.props.destinationId) {
@@ -81,7 +79,7 @@ class TripRequestsTable extends Component {
     linkElement() {
         if (!this.props.userId) {
             return {
-                columnName: 'firstname',
+                columnName: 'fullName',
                 prefix: '/admin/users/',
                 suffix: '/trips'
             };
