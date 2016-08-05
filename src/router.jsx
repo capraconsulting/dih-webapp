@@ -28,6 +28,7 @@ import AdminTrips from './sections/admin/trips';
 import AdminTripsAll from './sections/admin/trips/allTrips';
 import AdminTripsRequests from './sections/admin/trips/tripRequests';
 import EditTrip from './sections/trips/trip/editTrip';
+import CancelTrip from './sections/trips/trip/cancelTrip';
 import TripInfo from './sections/trips/trip/tripInfo';
 import Email from './sections/admin/email';
 import Users from './sections/admin/users';
@@ -59,7 +60,8 @@ export default(
                     <Route name="Sign up" path="signup" component={SignupTrip} />
                     <Route path=":tripId" component={Trip}>
                         <IndexRoute component={TripInfo} />
-                        <Route name="edit" path="edit" component={EditTrip} />
+                        <Route name="Edit" path="edit" component={EditTrip} />
+                        <Route name="Cancel" path="cancel" component={CancelTrip} />
                     </Route>
                 </Route>
                 <Route name="Destinations" path="admin/destinations">
