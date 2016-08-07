@@ -119,25 +119,39 @@ class Table extends Component {
         return this.sort(array);
     }
 
-    handleSearchChange(searchText) {
-        this.setState({
-            searchText,
-            selected: this.applyFilters(this.props.items)
+    setStatePromise(newState) {
+        return new Promise((resolve) => {
+            this.setState(newState, () => {
+                resolve();
+            });
         });
+    }
+
+    handleSearchChange(searchText) {
+        this.setStatePromise({
+            searchText
+        })
+        .then(() => this.updateSelected());
     }
 
     handleFilterChange(activeFilter) {
-        this.setState({
-            activeFilter,
-            selected: this.applyFilters(this.props.items)
-        });
+        this.setStatePromise({
+            activeFilter
+        })
+        .then(() => this.updateSelected());
     }
 
     handleDateFilterChange(fromDate, toDate) {
-        this.setState({
+        this.setStatePromise({
             fromDate,
-            toDate,
-            selected: this.applyFilters(this.props.items)
+            toDate
+        })
+        .then(() => this.updateSelected());
+    }
+
+    updateSelected() {
+        this.setState({
+            selected: this.applyFilters(this.state.selected)
         });
     }
 
