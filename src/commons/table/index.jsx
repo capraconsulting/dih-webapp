@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router';
 import moment from 'moment';
-
 import SearchField from './searchField';
 import Filter from './filter';
 import DateInterval from './dateInterval';
