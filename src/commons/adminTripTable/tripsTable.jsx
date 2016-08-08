@@ -98,6 +98,7 @@ class TripRequestsTable extends Component {
             <Table
                 search
                 dateFields={dateFields}
+                rowCounter="trips"
                 columnNames={this.prepareTableHeaders()}
                 items={this.prepareTableContent(trips)}
                 itemKey="id"
