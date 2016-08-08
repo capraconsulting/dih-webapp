@@ -6,7 +6,7 @@ const Actions = (props) => (
     <div>
         {props.actions.length === 1 &&
             <div
-                className="ui icon top right button labeled actions"
+                className="ui icon top right button labeled primary actions"
                 onClick={() => props.actions[0].action(props.selected)}
             >
                 <i className={`${props.actions[0].icon} icon`} />
@@ -14,7 +14,7 @@ const Actions = (props) => (
             </div>
         }
         {props.actions.length > 1 &&
-            <Dropdown icon="wrench" class="actions" label="Actions">
+            <Dropdown icon="wrench" class="actions primary" label="Actions">
                 {props.actions.map(action =>
                     <DropdownItem
                         disabled={props.selected.length === 0}
