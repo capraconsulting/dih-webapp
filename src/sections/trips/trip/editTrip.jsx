@@ -19,8 +19,7 @@ const fields = [
     'otherTravelInformation',
     'departureAirport',
     'flightNumber',
-    'arrivalDate',
-    'departureDate'
+    'arrivalDate'
 ];
 
 function EditTrip(props) {
@@ -34,8 +33,7 @@ function EditTrip(props) {
             otherTravelInformation,
             departureAirport,
             flightNumber,
-            arrivalDate,
-            departureDate
+            arrivalDate
         },
         handleSubmit,
         errorMessage,
@@ -106,14 +104,6 @@ function EditTrip(props) {
                 </DateField>
 
                 <DateField
-                    label="Date of departure towards the destination"
-                    minDate={moment()}
-                    allowNullValue
-                    id="departureDate"
-                >
-                    {departureDate}
-                </DateField>
-                <DateField
                     label="Date of arrival at destination"
                     minDate={moment()}
                     allowNullValue
@@ -159,7 +149,7 @@ function EditTrip(props) {
                 <Button
                     type="submit"
                     color="green"
-                    right
+                    fluid
                     loading={isFetching}
                     id="submit"
                 >

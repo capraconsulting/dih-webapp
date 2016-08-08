@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import _ from 'lodash';
 
 import Header from '../../commons/pageHeader';
 import Table from '../../commons/table';
@@ -14,34 +13,23 @@ class Trips extends React.Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
-        this.state = {
-            loaded: false
-        };
     }
 
-    // This is hack of sorts. Normally "componentDidMount() {this.handlers(...)}" will do the job,
-    // but that won't work in this case. The reason is that when the component intitially mounts,
-    // this.props.account is undefined. Since componentDidMount is only called once,
-    // the content would never be displayed.
-    componentWillReceiveProps(nextProps) {
-        if (!this.state.loaded) {
-            this.handlers(nextProps.account.id);
-            this.setState({ loaded: true });
-        }
+    componentDidMount() {
+        this.handlers(this.props.account.id);
     }
 
     normalizeTripObjectsForTable(items) {
-        const cleanObjects = [];
-        _.mapKeys(items, value => {
-            cleanObjects.push({
+        return items.filter(value => (value.status !== TRIP_STATUSES.CLOSED))
+        .map(value => (
+            {
                 id: value.id,
                 status: value.status,
                 destinationName: value.destination.name,
                 startDate: moment(value.startDate).format('YYYY-MM-DD'),
                 endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Not set'
-            });
-        });
-        return cleanObjects;
+            }
+        ));
     }
 
     render() {
@@ -86,13 +74,6 @@ class Trips extends React.Component {
                 color: 'red',
                 label: 'Rejected',
                 value: TRIP_STATUSES.REJECTED,
-                group: 'Trip status',
-                field: 'status'
-            },
-            {
-                color: 'black',
-                label: 'Closed',
-                value: TRIP_STATUSES.CLOSED,
                 group: 'Trip status',
                 field: 'status'
             }

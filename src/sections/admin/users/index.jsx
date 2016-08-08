@@ -1,12 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import moment from 'moment';
 import Table from '../../../commons/table';
 import Header from '../../../commons/pageHeader';
-
 import { list } from '../../../actions/userActions';
 import { addRecipients } from '../../../actions/messageActions';
-
 import { USER_ROLES } from '../../../constants';
 
 const createHandlers = (dispatch) => (
@@ -31,6 +30,7 @@ class UsersTableContainer extends Component {
                 action: this.sendMessage = this.sendMessage.bind(this)
             }
         ];
+        this.dateFields = { from: 'birth', to: 'birth' };
         this.filterValues = [
             {
                 value: USER_ROLES.USER,
@@ -60,6 +60,14 @@ class UsersTableContainer extends Component {
         this.handlers.list();
     }
 
+    prepareTableContent(items) {
+        return items.map(value => {
+            const user = value;
+            user.birth = value.birth ? moment(value.birth).format('YYYY-MM-DD') : 'Not set';
+            return user;
+        });
+    }
+
     sendMessage(selected) {
         this.handlers.addRecipients(selected);
         browserHistory.push('/admin/message/compose');
@@ -82,9 +90,11 @@ class UsersTableContainer extends Component {
                         selected={this.selected}
                         actions={this.actions}
                         filters={this.filterValues}
+                        dateFields={this.dateFields}
                         columnNames={{
                             firstname: 'First name',
                             lastname: 'Last name',
+                            birth: 'Date of birth',
                             email: 'E-mail',
                             role: 'Role'
                         }}
@@ -93,7 +103,7 @@ class UsersTableContainer extends Component {
                             prefix: '/admin/users/'
                         }}
                         itemKey="id"
-                        items={this.props.users}
+                        items={this.prepareTableContent(this.props.users)}
                     />
                 </div>
             </div>

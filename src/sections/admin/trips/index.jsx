@@ -1,21 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Header from '../../../commons/pageHeader';
-import AdminTripTable from '../../../commons/adminTripTable';
+import Navbar from '../../../commons/navbar';
 
-const Trips = () => (
-    <div className="ui segments">
-        <div className="ui segment">
-            <Header
-                icon="plane"
-                content="Trip requests"
-                subContent="Review trip requests from volunteers"
-            />
-        </div>
-        <div className="ui segment">
-            <AdminTripTable />
-        </div>
-    </div>
-);
+class Trips extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            pages: [
+                {
+                    name: 'All trips',
+                    uri: '/admin/trips'
+                },
+                {
+                    name: 'Requests',
+                    uri: '/admin/trips/requests'
+                }
+            ]
+        };
+    }
+
+    render() {
+        return (
+            <div className="ui segment">
+                <Header
+                    icon="plane"
+                    content="Trips"
+                    subContent="Manage and review trips from volunteers"
+                />
+                <Navbar pages={this.state.pages} />
+                {this.props.children}
+            </div>
+        );
+    }
+}
 
 export default Trips;

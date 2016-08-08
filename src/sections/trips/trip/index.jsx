@@ -7,6 +7,7 @@ import Navbar from '../../../commons/navbar';
 import { retrieve, update } from '../../../actions/tripActions';
 import { retrieve as retrieveDestination } from '../../../actions/destinationActions';
 import { pushNotification } from '../../../actions/notificationActions';
+import { TRIP_STATUSES } from '../../../constants';
 
 const createHandlers = (dispatch) => (
     {
@@ -39,7 +40,6 @@ function setEmptyDatesToNull(dirtyTrip) {
     if (trip.startDate === '') trip.startDate = null;
     if (trip.endDate === '') trip.endDate = null;
     if (trip.arrivalDate === '') trip.arrivalDate = null;
-    if (trip.departureDate === '') trip.departureDate = null;
     return trip;
 }
 
@@ -56,6 +56,10 @@ class Trip extends React.Component {
                 {
                     name: 'Edit',
                     uri: `/trips/${this.props.params.tripId}/edit`
+                },
+                {
+                    name: 'Cancel',
+                    uri: `/trips/${this.props.params.tripId}/cancel`
                 }
             ]
         };
@@ -79,6 +83,17 @@ class Trip extends React.Component {
         .then(() => browserHistory.push(`/trips/${this.props.params.tripId}`));
     }
 
+    onCancel() {
+        this.handlers.update({ status: TRIP_STATUSES.CLOSED, id: this.props.params.tripId })
+        .then(response => {
+            const message = 'Trip is canceled.';
+            const { error } = response;
+            if (!error) this.handlers.notification(message, 'success');
+            if (error) this.handlers.notification('There was a problem. Try again later.', 'error');
+            browserHistory.push('/trips');
+        });
+    }
+
     render() {
         return (
             <div className="ui segment clearing">
@@ -91,7 +106,9 @@ class Trip extends React.Component {
                 {React.cloneElement(this.props.children, {
                     initialValues: this.props.trip,
                     trip: this.props.trip,
-                    onSubmit: e => this.onUpdate(e)
+                    destination: this.props.destination,
+                    onSubmit: e => this.onUpdate(e),
+                    onCancel: e => this.onCancel(e)
                 })}
             </div>
         );

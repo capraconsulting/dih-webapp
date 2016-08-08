@@ -12,6 +12,9 @@ const fields = ['destinationId', 'notes', 'startDate', 'endDate'];
 const validate = values => { // eslint-disable-line
     const errors = {};
     if (!values.startDate) errors.startDate = 'Required';
+    if (values.endDate && values.startDate > values.endDate) {
+        errors.endDate = 'Must be a date after the start date';
+    }
     return errors;
 };
 
@@ -49,7 +52,7 @@ function SignupTripForm(props) {
             </DateField>
             <DateField
                 label="Date you wish to end your trip (optional)"
-                minDate={moment()}
+                minDate={moment(startDate.value) || moment()}
             >
                 {endDate}
             </DateField>

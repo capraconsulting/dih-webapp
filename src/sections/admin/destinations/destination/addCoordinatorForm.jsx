@@ -6,9 +6,8 @@ import Button from '../../../../commons/Button';
 import Form from '../../../../commons/Form';
 import DateField from '../../../../commons/Form/DateField';
 import SelectField from '../../../../commons/Form/SelectField';
-import TextField from '../../../../commons/Form/TextField';
 
-const fields = ['userId', 'startDate', 'endDate', 'notes'];
+const fields = ['userId', 'startDate', 'endDate'];
 
 const validate = values => {
     const errors = {};
@@ -21,9 +20,9 @@ const validate = values => {
     return errors;
 };
 
-function AddVolunteerForm(props) {
+function AddCoordinatorForm(props) {
     const {
-        fields: { userId, startDate, endDate, notes },
+        fields: { userId, startDate, endDate },
         handleSubmit,
         errorMessage,
         isFetching
@@ -37,16 +36,15 @@ function AddVolunteerForm(props) {
         >
             <SelectField
                 label="Volunteer"
-                values={props.users}
+                values={props.moderators}
                 placeholder="Select an user"
-                valueLabel="fullname"
+                valueLabel="name"
                 valueKey="id"
             >
                 {userId}
             </SelectField>
             <DateField
                 label="Start date"
-                minDate={moment()}
             >
                 {startDate}
             </DateField>
@@ -56,9 +54,6 @@ function AddVolunteerForm(props) {
             >
                 {endDate}
             </DateField>
-            <TextField type="text" rows={3} label="Additional information / questions">
-                {notes}
-            </TextField>
             <Button
                 type="submit"
                 color="primary"
@@ -67,23 +62,22 @@ function AddVolunteerForm(props) {
                 loading={isFetching}
                 id="submit"
             >
-                Add volunteer
+                Add coordinator
             </Button>
         </Form>
     );
 }
 
-AddVolunteerForm.propTypes = {
+AddCoordinatorForm.propTypes = {
     errorMessage: PropTypes.string,
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     isFetching: PropTypes.bool,
-    submitting: PropTypes.bool.isRequired,
-    users: PropTypes.array.isRequired
+    moderators: PropTypes.array.isRequired
 };
 
 export default reduxForm({
-    form: 'AddVolunteerForm',
+    form: 'AddCoordinatorForm',
     fields,
     validate
-})(AddVolunteerForm);
+})(AddCoordinatorForm);
