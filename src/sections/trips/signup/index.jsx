@@ -7,6 +7,7 @@ import Header from '../../../commons/pageHeader';
 import { create } from '../../../actions/tripActions';
 import { list } from '../../../actions/destinationActions';
 import { pushNotification } from '../../../actions/notificationActions';
+import { reset } from 'redux-form';
 
 const createHandlers = dispatch => ({
     create(data) {
@@ -17,6 +18,9 @@ const createHandlers = dispatch => ({
     },
     notification(message, level) {
         return dispatch(pushNotification(message, level));
+    },
+    reset(name) {
+        return dispatch(reset(name));
     }
 });
 
@@ -71,6 +75,7 @@ class SignupTripFormContainer extends Component {
                 success = `We have registered your trip request and
                 will respond by email as soon as possible.`;
             }
+            this.handlers.reset('SignupTripForm');
             this.setState({
                 errorMessage: error,
                 isFetching: false,
