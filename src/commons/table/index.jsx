@@ -24,7 +24,8 @@ import './table.scss';
 *
 * link: is an object describing the links to be created on the table, it needs a
 * prefix and a columnName name, to create a link with the prefix url  followed by the
-* itemKey value for the object.
+* itemKey value for the object. A suffix can also be specified, appending a given string
+* in the end of the link, this is optional.
 *
 * search (optional): Boolean. Add as a parameter if you want the table to be searchable
 *
@@ -150,11 +151,15 @@ class Table extends Component {
     }
 
     renderCell(item, columnNameKey, itemKey, link) {
+        const suffix = link.suffix || '';
         let element = (<td>{item[columnNameKey]}</td>);
         if (link && link.columnName === columnNameKey) {
             element = (
                 <td>
-                    <Link to={link.prefix + item[this.getLinkId()]} activeClassName="item-active">
+                    <Link
+                        to={link.prefix + item[this.getLinkId()] + suffix}
+                        activeClassName="item-active"
+                    >
                         {item[columnNameKey]}
                     </Link>
                 </td>

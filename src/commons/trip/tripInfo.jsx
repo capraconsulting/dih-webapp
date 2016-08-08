@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 
-import { TRAVEL_METHODS } from '../../../constants';
-import List from '../../../commons/list';
-import ListItem from '../../../commons/list/listItem';
-import FluidListItem from '../../../commons/list/fluidListItem';
+import { TRAVEL_METHODS } from '../../constants';
+import List from '../list';
+import ListItem from '../list/listItem';
+import FluidListItem from '../list/fluidListItem';
 import moment from 'moment';
 
 const MOMENT_FORMAT = 'YYYY-MM-DD';

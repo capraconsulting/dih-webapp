@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 
+import { USER_ROLES, TRIP_STATUSES } from '../../constants';
 import Table from '../../commons/table';
 import TripStatusDropdown from './tripStatusDropdown';
-import { TRIP_STATUSES } from '../../constants';
 
 class TripRequestsTable extends Component {
     getTrips() {
@@ -28,8 +28,7 @@ class TripRequestsTable extends Component {
     prepareTableHeaders() {
         const headers = {};
         if (!this.props.userId) {
-            headers.firstname = 'First name';
-            headers.lastname = 'Last name';
+            headers.fullName = 'Name';
         }
 
         if (!this.props.destinationId) {
@@ -42,6 +41,13 @@ class TripRequestsTable extends Component {
         return headers;
     }
 
+    prepareLinkPrefix() {
+        if (this.props.role === USER_ROLES.MODERATOR) {
+            return '/coordinator/users/';
+        }
+        return '/admin/users/';
+    }
+
     prepareTableContent(trips) {
         let filteredTrips = trips;
         if (this.props.requestsOnly) {
@@ -51,15 +57,14 @@ class TripRequestsTable extends Component {
         return filteredTrips.map(trip => {
             const row = {
                 id: trip.id,
-                userId: trip.uiserId,
+                userId: trip.userId,
                 startDate: moment(trip.startDate).format('YYYY-MM-DD'),
                 endDate: trip.endDate ? moment(trip.endDate).format('YYYY-MM-DD') : 'Not set',
                 status: <TripStatusDropdown trip={trip} />
             };
 
             if (!this.props.userId) {
-                row.firstname = trip.user.firstname;
-                row.lastname = trip.user.lastname;
+                row.fullName = trip.user.fullName;
             }
 
             if (!this.props.destinationId) {
@@ -68,6 +73,21 @@ class TripRequestsTable extends Component {
 
             return row;
         });
+    }
+
+    linkElement() {
+        if (!this.props.userId) {
+            return {
+                columnName: 'fullName',
+                prefix: this.prepareLinkPrefix(),
+                suffix: '/trips'
+            };
+        }
+
+        return {
+            columnName: 'destination',
+            prefix: '/trips/'
+        };
     }
 
     render() {
@@ -81,11 +101,8 @@ class TripRequestsTable extends Component {
                 columnNames={this.prepareTableHeaders()}
                 items={this.prepareTableContent(trips)}
                 itemKey="id"
-                linkKey="userId"
-                link={{
-                    columnName: 'firstname',
-                    prefix: '/admin/users/'
-                }}
+                linkKey={this.props.userId ? 'id' : 'userId'}
+                link={this.linkElement()}
             />
         );
     }
@@ -96,6 +113,7 @@ TripRequestsTable.propTypes = {
     trips: PropTypes.array.isRequired,
     userId: PropTypes.number,
     destinationId: PropTypes.number,
+    role: PropTypes.string,
     requestsOnly: PropTypes.bool
 };
 
