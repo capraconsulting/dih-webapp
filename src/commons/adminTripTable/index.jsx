@@ -33,6 +33,7 @@ class AdminTripTable extends Component {
                 trips={this.props.trips}
                 userId={this.props.userId}
                 destinationId={this.props.destinationId}
+                role={this.props.role}
                 requestsOnly={this.props.requestsOnly}
             />
         );
@@ -45,9 +46,10 @@ const mapStateToProps = store => ({
 
 AdminTripTable.propTypes = {
     trips: PropTypes.array.isRequired,
+    dispatch: PropTypes.func.isRequired,
     userId: PropTypes.number,
     destinationId: PropTypes.number,
-    dispatch: PropTypes.func.isRequired,
+    role: PropTypes.string,
     requestsOnly: PropTypes.bool
 };
 

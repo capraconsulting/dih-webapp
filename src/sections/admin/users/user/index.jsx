@@ -44,10 +44,6 @@ class User extends Component {
                 {
                     name: 'Trips',
                     uri: `/admin/users/${this.props.params.userId}/trips`
-                },
-                {
-                    name: 'Messages',
-                    uri: `/admin/users/${this.props.params.userId}/messages`
                 }
             ]
         };
@@ -80,7 +76,7 @@ class User extends Component {
                 <Header
                     icon="user"
                     content={`${this.props.user.firstname} ${this.props.user.lastname}`}
-                    subContent="Manage userprofile"
+                    subContent="Manage user"
                 />
                 <Navbar pages={this.state.pages} />
                 {React.cloneElement(this.props.children, {
