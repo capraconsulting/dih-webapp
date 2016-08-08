@@ -1,12 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
-
 
 import Header from '../../../../commons/pageHeader';
-import List from '../../../../commons/list';
-import ListItem from '../../../../commons/list/listItem';
-import FluidListItem from '../../../../commons/list/fluidListItem';
 import { retrieve } from '../../../../actions/tripActions';
 import { retrieve as retrieveDestination } from '../../../../actions/destinationActions';
 import { retrieve as retrieveUser } from '../../../../actions/userActions';
