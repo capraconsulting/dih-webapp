@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 
+import { USER_ROLES, TRIP_STATUSES } from '../../constants';
 import Table from '../../commons/table';
 import TripStatusDropdown from './tripStatusDropdown';
-import { TRIP_STATUSES } from '../../constants';
 
 class TripRequestsTable extends Component {
     getTrips() {
@@ -42,6 +42,13 @@ class TripRequestsTable extends Component {
         return headers;
     }
 
+    prepareLinkPrefix() {
+        if (this.props.role === USER_ROLES.MODERATOR) {
+            return '/coordinator/users/';
+        }
+        return '/admin/users/';
+    }
+
     prepareTableContent(trips) {
         let filteredTrips = trips;
         if (this.props.requestsOnly) {
@@ -51,7 +58,7 @@ class TripRequestsTable extends Component {
         return filteredTrips.map(trip => {
             const row = {
                 id: trip.id,
-                userId: trip.uiserId,
+                userId: trip.userId,
                 startDate: moment(trip.startDate).format('YYYY-MM-DD'),
                 endDate: trip.endDate ? moment(trip.endDate).format('YYYY-MM-DD') : 'Not set',
                 status: <TripStatusDropdown trip={trip} />
@@ -84,7 +91,7 @@ class TripRequestsTable extends Component {
                 linkKey="userId"
                 link={{
                     columnName: 'firstname',
-                    prefix: '/admin/users/'
+                    prefix: this.prepareLinkPrefix()
                 }}
             />
         );
@@ -96,6 +103,7 @@ TripRequestsTable.propTypes = {
     trips: PropTypes.array.isRequired,
     userId: PropTypes.number,
     destinationId: PropTypes.number,
+    role: PropTypes.string,
     requestsOnly: PropTypes.bool
 };
 

@@ -1,41 +1,57 @@
 import React from 'react';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
+// layouts
 import RootLayout from './layouts/Root';
 import MainLayout from './layouts/MainLayout';
 import PublicLayout from './layouts/PublicLayout';
 
+// public
 import Login from './sections/login';
 import SignUp from './sections/signup';
 import ConfirmSignUp from './sections/signup/confirm';
 import ForgotPassword from './sections/forgotPassword';
 import ForgotPasswordConfirm from './sections/forgotPassword/confirm';
+
+// user
 import Profile from './sections/profile';
 import ViewUser from './commons/user/viewUser';
 import EditUser from './commons/user/editUser';
+
+import SignupTrip from './sections/trips/signup';
+import Trips from './sections/trips/';
+import Trip from './sections/trips/trip';
+
+import EditTrip from './sections/trips/trip/editTrip';
+import CancelTrip from './sections/trips/trip/cancelTrip';
+import TripInfo from './sections/trips/trip/tripInfo';
+
+// Coordinator
+import CoordinatorDestinations from './sections/coordinator/destinations';
+import CoordinatorDestination from './sections/coordinator/destinations/destination';
+import CoordinatorUser from './sections/coordinator/users/user';
+
+// admin
+import Users from './sections/admin/users';
+import User from './sections/admin/users/user';
+import TripsForUser from './sections/admin/users/user/tripsForUser';
+
+import Destinations from './sections/admin/destinations';
 import Destination from './sections/admin/destinations/destination';
 import EditDestination from './sections/admin/destinations/destination/editDestination';
 import DestinationVolunteers from './sections/admin/destinations/destination/volunteers';
 import DestinationEmails from './sections/admin/destinations/destination/emailTemplates';
 import DestinationAddVolunteer from './sections/admin/destinations/destination/addVolunteer';
-import DestinationCoordinators from './sections/admin/destinations/destination/coordinators';
-import DestinationAddCoordinator from './sections/admin/destinations/destination/addCoordinator';
-import Destinations from './sections/admin/destinations';
 import DestinationsTable from './sections/admin/destinations/destinationsTable';
 import AddDestination from './sections/admin/destinations/addDestination';
-import SignupTrip from './sections/trips/signup';
-import Trips from './sections/trips/';
-import Trip from './sections/trips/trip';
+import DestinationCoordinators from './sections/admin/destinations/destination/coordinators';
+import DestinationAddCoordinator from './sections/admin/destinations/destination/addCoordinator';
+import Email from './sections/admin/email';
+
 import AdminTrips from './sections/admin/trips';
 import AdminTripsAll from './sections/admin/trips/allTrips';
 import AdminTripsRequests from './sections/admin/trips/tripRequests';
-import EditTrip from './sections/trips/trip/editTrip';
-import CancelTrip from './sections/trips/trip/cancelTrip';
-import TripInfo from './sections/trips/trip/tripInfo';
-import Email from './sections/admin/email';
-import Users from './sections/admin/users';
-import User from './sections/admin/users/user';
-import TripsForUser from './sections/admin/users/user/tripsForUser';
+
 import NotFound from './commons/NotFound.jsx';
 
 export default(
@@ -66,6 +82,11 @@ export default(
                         <Route name="Cancel" path="cancel" component={CancelTrip} />
                     </Route>
                 </Route>
+                <Route name="Destinations" path="coordinator/destinations">
+                    <IndexRoute component={CoordinatorDestinations} />
+                    <Route path=":destinationId" component={CoordinatorDestination} />
+                </Route>
+                <Route name="Users" path="coordinator/users/:userId" component={CoordinatorUser} />
                 <Route name="Destinations" path="admin/destinations">
                     <Route component={Destinations}>
                         <IndexRoute component={DestinationsTable} />
