@@ -28,8 +28,7 @@ class TripRequestsTable extends Component {
     prepareTableHeaders() {
         const headers = {};
         if (!this.props.userId) {
-            headers.firstname = 'First name';
-            headers.lastname = 'Last name';
+            headers.fullName = 'Name';
         }
 
         if (!this.props.destinationId) {
@@ -65,8 +64,7 @@ class TripRequestsTable extends Component {
             };
 
             if (!this.props.userId) {
-                row.firstname = trip.user.firstname;
-                row.lastname = trip.user.lastname;
+                row.fullName = trip.user.fullName;
             }
 
             if (!this.props.destinationId) {
@@ -75,6 +73,21 @@ class TripRequestsTable extends Component {
 
             return row;
         });
+    }
+
+    linkElement() {
+        if (!this.props.userId) {
+            return {
+                columnName: 'fullName',
+                prefix: this.prepareLinkPrefix(),
+                suffix: '/trips'
+            };
+        }
+
+        return {
+            columnName: 'destination',
+            prefix: '/trips/'
+        };
     }
 
     render() {
@@ -88,11 +101,8 @@ class TripRequestsTable extends Component {
                 columnNames={this.prepareTableHeaders()}
                 items={this.prepareTableContent(trips)}
                 itemKey="id"
-                linkKey="userId"
-                link={{
-                    columnName: 'firstname',
-                    prefix: this.prepareLinkPrefix()
-                }}
+                linkKey={this.props.userId ? 'id' : 'userId'}
+                link={this.linkElement()}
             />
         );
     }

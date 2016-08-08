@@ -24,7 +24,7 @@ import Trip from './sections/trips/trip';
 
 import EditTrip from './sections/trips/trip/editTrip';
 import CancelTrip from './sections/trips/trip/cancelTrip';
-import TripInfo from './sections/trips/trip/tripInfo';
+import TripInfo from './commons/trip/tripInfo';
 
 // Coordinator
 import CoordinatorDestinations from './sections/coordinator/destinations';
@@ -43,15 +43,18 @@ import EditDestination from './sections/admin/destinations/destination/editDesti
 import DestinationVolunteers from './sections/admin/destinations/destination/volunteers';
 import DestinationEmails from './sections/admin/destinations/destination/emailTemplates';
 import DestinationAddVolunteer from './sections/admin/destinations/destination/addVolunteer';
-import DestinationsTable from './sections/admin/destinations/destinationsTable';
-import AddDestination from './sections/admin/destinations/addDestination';
 import DestinationCoordinators from './sections/admin/destinations/destination/coordinators';
 import DestinationAddCoordinator from './sections/admin/destinations/destination/addCoordinator';
-import Email from './sections/admin/email';
+import DestinationsTable from './sections/admin/destinations/destinationsTable';
+import AddDestination from './sections/admin/destinations/addDestination';
+
+import AdminTrip from './sections/admin/trips/trip';
 
 import AdminTrips from './sections/admin/trips';
 import AdminTripsAll from './sections/admin/trips/allTrips';
 import AdminTripsRequests from './sections/admin/trips/tripRequests';
+
+import Email from './sections/admin/email';
 
 import NotFound from './commons/NotFound.jsx';
 
@@ -128,6 +131,9 @@ export default(
                 <Route name="Trips" path="admin/trips" component={AdminTrips}>
                     <IndexRoute component={AdminTripsAll} />
                     <Route name="Trip requests" path="requests" component={AdminTripsRequests} />
+                </Route>
+                <Route path="admin/trips/:tripId" component={AdminTrip}>
+                    <IndexRoute component={TripInfo} />
                 </Route>
                 <Route name="Not found" path="*" component={NotFound} />
             </Route>
