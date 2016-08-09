@@ -37,9 +37,10 @@ function AddVolunteerForm(props) {
         >
             <SelectField
                 label="Volunteer"
+                icon="users"
                 values={props.users}
                 placeholder="Select an user"
-                valueLabel="fullname"
+                valueLabel="fullName"
                 valueKey="id"
             >
                 {userId}

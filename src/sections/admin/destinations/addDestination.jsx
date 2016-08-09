@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { create } from '../../../actions/destinationActions';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import AddDestinationForm from './addDestinationForm';
 import { pushNotification } from '../../../actions/notificationActions';
@@ -27,7 +28,10 @@ class AddDestination extends React.Component {
             .then(response => {
                 const message = 'Destination added';
                 const { error } = response;
-                if (!error) this.handlers.notification(message, 'success');
+                if (!error) {
+                    this.handlers.notification(message, 'success');
+                    browserHistory.push('/admin/destinations');
+                }
             });
     }
 
