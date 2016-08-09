@@ -22,7 +22,8 @@ class NotificationContainer extends Component {
         const { message, level } = newProps.notification;
         this.notificationSystem.addNotification({
             message,
-            level
+            level,
+            autoDismiss: 10
         });
     }
 
