@@ -19,51 +19,49 @@ function EditDestinationForm(props) {
     } = props;
 
     return (
-        <div>
-            <Form
-                id="editDestinationForm"
-                errorMessage={errorMessage}
-                handleSubmit={handleSubmit}
+        <Form
+            id="editDestinationForm"
+            errorMessage={errorMessage}
+            handleSubmit={handleSubmit}
+        >
+            <InputField label="Name" type="text">
+                {name}
+            </InputField>
+            <InputField
+                label="The mimimum number of days a volunteer has to be at the destination"
+                type="number"
             >
-                <InputField label="Name" type="text">
-                    {name}
-                </InputField>
-                <InputField
-                    label="The mimimum number of days a volunteer has to be at the destination"
-                    type="number"
-                >
-                    {minimumTripDurationInDays}
-                </InputField>
-                <DateField label="Start date">
-                    {startDate}
-                </DateField>
-                <DateField
-                    minDate={moment()}
-                    label="End date"
-                >
-                    {endDate}
-                </DateField>
-                <ToggleField
-                    id="isActiveToggle"
-                    label="Toggle this destination to be active or inactive.
-                    Users can only sign up for active destinations.
-                    Toggling this changes the end date."
-                    name="Active"
-                >
-                    {isActive}
-                </ToggleField>
-                <Button
-                    type="submit"
-                    color="green"
-                    disabled={isFetching}
-                    loading={isFetching}
-                    id="submit"
-                    right
-                >
-                    Save changes
-                </Button>
-            </Form>
-        </div>
+                {minimumTripDurationInDays}
+            </InputField>
+            <DateField label="Start date">
+                {startDate}
+            </DateField>
+            <DateField
+                minDate={moment()}
+                label="End date"
+            >
+                {endDate}
+            </DateField>
+            <ToggleField
+                id="isActiveToggle"
+                label="Toggle this destination to be active or inactive.
+                Users can only sign up for active destinations.
+                Toggling this changes the end date."
+                name="Active"
+            >
+                {isActive}
+            </ToggleField>
+            <Button
+                type="submit"
+                color="green"
+                disabled={isFetching}
+                loading={isFetching}
+                id="submit"
+                right
+            >
+                Save changes
+            </Button>
+        </Form>
     );
 }
 

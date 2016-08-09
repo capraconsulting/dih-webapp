@@ -6,6 +6,10 @@ import Table from '../../commons/table';
 import TripStatusDropdown from './tripStatusDropdown';
 
 class TripRequestsTable extends Component {
+    constructor(props) {
+        super(props);
+        this.dateFields = { from: 'startDate', to: 'endDate' };
+    }
     getTrips() {
         let trips = this.props.trips;
         if (this.props.userId) {
@@ -29,6 +33,7 @@ class TripRequestsTable extends Component {
         const headers = {};
         if (!this.props.userId) {
             headers.fullName = 'Name';
+            headers.phoneNumber = 'Phone number';
         }
 
         if (!this.props.destinationId) {
@@ -65,6 +70,7 @@ class TripRequestsTable extends Component {
 
             if (!this.props.userId) {
                 row.fullName = trip.user.fullName;
+                row.phoneNumber = trip.user.phoneNumber;
             }
 
             if (!this.props.destinationId) {
@@ -83,7 +89,6 @@ class TripRequestsTable extends Component {
                 suffix: '/trips'
             };
         }
-
         return {
             columnName: 'destination',
             prefix: '/trips/'
@@ -92,12 +97,10 @@ class TripRequestsTable extends Component {
 
     render() {
         const trips = this.getTrips();
-        const dateFields = { from: 'startDate', to: 'endDate' };
-
         return (
             <Table
                 search
-                dateFields={dateFields}
+                dateFields={this.dateFields}
                 columnNames={this.prepareTableHeaders()}
                 items={this.prepareTableContent(trips)}
                 itemKey="id"

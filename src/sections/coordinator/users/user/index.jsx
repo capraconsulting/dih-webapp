@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import Header from '../../../../commons/pageHeader';
+import Segments from '../../../../commons/Segments';
+import Segment from '../../../../commons/Segment';
 import ViewUser from '../../../../commons/user/viewUser';
 import { retrieve } from '../../../../actions/userActions';
 
@@ -10,23 +12,31 @@ const createHandlers = dispatch => id => dispatch(retrieve(id));
 class User extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loading: true
+        };
         this.handlers = createHandlers(this.props.dispatch);
     }
 
     componentDidMount() {
-        this.handlers(this.props.params.userId);
+        this.handlers(this.props.params.userId)
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     render() {
         return (
-            <div className="ui segment clearing">
-                <Header
-                    icon="user"
-                    content={`${this.props.user.firstname} ${this.props.user.lastname}`}
-                    subContent="View user"
-                />
+            <Segments clearing loading={this.state.loading}>
+                <Segment>
+                    <Header
+                        icon="user"
+                        content={`${this.props.user.firstname} ${this.props.user.lastname}`}
+                        subContent="View user"
+                    />
+                </Segment>
                 <ViewUser user={this.props.user} />
-            </div>
+            </Segments>
         );
     }
 }

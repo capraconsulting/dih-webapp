@@ -85,31 +85,6 @@ class SignupTripFormContainer extends Component {
         });
     }
 
-    renderSignUpForTripForm() {
-        if (this.userAllowedToSignUp()) {
-            return (
-                <SignupTripForm
-                    destinations={this.props.destinations.filter(val => (val.isActive))}
-                    onSubmit={e => { this.handleSubmit(e); }}
-                    errorMessage={this.state.errorMessage}
-                    isFetching={this.state.isFetching}
-                    successMessage={this.state.successMessage}
-                />
-            );
-        }
-        return (
-            <div>
-                <h3>
-                    To register for a trip, you'll have to complete your profile.
-                </h3>
-                <h3>
-                    Go to <Link to="/profile/edit">your profile</Link> and
-                    add more information, then come back here.
-                </h3>
-            </div>
-        );
-    }
-
     render() {
         return (
             <Segments>
@@ -122,7 +97,26 @@ class SignupTripFormContainer extends Component {
                     />
                 </Segment>
                 <Segment loading={this.state.loading}>
-                    {this.renderSignUpForTripForm()}
+                    {this.userAllowedToSignUp() &&
+                        <SignupTripForm
+                            destinations={this.props.destinations.filter(val => (val.isActive))}
+                            onSubmit={e => { this.handleSubmit(e); }}
+                            errorMessage={this.state.errorMessage}
+                            isFetching={this.state.isFetching}
+                            successMessage={this.state.successMessage}
+                        />
+                    }
+                    {!this.userAllowedToSignUp() &&
+                        <div>
+                            <h3>
+                                To register for a trip, you'll have to complete your profile.
+                            </h3>
+                            <h3>
+                                Go to <Link to="/profile/edit">your profile</Link> and
+                                add more information, then come back here.
+                            </h3>
+                        </div>
+                    }
                 </Segment>
             </Segments>
         );

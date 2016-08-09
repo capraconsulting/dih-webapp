@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/types/trips';
 const initialState = {
     isFetching: false,
     trip: {
-        destination: {}
+        destination: {},
+        user: {}
     },
     trips: []
 };

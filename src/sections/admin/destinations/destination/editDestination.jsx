@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-
+import Segment from '../../../../commons/Segment';
 import EditDestinationForm from './editDestinationForm';
 import { retrieve, update } from '../../../../actions/destinationActions';
 import { pushNotification } from '../../../../actions/notificationActions';
@@ -23,11 +23,17 @@ const createHandlers = (dispatch) => (
 class EditDestination extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loading: false
+        };
         this.handlers = createHandlers(this.props.dispatch);
     }
 
     componentDidMount() {
-        this.handlers.retrieve(this.props.params.destinationId);
+        this.handlers.retrieve(this.props.params.destinationId)
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     handleSubmit(data) {
@@ -49,13 +55,13 @@ class EditDestination extends Component {
 
     render() {
         return (
-            <div>
+            <Segment loading={this.state.loading} >
                 <EditDestinationForm
                     initialValues={this.props.destination}
                     destination={this.props.destination}
                     onSubmit={e => { this.handleSubmit(e); }}
                 />
-            </div>
+            </Segment>
         );
     }
 }

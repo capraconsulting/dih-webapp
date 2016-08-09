@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import TripsTable from './tripsTable';
-import Loader from '../Loader';
+import Segment from '../Segment';
 import { list } from '../../actions/tripActions';
 
 /*
@@ -36,8 +36,7 @@ class AdminTripTable extends Component {
 
     render() {
         return (
-            <div>
-                <Loader active={this.state.loading} />
+            <Segment loading={this.state.loading}>
                 <TripsTable
                     trips={this.props.trips}
                     userId={this.props.userId}
@@ -45,7 +44,7 @@ class AdminTripTable extends Component {
                     role={this.props.role}
                     requestsOnly={this.props.requestsOnly}
                 />
-            </div>
+            </Segment>
         );
     }
 }
