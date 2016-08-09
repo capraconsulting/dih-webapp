@@ -38,14 +38,10 @@ const ViewUser = (props) => (
         )}
 
         <ListItem
-            name="Age"
-            icon="birthday"
-            content={moment(props.user.birth).fromNow(true)}
-        />
-        <ListItem
             name="Birthday"
             icon="birthday"
-            content={moment(props.user.birth).calendar()}
+            content={`${moment(props.user.birth).calendar()}
+            (${moment(props.user.birth).fromNow(true)})`}
         />
         {renderIfAdmin(props,
             <ListItem
@@ -60,14 +56,19 @@ const ViewUser = (props) => (
             content={props.user.volunteerInfo}
         />
         {renderIfAdmin(props,
+            <ListItem
+                name="Has the user confirmed that he/she has read the guidelines?"
+                icon="book"
+                content={props.user.readTerms ? 'Yes' : 'No'}
+            />
+        )}
+        {renderIfAdmin(props,
             <FluidListItem
                 name="Notes (only seen by administrators)"
                 icon="info circle"
                 content={props.user.notes}
             />
         )}
-
-
     </List>
 );
 
