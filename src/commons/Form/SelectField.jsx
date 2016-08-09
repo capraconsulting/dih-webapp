@@ -1,12 +1,11 @@
 import React, { PropTypes } from 'react';
-
+import Dropdown from '../DropdownComponent';
+import DropdownItem from '../DropdownComponent/DropdownItem';
 /*
 * commons.Form/SelectField
 * SelectField To be used within a Form components
 *
 * children - object: A redux form object.
-*
-* type - string: the type of input field.
 *
 * label - string: the label of input field.
 *
@@ -20,34 +19,31 @@ import React, { PropTypes } from 'react';
 *
 * disabled - boolean: if the button is disabled.
 *
-* onInput - function: called when selected value is changed
 */
-
-const createClasses = (props) => {
-    const classes = ['ui', 'fluid', 'selection', 'dropdown'];
-    if (props.children.touched && props.children.error) classes.push('error');
-    return classes;
-};
 
 const SelectField = (props) => (
     <div className="field">
         <label>{props.label}</label>
-        <select
-            {...props.children}
-            value={props.children.value || props.defaultValue}
+        <Dropdown
+            fluid
+            search
+            selection
             disabled={props.disabled}
-            className={createClasses(props).join(' ')}
-            onInput={props.onInput}
+            placeholder={props.placeholder}
+            error={props.children.touched && props.children.error}
+            label={props.valueLabel}
+            icon={props.icon}
+            valueKey={props.valueKey}
+            onSelect={props.children.onChange}
         >
-            <option value="" disabled={!props.allowNullValue}>
-                {props.placeholder}
-            </option>
-            {props.values.map(value => (
-                <option value={value[props.valueKey]} key={value[props.valueKey]} >
-                    {value[props.valueLabel]}
-                </option>
-            ))}
-        </select>
+        {props.values.map(value => (
+            <DropdownItem
+                item={value}
+                key={value[props.valueKey]}
+                label={props.valueLabel}
+            />
+        ))}
+        </Dropdown>
         {props.children.touched && props.children.error &&
             <div className="inline-error">{props.children.error}</div>}
     </div>
@@ -60,11 +56,11 @@ SelectField.propTypes = {
     valueKey: PropTypes.string.isRequired,
     valueLabel: PropTypes.string.isRequired,
     allowNullValue: PropTypes.bool,
+    search: PropTypes.bool,
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
-    defaultValue: PropTypes.string,
-    onInput: PropTypes.func
+    icon: PropTypes.string
 };
 
 export default SelectField;
