@@ -28,7 +28,10 @@ const createClasses = (props) => {
 
 const DateField = (props) => (
     <div className={createClasses(props).join(' ')}>
-        <label>{props.label}</label>
+        <label>
+            {props.label}
+            {props.required && <span className="required"> *</span>}
+        </label>
         <DatePicker
             {...props.children}
             className="form-control"
@@ -51,7 +54,8 @@ DateField.propTypes = {
     placeholder: PropTypes.string,
     minDate: PropTypes.object,
     maxDate: PropTypes.object,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    required: PropTypes.bool
 };
 
 export default DateField;

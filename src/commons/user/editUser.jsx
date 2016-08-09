@@ -59,13 +59,13 @@ function EditUser(props) {
                 errorMessage={errorMessage}
                 handleSubmit={handleSubmit}
             >
-                <InputField label="First name" type="text">
+                <InputField label="First name" type="text" required>
                     {firstname}
                 </InputField>
-                <InputField label="Last name" type="text">
+                <InputField label="Last name" type="text" required>
                     {lastname}
                 </InputField>
-                <InputField label="E-mail" type="email">
+                <InputField label="E-mail" type="email" required>
                     {email}
                 </InputField>
 
@@ -84,6 +84,7 @@ function EditUser(props) {
                 <DateField
                     label="Date of birth"
                     placeholder="YYYY-MM-DD"
+                    required
                 >
                     {birth}
                 </DateField>
@@ -91,12 +92,16 @@ function EditUser(props) {
                     rows={3}
                     label="Occupation and experience"
                     placeholder="What do you work with, and what experience do you have?"
+                    required
                 >
                     {volunteerInfo}
                 </TextField>
 
                 {renderIfAdmin(props,
-                    <TextField rows={3} label="Notes (only seen by administrators)">
+                    <TextField
+                        rows={3}
+                        label="Notes (only visible to administrators and coordinators)"
+                    >
                         {notes}
                     </TextField>
                 )}
