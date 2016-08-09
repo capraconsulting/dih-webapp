@@ -205,7 +205,9 @@ class Table extends Component {
     }
 
     renderCell(item, columnNameKey, itemKey, link, labels) {
-        const suffix = link.suffix || '';
+        let suffix = null;
+        if (link) suffix = link.suffix || '';
+
         let element = (<td>{item[columnNameKey]}</td>);
         if (link && link.columnName === columnNameKey) {
             element = (
