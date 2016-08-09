@@ -27,7 +27,7 @@ export function getErrorMessageForTripSubmission(trip, destination) {
     let msg = null;
     // Destination won't be acitve
     if (destination.endDate && moment(destination.endDate) <= moment(trip.startDate)) {
-        msg = `The destination will be inactive at that poiint.
+        msg = `The destination will be inactive at that point.
         As of now it seems we will end it at ${destination.endDate}.
         Please select a start date that corresponds with that, but do
         not hesitate to add any note regarding the time period in the
