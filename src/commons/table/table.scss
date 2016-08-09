@@ -31,6 +31,7 @@ i.close.icon {
 
 .search,
 .filterButton,
+.actions,
 .dateIntervalButton {
     margin-right: 10px !important; // Must be opposite of margin-right in .filterBar
     margin-bottom: 10px !important;
@@ -44,4 +45,16 @@ i.close.icon {
     margin-bottom: 10px !important;
     background-color: transparent !important;
     padding-top: 12px !important;
+}
+
+td.one.wide.checkbox {
+    padding: 5px !important;
+    padding-top: 9px !important;
+}
+
+th.one.wide.checkbox {
+    padding: 5px !important;
+    &:hover {
+        background: none !important;
+    }
 }
