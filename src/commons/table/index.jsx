@@ -3,7 +3,6 @@ import update from 'react-addons-update';
 import _ from 'lodash';
 import { Link } from 'react-router';
 import moment from 'moment';
-
 import Actions from './actions';
 import SearchField from './searchField';
 import Filter from './filter';
@@ -67,6 +66,14 @@ class Table extends Component {
     getLinkId() {
         if (this.props.linkKey) return this.props.linkKey;
         return this.props.itemKey;
+    }
+
+    setStatePromise(newState) {
+        return new Promise((resolve) => {
+            this.setState(newState, () => {
+                resolve();
+            });
+        });
     }
 
     filter(array) {
@@ -135,14 +142,6 @@ class Table extends Component {
         array = this.search(array);
         // Sort
         return this.sort(array);
-    }
-
-    setStatePromise(newState) {
-        return new Promise((resolve) => {
-            this.setState(newState, () => {
-                resolve();
-            });
-        });
     }
 
     handleSearchChange(searchText) {

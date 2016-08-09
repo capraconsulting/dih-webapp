@@ -1,0 +1,18 @@
+.ui.dropdown.selection {
+	input.search {
+		&.focus+.text {
+			color: rgba(115,115,115,.87)!important;
+		}
+	}
+	.menu {
+		&.visible {
+			display: block !important;
+		}
+		.item {
+
+			&.selected {
+				background: rgba(0, 0, 0, 0.06);
+			}
+		}
+	}
+}
