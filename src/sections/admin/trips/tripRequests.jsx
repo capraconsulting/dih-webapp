@@ -1,10 +1,11 @@
 import React from 'react';
 import AdminTripTable from '../../../commons/adminTripTable';
+import Segment from '../../../commons/Segment';
 
-function TripRequests() {
-    return (
-        <AdminTripTable requestsOnly />
-    );
-}
+const TripRequests = () => (
+    <Segment>
+        <AdminTripTable />
+    </Segment>
+);
 
 export default TripRequests;

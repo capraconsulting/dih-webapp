@@ -12,7 +12,7 @@ function CancelTrip(props) {
 
     return (
         <div>
-            <h3>Do you really want to cancel your trip to {props.destination.name}?</h3>
+            <h3>Do you really want to cancel your trip to {props.trip.destination.name}?</h3>
             <p>
                 You can cancel your trip at any time - we don't ask questions.
                 If you at a later time want to go on a
@@ -48,7 +48,6 @@ function CancelTrip(props) {
 
 CancelTrip.propTypes = {
     trip: React.PropTypes.object.isRequired,
-    destination: React.PropTypes.object.isRequired,
     onCancel: React.PropTypes.func.isRequired,
     errorMessage: React.PropTypes.string,
     isFetching: React.PropTypes.bool

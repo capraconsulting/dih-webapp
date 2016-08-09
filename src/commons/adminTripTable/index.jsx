@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import TripsTable from './tripsTable';
+import Loader from '../Loader';
 import { list } from '../../actions/tripActions';
 
 /*
@@ -20,22 +21,31 @@ const createHandlers = (dispatch) => () => dispatch(list());
 class AdminTripTable extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loading: true
+        };
         this.handlers = createHandlers(this.props.dispatch);
     }
 
     componentDidMount() {
-        this.handlers();
+        this.handlers()
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     render() {
         return (
-            <TripsTable
-                trips={this.props.trips}
-                userId={this.props.userId}
-                destinationId={this.props.destinationId}
-                role={this.props.role}
-                requestsOnly={this.props.requestsOnly}
-            />
+            <div>
+                <Loader active={this.state.loading} />
+                <TripsTable
+                    trips={this.props.trips}
+                    userId={this.props.userId}
+                    destinationId={this.props.destinationId}
+                    role={this.props.role}
+                    requestsOnly={this.props.requestsOnly}
+                />
+            </div>
         );
     }
 }

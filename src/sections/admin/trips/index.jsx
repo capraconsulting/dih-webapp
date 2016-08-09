@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
+import Segments from '../../../commons/Segments';
+import Segment from '../../../commons/Segment';
 import Header from '../../../commons/pageHeader';
 import Navbar from '../../../commons/navbar';
 
@@ -22,17 +24,23 @@ class Trips extends Component {
 
     render() {
         return (
-            <div className="ui segment">
-                <Header
-                    icon="plane"
-                    content="Trips"
-                    subContent="Manage and review trips from volunteers"
-                />
+            <Segments>
+                <Segment>
+                    <Header
+                        icon="plane"
+                        content="Trips"
+                        subContent="Manage and review trips from volunteers"
+                    />
+                </Segment>
                 <Navbar pages={this.state.pages} />
                 {this.props.children}
-            </div>
+            </Segments>
         );
     }
 }
+
+Trips.propTypes = {
+    children: PropTypes.object
+};
 
 export default Trips;

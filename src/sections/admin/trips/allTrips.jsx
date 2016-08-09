@@ -1,10 +1,11 @@
 import React from 'react';
 import AdminTripTable from '../../../commons/adminTripTable';
+import Segment from '../../../commons/Segment';
 
-function AllTrips() {
-    return (
+const AllTrips = () => (
+    <Segment>
         <AdminTripTable />
-    );
-}
+    </Segment>
+);
 
 export default AllTrips;
