@@ -4,6 +4,8 @@ import { Link } from 'react-router';
 import moment from 'moment';
 import SignupTripForm from './SignupTripForm';
 import Header from '../../../commons/pageHeader';
+import Segments from '../../../commons/Segments';
+import Segment from '../../../commons/Segment';
 import { create } from '../../../actions/tripActions';
 import { list } from '../../../actions/destinationActions';
 import { pushNotification } from '../../../actions/notificationActions';
@@ -25,13 +27,17 @@ class SignupTripFormContainer extends Component {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
         this.state = {
+            loading: true,
             errorMessage: null,
             successMessage: null
         };
     }
 
     componentDidMount() {
-        this.handlers.list();
+        this.handlers.list()
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     userAllowedToSignUp() {
@@ -106,19 +112,19 @@ class SignupTripFormContainer extends Component {
 
     render() {
         return (
-            <div className="ui segments">
-                <div className="ui segment">
+            <Segments>
+                <Segment>
                     <Header
                         icon="plane"
                         subContent={`Sign up for a trip by filling in the form below,
                         we will get back to you for further information as fast as we can!`}
                         content="Sign up for a trip"
                     />
-                </div>
-                <div className="ui blue segment">
+                </Segment>
+                <Segment loading={this.state.loading}>
                     {this.renderSignUpForTripForm()}
-                </div>
-            </div>
+                </Segment>
+            </Segments>
         );
     }
 }

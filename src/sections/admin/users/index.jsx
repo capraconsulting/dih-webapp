@@ -67,8 +67,8 @@ class UsersTableContainer extends Component {
                 <Segment blue loading={this.props.users.length < 1}>
                     <Table
                         search
-                        filters={filterValues}
-                        dateFields={dateFields}
+                        filters={this.filterValues}
+                        dateFields={this.dateFields}
                         columnNames={{
                             fullName: 'Name',
                             birth: 'Date of birth',

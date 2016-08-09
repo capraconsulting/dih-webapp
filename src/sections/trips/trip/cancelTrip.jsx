@@ -1,7 +1,7 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
-
+import Segment from '../../../commons/Segment';
 import Button from '../../../commons/Button';
 
 // This form is not using the Form-component so it does not conflict with the methods of editTrip
@@ -11,7 +11,7 @@ function CancelTrip(props) {
     } = props;
 
     return (
-        <div>
+        <Segment>
             <h3>Do you really want to cancel your trip to {props.trip.destination.name}?</h3>
             <p>
                 You can cancel your trip at any time - we don't ask questions.
@@ -42,7 +42,7 @@ function CancelTrip(props) {
                     Confirm cancelation of trip
                 </Button>
             </form>
-        </div>
+        </Segment>
     );
 }
 
