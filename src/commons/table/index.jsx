@@ -3,7 +3,6 @@ import update from 'react-addons-update';
 import _ from 'lodash';
 import { Link } from 'react-router';
 import moment from 'moment';
-
 import Actions from './actions';
 import SearchField from './searchField';
 import Filter from './filter';
@@ -67,6 +66,14 @@ class Table extends Component {
     getLinkId() {
         if (this.props.linkKey) return this.props.linkKey;
         return this.props.itemKey;
+    }
+
+    setStatePromise(newState) {
+        return new Promise((resolve) => {
+            this.setState(newState, () => {
+                resolve();
+            });
+        });
     }
 
     filter(array) {
@@ -137,14 +144,6 @@ class Table extends Component {
         return this.sort(array);
     }
 
-    setStatePromise(newState) {
-        return new Promise((resolve) => {
-            this.setState(newState, () => {
-                resolve();
-            });
-        });
-    }
-
     handleSearchChange(searchText) {
         this.setStatePromise({
             searchText
@@ -205,7 +204,9 @@ class Table extends Component {
     }
 
     renderCell(item, columnNameKey, itemKey, link, labels) {
-        const suffix = link.suffix || '';
+        let suffix = null;
+        if (link) suffix = link.suffix || '';
+
         let element = (<td>{item[columnNameKey]}</td>);
         if (link && link.columnName === columnNameKey) {
             element = (
@@ -239,9 +240,20 @@ class Table extends Component {
         );
     }
 
-    renderFiltersBar() {
+    renderFiltersBar(rowCount = 0) {
+
         return (
             <div className="filterBar">
+
+                {this.props.rowCounter &&
+                    <div className="ui label row-count">
+                        {this.props.rowCounter.prefix}&nbsp;
+                        {rowCount}/{this.props.items.length}&nbsp;
+                        {this.props.rowCounter.suffix}
+                    </div>
+                }
+
+
                 {this.props.search &&
                     <SearchField
                         value={this.state.searchText}
@@ -305,9 +317,11 @@ class Table extends Component {
         );
     }
     render() {
+        const rows = this.applyFilters(this.props.items);
+
         return (
             <div>
-                {this.renderFiltersBar()}
+                {this.renderFiltersBar(rows.length)}
                 <table className="ui fixed single sortable line very basic table unstackable">
                     <thead>
                         <tr>
@@ -326,7 +340,7 @@ class Table extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.applyFilters(this.props.items).map(item =>
+                        {rows.map(item =>
                             this.renderRow(
                                 this.props.columnNames,
                                 this.props.itemKey,
@@ -350,6 +364,7 @@ Table.propTypes = {
     selected: PropTypes.array,
     select: PropTypes.bool,
     search: PropTypes.bool,
+    rowCounter: PropTypes.object,
     labels: PropTypes.object,
     filters: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string.isRequired,

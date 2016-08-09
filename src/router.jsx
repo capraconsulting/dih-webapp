@@ -30,6 +30,7 @@ import TripInfo from './commons/trip/tripInfo';
 import CoordinatorDestinations from './sections/coordinator/destinations';
 import CoordinatorDestination from './sections/coordinator/destinations/destination';
 import CoordinatorUser from './sections/coordinator/users/user';
+import EditNotes from './sections/coordinator/users/user/notes';
 
 // admin
 import Users from './sections/admin/users';
@@ -94,7 +95,11 @@ export default(
                     <IndexRoute component={CoordinatorDestinations} />
                     <Route path=":destinationId" component={CoordinatorDestination} />
                 </Route>
-                <Route name="Users" path="coordinator/users/:userId" component={CoordinatorUser} />
+                <Route name="Users" path="coordinator/users/:userId" component={CoordinatorUser}>
+                    <IndexRoute component={ViewUser} />
+                    <Route name="Notes" path="notes" component={EditNotes} />
+                </Route>
+
                 <Route name="Destinations" path="admin/destinations">
                     <Route component={Destinations}>
                         <IndexRoute component={DestinationsTable} />
