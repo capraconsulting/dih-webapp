@@ -1,3 +1,4 @@
+import React from 'react';
 /**
 * All constants used trouought the application.
 * @module components/constants
@@ -63,4 +64,91 @@ exports.KEY_CODES = {
     UP_ARROW: 38,
     RIGHT_ARROW: 39,
     DOWN_ARROW: 40
+};
+
+export const TRIP_STATUS_LABELS = {
+    PENDING: (
+        <div className="ui blue label">
+            <i className="circle icon"></i>
+            Pending
+        </div>
+    ),
+    ACCEPTED: (
+        <div className="ui teal label">
+            <i className="circle icon"></i>
+            Accepted
+        </div>
+    ),
+    REJECTED: (
+        <div className="ui red label">
+            <i className="circle icon"></i>
+            Rejected
+        </div>
+    ),
+    ACTIVE: (
+        <div className="ui yellow label">
+            <i className="circle icon"></i>
+            Active
+        </div>
+    ),
+    CLOSED: (
+        <div className="ui gray label">
+            <i className="circle icon"></i>
+            Closed
+        </div>
+    ),
+    PRESENT: (
+        <div className="ui green label">
+            <i className="circle icon"></i>
+            Present
+        </div>
+    ),
+    LEFT: (
+        <div className="ui orange label">
+            <i className="circle icon"></i>
+            Left
+        </div>
+    ),
+    NOSHOW: (
+        <div className="ui black label">
+            <i className="circle icon"></i>
+            No show
+        </div>
+    )
+};
+
+export const BOOLEAN_LABELS = {
+    true: (
+        <div className="ui green label">
+            <i className="checkmark icon"></i>
+            Active
+        </div>
+    ),
+    false: (
+        <div className="ui red label">
+            <i className="remove icon"></i>
+            Inactive
+        </div>
+    )
+};
+
+export const ROLE_LABELS = {
+    USER: (
+        <div className="ui blue label">
+            <i className="user icon"></i>
+            User
+        </div>
+    ),
+    MODERATOR: (
+        <div className="ui teal label">
+            <i className="user icon"></i>
+            Coordinator
+        </div>
+    ),
+    ADMIN: (
+        <div className="ui orange label">
+            <i className="user icon"></i>
+            Administrator
+        </div>
+    )
 };
