@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+
+import { USER_ROLES } from '../../constants';
 import { retrieve } from '../../actions/accountActions';
 import { logout } from '../../actions/authenticationActions';
 import Account from './Account';
@@ -52,16 +54,27 @@ class Sidebar extends Component {
                 <img src="/logo.png" alt="logo" />
                 Dråpen i Havet
             </div>
+
             <SidebarMenuItem uri="/profile" itemName="My profile" icon="child" />
+
             <SidebarMenuGroup groupName="Trips" icon="plane">
                 <SidebarMenuItem uri="/trips" itemName="My trips" />
                 <SidebarMenuItem uri="/trips/signup" itemName="Sign up for a trip" />
             </SidebarMenuGroup>
-            {this.props.account.role === 'ADMIN' && <SidebarMenuGroup groupName="Admin" icon="user">
-                <SidebarMenuItem uri="/admin/users" itemName="Users" />
-                <SidebarMenuItem uri="/admin/destinations" itemName="Destinations" />
-                <SidebarMenuItem uri="/admin/trips" itemName="Trips" />
-            </SidebarMenuGroup>}
+
+            {this.props.account.role === USER_ROLES.MODERATOR &&
+                <SidebarMenuGroup groupName="Coordinator" icon="comments">
+                    <SidebarMenuItem uri="/coordinator/destinations" itemName="My destinations" />
+                </SidebarMenuGroup>
+            }
+
+            {this.props.account.role === USER_ROLES.ADMIN &&
+                <SidebarMenuGroup groupName="Admin" icon="user">
+                    <SidebarMenuItem uri="/admin/users" itemName="Users" />
+                    <SidebarMenuItem uri="/admin/destinations" itemName="Destinations" />
+                    <SidebarMenuItem uri="/admin/trips" itemName="Trips" />
+                </SidebarMenuGroup>
+            }
             <Account account={this.props.account} onLogout={e => { this.handleLogout(e); }} />
         </div>);
     }

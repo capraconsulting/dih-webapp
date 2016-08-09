@@ -23,7 +23,8 @@ import './table.scss';
 *
 * link: is an object describing the links to be created on the table, it needs a
 * prefix and a columnName name, to create a link with the prefix url  followed by the
-* itemKey value for the object.
+* itemKey value for the object. A suffix can also be specified, appending a given string
+* in the end of the link, this is optional.
 *
 * search (optional): Boolean. Add as a parameter if you want the table to be searchable
 *
@@ -58,18 +59,35 @@ class Table extends Component {
     }
 
     filterDate(array) {
-        const { fromDate, toDate } = this.state;
+        const filterStart = this.state.fromDate;
+        const filterEnd = this.state.toDate;
 
         return array.filter(row => {
-            const rowStartDate = moment(row[this.props.dateFields.from]);
-            const rowEndDate = moment(row[this.props.dateFields.to]);
+            const rowStart = moment(row[this.props.dateFields.from]);
+            const rowEnd = moment(row[this.props.dateFields.to]);
 
-            if (fromDate && toDate) {
-                return rowStartDate.isSameOrAfter(fromDate)
-                    && rowEndDate.isSameOrBefore(toDate);
+
+            if (filterStart && filterEnd) {
+                return (
+                    (rowStart.isSameOrBefore(filterStart) && rowEnd.isSameOrAfter(filterStart)) ||
+                    (rowStart.isSameOrBefore(filterStart) && !rowEnd.isValid()) ||
+                    (rowStart.isSameOrAfter(filterStart) && rowStart.isSameOrBefore(filterEnd))
+                );
             }
-            if (fromDate && !toDate) return rowStartDate.isSameOrAfter(fromDate);
-            if (!fromDate && toDate) return rowEndDate.isSameOrBefore(toDate);
+            if (filterStart && !filterEnd) {
+                return (
+                    rowStart.isSameOrAfter(filterStart) ||
+                    (rowStart.isBefore(filterStart) && rowEnd.isSameOrAfter(filterStart)) ||
+                    (rowStart.isBefore(filterStart) && !rowEnd.isValid())
+                );
+            }
+            if (!filterStart && filterEnd) {
+                return (
+                    rowEnd.isSameOrBefore(filterEnd) ||
+                    (rowEnd.isAfter(filterEnd) && rowStart.isSameOrBefore(filterEnd)) ||
+                    (!rowEnd.isValid() && rowStart.isSameOrBefore(filterEnd))
+                );
+            }
             return true;
         });
     }
@@ -132,11 +150,15 @@ class Table extends Component {
     }
 
     renderCell(item, columnNameKey, itemKey, link) {
+        const suffix = link.suffix || '';
         let element = (<td>{item[columnNameKey]}</td>);
         if (link && link.columnName === columnNameKey) {
             element = (
                 <td>
-                    <Link to={link.prefix + item[this.getLinkId()]} activeClassName="item-active">
+                    <Link
+                        to={link.prefix + item[this.getLinkId()] + suffix}
+                        activeClassName="item-active"
+                    >
                         {item[columnNameKey]}
                     </Link>
                 </td>
