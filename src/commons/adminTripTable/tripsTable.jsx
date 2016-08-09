@@ -93,11 +93,13 @@ class TripRequestsTable extends Component {
     render() {
         const trips = this.getTrips();
         const dateFields = { from: 'startDate', to: 'endDate' };
+        const rowCounterLabels = { prefix: 'Showing', suffix: 'trips' };
 
         return (
             <Table
                 search
                 dateFields={dateFields}
+                rowCounter={rowCounterLabels}
                 columnNames={this.prepareTableHeaders()}
                 items={this.prepareTableContent(trips)}
                 itemKey="id"

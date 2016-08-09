@@ -240,9 +240,20 @@ class Table extends Component {
         );
     }
 
-    renderFiltersBar() {
+    renderFiltersBar(rowCount = 0) {
+
         return (
             <div className="filterBar">
+
+                {this.props.rowCounter &&
+                    <div className="ui label row-count">
+                        {this.props.rowCounter.prefix}&nbsp;
+                        {rowCount}/{this.props.items.length}&nbsp;
+                        {this.props.rowCounter.suffix}
+                    </div>
+                }
+
+
                 {this.props.search &&
                     <SearchField
                         value={this.state.searchText}
@@ -306,9 +317,11 @@ class Table extends Component {
         );
     }
     render() {
+        const rows = this.applyFilters(this.props.items);
+
         return (
             <div>
-                {this.renderFiltersBar()}
+                {this.renderFiltersBar(rows.length)}
                 <table className="ui fixed single sortable line very basic table unstackable">
                     <thead>
                         <tr>
@@ -327,7 +340,7 @@ class Table extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.applyFilters(this.props.items).map(item =>
+                        {rows.map(item =>
                             this.renderRow(
                                 this.props.columnNames,
                                 this.props.itemKey,
@@ -351,6 +364,7 @@ Table.propTypes = {
     selected: PropTypes.array,
     select: PropTypes.bool,
     search: PropTypes.bool,
+    rowCounter: PropTypes.object,
     labels: PropTypes.object,
     filters: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string.isRequired,
