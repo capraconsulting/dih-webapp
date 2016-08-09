@@ -15,6 +15,8 @@ import React, { PropTypes } from 'react';
 *
 * disabled - boolean: if the button is disabled.
 *
+* style - object: map style object over to react inline styling.
+*
 * children - string: Name to be on the button
 *
 */
@@ -35,6 +37,7 @@ const Button = (props) => (
         id={props.id}
         onClick={props.onClick}
         disabled={props.disabled}
+        style={props.style}
     >
         {props.children}
     </button>
@@ -46,6 +49,7 @@ Button.propTypes = {
     loading: PropTypes.bool,
     fluid: PropTypes.bool,
     right: PropTypes.bool,
+    style: PropTypes.object,
     type: PropTypes.string,
     onClick: PropTypes.func,
     color: PropTypes.string,
