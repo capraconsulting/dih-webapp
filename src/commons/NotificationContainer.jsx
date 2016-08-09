@@ -4,6 +4,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushNotification } from '../actions/notificationActions';
 
+const style = {
+    NotificationItem: {
+        DefaultStyle: {
+            fontSize: '18px',
+            padding: '20px 30px'
+        }
+    }
+};
+
 class NotificationContainer extends Component {
     componentDidMount() {
         this.notificationSystem = this.refs.notificationSystem;
@@ -19,7 +28,7 @@ class NotificationContainer extends Component {
 
     render() {
         return (
-            <NotificationSystem ref="notificationSystem" />
+            <NotificationSystem ref="notificationSystem" style={style} />
         );
     }
 }
