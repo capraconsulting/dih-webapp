@@ -7,7 +7,11 @@ const fluidlistItem = (props) => {
             <i className={`icon ${props.icon}`}></i>
             <div className="content">{props.name}</div>
             <div className="item">
-                <div className="content">{props.content}</div>
+                <div className="content">
+                    <div className="ui message">
+                        {props.content}
+                    </div>
+                </div>
             </div>
         </div>
     );

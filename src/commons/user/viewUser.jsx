@@ -36,17 +36,13 @@ const ViewUser = (props) => (
                 content={props.user.role}
             />
         )}
-
-        <ListItem
-            name="Age"
-            icon="birthday"
-            content={moment(props.user.birth).fromNow(true)}
-        />
         <ListItem
             name="Birthday"
             icon="birthday"
-            content={moment(props.user.birth).calendar()}
+            content={props.user.birth ? `${moment(props.user.birth).calendar()}
+            (${moment(props.user.birth).fromNow(true)} old)` : 'Not set'}
         />
+
         {renderIfAdmin(props,
             <ListItem
                 name="Date account was created"
@@ -73,8 +69,6 @@ const ViewUser = (props) => (
                 content={props.user.notes}
             />
         )}
-
-
     </List>
 );
 

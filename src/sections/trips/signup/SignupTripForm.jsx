@@ -14,6 +14,9 @@ let selectedDestination;
 const validate = values => { // eslint-disable-line
     const errors = {};
     if (!values.startDate) errors.startDate = 'Required';
+    if (values.endDate && values.startDate > values.endDate) {
+        errors.endDate = 'Must be a date after the start date';
+    }
     return errors;
 };
 
@@ -75,7 +78,6 @@ function SignupTripForm(props) {
                 {destinationId}
             </SelectField>
             {dateFields}
-
             <TextField type="text" rows={3} label="Additional information / questions">
                 {notes}
             </TextField>
