@@ -8,6 +8,8 @@ import Navbar from '../../../commons/navbar';
 import { retrieve, update } from '../../../actions/tripActions';
 import { pushNotification } from '../../../actions/notificationActions';
 import { TRIP_STATUSES } from '../../../constants';
+import { getErrorMessageForTripSubmission } from '../../../helpers';
+
 
 const createHandlers = (dispatch) => (
     {
@@ -72,6 +74,13 @@ class Trip extends React.Component {
 
     onUpdate(trip) {
         const cleanTrip = setEmptyDatesToNull(trip);
+        if (trip.endDate) {
+            const msg = getErrorMessageForTripSubmission(trip, this.props.destination);
+            if (msg) {
+                this.handlers.notification(msg, 'error');
+                return;
+            }
+        }
         this.handlers.update({ ...cleanTrip, id: this.props.params.tripId })
         .then(response => {
             const message = 'Trip changes saved!';

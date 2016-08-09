@@ -94,19 +94,21 @@ function EditTrip(props) {
                 >
                     {startDate}
                 </DateField>
-
                 <DateField
                     label="End date (optional)"
-                    minDate={startDate.value ? moment(startDate.value) : moment()}
-                    id="endDate"
+                    minDate={moment(startDate.value) || moment()}
+                    maxDate={props.destination.endDate ?
+                            moment(props.destination.endDate) : null}
                     allowNullValue
+                    id="endDate"
                 >
                     {endDate}
                 </DateField>
-
                 <DateField
                     label="Date of arrival at destination"
-                    minDate={moment()}
+                    minDate={moment(startDate.value) || moment()}
+                    maxDate={props.destination.endDate ?
+                            moment(props.destination.endDate) : null}
                     allowNullValue
                     id="arrivalDate"
                 >
@@ -163,6 +165,7 @@ function EditTrip(props) {
 
 EditTrip.propTypes = {
     trip: React.PropTypes.object.isRequired,
+    destination: React.PropTypes.object.isRequired,
     fields: React.PropTypes.object.isRequired,
     handleSubmit: React.PropTypes.func.isRequired,
     errorMessage: React.PropTypes.string,

@@ -9,6 +9,7 @@ class TripRequestsTable extends Component {
     constructor(props) {
         super(props);
         this.dateFields = { from: 'startDate', to: 'endDate' };
+        this.rowCounterLabels = { prefix: 'Showing', suffix: 'trips' };
     }
     getTrips() {
         let trips = this.props.trips;
@@ -101,6 +102,7 @@ class TripRequestsTable extends Component {
             <Table
                 search
                 dateFields={this.dateFields}
+                rowCounter={this.rowCounterLabels}
                 columnNames={this.prepareTableHeaders()}
                 items={this.prepareTableContent(trips)}
                 itemKey="id"

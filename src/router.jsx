@@ -30,6 +30,7 @@ import TripInfo from './commons/trip/tripInfo';
 import CoordinatorDestinations from './sections/coordinator/destinations';
 import CoordinatorDestination from './sections/coordinator/destinations/destination';
 import CoordinatorUser from './sections/coordinator/users/user';
+import EditNotes from './sections/coordinator/users/user/notes';
 
 // admin
 import Users from './sections/admin/users';
@@ -54,6 +55,11 @@ import AdminTripsAll from './sections/admin/trips/allTrips';
 import AdminTripsRequests from './sections/admin/trips/tripRequests';
 
 import Email from './sections/admin/email';
+import Message from './sections/admin/message';
+import RecipientsMessage from './sections/admin/message/recipients';
+import ComposeMessage from './sections/admin/message/compose';
+import MessageSummary from './sections/admin/message/summary';
+import MessageSend from './sections/admin/message/send';
 
 import NotFound from './commons/NotFound.jsx';
 
@@ -89,7 +95,11 @@ export default(
                     <IndexRoute component={CoordinatorDestinations} />
                     <Route path=":destinationId" component={CoordinatorDestination} />
                 </Route>
-                <Route name="Users" path="coordinator/users/:userId" component={CoordinatorUser} />
+                <Route name="Users" path="coordinator/users/:userId" component={CoordinatorUser}>
+                    <IndexRoute component={ViewUser} />
+                    <Route name="Notes" path="notes" component={EditNotes} />
+                </Route>
+
                 <Route name="Destinations" path="admin/destinations">
                     <Route component={Destinations}>
                         <IndexRoute component={DestinationsTable} />
@@ -121,6 +131,12 @@ export default(
                         <Route name="Edit" path="edit" component={EditUser} />
                         <Route name="Trips" path="trips" component={TripsForUser} />
                     </Route>
+                </Route>
+                <Route name="message" path="admin/message" component={Message}>
+                    <Route name="recipients" path="recipients" component={RecipientsMessage} />
+                    <Route name="compose" path="compose" component={ComposeMessage} />
+                    <Route name="summary" path="summary" component={MessageSummary} />
+                    <Route name="send" path="send" component={MessageSend} />
                 </Route>
                 <Route name="Email" path="admin/email/:emailId" component={Email} />
                 <Route name="Trips" path="admin/trips" component={AdminTrips}>

@@ -8,8 +8,10 @@ const fluidlistItem = (props) => {
             <div className="content">{props.name}</div>
             <div className="item">
                 <div className="content">
-                    <div className="ui message">
-                        {props.content}
+                    <div
+                        className="ui message"
+                        dangerouslySetInnerHTML={{ __html: props.content }}
+                    >
                     </div>
                 </div>
             </div>

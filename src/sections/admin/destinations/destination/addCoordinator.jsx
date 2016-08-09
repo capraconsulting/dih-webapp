@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import { USER_ROLES } from '../../../../constants';
 import Segment from '../../../../commons/Segment';
@@ -67,7 +68,9 @@ class AddCoordinator extends Component {
             const message = 'Coordinator added';
             const { error } = response;
             if (!error) {
+                const destId = this.props.params.destinationId;
                 this.handlers.notification(message, 'success');
+                browserHistory.push(`/admin/destinations/${destId}/coordinators`);
             }
         });
     }
