@@ -1,19 +1,23 @@
 import React from 'react';
 import PublicHeader from '../commons/PublicHeader';
-import PublicFooter from '../commons/PublicFooter';
 
 function SignUpLayout(props) {
     return (
         <div>
-            <PublicHeader />
+            <div className="to-frontpage">
+                <a href="http://drapenihavet.no">
+                    <i className="icon angle left"></i>
+                    Back to frontpage
+                </a>
+            </div>
             <div className="layout-public">
+                <PublicHeader />
                 <div className="ui card fluid">
                     <div className="content">
                         {props.children}
                     </div>
                 </div>
             </div>
-            <PublicFooter />
         </div>
     );
 }

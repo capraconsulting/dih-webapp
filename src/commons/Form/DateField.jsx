@@ -33,7 +33,7 @@ const DateField = (props) => (
             {...props.children}
             className="form-control"
             dateFormat="YYYY-MM-DD"
-            placeholder={props.placeholder}
+            placeholderText={props.placeholder}
             minDate={props.minDate}
             maxDate={props.maxDate}
             disabled={props.disabled}

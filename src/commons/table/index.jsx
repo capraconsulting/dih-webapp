@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import update from 'react-addons-update';
 import _ from 'lodash';
 import { Link } from 'react-router';
 import moment from 'moment';
+import Actions from './actions';
 import SearchField from './searchField';
 import Filter from './filter';
 import DateInterval from './dateInterval';
@@ -28,6 +30,17 @@ import './table.scss';
 *
 * search (optional): Boolean. Add as a parameter if you want the table to be searchable
 *
+* select (optional): Boolean. Add as a parameter if you want the table to have toggle fields
+*
+* actions (optional): Array. Add as a parameter if you want the table to be searchable
+* Array must contain {name, icon, action}.
+* Action.action is a function that returns the selected values.
+*
+* selected (optional): Array, if you have pre selected any values, input these as selected
+*
+* labels (optional): Object. Add as a parameter if you want to map values from text to labels
+* Object keys map to itemKeys, which again map values from itemValue to Objectkey[itemKeys];
+*
 * filters (optional): Array. Lets the user view a subset of the table by selecting a filter
 * Array must contain {label, value, color, field, group}.
 *
@@ -39,8 +52,10 @@ class Table extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sorted: this.props.itemKey,
+            sorted: props.itemKey,
             order: 'ascending',
+            selected: props.selected || [],
+            selectedAll: false,
             searchText: '',
             activeFilter: null,
             fromDate: null,
@@ -51,6 +66,14 @@ class Table extends Component {
     getLinkId() {
         if (this.props.linkKey) return this.props.linkKey;
         return this.props.itemKey;
+    }
+
+    setStatePromise(newState) {
+        return new Promise((resolve) => {
+            this.setState(newState, () => {
+                resolve();
+            });
+        });
     }
 
     filter(array) {
@@ -113,27 +136,58 @@ class Table extends Component {
 
         // Filter
         if (this.state.activeFilter) array = this.filter(array);
-
         // Date interval
         if (this.state.fromDate || this.state.toDate) array = this.filterDate(array);
-
         // Search
         array = this.search(array);
-
         // Sort
         return this.sort(array);
     }
 
     handleSearchChange(searchText) {
-        this.setState({ searchText });
+        this.setStatePromise({
+            searchText
+        })
+        .then(() => this.updateSelected());
     }
 
     handleFilterChange(activeFilter) {
-        this.setState({ activeFilter });
+        this.setStatePromise({
+            activeFilter
+        })
+        .then(() => this.updateSelected());
     }
 
     handleDateFilterChange(fromDate, toDate) {
-        this.setState({ fromDate, toDate });
+        this.setStatePromise({
+            fromDate,
+            toDate
+        })
+        .then(() => this.updateSelected());
+    }
+
+    updateSelected() {
+        this.setState({
+            selected: this.applyFilters(this.state.selected)
+        });
+    }
+
+    toggleSelectAll() {
+        if (this.state.selectedAll) {
+            this.setState({ selected: [] });
+        } else {
+            this.setState({ selected: this.applyFilters(this.props.items) });
+        }
+        this.setState({ selectedAll: !this.state.selectedAll });
+    }
+
+    handleToggle(e, item) {
+        const index = _.findIndex(this.state.selected, (obj) => (obj.id === item.id));
+        if (index < 0) {
+            this.setState({ selected: this.state.selected.concat([item]) });
+        } else {
+            this.setState({ selected: update(this.state.selected, { $splice: [[index, 1]] }) });
+        }
     }
 
     toggleSort(columnName) {
@@ -149,8 +203,10 @@ class Table extends Component {
         });
     }
 
-    renderCell(item, columnNameKey, itemKey, link) {
-        const suffix = link.suffix || '';
+    renderCell(item, columnNameKey, itemKey, link, labels) {
+        let suffix = null;
+        if (link) suffix = link.suffix || '';
+
         let element = (<td>{item[columnNameKey]}</td>);
         if (link && link.columnName === columnNameKey) {
             element = (
@@ -164,14 +220,22 @@ class Table extends Component {
                 </td>
             );
         }
+        if (labels && labels[columnNameKey]) {
+            element = (
+                <td>
+                    {labels[columnNameKey][item[columnNameKey]]}
+                </td>
+            );
+        }
         return element;
     }
 
     renderRow(columnNames, itemKey, item, link) {
         return (
             <tr key={item[itemKey]}>
+                {this.props.select && this.renderToggle(item)}
                 {Object.keys(columnNames).map(columnNameKey =>
-                    this.renderCell(item, columnNameKey, itemKey, link))}
+                    this.renderCell(item, columnNameKey, itemKey, link, this.props.labels))}
             </tr>
         );
     }
@@ -193,6 +257,13 @@ class Table extends Component {
                     />
                 }
 
+                {this.state.selected.length > 0 &&
+                    <Actions
+                        selected={this.state.selected}
+                        actions={this.props.actions}
+                    />
+                }
+
                 {this.props.dateFields &&
                     <DateInterval
                         onChange={
@@ -204,6 +275,36 @@ class Table extends Component {
         );
     }
 
+    renderToggle(item) {
+        return (
+            <td className="one wide checkbox">
+                <div className="ui fitted toggle checkbox">
+                    <input
+                        type="checkbox"
+                        onClick={(e) => this.handleToggle(e, item)}
+                        checked={_.findIndex(this.state.selected,
+                            (obj) => (obj.id === item.id)) > -1 ? 'checked' : ''}
+                    />
+                    <label></label>
+                </div>
+            </td>
+        );
+    }
+
+    renderToggleAll() {
+        return (
+            <th className="one wide checkbox">
+                <div className="ui fitted toggle checkbox">
+                    <input
+                        type="checkbox"
+                        onClick={() => this.toggleSelectAll()}
+                        checked={this.state.selectedAll ? 'checked' : ''}
+                    />
+                    <label></label>
+                </div>
+            </th>
+        );
+    }
     render() {
         return (
             <div>
@@ -211,6 +312,7 @@ class Table extends Component {
                 <table className="ui fixed single sortable line very basic table unstackable">
                     <thead>
                         <tr>
+                        {this.props.select && this.renderToggleAll()}
                         {Object.keys(this.props.columnNames).map(columnNameKey => (
                             <th
                                 onClick={() => this.toggleSort(columnNameKey)}
@@ -245,7 +347,11 @@ Table.propTypes = {
     itemKey: PropTypes.string.isRequired,
     linkKey: PropTypes.string,
     link: PropTypes.object,
+    actions: PropTypes.array,
+    selected: PropTypes.array,
+    select: PropTypes.bool,
     search: PropTypes.bool,
+    labels: PropTypes.object,
     filters: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
