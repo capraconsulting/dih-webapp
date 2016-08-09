@@ -5,10 +5,17 @@ import { bindActionCreators } from 'redux';
 import { pushNotification } from '../actions/notificationActions';
 
 const style = {
+    Containers: {
+        DefaultStyle: {
+            width: '100%',
+            padding: '0'
+        }
+    },
     NotificationItem: {
         DefaultStyle: {
             fontSize: '18px',
-            padding: '20px 30px'
+            padding: '30px 50px',
+            margin: '0'
         }
     }
 };
