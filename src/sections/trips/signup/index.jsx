@@ -54,12 +54,14 @@ class SignupTripFormContainer extends Component {
             const destId = parseInt(trip.destinationId, 10);
             const destination = this.props.destinations.filter(e => e.id === destId)[0];
             const msg = getErrorMessageForTripSubmission(trip, destination);
-            this.setState({
-                isFetching: false,
-                errorMessage: msg,
-                successMessage: null
-            });
-            return;
+            if (msg) {
+                this.setState({
+                    isFetching: false,
+                    errorMessage: msg,
+                    successMessage: null
+                });
+                return;
+            }
         }
         this.handlers.create(trip)
         .then(response => {
