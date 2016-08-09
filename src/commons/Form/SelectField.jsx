@@ -34,7 +34,7 @@ const SelectField = (props) => (
         <label>{props.label}</label>
         <select
             {...props.children}
-            value={props.children.value}
+            value={props.children.value || props.defaultValue}
             disabled={props.disabled}
             className={createClasses(props).join(' ')}
             onInput={props.onInput}
@@ -48,6 +48,8 @@ const SelectField = (props) => (
                 </option>
             ))}
         </select>
+        {props.children.touched && props.children.error &&
+            <div className="inline-error">{props.children.error}</div>}
     </div>
 );
 
@@ -61,6 +63,7 @@ SelectField.propTypes = {
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
+    defaultValue: PropTypes.string,
     onInput: PropTypes.func
 };
 
