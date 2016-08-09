@@ -98,6 +98,14 @@ class TripRequestsTable extends Component {
                 search
                 dateFields={dateFields}
                 rowCounter={rowCounterLabels}
+                responsivePriority={[
+                    'fullName',
+                    'destination',
+                    'status',
+                    'phoneNumber',
+                    'startDate',
+                    'endDate'
+                ]}
                 columnNames={this.prepareTableHeaders()}
                 items={this.prepareTableContent(trips)}
                 labels={{

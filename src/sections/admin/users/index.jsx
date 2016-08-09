@@ -96,14 +96,22 @@ class UsersTableContainer extends Component {
                         }}
                         columnNames={{
                             fullName: 'Name',
+                            phoneNumber: 'Phone Number',
                             birth: 'Date of birth',
                             email: 'E-mail',
                             role: 'Role'
                         }}
                         link={{
-                            columnName: 'firstname',
+                            columnName: 'fullName',
                             prefix: '/admin/users/'
                         }}
+                        responsivePriority={[
+                            'fullName',
+                            'email',
+                            'role',
+                            'phoneNumber',
+                            'birth'
+                        ]}
                         itemKey="id"
                         items={this.prepareTableContent(this.props.users)}
                     />

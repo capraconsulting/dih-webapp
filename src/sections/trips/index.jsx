@@ -5,7 +5,7 @@ import moment from 'moment';
 import Header from '../../commons/pageHeader';
 import Table from '../../commons/table';
 import { listForUser } from '../../actions/tripActions';
-import { TRIP_STATUSES } from '../../constants';
+import { TRIP_STATUSES, TRIP_STATUS_LABELS } from '../../constants';
 
 const createHandlers = (dispatch) => (userId) => dispatch(listForUser(userId));
 
@@ -101,6 +101,15 @@ class Trips extends React.Component {
                             columnName: 'destinationName',
                             prefix: '/trips/'
                         }}
+                        labels={{
+                            status: TRIP_STATUS_LABELS
+                        }}
+                        responsivePriority={[
+                            'destinationName',
+                            'status',
+                            'startDate',
+                            'endDate'
+                        ]}
                         items={this.normalizeTripObjectsForTable(this.props.tripsForUser)}
                         search
                         filters={filters}

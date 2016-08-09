@@ -59,11 +59,11 @@ class DestinationsList extends Component {
                 filters={filterValues}
                 columnNames={{
                     name: 'Name',
-                    countOfActiveVolunteers: 'Volunteers at destination',
+                    countOfActiveVolunteers: '# Volunteers',
                     isActive: 'Status',
                     startDate: 'Active from',
                     endDate: 'Active to',
-                    minimumTripDurationInDays: 'Minimum trip duration (days)'
+                    minimumTripDurationInDays: 'Minimum trip duration'
                 }}
                 dateFields={dateFields}
                 itemKey="id"
@@ -71,6 +71,14 @@ class DestinationsList extends Component {
                     columnName: 'name',
                     prefix: '/admin/destinations/'
                 }}
+                responsivePriority={[
+                    'name',
+                    'countOfActiveVolunteers',
+                    'isActive',
+                    'minimumTripDurationInDays',
+                    'endDate',
+                    'startDate'
+                ]}
                 labels={{
                     isActive: BOOLEAN_LABELS
                 }}
