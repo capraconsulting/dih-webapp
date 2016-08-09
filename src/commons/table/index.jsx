@@ -240,12 +240,15 @@ class Table extends Component {
     }
 
     renderFiltersBar(rowCount = 0) {
+
         return (
             <div className="filterBar">
 
                 {this.props.rowCounter &&
                     <div className="ui label row-count">
-                        {rowCount}/{this.props.items.length} {this.props.rowCounter}
+                        {this.props.rowCounter.prefix}&nbsp;
+                        {rowCount}/{this.props.items.length}&nbsp;
+                        {this.props.rowCounter.suffix}
                     </div>
                 }
 
@@ -360,7 +363,7 @@ Table.propTypes = {
     selected: PropTypes.array,
     select: PropTypes.bool,
     search: PropTypes.bool,
-    rowCounter: PropTypes.string,
+    rowCounter: PropTypes.object,
     labels: PropTypes.object,
     filters: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string.isRequired,
