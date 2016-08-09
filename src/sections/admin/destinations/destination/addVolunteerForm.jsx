@@ -6,8 +6,9 @@ import Button from '../../../../commons/Button';
 import Form from '../../../../commons/Form';
 import DateField from '../../../../commons/Form/DateField';
 import SelectField from '../../../../commons/Form/SelectField';
+import TextField from '../../../../commons/Form/TextField';
 
-const fields = ['userId', 'startDate', 'endDate'];
+const fields = ['userId', 'startDate', 'endDate', 'notes'];
 
 const validate = values => {
     const errors = {};
@@ -22,7 +23,7 @@ const validate = values => {
 
 function AddVolunteerForm(props) {
     const {
-        fields: { userId, startDate, endDate },
+        fields: { userId, startDate, endDate, notes },
         handleSubmit,
         errorMessage,
         isFetching
@@ -55,6 +56,9 @@ function AddVolunteerForm(props) {
             >
                 {endDate}
             </DateField>
+            <TextField type="text" rows={3} label="Additional information / questions">
+                {notes}
+            </TextField>
             <Button
                 type="submit"
                 color="primary"

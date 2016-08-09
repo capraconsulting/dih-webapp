@@ -114,7 +114,7 @@ class Filter extends Component {
                 onClick={e => this.toggleMenu(e)}
             >
                 <i className="filter icon" />
-                {!this.state.activeFilter && <span className="text">Filter Posts</span>}
+                {!this.state.activeFilter && <span className="text">Filter rows</span>}
                 {this.state.activeFilter && this.renderActiveFilter()}
                 <div
                     className={this.createMenuClasses().join(' ')}
