@@ -5,7 +5,6 @@ import Segments from '../../commons/Segments';
 import Segment from '../../commons/Segment';
 import Header from '../../commons/pageHeader';
 import Table from '../../commons/table';
-import { listForUser } from '../../actions/tripActions';
 import { TRIP_STATUSES, TRIP_STATUS_LABELS } from '../../constants';
 import { trips } from '../../actions/accountActions';
 

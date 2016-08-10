@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { browserHistory } from 'react-router';
 import Table from '../../../commons/table';
-import { USER_ROLES } from '../../../constants';
+import { USER_ROLES, ROLE_LABELS } from '../../../constants';
 
 class Recipients extends Component {
     constructor(props) {
@@ -13,25 +13,25 @@ class Recipients extends Component {
                 action: this.sendMessage = this.sendMessage.bind(this)
             }
         ];
-        this.filterValues = [
+        this.filters = [
             {
                 value: USER_ROLES.USER,
                 label: 'User',
-                color: 'green',
+                color: 'empty',
                 group: 'Filter by user role',
                 field: 'role'
             },
             {
                 value: USER_ROLES.MODERATOR,
-                label: 'Moderator',
-                color: 'yellow',
+                label: 'Coordinator',
+                color: 'grey',
                 group: 'Filter by user role',
                 field: 'role'
             },
             {
                 value: USER_ROLES.ADMIN,
-                label: 'Admin',
-                color: 'red',
+                label: 'Administrator',
+                color: 'black',
                 group: 'Filter by user role',
                 field: 'role'
             }
@@ -50,7 +50,7 @@ class Recipients extends Component {
                 select
                 selected={this.props.recipients}
                 actions={this.actions}
-                filters={this.filterValues}
+                filters={this.filters}
                 columnNames={{
                     fullName: 'Name',
                     email: 'E-mail',
@@ -59,6 +59,9 @@ class Recipients extends Component {
                 link={{
                     columnName: 'fullName',
                     prefix: '/admin/users/'
+                }}
+                labels={{
+                    role: ROLE_LABELS
                 }}
                 itemKey="id"
                 items={this.props.users}
