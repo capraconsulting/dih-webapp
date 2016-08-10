@@ -109,7 +109,7 @@ class SignupTripFormContainer extends Component {
                     }
                     {!this.userAllowedToSignUp() &&
                         <div>
-                            <h3>Profile information not filled out</h3>
+                            <h3>We would like to know you better!</h3>
                             <p>
                                 Before you can sign up for a trip, you will have to fill out
                                 some information about yourself.
