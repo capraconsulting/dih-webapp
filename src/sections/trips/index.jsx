@@ -25,28 +25,28 @@ class Trips extends React.Component {
                 field: 'status'
             },
             {
-                color: 'olive',
+                color: 'teal',
                 label: 'Accepted',
                 value: TRIP_STATUSES.ACCEPTED,
                 group: 'Trip status',
                 field: 'status'
             },
             {
-                color: 'green',
+                color: 'olive',
                 label: 'Active',
                 value: TRIP_STATUSES.ACTIVE,
                 group: 'Trip status',
                 field: 'status'
             },
             {
-                color: 'teal',
+                color: 'green',
                 label: 'Present',
                 value: TRIP_STATUSES.PRESENT,
                 group: 'Trip status',
                 field: 'status'
             },
             {
-                color: 'blue',
+                color: 'grey',
                 label: 'Left',
                 value: TRIP_STATUSES.LEFT,
                 group: 'Trip status',
@@ -56,6 +56,20 @@ class Trips extends React.Component {
                 color: 'red',
                 label: 'Rejected',
                 value: TRIP_STATUSES.REJECTED,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'black',
+                label: 'Closed',
+                value: TRIP_STATUSES.CLOSED,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'orange',
+                label: 'No show',
+                value: TRIP_STATUSES.NOSHOW,
                 group: 'Trip status',
                 field: 'status'
             }
