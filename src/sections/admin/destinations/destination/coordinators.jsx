@@ -3,9 +3,22 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import Segment from '../../../../commons/Segment';
 import Table from '../../../../commons/table';
-import { retrieve } from '../../../../actions/destinationActions';
+import { retrieve, update } from '../../../../actions/destinationActions';
+import { pushNotification } from '../../../../actions/notificationActions';
 
-const createHandlers = (dispatch) => (id) => dispatch(retrieve(id));
+const createHandlers = (dispatch) => (
+    {
+        retrieve(id) {
+            return dispatch(retrieve(id));
+        },
+        update(destination) {
+            return dispatch(update(destination));
+        },
+        notification(message, level) {
+            return dispatch(pushNotification(message, level));
+        }
+    }
+);
 
 class Coordinators extends Component {
     constructor(props) {
@@ -14,11 +27,16 @@ class Coordinators extends Component {
         this.state = {
             loading: false
         };
+        this.actions = [
+            {
+                action: this.handleClick = this.handleClick.bind(this)
+            }
+        ];
         this.handlers = createHandlers(this.props.dispatch);
     }
 
     componentDidMount() {
-        this.handlers(this.props.params.destinationId)
+        this.handlers.retrieve(this.props.params.destinationId)
             .then(() => {
                 this.setState({ loading: false });
             });
@@ -33,9 +51,41 @@ class Coordinators extends Component {
                 startDate: value.destinationCoordinator.startDate ?
                     moment(value.destinationCoordinator.startDate).format('YYYY-MM-DD') : 'Not set',
                 endDate: value.destinationCoordinator.endDate ?
-                    moment(value.destinationCoordinator.endDate).format('YYYY-MM-DD') : 'Forever'
+                    moment(value.destinationCoordinator.endDate).format('YYYY-MM-DD') : 'Forever',
+                isActive: value.destinationCoordinator.isActive
             }
         ));
+    }
+
+    handleClick(data) {
+        const user = data;
+
+        user.userId = parseInt(user.id, 10);
+
+        if (user.isActive) {
+            user.endDate = moment();
+            if (user.startDate > user.endDate) user.startDate = moment().subtract(1, 'days');
+        } else {
+            user.endDate = null;
+            if (user.startDate > moment()) user.startDate = moment();
+        }
+
+        const payload = {
+            users: [user],
+            id: this.props.params.destinationId
+        };
+
+        this.handlers.update(payload)
+        .then(response => {
+            const message = 'Coordinator has been marked as inactive';
+            const { error } = response;
+            if (!error) {
+                this.handlers.notification(message, 'success');
+            }
+        })
+        .then(() => {
+            this.handlers.retrieve(this.props.params.destinationId);
+        });
     }
 
     render() {
@@ -48,10 +98,40 @@ class Coordinators extends Component {
                         fullName: 'Name',
                         phoneNumber: 'Phone number',
                         startDate: 'Active from',
-                        endDate: 'Active to'
+                        endDate: 'Active to',
+                        isActive: 'Status'
                     }}
                     itemKey="id"
                     items={this.normalizeCoordinatorObjectsForTable(this.props.destination.users)}
+                    labels={{
+                        isActive: {
+                            true: {
+                                html: (
+                                    <div className="ui green label">
+                                        <i className="checkmark icon"></i>
+                                        Active
+                                    </div>
+                                ),
+                                action: this.handleClick
+                            },
+                            false: {
+                                html: (
+                                    <div className="ui red label">
+                                        <i className="remove icon"></i>
+                                        Inactive
+                                    </div>
+                                ),
+                                action: this.handleClick
+                            }
+                        }
+                    }}
+                    responsivePriority={[
+                        'fullName',
+                        'phoneNumber',
+                        'isActive',
+                        'endDate',
+                        'startDate'
+                    ]}
                 />
             </Segment>
         );

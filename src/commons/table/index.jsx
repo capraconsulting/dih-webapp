@@ -221,11 +221,18 @@ class Table extends Component {
             );
         }
         if (labels && labels[columnNameKey]) {
-            element = (
-                <td>
-                    {labels[columnNameKey][item[columnNameKey]]}
-                </td>
-            );
+            const label = labels[columnNameKey][item[columnNameKey]];
+            if (label.html) {
+                element = (
+                    <td>
+                        <div onClick={() => label.action(item)}>
+                            {label.html}
+                        </div>
+                    </td>
+                );
+            } else {
+                element = (<td>{label}</td>);
+            }
         }
         return element;
     }
@@ -241,7 +248,6 @@ class Table extends Component {
     }
 
     renderFiltersBar(rowCount = 0) {
-
         return (
             <div className="filterBar">
 
