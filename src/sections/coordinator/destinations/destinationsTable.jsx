@@ -13,11 +13,13 @@ class DestinationsTable extends Component {
     }
 
     componentDidMount() {
-        this.handlers();
+        this.handlers(this.props.account.id);
     }
 
     prepareTableContent(items) {
-        return items.map(value => ({
+        return items.filter(item => item.users &&
+            item.users.map(user => user.id).includes(this.props.account.id))
+        .map(value => ({
             id: value.id,
             name: value.name,
             countOfActiveVolunteers: value.countOfActiveVolunteers,
@@ -68,12 +70,14 @@ class DestinationsTable extends Component {
 }
 
 const mapStateToProps = store => ({
-    destinations: store.destinationState.destinations
+    destinations: store.destinationState.destinations,
+    account: store.accountState.account
 });
 
 DestinationsTable.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    destinations: PropTypes.array.isRequired
+    destinations: PropTypes.array.isRequired,
+    account: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(DestinationsTable);
