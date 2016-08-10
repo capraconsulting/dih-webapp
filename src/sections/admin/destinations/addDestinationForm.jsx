@@ -29,7 +29,7 @@ function AddDestinationForm(props) {
             errorMessage={errorMessage}
             handleSubmit={handleSubmit}
         >
-            <InputField label="Name" type="text">
+            <InputField label="Name" type="text" required>
                 {name}
             </InputField>
             <InputField

@@ -23,7 +23,10 @@ const createClasses = (props) => {
 
 const InputField = (props) => (
     <div className={createClasses(props).join(' ')}>
-        <label htmlFor={props.type}>{props.label}</label>
+        <label htmlFor={props.type}>
+            {props.label}
+            {props.required && <span className="required"> *</span>}
+        </label>
         <input
             {...props.children}
             disabled={props.disabled}
@@ -43,7 +46,8 @@ InputField.propTypes = {
     type: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    required: PropTypes.bool
 };
 
 export default InputField;

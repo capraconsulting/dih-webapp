@@ -42,12 +42,14 @@ function AddVolunteerForm(props) {
                 placeholder="Select an user"
                 valueLabel="fullName"
                 valueKey="id"
+                required
             >
                 {userId}
             </SelectField>
             <DateField
                 label="Start date"
                 minDate={moment()}
+                required
             >
                 {startDate}
             </DateField>
