@@ -59,15 +59,20 @@ class Coordinators extends Component {
 
     handleClick(data) {
         const user = data;
+        let message = '';
 
         user.userId = parseInt(user.id, 10);
 
         if (user.isActive) {
             user.endDate = moment();
             if (user.startDate > user.endDate) user.startDate = moment().subtract(1, 'days');
+
+            message = 'Coordinator has been marked as inactive';
         } else {
             user.endDate = null;
             if (user.startDate > moment()) user.startDate = moment();
+
+            message = 'Coordinator has been marked as active';
         }
 
         const payload = {
@@ -77,7 +82,6 @@ class Coordinators extends Component {
 
         this.handlers.update(payload)
         .then(response => {
-            const message = 'Coordinator has been marked as inactive';
             const { error } = response;
             if (!error) {
                 this.handlers.notification(message, 'success');
