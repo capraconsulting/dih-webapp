@@ -35,7 +35,9 @@ class Dropdown extends Component {
             visible: false,
             active: false,
             search: '',
-            selected: null
+            selected: this.getIntialValue(props),
+            initialValue: props.initialValue,
+            initialValueSat: false
         };
     }
 
@@ -43,8 +45,35 @@ class Dropdown extends Component {
         window.addEventListener('keydown', this.handleKeyPress);
     }
 
+    componentWillReceiveProps(props) {
+        if (!this.state.initialValueSat) {
+            if (props.initialValue !== this.state.initialValue) {
+                const selected = this.getIntialValue(props);
+                this.setState({
+                    selected,
+                    initialValue: props.initialValue,
+                    initialValueSat: true
+                });
+            }
+        }
+        if (!props.value) {
+            const selectNullValue = (props.value === null);
+            if (!selectNullValue) this.setState({ selected: null });
+        }
+    }
+
     componentWillUnmount() {
         window.removeEventListener('keydown', this.handleKeyPress);
+    }
+
+    getIntialValue(props) {
+        let selected = null;
+        if (props.initialValue) {
+            selected = _.filter(props.children, data =>
+                (data.props.item[props.valueKey] === props.initialValue));
+        }
+        if (selected) selected = selected[0].props.item;
+        return selected;
     }
 
     toggleMenu() {
@@ -52,6 +81,7 @@ class Dropdown extends Component {
         this.setState({
             visible: !this.state.visible,
             active: !this.state.active,
+            placeholder: false,
             search: ''
         });
         if (focus) ReactDOM.findDOMNode(this.refs.searchInput).focus();
@@ -89,8 +119,8 @@ class Dropdown extends Component {
     }
 
     handleSelect(selected) {
-        this.props.onSelect(selected[this.props.valueKey]);
         this.setState({ selected });
+        this.props.onSelect(selected[this.props.valueKey]);
         this.toggleMenu();
     }
 
@@ -217,6 +247,7 @@ Dropdown.propTypes = {
     search: PropTypes.bool,
     button: PropTypes.bool,
     placeholder: PropTypes.string,
+    initialValue: PropTypes.string,
     label: PropTypes.string,
     error: PropTypes.bool,
     disabled: PropTypes.bool,
