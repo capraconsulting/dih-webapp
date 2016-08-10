@@ -25,7 +25,10 @@ const createClasses = (props) => {
 
 const TextField = (props) => (
     <div className={createClasses(props).join(' ')}>
-        <label htmlFor={props.label}>{props.label}</label>
+        <label htmlFor={props.label}>
+            {props.label}
+            {props.required && <span className="required"> *</span>}
+        </label>
         <textarea
             {...props.children}
             rows={props.rows}
@@ -45,7 +48,8 @@ TextField.propTypes = {
     label: PropTypes.string.isRequired,
     rows: PropTypes.number,
     disabled: PropTypes.bool,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    required: PropTypes.bool
 };
 
 export default TextField;

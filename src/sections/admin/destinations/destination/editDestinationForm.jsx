@@ -24,16 +24,17 @@ function EditDestinationForm(props) {
             errorMessage={errorMessage}
             handleSubmit={handleSubmit}
         >
-            <InputField label="Name" type="text">
+            <InputField label="Name" type="text" required>
                 {name}
             </InputField>
             <InputField
                 label="The mimimum number of days a volunteer has to be at the destination"
                 type="number"
+                required
             >
                 {minimumTripDurationInDays}
             </InputField>
-            <DateField label="Start date">
+            <DateField label="Start date" required>
                 {startDate}
             </DateField>
             <DateField

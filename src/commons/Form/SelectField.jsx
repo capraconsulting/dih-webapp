@@ -23,7 +23,10 @@ import DropdownItem from '../DropdownComponent/DropdownItem';
 
 const SelectField = (props) => (
     <div className="field">
-        <label>{props.label}</label>
+        <label>
+            {props.label}
+            {props.required && <span className="required"> *</span>}
+        </label>
         <Dropdown
             fluid
             search
@@ -60,7 +63,8 @@ SelectField.propTypes = {
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
-    icon: PropTypes.string
+    icon: PropTypes.string,
+    required: PropTypes.bool
 };
 
 export default SelectField;

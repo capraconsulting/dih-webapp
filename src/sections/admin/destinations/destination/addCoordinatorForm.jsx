@@ -40,11 +40,13 @@ function AddCoordinatorForm(props) {
                 placeholder="Select an user"
                 valueLabel="name"
                 valueKey="id"
+                required
             >
                 {userId}
             </SelectField>
             <DateField
                 label="Start date"
+                required
             >
                 {startDate}
             </DateField>
