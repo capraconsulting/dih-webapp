@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import Header from '../../../../commons/pageHeader';
+import Segments from '../../../../commons/Segments';
+import Segment from '../../../../commons/Segment';
 import { retrieve } from '../../../../actions/tripActions';
 import { retrieve as retrieveDestination } from '../../../../actions/destinationActions';
 import { retrieve as retrieveUser } from '../../../../actions/userActions';
@@ -24,14 +26,16 @@ const createHandlers = (dispatch) => (
 class Trip extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loading: true
+        };
         this.handlers = createHandlers(this.props.dispatch);
     }
 
     componentDidMount() {
         this.handlers.retrieve(this.props.params.tripId)
         .then(() => {
-            this.handlers.retrieveDestination(this.props.trip.destinationId);
-            this.handlers.retrieveUser(this.props.trip.userId);
+            this.setState({ loading: false });
         });
     }
 
@@ -39,28 +43,28 @@ class Trip extends Component {
         const headerTitle = `Trip to ${this.props.destination.name}`;
 
         return (
-            <div className="ui segments">
-                <div className="ui segment">
+            <Segments loading={this.state.loading} >
+                <Segment>
                     <Header
                         icon="plane"
                         content={headerTitle}
                         subContent="Manage trip"
                     />
-                    {React.cloneElement(this.props.children, {
-                        initialValues: this.props.trip,
-                        trip: this.props.trip,
-                        onSubmit: e => this.onUpdate(e)
-                    })}
-                </div>
-            </div>
+                </Segment>
+                {React.cloneElement(this.props.children, {
+                    initialValues: this.props.trip,
+                    trip: this.props.trip,
+                    onSubmit: e => this.onUpdate(e)
+                })}
+            </Segments>
         );
     }
 }
 
 const mapStateToProps = store => ({
-    destination: store.destinationState.destination,
+    destination: store.tripState.trip.destination,
     trip: store.tripState.trip,
-    user: store.userState.user
+    user: store.tripState.trip.user
 });
 
 Trip.propTypes = {

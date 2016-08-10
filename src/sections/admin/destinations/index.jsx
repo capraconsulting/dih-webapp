@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import Header from '../../../commons/pageHeader';
+import Segment from '../../../commons/Segment';
+import Segments from '../../../commons/Segments';
 import Navbar from '../../../commons/navbar';
 
 class Destinations extends Component {
@@ -21,15 +23,17 @@ class Destinations extends Component {
 
     render() {
         return (
-            <div className="ui segment">
-                <Header
-                    content="Destinations"
-                    subContent="View and edit destinations"
-                    icon="marker"
-                />
+            <Segments>
+                <Segment>
+                    <Header
+                        content="Destinations"
+                        subContent="View and edit destinations"
+                        icon="marker"
+                    />
+                </Segment>
                 <Navbar pages={this.state.pages} />
                 {this.props.children}
-            </div>
+            </Segments>
         );
     }
 }

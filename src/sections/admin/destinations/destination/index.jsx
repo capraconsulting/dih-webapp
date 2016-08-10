@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { retrieve } from '../../../../actions/destinationActions';
 import Header from '../../../../commons/pageHeader';
 import Navbar from '../../../../commons/navbar';
+import Segments from '../../../../commons/Segments';
+import Segment from '../../../../commons/Segment';
 
 const createHandlers = (dispatch) => (id) => dispatch(retrieve(id));
 
@@ -11,6 +13,7 @@ class Destination extends Component {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
         this.state = {
+            loading: true,
             pages: [
                 {
                     name: 'Volunteers',
@@ -41,20 +44,25 @@ class Destination extends Component {
     }
 
     componentDidMount() {
-        this.handlers(this.props.params.destinationId);
+        this.handlers(this.props.params.destinationId)
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     render() {
         return (
-            <div className="ui segment clearing">
-                <Header
-                    icon="marker"
-                    content={this.props.destination.name}
-                    subContent="Manage destination"
-                />
+            <Segments loading={this.state.loading}>
+                <Segment>
+                    <Header
+                        icon="marker"
+                        content={this.props.destination.name}
+                        subContent="Manage destination"
+                    />
+                </Segment>
                 <Navbar pages={this.state.pages} />
                 {this.props.children}
-            </div>
+            </Segments>
         );
     }
 }

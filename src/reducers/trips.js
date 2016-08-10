@@ -2,9 +2,11 @@ import * as actionTypes from '../actions/types/trips';
 
 const initialState = {
     isFetching: false,
-    trip: {},
-    trips: [],
-    tripsForUser: []
+    trip: {
+        destination: {},
+        user: {}
+    },
+    trips: []
 };
 
 export default function (state = initialState, action) {
@@ -34,12 +36,6 @@ export default function (state = initialState, action) {
             ...state,
             isFetching: false,
             trips: action.res
-        };
-    case actionTypes.GET_TRIPS_FOR_USER_SUCCESS:
-        return {
-            ...state,
-            tripsForUser: action.res,
-            isFetching: false
         };
     default:
         return state;

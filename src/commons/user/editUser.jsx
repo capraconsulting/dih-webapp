@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 
 import Form from '../Form';
 import Button from '../Button';
+import Segment from '../Segment';
 import DateField from '../Form/DateField';
 import InputField from '../Form/InputField';
 import SelectField from '../Form/SelectField';
@@ -53,7 +54,7 @@ function EditUser(props) {
     } = props;
 
     return (
-        <div>
+        <Segment>
             <Form
                 id="editUserForm"
                 errorMessage={errorMessage}
@@ -139,7 +140,7 @@ function EditUser(props) {
                     Save
                 </Button>
             </Form>
-        </div>
+        </Segment>
     );
 }
 

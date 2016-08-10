@@ -5,6 +5,8 @@ import { update, retrieve } from '../../actions/accountActions';
 import { pushNotification } from '../../actions/notificationActions';
 import Header from '../../commons/pageHeader';
 import Navbar from '../../commons/navbar';
+import Segment from '../../commons/Segment';
+import Segments from '../../commons/Segments';
 
 const createHandlers = (dispatch) => (
     {
@@ -50,12 +52,14 @@ class Profile extends Component {
 
     render() {
         return (
-            <div className="ui segment clearing">
-                <Header
-                    icon="child"
-                    content="Profile"
-                    subContent="View and edit your profile"
-                />
+            <Segments>
+                <Segment>
+                    <Header
+                        icon="child"
+                        content="Profile"
+                        subContent="View and edit your profile"
+                    />
+                </Segment>
                 <Navbar pages={this.state.pages} />
                 {React.cloneElement(this.props.children, {
                     initialValues: this.props.account,
@@ -63,7 +67,7 @@ class Profile extends Component {
                     showAdminFields: false,
                     onSubmit: e => this.onUpdate(e)
                 })}
-            </div>
+            </Segments>
         );
     }
 }

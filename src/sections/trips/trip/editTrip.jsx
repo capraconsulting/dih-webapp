@@ -4,6 +4,7 @@ import moment from 'moment';
 
 import { TRAVEL_METHODS } from '../../../constants';
 import Form from '../../../commons/Form';
+import Segment from '../../../commons/Segment';
 import SelectField from '../../../commons/Form/SelectField';
 import InputField from '../../../commons/Form/InputField';
 import TextField from '../../../commons/Form/TextField';
@@ -80,7 +81,7 @@ function EditTrip(props) {
 
     updateTravelInformationFields(); // Set area on initial load
     return (
-        <div>
+        <Segment>
             <Form
                 id="editTripForm"
                 handleSubmit={handleSubmit}
@@ -164,7 +165,7 @@ function EditTrip(props) {
                     Save
                 </Button>
             </Form>
-        </div>
+        </Segment>
     );
 }
 

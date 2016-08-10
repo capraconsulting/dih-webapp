@@ -1,10 +1,6 @@
 import React from 'react';
 import AdminTripTable from '../../../commons/adminTripTable';
 
-function AllTrips() {
-    return (
-        <AdminTripTable />
-    );
-}
+const AllTrips = () => (<AdminTripTable />);
 
 export default AllTrips;

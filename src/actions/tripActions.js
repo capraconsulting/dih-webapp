@@ -16,22 +16,6 @@ export function list() {
     };
 }
 
-export function listForUser(userId) {
-    return {
-        [CALL_API]: {
-            method: 'get',
-            url: `/trips?userId=${userId}`,
-            types: [
-                types.GET_TRIPS_FOR_USER_REQUEST,
-                types.GET_TRIPS_FOR_USER_SUCCESS,
-                types.GET_TRIPS_FOR_USER_FAILURE
-            ],
-            authenticated: true
-        }
-    };
-}
-
-
 export function retrieve(id) {
     return {
         [CALL_API]: {
