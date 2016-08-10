@@ -4,11 +4,8 @@ import _ from 'lodash';
 import moment from 'moment';
 import { list } from '../../../actions/destinationActions';
 import Table from '../../../commons/table';
-<<<<<<< HEAD
 import { BOOLEAN_LABELS } from '../../../constants';
-=======
 import Segment from '../../../commons/Segment';
->>>>>>> dev
 
 const createHandlers = (dispatch) => () => dispatch(list());
 
