@@ -42,7 +42,7 @@ class AdminTripTable extends Component {
                     userId={this.props.userId}
                     destinationId={this.props.destinationId}
                     role={this.props.role}
-                    requestsOnly={this.props.requestsOnly}
+                    statuses={this.props.statuses}
                 />
             </Segment>
         );
@@ -59,7 +59,7 @@ AdminTripTable.propTypes = {
     userId: PropTypes.number,
     destinationId: PropTypes.number,
     role: PropTypes.string,
-    requestsOnly: PropTypes.bool
+    statuses: PropTypes.array
 };
 
 export default connect(mapStateToProps)(AdminTripTable);

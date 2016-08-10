@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import { USER_ROLES, TRIP_STATUS_LABELS, TRIP_STATUSES } from '../../constants';
+import _ from 'lodash';
+import { USER_ROLES, TRIP_STATUS_LABELS } from '../../constants';
 import Table from '../../commons/table';
 
 class TripRequestsTable extends Component {
@@ -9,6 +10,7 @@ class TripRequestsTable extends Component {
         this.dateFields = { from: 'startDate', to: 'endDate' };
         this.rowCounterLabels = { prefix: 'Showing', suffix: 'trips' };
     }
+
     getTrips() {
         let trips = this.props.trips;
         if (this.props.userId) {
@@ -54,8 +56,8 @@ class TripRequestsTable extends Component {
 
     prepareTableContent(trips) {
         let filteredTrips = trips;
-        if (this.props.requestsOnly) {
-            filteredTrips = trips.filter(trip => (trip.status === TRIP_STATUSES.PENDING));
+        if (this.props.statuses) {
+            filteredTrips = trips.filter(trip => _.includes(this.props.statuses, trip.status));
         }
 
         return filteredTrips.map(trip => {
@@ -128,7 +130,7 @@ TripRequestsTable.propTypes = {
     userId: PropTypes.number,
     destinationId: PropTypes.number,
     role: PropTypes.string,
-    requestsOnly: PropTypes.bool
+    statuses: PropTypes.array
 };
 
 export default TripRequestsTable;

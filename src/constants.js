@@ -23,8 +23,8 @@ export const USER_ROLES = {
 * @property {string} PENDING - The trip is requested by a user but not handled by an admin
 * @property {string} ACCEPTED - The trip is accepted by an admin
 * @property {string} REJECTED - The trip is rejected by an admin
-* @property {string} ACTIVE - The trip is currently in progress by a user
-* @property {string} CLOSED - The trip is closed, hence the user has completed this trip
+* @property {string} ACTIVE - The trip information is filled out and user is ready for the trip
+* @property {string} CLOSED - The trip is closed. Happens when user cancels the trip
 * @property {string} PRESENT - User is present at destination
 * @property {string} LEFT - User has left destination
 * @property {string} NOSHOW - User did not show up at destination
