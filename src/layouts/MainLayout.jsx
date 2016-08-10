@@ -78,7 +78,9 @@ class MainLayout extends Component {
                         {this.props.children}
                     </div>
                 </div>
-                <NotificationContainer props />
+                <NotificationContainer
+                    isMobile={this.state.isMobile}
+                />
             </div>
         );
     }
