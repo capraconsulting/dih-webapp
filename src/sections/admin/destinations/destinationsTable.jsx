@@ -4,7 +4,11 @@ import _ from 'lodash';
 import moment from 'moment';
 import { list } from '../../../actions/destinationActions';
 import Table from '../../../commons/table';
+<<<<<<< HEAD
 import { BOOLEAN_LABELS } from '../../../constants';
+=======
+import Segment from '../../../commons/Segment';
+>>>>>>> dev
 
 const createHandlers = (dispatch) => () => dispatch(list());
 
@@ -54,36 +58,38 @@ class DestinationsList extends Component {
             }
         ];
         return (
-            <Table
-                search
-                filters={filterValues}
-                columnNames={{
-                    name: 'Name',
-                    countOfActiveVolunteers: '# Volunteers',
-                    isActive: 'Status',
-                    startDate: 'Active from',
-                    endDate: 'Active to',
-                    minimumTripDurationInDays: 'Minimum trip duration'
-                }}
-                dateFields={dateFields}
-                itemKey="id"
-                link={{
-                    columnName: 'name',
-                    prefix: '/admin/destinations/'
-                }}
-                responsivePriority={[
-                    'name',
-                    'countOfActiveVolunteers',
-                    'isActive',
-                    'minimumTripDurationInDays',
-                    'endDate',
-                    'startDate'
-                ]}
-                labels={{
-                    isActive: BOOLEAN_LABELS
-                }}
-                items={this.normalizeTripObjectsForTable(this.props.destinations)}
-            />
+            <Segment loading={this.props.destinations.length < 1}>
+                <Table
+                    search
+                    filters={filterValues}
+                    columnNames={{
+                        name: 'Name',
+                        countOfActiveVolunteers: '# Volunteers',
+                        isActive: 'Status',
+                        startDate: 'Active from',
+                        endDate: 'Active to',
+                        minimumTripDurationInDays: 'Minimum trip duration'
+                    }}
+                    dateFields={dateFields}
+                    itemKey="id"
+                    link={{
+                        columnName: 'name',
+                        prefix: '/admin/destinations/'
+                    }}
+                    responsivePriority={[
+                        'name',
+                        'countOfActiveVolunteers',
+                        'isActive',
+                        'minimumTripDurationInDays',
+                        'endDate',
+                        'startDate'
+                    ]}
+                    labels={{
+                        isActive: BOOLEAN_LABELS
+                    }}
+                    items={this.normalizeTripObjectsForTable(this.props.destinations)}
+                />
+            </Segment>
         );
     }
 }

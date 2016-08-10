@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Table from '../../../../commons/table';
+import Segment from '../../../../commons/Segment';
 
 const createTemplatesList = (destination) => {
     if (!destination.id) return [];
@@ -24,18 +25,20 @@ const createTemplatesList = (destination) => {
 };
 
 const EmailTemplates = (props) => (
-    <Table
-        columnNames={{
-            name: 'Name',
-            description: 'Description'
-        }}
-        link={{
-            columnName: 'name',
-            prefix: '/admin/email/'
-        }}
-        itemKey="id"
-        items={createTemplatesList(props.destination)}
-    />
+    <Segment>
+        <Table
+            columnNames={{
+                name: 'Name',
+                description: 'Description'
+            }}
+            link={{
+                columnName: 'name',
+                prefix: '/admin/email/'
+            }}
+            itemKey="id"
+            items={createTemplatesList(props.destination)}
+        />
+    </Segment>
 );
 
 const mapStateToProps = store => ({

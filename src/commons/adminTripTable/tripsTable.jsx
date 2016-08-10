@@ -4,6 +4,11 @@ import { USER_ROLES, TRIP_STATUS_LABELS, TRIP_STATUSES } from '../../constants';
 import Table from '../../commons/table';
 
 class TripRequestsTable extends Component {
+    constructor(props) {
+        super(props);
+        this.dateFields = { from: 'startDate', to: 'endDate' };
+        this.rowCounterLabels = { prefix: 'Showing', suffix: 'trips' };
+    }
     getTrips() {
         let trips = this.props.trips;
         if (this.props.userId) {
@@ -27,6 +32,7 @@ class TripRequestsTable extends Component {
         const headers = {};
         if (!this.props.userId) {
             headers.fullName = 'Name';
+            headers.phoneNumber = 'Phone number';
         }
 
         if (!this.props.destinationId) {
@@ -63,6 +69,7 @@ class TripRequestsTable extends Component {
 
             if (!this.props.userId) {
                 row.fullName = trip.user.fullName;
+                row.phoneNumber = trip.user.phoneNumber;
             }
 
             if (!this.props.destinationId) {
@@ -81,7 +88,6 @@ class TripRequestsTable extends Component {
                 suffix: '/trips'
             };
         }
-
         return {
             columnName: 'destination',
             prefix: '/trips/'
@@ -90,14 +96,9 @@ class TripRequestsTable extends Component {
 
     render() {
         const trips = this.getTrips();
-        const dateFields = { from: 'startDate', to: 'endDate' };
-        const rowCounterLabels = { prefix: 'Showing', suffix: 'trips' };
-
         return (
             <Table
                 search
-                dateFields={dateFields}
-                rowCounter={rowCounterLabels}
                 responsivePriority={[
                     'fullName',
                     'destination',
@@ -106,6 +107,8 @@ class TripRequestsTable extends Component {
                     'startDate',
                     'endDate'
                 ]}
+                dateFields={this.dateFields}
+                rowCounter={this.rowCounterLabels}
                 columnNames={this.prepareTableHeaders()}
                 items={this.prepareTableContent(trips)}
                 labels={{

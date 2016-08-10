@@ -1,40 +1,22 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-
+import Segments from '../../commons/Segments';
+import Segment from '../../commons/Segment';
 import Header from '../../commons/pageHeader';
 import Table from '../../commons/table';
 import { listForUser } from '../../actions/tripActions';
 import { TRIP_STATUSES, TRIP_STATUS_LABELS } from '../../constants';
+import { trips } from '../../actions/accountActions';
 
-const createHandlers = (dispatch) => (userId) => dispatch(listForUser(userId));
+const createHandlers = (dispatch) => () => dispatch(trips());
 
 class Trips extends React.Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
-    }
-
-    componentDidMount() {
-        this.handlers(this.props.account.id);
-    }
-
-    normalizeTripObjectsForTable(items) {
-        return items.filter(value => (value.status !== TRIP_STATUSES.CLOSED))
-        .map(value => (
-            {
-                id: value.id,
-                status: value.status,
-                destinationName: value.destination.name,
-                startDate: moment(value.startDate).format('YYYY-MM-DD'),
-                endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Not set'
-            }
-        ));
-    }
-
-    render() {
-        const dateFields = { from: 'startDate', to: 'endDate' };
-        const filters = [
+        this.dateFields = { from: 'startDate', to: 'endDate' };
+        this.filters = [
             {
                 color: 'empty',
                 label: 'Pending',
@@ -78,17 +60,36 @@ class Trips extends React.Component {
                 field: 'status'
             }
         ];
+    }
 
+    componentDidMount() {
+        this.handlers();
+    }
+
+    normalizeTripObjectsForTable(items) {
+        return items.filter(value => (value.status !== TRIP_STATUSES.CLOSED))
+            .map(value => (
+                {
+                    id: value.id,
+                    status: value.status,
+                    destinationName: value.destination.name,
+                    startDate: moment(value.startDate).format('YYYY-MM-DD'),
+                    endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Not set'
+                }
+            ));
+    }
+
+    render() {
         return (
-            <div className="ui segments">
-                <div className="ui segment">
+            <Segments>
+                <Segment>
                     <Header
                         content="Trips"
                         subContent="View and edit your trips"
                         icon="plane"
                     />
-                </div>
-                <div className="ui blue segment">
+                </Segment>
+                <Segment blue loading={this.props.trips.length < 1}>
                     <Table
                         columnNames={{
                             destinationName: 'Destination',
@@ -101,6 +102,7 @@ class Trips extends React.Component {
                             columnName: 'destinationName',
                             prefix: '/trips/'
                         }}
+<<<<<<< HEAD
                         labels={{
                             status: TRIP_STATUS_LABELS
                         }}
@@ -111,23 +113,25 @@ class Trips extends React.Component {
                             'endDate'
                         ]}
                         items={this.normalizeTripObjectsForTable(this.props.tripsForUser)}
+=======
+                        items={this.normalizeTripObjectsForTable(this.props.trips)}
+>>>>>>> dev
                         search
-                        filters={filters}
-                        dateFields={dateFields}
+                        filters={this.filters}
+                        dateFields={this.dateFields}
                     />
-                </div>
-            </div>
+                </Segment>
+            </Segments>
         );
     }
 }
 
 const mapStateToProps = store => ({
-    tripsForUser: store.tripState.tripsForUser,
-    account: store.accountState.account
+    trips: store.accountState.trips
 });
 
 Trips.propTypes = {
-    tripsForUser: PropTypes.array.isRequired,
+    trips: PropTypes.array.isRequired,
     dispatch: PropTypes.func.isRequired,
     account: PropTypes.object.isRequired
 };

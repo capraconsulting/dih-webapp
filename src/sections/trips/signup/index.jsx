@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import SignupTripForm from './SignupTripForm';
 import Header from '../../../commons/pageHeader';
+import Segments from '../../../commons/Segments';
+import Segment from '../../../commons/Segment';
 import { create } from '../../../actions/tripActions';
 import { list } from '../../../actions/destinationActions';
 import { pushNotification } from '../../../actions/notificationActions';
@@ -29,13 +31,17 @@ class SignupTripFormContainer extends Component {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
         this.state = {
+            loading: true,
             errorMessage: null,
             successMessage: null
         };
     }
 
     componentDidMount() {
-        this.handlers.list();
+        this.handlers.list()
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     userAllowedToSignUp() {
@@ -80,46 +86,40 @@ class SignupTripFormContainer extends Component {
         });
     }
 
-    renderSignUpForTripForm() {
-        if (this.userAllowedToSignUp()) {
-            return (
-                <SignupTripForm
-                    destinations={this.props.destinations.filter(val => (val.isActive))}
-                    onSubmit={e => { this.handleSubmit(e); }}
-                    errorMessage={this.state.errorMessage}
-                    isFetching={this.state.isFetching}
-                    successMessage={this.state.successMessage}
-                />
-            );
-        }
-        return (
-            <div>
-                <h3>
-                    To register for a trip, you'll have to complete your profile.
-                </h3>
-                <h3>
-                    Go to <Link to="/profile/edit">your profile</Link> and
-                    add more information, then come back here.
-                </h3>
-            </div>
-        );
-    }
-
     render() {
         return (
-            <div className="ui segments">
-                <div className="ui segment">
+            <Segments>
+                <Segment>
                     <Header
                         icon="plane"
                         subContent={`Sign up for a trip by filling in the form below,
                         we will get back to you for further information as fast as we can!`}
                         content="Sign up for a trip"
                     />
-                </div>
-                <div className="ui blue segment">
-                    {this.renderSignUpForTripForm()}
-                </div>
-            </div>
+                </Segment>
+                <Segment loading={this.state.loading}>
+                    {this.userAllowedToSignUp() &&
+                        <SignupTripForm
+                            destinations={this.props.destinations.filter(val => (val.isActive))}
+                            onSubmit={e => { this.handleSubmit(e); }}
+                            errorMessage={this.state.errorMessage}
+                            isFetching={this.state.isFetching}
+                            successMessage={this.state.successMessage}
+                        />
+                    }
+                    {!this.userAllowedToSignUp() &&
+                        <div>
+                            <h3>
+                                To register for a trip, you'll have to complete your profile.
+                            </h3>
+                            <h3>
+                                Go to <Link to="/profile/edit">your profile</Link> and
+                                add more information, then come back here.
+                            </h3>
+                        </div>
+                    }
+                </Segment>
+            </Segments>
         );
     }
 }

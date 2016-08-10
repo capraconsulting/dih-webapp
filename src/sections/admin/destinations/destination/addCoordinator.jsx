@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
 import { USER_ROLES } from '../../../../constants';
-
+import Segment from '../../../../commons/Segment';
 import AddCoordinatorForm from './addCoordinatorForm';
 import { list } from '../../../../actions/userActions';
 import { update } from '../../../../actions/destinationActions';
@@ -26,11 +26,17 @@ const createHandlers = (dispatch) => (
 class AddCoordinator extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loading: false
+        };
         this.handlers = createHandlers(this.props.dispatch);
     }
 
     componentDidMount() {
-        this.handlers.list();
+        this.handlers.list()
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     filterModerators(items) {
@@ -71,10 +77,12 @@ class AddCoordinator extends Component {
 
     render() {
         return (
-            <AddCoordinatorForm
-                moderators={this.filterModerators(this.props.users)}
-                onSubmit={e => { this.handleSubmit(e); }}
-            />
+            <Segment loading={this.state.loading} >
+                <AddCoordinatorForm
+                    moderators={this.filterModerators(this.props.users)}
+                    onSubmit={e => { this.handleSubmit(e); }}
+                />
+            </Segment>
         );
     }
 }

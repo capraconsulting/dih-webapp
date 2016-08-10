@@ -2,6 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import moment from 'moment';
+import Segments from '../../../commons/Segments';
+import Segment from '../../../commons/Segment';
 import Table from '../../../commons/table';
 import Header from '../../../commons/pageHeader';
 import { list } from '../../../actions/userActions';
@@ -75,15 +77,15 @@ class UsersTableContainer extends Component {
 
     render() {
         return (
-            <div className="ui segments">
-                <div className="ui segment">
+            <Segments>
+                <Segment>
                     <Header
                         content="Users"
                         subContent="List of all users"
                         icon="users"
                     />
-                </div>
-                <div className="ui blue segment">
+                </Segment>
+                <Segment blue loading={this.props.users.length < 1}>
                     <Table
                         search
                         select
@@ -115,8 +117,8 @@ class UsersTableContainer extends Component {
                         itemKey="id"
                         items={this.prepareTableContent(this.props.users)}
                     />
-                </div>
-            </div>
+                </Segment>
+            </Segments>
         );
     }
 }

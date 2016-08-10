@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import Segment from '../../../../commons/Segment';
 
 import AddVolunteerForm from './addVolunteerForm';
 import { create } from '../../../../actions/tripActions';
@@ -26,11 +27,17 @@ const createHandlers = (dispatch) => (
 class AddVolunteer extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loading: false
+        };
         this.handlers = createHandlers(this.props.dispatch);
     }
 
     componentDidMount() {
-        this.handlers.list();
+        this.handlers.list()
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     handleSubmit(data) {
@@ -53,17 +60,13 @@ class AddVolunteer extends Component {
     }
 
     render() {
-        const usersWithFullname = this.props.users.map(user => ({
-            ...user, fullname: `${user.firstname} ${user.lastname}`
-        }));
-
         return (
-            <div>
+            <Segment loading={this.state.loading}>
                 <AddVolunteerForm
-                    users={usersWithFullname}
+                    users={this.props.users}
                     onSubmit={e => { this.handleSubmit(e); }}
                 />
-            </div>
+            </Segment>
         );
     }
 }

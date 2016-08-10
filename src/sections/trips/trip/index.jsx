@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-
+import Segments from '../../../commons/Segments';
+import Segment from '../../../commons/Segment';
 import Header from '../../../commons/pageHeader';
 import Navbar from '../../../commons/navbar';
 import { retrieve, update } from '../../../actions/tripActions';
-import { retrieve as retrieveDestination } from '../../../actions/destinationActions';
 import { pushNotification } from '../../../actions/notificationActions';
 import { TRIP_STATUSES } from '../../../constants';
 import { getErrorMessageForTripSubmission } from '../../../helpers';
@@ -21,9 +21,6 @@ const createHandlers = (dispatch) => (
         },
         notification(message, level) {
             return dispatch(pushNotification(message, level));
-        },
-        retrieveDestination(id) {
-            return dispatch(retrieveDestination(id));
         }
     }
 );
@@ -50,6 +47,7 @@ class Trip extends React.Component {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
         this.state = {
+            loading: true,
             pages: [
                 {
                     name: 'View',
@@ -69,7 +67,9 @@ class Trip extends React.Component {
 
     componentDidMount() {
         this.handlers.retrieve(this.props.params.tripId)
-        .then(() => this.handlers.retrieveDestination(this.props.trip.destinationId));
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     onUpdate(trip) {
@@ -105,21 +105,22 @@ class Trip extends React.Component {
 
     render() {
         return (
-            <div className="ui segment clearing">
-                <Header
-                    icon="plane"
-                    content={`Trip to ${this.props.destination.name}`}
-                    subContent="Manage your trip"
-                />
+            <Segments loading={this.state.loading}>
+                <Segment>
+                    <Header
+                        icon="plane"
+                        content={`Trip to ${this.props.destination.name}`}
+                        subContent="Manage your trip"
+                    />
+                </Segment>
                 <Navbar pages={this.state.pages} />
                 {React.cloneElement(this.props.children, {
                     initialValues: this.props.trip,
                     trip: this.props.trip,
-                    destination: this.props.destination,
                     onSubmit: e => this.onUpdate(e),
                     onCancel: e => this.onCancel(e)
                 })}
-            </div>
+            </Segments>
         );
     }
 }
@@ -127,7 +128,7 @@ class Trip extends React.Component {
 
 const mapStateToProps = store => ({
     trip: store.tripState.trip,
-    destination: store.destinationState.destination
+    destination: store.tripState.trip.destination
 });
 
 Trip.propTypes = {
