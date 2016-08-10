@@ -1,0 +1,74 @@
+.ui.sortable.table thead th {
+    border-right: none;
+    border-left: none;
+}
+
+.ui.sortable.table thead th.sorted {
+    background-color: transparent;
+}
+
+.ui.labeled.icon.top.right.dropdown.button.visible.active,
+.ui.icon.dropdown.button.visible.active {
+    .menu.visible {
+        display: block !important;
+    }
+}
+
+i.close.icon {
+    margin-left: 10px !important;
+    margin-right: 0 !important;
+}
+
+.filterBar {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -10px;
+}
+
+.search {
+    flex-grow: 1;
+}
+
+.search,
+.filterButton,
+.actions,
+.dateIntervalButton {
+    margin-right: 10px !important; // Must be opposite of margin-right in .filterBar
+    margin-bottom: 10px !important;
+}
+
+.dateFilterButton:not(:last-child) {
+    border-right: 1px solid #d5d5d5 !important;
+}
+
+.row-count {
+    margin-bottom: 10px !important;
+    background-color: transparent !important;
+    padding-top: 12px !important;
+}
+
+td.one.wide.checkbox {
+    padding: 5px !important;
+    padding-top: 9px !important;
+}
+
+th.one.wide.checkbox {
+    padding: 5px !important;
+    &:hover {
+        background: none !important;
+    }
+}
+
+td.hide-large,
+th.hide-large {
+    @media screen and (max-width: 1100px) {
+        display: none;
+    }
+}
+
+th.hide-medium,
+td.hide-medium {
+    @media screen and (max-width: 600px) {
+        display: none;
+    }
+}

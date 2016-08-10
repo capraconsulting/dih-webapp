@@ -1,4 +1,4 @@
-import * as actions from './actionTypes';
+import * as types from './types/destinations';
 import { CALL_API } from '../middleware/api';
 
 export function list() {
@@ -7,9 +7,9 @@ export function list() {
             method: 'get',
             url: '/destinations',
             types: [
-                actions.GET_DESTINATIONS_REQUEST,
-                actions.GET_DESTINATIONS_SUCCESS,
-                actions.GET_DESTINATIONS_FAILURE
+                types.GET_DESTINATIONS_REQUEST,
+                types.GET_DESTINATIONS_SUCCESS,
+                types.GET_DESTINATIONS_FAILURE
             ],
             authenticated: true
         }
@@ -22,9 +22,9 @@ export function retrieve(id) {
             method: 'get',
             url: `/destinations/${id}`,
             types: [
-                actions.GET_DESTINATION_REQUEST,
-                actions.GET_DESTINATION_SUCCESS,
-                actions.GET_DESTINATION_FAILURE
+                types.GET_DESTINATION_REQUEST,
+                types.GET_DESTINATION_SUCCESS,
+                types.GET_DESTINATION_FAILURE
             ],
             authenticated: true
         }
@@ -37,9 +37,25 @@ export function create(data) {
             method: 'post',
             url: '/destinations',
             types: [
-                actions.POST_DESTINATION_REQUEST,
-                actions.POST_DESTINATION_SUCCESS,
-                actions.POST_DESTINATION_FAILURE
+                types.POST_DESTINATION_REQUEST,
+                types.POST_DESTINATION_SUCCESS,
+                types.POST_DESTINATION_FAILURE
+            ],
+            authenticated: true,
+            data
+        }
+    };
+}
+
+export function update(data) {
+    return {
+        [CALL_API]: {
+            method: 'put',
+            url: `/destinations/${data.id}`,
+            types: [
+                types.PUT_DESTINATION_REQUEST,
+                types.PUT_DESTINATION_SUCCESS,
+                types.PUT_DESTINATION_FAILURE
             ],
             authenticated: true,
             data

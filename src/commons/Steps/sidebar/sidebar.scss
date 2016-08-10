@@ -1,0 +1,32 @@
+.ui.menu {
+    font-size: 1.15rem;
+}
+
+.item.brand {
+    padding: 12px 20px !important;
+    vertical-align: middle;
+    font-size: 20px;
+    img {
+        height: 50px !important;
+        margin-right: 20px !important;
+        display: inline-block !important;
+    }
+}
+
+.item.account {
+    .ui.header {
+        margin-bottom: -5px;
+    }
+    position: absolute !important;
+    bottom: 0px;
+    width: 260px;
+    p.item {
+        margin-bottom: 0px;
+    }
+}
+
+.ui.vertical.menu {
+    i {
+        margin-top: -5px !important;
+    }
+}

@@ -206,6 +206,9 @@ config.user = process.env.SAUCE_USERNAME;
 config.key = process.env.SAUCE_ACCESS_KEY;
 config.sauceConnect = true;
 if (process.env.CIRCLECI) {
+    config.user = process.env.SAUCE_USERNAME;
+    config.key = process.env.SAUCE_ACCESS_KEY;
+    config.sauceConnect = true;
     config.reporters.push('junit');
     config.reporterOptions = {
         junit: {

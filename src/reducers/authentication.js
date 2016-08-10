@@ -1,8 +1,9 @@
-import * as types from '../actions/actionTypes';
+import * as types from '../actions/types/authentication';
 
 const initialState = {
     isFetching: false,
     errorMessage: null,
+    successMessage: null,
     isAuthenticated: typeof localStorage.getItem('jwt') === 'string'
 };
 // The auth reducer. The starting state sets authentication
@@ -15,23 +16,31 @@ export default function (state = initialState, action) {
             ...state,
             isFetching: true,
             isAuthenticated: false,
-            credentials: action.creds
+            credentials: action.credentials
+        };
+    case types.GET_PASSWORD_SUCCESS:
+        return {
+            ...state,
+            successMessage: action.message,
+            errorMessage: null,
+            credentials: action.credentials
         };
     case types.POST_PASSWORD_SUCCESS:
     case types.POST_LOGIN_SUCCESS:
-        localStorage.setItem('jwt', action.res.jwt);
         return {
             ...state,
             isFetching: false,
             isAuthenticated: true,
-            jwt: action.res.jwt
+            jwt: action.jwt
         };
+    case types.GET_PASSWORD_FAILURE:
     case types.POST_LOGIN_FAILURE:
         return {
             ...state,
             isFetching: false,
             isAuthenticated: false,
-            errorMessage: action.error
+            successMessage: null,
+            errorMessage: action.message
         };
     default:
         return state;

@@ -1,4 +1,4 @@
-import * as types from './actionTypes';
+import * as types from './types/account';
 import { CALL_API } from '../middleware/api';
 
 export function retrieve(headers) {
@@ -30,6 +30,21 @@ export function update(data) {
             ],
             authenticated: true,
             data
+        }
+    };
+}
+
+export function trips() {
+    return {
+        [CALL_API]: {
+            method: 'get',
+            url: '/account/trips',
+            types: [
+                types.GET_ACCOUNT_TRIPS_REQUEST,
+                types.GET_ACCOUNT_TRIPS_SUCCESS,
+                types.GET_ACCOUNT_TRIPS_FAILURE
+            ],
+            authenticated: true
         }
     };
 }

@@ -1,0 +1,24 @@
+
+form.ui.form {
+	margin-bottom: 15px;
+
+	a {
+	    display: block;
+	    padding: 5px 0px;
+	}
+	button#submit {
+		margin: 20px 0px !important;
+	}
+}
+
+.field {
+	.inline-error {
+	    margin: 5px 0px;
+	    font-size: 12px;
+	    font-weight: 800;
+	}
+}
+
+.required {
+	color: #9F3A38;
+}

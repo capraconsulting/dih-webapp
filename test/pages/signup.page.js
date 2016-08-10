@@ -4,25 +4,25 @@ module.exports = Object.create(page, {
 
     firstname: {
         get() {
-            return browser.elements('#firstname');
+            return browser.element('#firstname');
         }
     },
 
     lastname: {
         get() {
-            return browser.elements('#lastname');
+            return browser.element('#lastname');
         }
     },
 
     birth: {
         get() {
-            return browser.elements('input#birth');
+            return browser.element('input#birth');
         }
     },
 
     email: {
         get() {
-            return browser.elements('#email');
+            return browser.element('#email');
         }
     },
 
@@ -34,7 +34,7 @@ module.exports = Object.create(page, {
 
     messages: {
         get() {
-            return browser.elements('li#message');
+            return browser.elements('#messages');
         }
     },
 

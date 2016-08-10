@@ -8,22 +8,22 @@ Feature: Login
     Scenario: Open login page
         Given I open the page "login"
         Then I expect that element "email" is visible
-        Then I expect that element "password" is visible
+        And I expect that element "password" is visible
 
     Scenario: Unsuccessful login with blank input
         Given I open the page "login"
         When I press the button "submit"
-        Then I expect that "messages" contains "The combination of username and password is invalid"
+        Then I expect that "messages" contains "Authentication requires both email and password"
 
     Scenario: Unsuccessful login with invalid credentials
         Given I open the page "login"
-        When I set "E-mail" to the inputfield "test@test.com"
-        And I set "Password" to the inputfield "wrongpassword"
+        When I set "test@test.com" to the inputfield "email"
+        And I set "wrongpassword" to the inputfield "password"
         And I press the button "submit"
-        Then I expect that "messages" contains "The combination of username and password is invalid"
+        Then I expect that "messages" contains "Invalid credentials provided"
 
     Scenario: Login succeeds with valid credentials
         Given I open the page "login"
-        When I set "E-mail" to the inputfield "test@test.com"
-        And I set "Password" to the inputfield "password"
+        When I set "test@test.com" to the inputfield "email"
+        And I set "password" to the inputfield "password"
         And I press the button "submit"
