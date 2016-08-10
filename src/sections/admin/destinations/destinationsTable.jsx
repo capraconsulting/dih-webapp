@@ -4,6 +4,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import { list } from '../../../actions/destinationActions';
 import Table from '../../../commons/table';
+import { BOOLEAN_LABELS } from '../../../constants';
 import Segment from '../../../commons/Segment';
 
 const createHandlers = (dispatch) => () => dispatch(list());
@@ -26,7 +27,7 @@ class DestinationsList extends Component {
                 name: value.name,
                 minimumTripDurationInDays: value.minimumTripDurationInDays,
                 countOfActiveVolunteers: value.countOfActiveVolunteers,
-                isActive: value.isActive ? 'yes' : 'no',
+                isActive: value.isActive,
                 startDate: value.startDate ?
                     moment(value.startDate).format('YYYY-MM-DD') : 'Not set',
                 endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Forever'
@@ -60,17 +61,28 @@ class DestinationsList extends Component {
                     filters={filterValues}
                     columnNames={{
                         name: 'Name',
-                        countOfActiveVolunteers: 'Volunteers at destination',
-                        isActive: 'Active?',
+                        countOfActiveVolunteers: '# Volunteers',
+                        isActive: 'Status',
                         startDate: 'Active from',
                         endDate: 'Active to',
-                        minimumTripDurationInDays: 'Minimum trip duration (days)'
+                        minimumTripDurationInDays: 'Minimum trip duration'
                     }}
                     dateFields={dateFields}
                     itemKey="id"
                     link={{
                         columnName: 'name',
                         prefix: '/admin/destinations/'
+                    }}
+                    responsivePriority={[
+                        'name',
+                        'countOfActiveVolunteers',
+                        'isActive',
+                        'minimumTripDurationInDays',
+                        'endDate',
+                        'startDate'
+                    ]}
+                    labels={{
+                        isActive: BOOLEAN_LABELS
                     }}
                     items={this.normalizeTripObjectsForTable(this.props.destinations)}
                 />

@@ -50,6 +50,7 @@ function EditTrip(props) {
                         label="Aiport of flight departure"
                         type="text"
                         id="departureAirport"
+                        required
                     >
                         {departureAirport}
                     </InputField>
@@ -57,6 +58,7 @@ function EditTrip(props) {
                         label="Flight number"
                         type="text"
                         id="flightNumber"
+                        required
                     >
                         {flightNumber}
                     </InputField>
@@ -68,6 +70,7 @@ function EditTrip(props) {
                     label="Other travel information"
                     id="otherTravelInformation"
                     placeholder="Describe how you're going to travel to the destination"
+                    required
                 >
                     {otherTravelInformation}
                 </TextField>
@@ -111,6 +114,7 @@ function EditTrip(props) {
                             moment(props.destination.endDate) : null}
                     allowNullValue
                     id="arrivalDate"
+                    required
                 >
                     {arrivalDate}
                 </DateField>
@@ -125,6 +129,7 @@ function EditTrip(props) {
                     allowNullValue
                     valueLabel="name"
                     valueKey="name"
+                    required
                     onInput={() => {
                         updateTravelInformationFields();
                     }}
@@ -138,6 +143,7 @@ function EditTrip(props) {
                     label="Hotel you're going to stay at"
                     type="text"
                     id="hotel"
+                    required
                 >
                     {hotel}
                 </InputField>

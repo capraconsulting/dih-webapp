@@ -105,6 +105,12 @@ class Coordinators extends Component {
                         endDate: 'Active to',
                         isActive: 'Status'
                     }}
+                    responsivePriority={[
+                        'fullName',
+                        'phoneNumber',
+                        'startDate',
+                        'endDate'
+                    ]}
                     itemKey="id"
                     items={this.normalizeCoordinatorObjectsForTable(this.props.destination.users)}
                     labels={{

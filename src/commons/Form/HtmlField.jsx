@@ -26,7 +26,10 @@ const createClasses = (props) => {
 
 const HtmlField = (props) => (
     <div className={createClasses(props).join(' ')}>
-        <label htmlFor={props.label}>{props.label}</label>
+        <label htmlFor={props.label}>
+            {props.label}
+            {props.required && <span className="required"> *</span>}
+        </label>
         <Editor
             onChange={html => props.children.onChange(html)}
             html={props.children.value}
@@ -38,7 +41,8 @@ const HtmlField = (props) => (
 
 HtmlField.propTypes = {
     children: PropTypes.object.isRequired,
-    label: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired,
+    required: PropTypes.bool
 };
 
 export default HtmlField;

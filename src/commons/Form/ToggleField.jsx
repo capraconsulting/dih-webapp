@@ -15,7 +15,10 @@ import React, { PropTypes } from 'react';
 
 const ToggleField = props => (
     <div className="field">
-        <label htmlFor={props.id}>{props.name}</label>
+        <label htmlFor={props.id}>
+            {props.name}
+            {props.required && <span className="required"> *</span>}
+        </label>
         <div className="ui toggle checkbox">
             <input
                 {...props.children}
@@ -32,7 +35,8 @@ ToggleField.propTypes = {
     children: PropTypes.object.isRequired,
     label: PropTypes.string,
     name: PropTypes.string,
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    required: PropTypes.bool
 };
 
 export default ToggleField;
