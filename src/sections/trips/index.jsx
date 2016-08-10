@@ -102,7 +102,6 @@ class Trips extends React.Component {
                             columnName: 'destinationName',
                             prefix: '/trips/'
                         }}
-<<<<<<< HEAD
                         labels={{
                             status: TRIP_STATUS_LABELS
                         }}
@@ -112,10 +111,7 @@ class Trips extends React.Component {
                             'startDate',
                             'endDate'
                         ]}
-                        items={this.normalizeTripObjectsForTable(this.props.tripsForUser)}
-=======
                         items={this.normalizeTripObjectsForTable(this.props.trips)}
->>>>>>> dev
                         search
                         filters={this.filters}
                         dateFields={this.dateFields}
