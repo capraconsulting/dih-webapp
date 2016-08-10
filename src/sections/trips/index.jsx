@@ -5,8 +5,9 @@ import Segments from '../../commons/Segments';
 import Segment from '../../commons/Segment';
 import Header from '../../commons/pageHeader';
 import Table from '../../commons/table';
+import { listForUser } from '../../actions/tripActions';
+import { TRIP_STATUSES, TRIP_STATUS_LABELS } from '../../constants';
 import { trips } from '../../actions/accountActions';
-import { TRIP_STATUSES } from '../../constants';
 
 const createHandlers = (dispatch) => () => dispatch(trips());
 
@@ -101,6 +102,15 @@ class Trips extends React.Component {
                             columnName: 'destinationName',
                             prefix: '/trips/'
                         }}
+                        labels={{
+                            status: TRIP_STATUS_LABELS
+                        }}
+                        responsivePriority={[
+                            'destinationName',
+                            'status',
+                            'startDate',
+                            'endDate'
+                        ]}
                         items={this.normalizeTripObjectsForTable(this.props.trips)}
                         search
                         filters={this.filters}

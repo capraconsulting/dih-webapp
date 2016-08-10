@@ -203,14 +203,34 @@ class Table extends Component {
         });
     }
 
+    createTableHeaderClass(columnNameKey) {
+        const classes = [];
+        if (this.state.sorted === columnNameKey) classes.push(`sorted ${this.state.order}`);
+        if (!this.props.responsivePriority) return classes;
+        if (this.props.responsivePriority.indexOf(columnNameKey) > 3) classes.push('hide-large');
+        if (this.props.responsivePriority.indexOf(columnNameKey) > 2) classes.push('hide-medium');
+        return classes;
+    }
+
+    createTableDataClass(columnNameKey) {
+        const classes = [];
+        if (!this.props.responsivePriority) return classes;
+        if (this.props.responsivePriority.indexOf(columnNameKey) > 3) classes.push('hide-large');
+        if (this.props.responsivePriority.indexOf(columnNameKey) > 2) classes.push('hide-medium');
+        return classes;
+    }
+
     renderCell(item, columnNameKey, itemKey, link, labels) {
         let suffix = null;
         if (link) suffix = link.suffix || '';
-
-        let element = (<td>{item[columnNameKey]}</td>);
+        let element = (
+            <td className={this.createTableDataClass(columnNameKey).join(' ')}>
+                {item[columnNameKey]}
+            </td>
+        );
         if (link && link.columnName === columnNameKey) {
             element = (
-                <td>
+                <td className={this.createTableDataClass(columnNameKey).join(' ')}>
                     <Link
                         to={link.prefix + item[this.getLinkId()] + suffix}
                         activeClassName="item-active"
@@ -222,7 +242,7 @@ class Table extends Component {
         }
         if (labels && labels[columnNameKey]) {
             element = (
-                <td>
+                <td className={this.createTableDataClass(columnNameKey).join(' ')}>
                     {labels[columnNameKey][item[columnNameKey]]}
                 </td>
             );
@@ -241,7 +261,6 @@ class Table extends Component {
     }
 
     renderFiltersBar(rowCount = 0) {
-
         return (
             <div className="filterBar">
 
@@ -316,6 +335,7 @@ class Table extends Component {
             </th>
         );
     }
+
     render() {
         const rows = this.applyFilters(this.props.items);
 
@@ -329,10 +349,7 @@ class Table extends Component {
                         {Object.keys(this.props.columnNames).map(columnNameKey => (
                             <th
                                 onClick={() => this.toggleSort(columnNameKey)}
-                                className={
-                                    (this.state.sorted === columnNameKey)
-                                    ? `sorted ${this.state.order}` : ''
-                                }
+                                className={this.createTableHeaderClass(columnNameKey).join(' ')}
                             >
                                 {this.props.columnNames[columnNameKey]}
                             </th>
@@ -360,6 +377,7 @@ Table.propTypes = {
     itemKey: PropTypes.string.isRequired,
     linkKey: PropTypes.string,
     link: PropTypes.object,
+    responsivePriority: PropTypes.array,
     actions: PropTypes.array,
     selected: PropTypes.array,
     select: PropTypes.bool,

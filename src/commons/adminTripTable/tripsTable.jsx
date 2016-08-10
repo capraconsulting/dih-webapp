@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-
-import { USER_ROLES, TRIP_STATUSES } from '../../constants';
+import { USER_ROLES, TRIP_STATUS_LABELS, TRIP_STATUSES } from '../../constants';
 import Table from '../../commons/table';
-import TripStatusDropdown from './tripStatusDropdown';
 
 class TripRequestsTable extends Component {
     constructor(props) {
@@ -66,7 +64,7 @@ class TripRequestsTable extends Component {
                 userId: trip.userId,
                 startDate: moment(trip.startDate).format('YYYY-MM-DD'),
                 endDate: trip.endDate ? moment(trip.endDate).format('YYYY-MM-DD') : 'Not set',
-                status: <TripStatusDropdown trip={trip} />
+                status: trip.status
             };
 
             if (!this.props.userId) {
@@ -101,10 +99,21 @@ class TripRequestsTable extends Component {
         return (
             <Table
                 search
+                responsivePriority={[
+                    'fullName',
+                    'destination',
+                    'status',
+                    'phoneNumber',
+                    'startDate',
+                    'endDate'
+                ]}
                 dateFields={this.dateFields}
                 rowCounter={this.rowCounterLabels}
                 columnNames={this.prepareTableHeaders()}
                 items={this.prepareTableContent(trips)}
+                labels={{
+                    status: TRIP_STATUS_LABELS
+                }}
                 itemKey="id"
                 linkKey={this.props.userId ? 'id' : 'userId'}
                 link={this.linkElement()}

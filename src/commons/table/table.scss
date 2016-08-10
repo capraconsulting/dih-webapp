@@ -58,3 +58,17 @@ th.one.wide.checkbox {
         background: none !important;
     }
 }
+
+td.hide-large,
+th.hide-large {
+    @media screen and (max-width: 1100px) {
+        display: none;
+    }
+}
+
+th.hide-medium,
+td.hide-medium {
+    @media screen and (max-width: 600px) {
+        display: none;
+    }
+}

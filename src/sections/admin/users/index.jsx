@@ -8,7 +8,7 @@ import Table from '../../../commons/table';
 import Header from '../../../commons/pageHeader';
 import { list } from '../../../actions/userActions';
 import { addRecipients } from '../../../actions/messageActions';
-import { USER_ROLES } from '../../../constants';
+import { USER_ROLES, ROLE_LABELS } from '../../../constants';
 
 const createHandlers = (dispatch) => (
     {
@@ -93,8 +93,12 @@ class UsersTableContainer extends Component {
                         actions={this.actions}
                         filters={this.filterValues}
                         dateFields={this.dateFields}
+                        labels={{
+                            role: ROLE_LABELS
+                        }}
                         columnNames={{
                             fullName: 'Name',
+                            phoneNumber: 'Phone Number',
                             birth: 'Date of birth',
                             email: 'E-mail',
                             role: 'Role'
@@ -103,6 +107,13 @@ class UsersTableContainer extends Component {
                             columnName: 'fullName',
                             prefix: '/admin/users/'
                         }}
+                        responsivePriority={[
+                            'fullName',
+                            'email',
+                            'role',
+                            'phoneNumber',
+                            'birth'
+                        ]}
                         itemKey="id"
                         items={this.prepareTableContent(this.props.users)}
                     />

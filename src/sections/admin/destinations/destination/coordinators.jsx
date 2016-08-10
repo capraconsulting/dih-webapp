@@ -28,8 +28,8 @@ class Coordinators extends Component {
         return items.map(value => (
             {
                 id: value.id,
-                firstname: value.firstname,
-                lastname: value.lastname,
+                fullName: value.fullName,
+                phoneNumber: value.phoneNumber,
                 startDate: value.destinationCoordinator.startDate ?
                     moment(value.destinationCoordinator.startDate).format('YYYY-MM-DD') : 'Not set',
                 endDate: value.destinationCoordinator.endDate ?
@@ -50,6 +50,12 @@ class Coordinators extends Component {
                         startDate: 'Active from',
                         endDate: 'Active to'
                     }}
+                    responsivePriority={[
+                        'fullName',
+                        'phoneNumber',
+                        'startDate',
+                        'endDate'
+                    ]}
                     itemKey="id"
                     items={this.normalizeCoordinatorObjectsForTable(this.props.destination.users)}
                 />
