@@ -27,6 +27,11 @@ const ViewUser = (props) => (
                 content={props.user.lastname}
             />
             <ListItem
+                name="Gender"
+                icon="intergender"
+                content={props.user.gender}
+            />
+            <ListItem
                 name="Birthday"
                 icon="birthday"
                 content={props.user.birth ? `${moment(props.user.birth).calendar()}
@@ -36,6 +41,40 @@ const ViewUser = (props) => (
                 name="E-mail"
                 icon="at"
                 content={props.user.email}
+            />
+            <ListItem
+                name="Phone number"
+                icon="call"
+                content={props.user.phoneNumber}
+            />
+            <ListItem
+                name="Address"
+                icon="marker"
+                content={props.user.addressLine1}
+            />
+            <ListItem
+                content={props.user.addressLine2}
+                hidden={props.user.addressLine2}
+            />
+            <ListItem
+                name="Postal code"
+                icon="marker"
+                content={props.user.postalCode}
+            />
+            <ListItem
+                name="City"
+                icon="marker"
+                content={props.user.city}
+            />
+            <ListItem
+                name="Country"
+                icon="marker"
+                content={props.user.country}
+            />
+            <ListItem
+                name="Nationality"
+                icon="flag"
+                content={props.user.nationality ? props.user.nationality : 'Not set'}
             />
             {renderIfAdmin(props,
                 <ListItem
@@ -51,6 +90,23 @@ const ViewUser = (props) => (
                     content={moment(props.user.createdAt).calendar()}
                 />
             )}
+            <ListItem
+                name="Medical degree"
+                icon="doctor"
+                content={props.user.medicalDegree}
+                hidden={props.user.medicalDegree}
+            />
+            <ListItem
+                name="Licence number of medical degree"
+                icon="doctor"
+                content={props.user.medicalDegreeLicenseNumber}
+                hidden={props.user.medicalDegree}
+            />
+            <ListItem
+                name="Languages"
+                icon="talk"
+                content={props.user.languages.join(', ')}
+            />
             <FluidListItem
                 name="Occupation and experience"
                 icon="student"
