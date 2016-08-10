@@ -3,7 +3,7 @@ import * as types from '../actions/types/destinations';
 const initialState = {
     isFetching: false,
     destinations: [],
-    destination: {}
+    destination: { users: [] }
 };
 
 export default function (state = initialState, action) {

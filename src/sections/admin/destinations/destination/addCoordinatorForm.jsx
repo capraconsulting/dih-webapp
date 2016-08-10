@@ -35,7 +35,7 @@ function AddCoordinatorForm(props) {
             handleSubmit={handleSubmit}
         >
             <SelectField
-                label="Volunteer"
+                label="Coordinator"
                 values={props.moderators}
                 placeholder="Select an user"
                 valueLabel="name"
