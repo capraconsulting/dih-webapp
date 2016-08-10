@@ -4,6 +4,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import { list } from '../../../actions/destinationActions';
 import Table from '../../../commons/table';
+import Segment from '../../../commons/Segment';
 
 const createHandlers = (dispatch) => () => dispatch(list());
 
@@ -53,25 +54,27 @@ class DestinationsList extends Component {
             }
         ];
         return (
-            <Table
-                search
-                filters={filterValues}
-                columnNames={{
-                    name: 'Name',
-                    countOfActiveVolunteers: 'Volunteers at destination',
-                    isActive: 'Active?',
-                    startDate: 'Active from',
-                    endDate: 'Active to',
-                    minimumTripDurationInDays: 'Minimum trip duration (days)'
-                }}
-                dateFields={dateFields}
-                itemKey="id"
-                link={{
-                    columnName: 'name',
-                    prefix: '/admin/destinations/'
-                }}
-                items={this.normalizeTripObjectsForTable(this.props.destinations)}
-            />
+            <Segment loading={this.props.destinations.length < 1}>
+                <Table
+                    search
+                    filters={filterValues}
+                    columnNames={{
+                        name: 'Name',
+                        countOfActiveVolunteers: 'Volunteers at destination',
+                        isActive: 'Active?',
+                        startDate: 'Active from',
+                        endDate: 'Active to',
+                        minimumTripDurationInDays: 'Minimum trip duration (days)'
+                    }}
+                    dateFields={dateFields}
+                    itemKey="id"
+                    link={{
+                        columnName: 'name',
+                        prefix: '/admin/destinations/'
+                    }}
+                    items={this.normalizeTripObjectsForTable(this.props.destinations)}
+                />
+            </Segment>
         );
     }
 }

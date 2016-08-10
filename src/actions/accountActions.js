@@ -33,3 +33,18 @@ export function update(data) {
         }
     };
 }
+
+export function trips() {
+    return {
+        [CALL_API]: {
+            method: 'get',
+            url: '/account/trips',
+            types: [
+                types.GET_ACCOUNT_TRIPS_REQUEST,
+                types.GET_ACCOUNT_TRIPS_SUCCESS,
+                types.GET_ACCOUNT_TRIPS_FAILURE
+            ],
+            authenticated: true
+        }
+    };
+}

@@ -1,13 +1,15 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 
 import 'normalize.css/normalize.css';
 import 'semantic-ui-css/semantic.css';
 import '../styles/main.scss';
 import Header from '../commons/header';
 import Sidebar from '../commons/sidebar';
+import Loader from '../commons/Loader';
 import NotificationContainer from '../commons/NotificationContainer.jsx';
 
-class MainLayout extends React.Component {
+class MainLayout extends Component {
     constructor(props) {
         super(props);
         this.handleResize = this.handleResize.bind(this);
@@ -60,6 +62,7 @@ class MainLayout extends React.Component {
         return (
             <div>
                 <div className="wrapper">
+                    <Loader active={typeof this.props.account.id === 'undefined'} />
                     <Sidebar
                         isMobile={this.state.isMobile}
                         sidebarOpen={this.state.sidebarOpen}
@@ -84,9 +87,14 @@ class MainLayout extends React.Component {
 }
 
 MainLayout.propTypes = {
+    account: PropTypes.object.isRequired,
     children: PropTypes.object,
     routes: PropTypes.array,
     params: PropTypes.object
 };
 
-export default MainLayout;
+const mapStateToProps = store => ({
+    account: store.accountState.account
+});
+
+export default connect(mapStateToProps)(MainLayout);

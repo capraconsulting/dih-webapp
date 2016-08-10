@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Editor from '../../../commons/Editor';
 import Header from '../../../commons/pageHeader';
 import Button from '../../../commons/Button';
+import Segments from '../../../commons/Segments';
+import Segment from '../../../commons/Segment';
 import { retrieve, update } from '../../../actions/emailActions';
 import { pushNotification } from '../../../actions/notificationActions';
 
@@ -59,16 +61,16 @@ class Email extends Component {
 
     render() {
         return (
-            <div className="ui segments">
-                <div className="ui segment">
+            <Segments loading={!this.state.loaded}>
+                <Segment>
                     <Header
                         icon="mail"
                         content="Edit email template"
                         subContent={`Edit your desired template,
                         press save to store your template as it is.`}
                     />
-                </div>
-                <div className="ui blue clearing segment">
+                </Segment>
+                <Segment blue>
                     {this.state.loaded &&
                         <Editor
                             onChange={(html => this.onChange(html))}
@@ -76,8 +78,8 @@ class Email extends Component {
                         />}
                     <Button onClick={(e) => this.onSave(e)} color="green" right >Save</Button>
                     <Button onClick={(e) => this.onBack(e)} right >Back</Button>
-                </div>
-            </div>
+                </Segment>
+            </Segments>
         );
     }
 }

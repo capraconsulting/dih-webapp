@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-
 import Header from '../../../../commons/pageHeader';
-import Navbar from '../../../../commons/navbar';
+import Segments from '../../../../commons/Segments';
+import Segment from '../../../../commons/Segment';
+import ViewUser from '../../../../commons/user/viewUser';
 import { retrieve, update } from '../../../../actions/userActions';
 import { pushNotification } from '../../../../actions/notificationActions';
 
@@ -24,6 +25,9 @@ const createHandlers = dispatch => (
 class User extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loading: true
+        };
         this.handlers = createHandlers(this.props.dispatch);
         this.state = {
             pages: [
@@ -40,7 +44,10 @@ class User extends Component {
     }
 
     componentDidMount() {
-        this.handlers.retrieve(this.props.params.userId);
+        this.handlers(this.props.params.userId)
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     handleSubmit(user) {
@@ -57,20 +64,16 @@ class User extends Component {
 
     render() {
         return (
-            <div className="ui segment clearing">
-                <Header
-                    icon="user"
-                    content={`${this.props.user.firstname} ${this.props.user.lastname}`}
-                    subContent="View user"
-                />
-                <Navbar pages={this.state.pages} />
-                {React.cloneElement(this.props.children, {
-                    user: this.props.user,
-                    initialValues: this.props.user,
-                    showAdminFields: true,
-                    onSubmit: e => this.handleSubmit(e)
-                })}
-            </div>
+            <Segments clearing loading={this.state.loading}>
+                <Segment>
+                    <Header
+                        icon="user"
+                        content={`${this.props.user.firstname} ${this.props.user.lastname}`}
+                        subContent="View user"
+                    />
+                </Segment>
+                <ViewUser user={this.props.user} />
+            </Segments>
         );
     }
 }

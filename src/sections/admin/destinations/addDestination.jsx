@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { create } from '../../../actions/destinationActions';
 import { connect } from 'react-redux';
+import Segment from '../../../commons/Segment';
 import { browserHistory } from 'react-router';
-
 import AddDestinationForm from './addDestinationForm';
 import { pushNotification } from '../../../actions/notificationActions';
 
@@ -37,9 +37,11 @@ class AddDestination extends React.Component {
 
     render() {
         return (
-            <AddDestinationForm
-                onSubmit={e => { this.handleSubmit(e); }}
-            />
+            <Segment>
+                <AddDestinationForm
+                    onSubmit={e => { this.handleSubmit(e); }}
+                />
+            </Segment>
         );
     }
 }

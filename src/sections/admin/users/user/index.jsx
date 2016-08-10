@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 import { retrieve, update, destroy } from '../../../../actions/userActions';
 import { retrieve as retrieveAccount } from '../../../../actions/accountActions';
 import { pushNotification } from '../../../../actions/notificationActions';
+import Segment from '../../../../commons/Segment';
 import Header from '../../../../commons/pageHeader';
 import Navbar from '../../../../commons/navbar';
 
@@ -32,6 +33,7 @@ class User extends Component {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
         this.state = {
+            loading: true,
             pages: [
                 {
                     name: 'View',
@@ -50,7 +52,10 @@ class User extends Component {
     }
 
     componentDidMount() {
-        this.handlers.retrieve(this.props.params.userId);
+        this.handlers.retrieve(this.props.params.userId)
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     onUpdate(user) {
@@ -72,20 +77,22 @@ class User extends Component {
 
     render() {
         return (
-            <div className="ui segment clearing">
+            <Segment clearing loading={this.state.loading}>
                 <Header
                     icon="user"
                     content={`${this.props.user.firstname} ${this.props.user.lastname}`}
                     subContent="Manage user"
                 />
                 <Navbar pages={this.state.pages} />
-                {React.cloneElement(this.props.children, {
-                    initialValues: this.props.user,
-                    user: this.props.user,
-                    showAdminFields: true,
-                    onSubmit: e => this.onUpdate(e)
-                })}
-            </div>
+                <Segment clearing>
+                    {React.cloneElement(this.props.children, {
+                        initialValues: this.props.user,
+                        user: this.props.user,
+                        showAdminFields: true,
+                        onSubmit: e => this.onUpdate(e)
+                    })}
+                </Segment>
+            </Segment>
         );
     }
 }
