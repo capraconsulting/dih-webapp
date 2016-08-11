@@ -1,3 +1,19 @@
 .item.fluid > .item {
     padding: 15px 0px;
 }
+
+.ui.very.relaxed.divided.list {
+    margin-top: 0pc;
+    .item {
+        .content {
+            line-height: 1.902857em;
+
+        }
+        i {
+            padding-top: .37142857em;
+        }
+    }
+}
+
+.right.floated.content {
+}

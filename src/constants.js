@@ -23,8 +23,8 @@ export const USER_ROLES = {
 * @property {string} PENDING - The trip is requested by a user but not handled by an admin
 * @property {string} ACCEPTED - The trip is accepted by an admin
 * @property {string} REJECTED - The trip is rejected by an admin
-* @property {string} ACTIVE - The trip is currently in progress by a user
-* @property {string} CLOSED - The trip is closed, hence the user has completed this trip
+* @property {string} ACTIVE - The trip information is filled out and user is ready for the trip
+* @property {string} CLOSED - The trip is closed. Happens when user cancels the trip
 * @property {string} PRESENT - User is present at destination
 * @property {string} LEFT - User has left destination
 * @property {string} NOSHOW - User did not show up at destination
@@ -68,13 +68,13 @@ exports.KEY_CODES = {
 
 export const TRIP_STATUS_LABELS = {
     PENDING: (
-        <div className="ui blue label">
+        <div className="ui empty label">
             <i className="circle icon"></i>
             Pending
         </div>
     ),
     ACCEPTED: (
-        <div className="ui teal label">
+        <div className="ui yellow label">
             <i className="circle icon"></i>
             Accepted
         </div>
@@ -86,13 +86,13 @@ export const TRIP_STATUS_LABELS = {
         </div>
     ),
     ACTIVE: (
-        <div className="ui yellow label">
+        <div className="ui olive label">
             <i className="circle icon"></i>
             Active
         </div>
     ),
     CLOSED: (
-        <div className="ui gray label">
+        <div className="ui black label">
             <i className="circle icon"></i>
             Closed
         </div>
@@ -104,13 +104,13 @@ export const TRIP_STATUS_LABELS = {
         </div>
     ),
     LEFT: (
-        <div className="ui orange label">
+        <div className="ui grey label">
             <i className="circle icon"></i>
             Left
         </div>
     ),
-    NOSHOW: (
-        <div className="ui black label">
+    'NO SHOW': (
+        <div className="ui orange label">
             <i className="circle icon"></i>
             No show
         </div>
@@ -134,19 +134,19 @@ export const BOOLEAN_LABELS = {
 
 export const ROLE_LABELS = {
     USER: (
-        <div className="ui blue label">
+        <div className="ui empty label">
             <i className="user icon"></i>
             User
         </div>
     ),
     MODERATOR: (
-        <div className="ui teal label">
+        <div className="ui grey label">
             <i className="user icon"></i>
             Coordinator
         </div>
     ),
     ADMIN: (
-        <div className="ui orange label">
+        <div className="ui black label">
             <i className="user icon"></i>
             Administrator
         </div>

@@ -56,7 +56,7 @@ class SignupTripFormContainer extends Component {
         });
         const trip = data;
         trip.wishStartDate = data.startDate; // Cannot be null. Field is not used anymore.
-        if (trip.endDate) {
+        if (trip.endDate && trip.destinationId) {
             const destId = parseInt(trip.destinationId, 10);
             const destination = this.props.destinations.filter(e => e.id === destId)[0];
             const msg = getErrorMessageForTripSubmission(trip, destination);
@@ -97,7 +97,7 @@ class SignupTripFormContainer extends Component {
                         content="Sign up for a trip"
                     />
                 </Segment>
-                <Segment loading={this.state.loading}>
+                <Segment loading={this.state.loading} blue>
                     {this.userAllowedToSignUp() &&
                         <SignupTripForm
                             destinations={this.props.destinations.filter(val => (val.isActive))}
@@ -109,13 +109,15 @@ class SignupTripFormContainer extends Component {
                     }
                     {!this.userAllowedToSignUp() &&
                         <div>
-                            <h3>
-                                To register for a trip, you'll have to complete your profile.
-                            </h3>
-                            <h3>
+                            <h3>We would like to know you better!</h3>
+                            <p>
+                                Before you can sign up for a trip, you will have to fill out
+                                some information about yourself.
+                            </p>
+                            <p>
                                 Go to <Link to="/profile/edit">your profile</Link> and
                                 add more information, then come back here.
-                            </h3>
+                            </p>
                         </div>
                     }
                 </Segment>

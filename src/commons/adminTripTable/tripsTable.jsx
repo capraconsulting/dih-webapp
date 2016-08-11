@@ -1,14 +1,75 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
+import _ from 'lodash';
 import { USER_ROLES, TRIP_STATUS_LABELS, TRIP_STATUSES } from '../../constants';
 import Table from '../../commons/table';
 
-class TripRequestsTable extends Component {
+
+class TripsTable extends Component {
     constructor(props) {
         super(props);
         this.dateFields = { from: 'startDate', to: 'endDate' };
         this.rowCounterLabels = { prefix: 'Showing', suffix: 'trips' };
+        this.filters = [
+            {
+                color: 'empty',
+                label: 'Pending',
+                value: TRIP_STATUSES.PENDING,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'teal',
+                label: 'Accepted',
+                value: TRIP_STATUSES.ACCEPTED,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'olive',
+                label: 'Active',
+                value: TRIP_STATUSES.ACTIVE,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'green',
+                label: 'Present',
+                value: TRIP_STATUSES.PRESENT,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'grey',
+                label: 'Left',
+                value: TRIP_STATUSES.LEFT,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'red',
+                label: 'Rejected',
+                value: TRIP_STATUSES.REJECTED,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'black',
+                label: 'Closed',
+                value: TRIP_STATUSES.CLOSED,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'orange',
+                label: 'No show',
+                value: TRIP_STATUSES.NOSHOW,
+                group: 'Trip status',
+                field: 'status'
+            }
+        ];
     }
+
     getTrips() {
         let trips = this.props.trips;
         if (this.props.userId) {
@@ -47,15 +108,15 @@ class TripRequestsTable extends Component {
 
     prepareLinkPrefix() {
         if (this.props.role === USER_ROLES.MODERATOR) {
-            return '/coordinator/users/';
+            return '/coordinator/trips/';
         }
-        return '/admin/users/';
+        return '/admin/trips/';
     }
 
     prepareTableContent(trips) {
         let filteredTrips = trips;
-        if (this.props.requestsOnly) {
-            filteredTrips = trips.filter(trip => (trip.status === TRIP_STATUSES.PENDING));
+        if (this.props.statuses) {
+            filteredTrips = trips.filter(trip => _.includes(this.props.statuses, trip.status));
         }
 
         return filteredTrips.map(trip => {
@@ -73,7 +134,8 @@ class TripRequestsTable extends Component {
             }
 
             if (!this.props.destinationId) {
-                row.destination = trip.destination.name;
+                if (trip.destination) row.destination = trip.destination.name;
+                else row.destination = 'No preferance';
             }
 
             return row;
@@ -84,8 +146,7 @@ class TripRequestsTable extends Component {
         if (!this.props.userId) {
             return {
                 columnName: 'fullName',
-                prefix: this.prepareLinkPrefix(),
-                suffix: '/trips'
+                prefix: this.prepareLinkPrefix()
             };
         }
         return {
@@ -107,6 +168,7 @@ class TripRequestsTable extends Component {
                     'startDate',
                     'endDate'
                 ]}
+                filters={this.filters}
                 dateFields={this.dateFields}
                 rowCounter={this.rowCounterLabels}
                 columnNames={this.prepareTableHeaders()}
@@ -115,7 +177,6 @@ class TripRequestsTable extends Component {
                     status: TRIP_STATUS_LABELS
                 }}
                 itemKey="id"
-                linkKey={this.props.userId ? 'id' : 'userId'}
                 link={this.linkElement()}
             />
         );
@@ -123,12 +184,12 @@ class TripRequestsTable extends Component {
 }
 
 
-TripRequestsTable.propTypes = {
+TripsTable.propTypes = {
     trips: PropTypes.array.isRequired,
     userId: PropTypes.number,
     destinationId: PropTypes.number,
     role: PropTypes.string,
-    requestsOnly: PropTypes.bool
+    statuses: PropTypes.array
 };
 
-export default TripRequestsTable;
+export default TripsTable;
