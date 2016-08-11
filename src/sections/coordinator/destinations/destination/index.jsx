@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 
-import { USER_ROLES } from '../../../../constants';
+import { USER_ROLES, TRIP_STATUSES } from '../../../../constants';
 import { retrieve } from '../../../../actions/destinationActions';
 import Header from '../../../../commons/pageHeader';
 import Segments from '../../../../commons/Segments';
@@ -17,6 +17,12 @@ class Destination extends Component {
             loading: true
         };
         this.handlers = createHandlers(this.props.dispatch);
+        this.statuses = [
+            TRIP_STATUSES.ACTIVE,
+            TRIP_STATUSES.PRESENT,
+            TRIP_STATUSES.LEFT,
+            TRIP_STATUSES.NOSHOW
+        ];
     }
 
     componentDidMount() {
@@ -39,6 +45,7 @@ class Destination extends Component {
                 <AdminTripTable
                     destinationId={parseInt(this.props.params.destinationId, 10)}
                     role={USER_ROLES.MODERATOR}
+                    statuses={this.statuses}
                 />
             </Segments>
         );

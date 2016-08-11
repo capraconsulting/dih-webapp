@@ -22,9 +22,9 @@ import SignupTrip from './sections/trips/signup';
 import Trips from './sections/trips/';
 import Trip from './sections/trips/trip';
 
-import EditTrip from './sections/trips/trip/editTrip';
 import CancelTrip from './sections/trips/trip/cancelTrip';
 import TripInfo from './commons/trip/tripInfo';
+import EditTrip from './commons/trip/editTrip';
 
 // Coordinator
 import CoordinatorDestinations from './sections/coordinator/destinations';
@@ -49,6 +49,7 @@ import DestinationsTable from './sections/admin/destinations/destinationsTable';
 import AddDestination from './sections/admin/destinations/addDestination';
 
 import AdminTrip from './sections/admin/trips/trip';
+import TripStatus from './sections/admin/trips/trip/tripStatus';
 
 import AdminTrips from './sections/admin/trips';
 import AdminTripsAll from './sections/admin/trips/allTrips';
@@ -124,6 +125,7 @@ export default(
                         </Route>
                     </Route>
                 </Route>
+
                 <Route name="Users" path="admin/users">
                     <IndexRoute component={Users} />
                     <Route path=":userId" component={User}>
@@ -132,19 +134,24 @@ export default(
                         <Route name="Trips" path="trips" component={TripsForUser} />
                     </Route>
                 </Route>
+
                 <Route name="Message" path="admin/message" component={Message}>
                     <Route name="Recipients" path="recipients" component={RecipientsMessage} />
                     <Route name="Compose" path="compose" component={ComposeMessage} />
                     <Route name="Summary" path="summary" component={MessageSummary} />
                     <Route name="Send" path="send" component={MessageSend} />
                 </Route>
+
                 <Route name="Email" path="admin/email/:emailId" component={Email} />
+
                 <Route name="Trips" path="admin/trips" component={AdminTrips}>
                     <IndexRoute component={AdminTripsAll} />
                     <Route name="Trip requests" path="requests" component={AdminTripsRequests} />
                 </Route>
                 <Route path="admin/trips/:tripId" component={AdminTrip}>
-                    <IndexRoute component={TripInfo} />
+                    <IndexRoute component={TripStatus} />
+                    <Route name="user" path="user" component={ViewUser} />
+                    <Route name="edit" path="edit" component={EditTrip} />
                 </Route>
                 <Route name="Not found" path="*" component={NotFound} />
             </Route>

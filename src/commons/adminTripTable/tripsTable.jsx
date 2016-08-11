@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
+import _ from 'lodash';
 import { USER_ROLES, TRIP_STATUS_LABELS, TRIP_STATUSES } from '../../constants';
 import Table from '../../commons/table';
+
 
 class TripsTable extends Component {
     constructor(props) {
@@ -67,6 +69,7 @@ class TripsTable extends Component {
             }
         ];
     }
+
     getTrips() {
         let trips = this.props.trips;
         if (this.props.userId) {
@@ -105,15 +108,15 @@ class TripsTable extends Component {
 
     prepareLinkPrefix() {
         if (this.props.role === USER_ROLES.MODERATOR) {
-            return '/coordinator/users/';
+            return '/coordinator/trips/';
         }
-        return '/admin/users/';
+        return '/admin/trips/';
     }
 
     prepareTableContent(trips) {
         let filteredTrips = trips;
-        if (this.props.requestsOnly) {
-            filteredTrips = trips.filter(trip => (trip.status === TRIP_STATUSES.PENDING));
+        if (this.props.statuses) {
+            filteredTrips = trips.filter(trip => _.includes(this.props.statuses, trip.status));
         }
 
         return filteredTrips.map(trip => {
@@ -131,7 +134,8 @@ class TripsTable extends Component {
             }
 
             if (!this.props.destinationId) {
-                row.destination = trip.destination.name;
+                if (trip.destination) row.destination = trip.destination.name;
+                else row.destination = 'No preferance';
             }
 
             return row;
@@ -142,8 +146,7 @@ class TripsTable extends Component {
         if (!this.props.userId) {
             return {
                 columnName: 'fullName',
-                prefix: this.prepareLinkPrefix(),
-                suffix: '/trips'
+                prefix: this.prepareLinkPrefix()
             };
         }
         return {
@@ -174,7 +177,6 @@ class TripsTable extends Component {
                     status: TRIP_STATUS_LABELS
                 }}
                 itemKey="id"
-                linkKey={this.props.userId ? 'id' : 'userId'}
                 link={this.linkElement()}
             />
         );
@@ -187,7 +189,7 @@ TripsTable.propTypes = {
     userId: PropTypes.number,
     destinationId: PropTypes.number,
     role: PropTypes.string,
-    requestsOnly: PropTypes.bool
+    statuses: PropTypes.array
 };
 
 export default TripsTable;

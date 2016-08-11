@@ -15,7 +15,7 @@ const createStyle = (isMobile) => {
     const style = {
         Containers: {
             DefaultStyle: {
-                padding: '0',
+                padding: '0px',
                 width: 'auto'
             },
             tc: {
@@ -27,9 +27,9 @@ const createStyle = (isMobile) => {
         },
         NotificationItem: {
             DefaultStyle: {
-                borderRadius: '0',
+                borderRadius: '0px',
                 fontSize: '18px',
-                margin: '0',
+                margin: '0px',
                 padding: '22px 50px',
                 opacity: '0.95',
                 minHeight: '63px'

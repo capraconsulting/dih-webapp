@@ -117,6 +117,7 @@ class Trip extends React.Component {
                 {React.cloneElement(this.props.children, {
                     initialValues: this.props.trip,
                     trip: this.props.trip,
+                    destination: this.props.destination,
                     onSubmit: e => this.onUpdate(e),
                     onCancel: e => this.onCancel(e)
                 })}

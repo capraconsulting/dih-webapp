@@ -68,11 +68,14 @@ class Dropdown extends Component {
 
     getIntialValue(props) {
         let selected = null;
+        if (props.noInitalValue) return null;
         if (props.initialValue) {
             selected = _.filter(props.children, data =>
                 (data.props.item[props.valueKey] === props.initialValue));
         }
-        if (selected) selected = selected[0].props.item;
+        if (selected) {
+            if (selected.length) selected = selected[0].props.item;
+        }
         return selected;
     }
 
@@ -131,7 +134,7 @@ class Dropdown extends Component {
         if (!this.state.selected) {
             selected = _.last(items);
         } else {
-            selected = items[items.indexOf(this.state.selected.id) - 1];
+            selected = items[items.indexOf(this.state.selected[this.props.valueKey]) - 1];
             if (!selected) selected = _.last(items);
         }
         selected = _.filter(this.props.children, data =>
@@ -147,7 +150,7 @@ class Dropdown extends Component {
         if (!this.state.selected) {
             selected = _.head(items);
         } else {
-            selected = items[items.indexOf(this.state.selected.id) + 1];
+            selected = items[items.indexOf(this.state.selected[this.props.valueKey]) + 1];
             if (!selected) selected = _.head(items);
         }
         selected = _.filter(this.props.children, data =>
@@ -213,7 +216,10 @@ class Dropdown extends Component {
                     <div
                         className={this.state.search.length > 0 ? 'text filtered' : 'text'}
                     >
-                        {this.props.icon && <i className={`${this.props.icon} icon`}></i>}
+                        {this.state.selected.icon &&
+                            <i className={`${this.state.selected.icon} icon`}></i>}
+                        {(this.props.icon && !this.state.selected.icon) &&
+                            <i className={`${this.props.icon} icon`}></i>}
                         {this.state.selected[this.props.label]}
                     </div>}
                 {!this.state.selected &&
@@ -250,6 +256,7 @@ Dropdown.propTypes = {
     initialValue: PropTypes.string,
     label: PropTypes.string,
     error: PropTypes.bool,
+    noInitalValue: PropTypes.bool,
     disabled: PropTypes.bool,
     onSelect: PropTypes.func,
     fluid: PropTypes.bool,
