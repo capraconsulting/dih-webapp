@@ -8,14 +8,14 @@ import InputField from '../Form/InputField';
 import SelectField from '../Form/SelectField';
 import TextField from '../Form/TextField';
 import ToggleField from '../Form/ToggleField';
-import DateField from '../Form/DateField';
-import { USER_ROLES, GENDERS } from '../../constants';
+import { USER_ROLES, GENDERS, USER_MEDICAL_DEGREES, COUNTRIES } from '../../constants';
 import { emailIsValid } from '../../helpers';
 
 const fields = [
-    'firstname', 'lastname', 'phoneNumber', 'email', 'role', 'birth',
+    'firstname', 'lastname', 'gender', 'phoneNumber', 'email', 'role', 'birth',
     'notes', 'volunteerInfo', 'readTerms', 'addressLine1', 'addressLine2',
-    'postalCode', 'city', 'country'
+    'postalCode', 'city', 'country', 'medicalDegree', 'medicalDegreeLicenseNumber',
+    'nationality'
 ];
 
 const validate = values => {
@@ -47,11 +47,17 @@ const renderIfAdmin = (props, elementForAdmin, elementForUser) => {
     return elementForUser || '';
 };
 
+const renderIfFieldIsFilled = (field, element) => {
+    if (field.value && field.value.length > 0) return element;
+    return '';
+};
+
 function EditUser(props) {
     const {
-        fields: { firstname, lastname, email, phoneNumber,
+        fields: { firstname, lastname, email, phoneNumber, gender,
             role, birth, notes, volunteerInfo, readTerms,
-            addressLine1, addressLine2, postalCode, city, country
+            addressLine1, addressLine2, postalCode, city, country,
+            medicalDegree, medicalDegreeLicenseNumber, nationality
         },
         handleSubmit,
         errorMessage,
@@ -78,21 +84,33 @@ function EditUser(props) {
                     valueLabel="gender"
                     valueKey="gender"
                 >
-                    {role}
+                    {gender}
                 </SelectField>
-                <DateField
-                    label="Date of birth"
+                <InputField
+                    label="Date of birth (YYYY-MM-DD)"
                     placeholder="YYYY-MM-DD"
                     required
                 >
                     {birth}
-                </DateField>
+                </InputField>
                 <InputField label="E-mail" type="email" required>
                     {email}
                 </InputField>
                 <InputField label="Phone number" type="tel" required>
                     {phoneNumber}
                 </InputField>
+                <SelectField
+                    label="Nationality"
+                    values={Object.keys(COUNTRIES).map(key =>
+                        ({ icon: `${key.toLowerCase()} flag`,
+                        country: COUNTRIES[key] }))}
+                    placeholder="Where you're originally from"
+                    valueLabel="country"
+                    valueKey="country"
+                    search
+                >
+                    {nationality}
+                </SelectField>
                 {renderIfAdmin(props,
                     <SelectField
                         label="Role"
@@ -131,13 +149,37 @@ function EditUser(props) {
                 >
                 {city}
                 </InputField>
-                <InputField
+                <SelectField
                     label="Country of residence"
+                    values={Object.keys(COUNTRIES).map(key =>
+                        ({ icon: `${key.toLowerCase()} flag`,
+                        country: COUNTRIES[key] }))}
                     placeholder="Where you live"
-                    type="text"
+                    valueLabel="country"
+                    valueKey="country"
+                    search
                 >
                 {country}
-                </InputField>
+                </SelectField>
+                <SelectField
+                    label="Medical degree"
+                    values={Object.keys(USER_MEDICAL_DEGREES).map((k) =>
+                        ({ degree: USER_MEDICAL_DEGREES[k] }))}
+                    placeholder="Select your medical degree if you have one"
+                    valueLabel="degree"
+                    valueKey="degree"
+                >
+                    {medicalDegree}
+                </SelectField>
+                {renderIfFieldIsFilled(medicalDegree,
+                    <InputField
+                        label="License number of medical degree"
+                        placeholder="License number or description"
+                        type="text"
+                    >
+                    {medicalDegreeLicenseNumber}
+                    </InputField>
+                )}
                 <TextField
                     rows={3}
                     label="Occupation and experience"

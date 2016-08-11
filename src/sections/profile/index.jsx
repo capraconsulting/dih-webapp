@@ -39,6 +39,7 @@ class Profile extends Component {
                 }
             ]
         };
+        this.handlers.retrieve();
     }
 
     componentDidMount() {

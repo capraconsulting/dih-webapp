@@ -54,7 +54,7 @@ const ViewUser = (props) => (
             />
             <ListItem
                 content={props.user.addressLine2}
-                hidden={props.user.addressLine2}
+                hidden
             />
             <ListItem
                 name="Postal code"
@@ -105,7 +105,7 @@ const ViewUser = (props) => (
             <ListItem
                 name="Languages"
                 icon="talk"
-                content={props.user.languages.join(', ')}
+                content={props.user.languages ? props.user.languages.join(', ') : 'Not set'}
             />
             <FluidListItem
                 name="Occupation and experience"
