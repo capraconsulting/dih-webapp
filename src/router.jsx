@@ -132,11 +132,11 @@ export default(
                         <Route name="Trips" path="trips" component={TripsForUser} />
                     </Route>
                 </Route>
-                <Route name="message" path="admin/message" component={Message}>
-                    <Route name="recipients" path="recipients" component={RecipientsMessage} />
-                    <Route name="compose" path="compose" component={ComposeMessage} />
-                    <Route name="summary" path="summary" component={MessageSummary} />
-                    <Route name="send" path="send" component={MessageSend} />
+                <Route name="Message" path="admin/message" component={Message}>
+                    <Route name="Recipients" path="recipients" component={RecipientsMessage} />
+                    <Route name="Compose" path="compose" component={ComposeMessage} />
+                    <Route name="Summary" path="summary" component={MessageSummary} />
+                    <Route name="Send" path="send" component={MessageSend} />
                 </Route>
                 <Route name="Email" path="admin/email/:emailId" component={Email} />
                 <Route name="Trips" path="admin/trips" component={AdminTrips}>

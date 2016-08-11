@@ -276,6 +276,12 @@ class Table extends Component {
     renderFiltersBar(rowCount = 0) {
         return (
             <div className="filterBar">
+                {this.state.selected.length > 0 &&
+                    <Actions
+                        selected={this.state.selected}
+                        actions={this.props.actions}
+                    />
+                }
 
                 {this.props.rowCounter &&
                     <div className="ui label row-count">
@@ -300,13 +306,6 @@ class Table extends Component {
                     />
                 }
 
-                {this.state.selected.length > 0 &&
-                    <Actions
-                        selected={this.state.selected}
-                        actions={this.props.actions}
-                    />
-                }
-
                 {this.props.dateFields &&
                     <DateInterval
                         onChange={
@@ -321,7 +320,7 @@ class Table extends Component {
     renderToggle(item) {
         return (
             <td className="one wide checkbox">
-                <div className="ui fitted toggle checkbox">
+                <div className="ui fitted checkbox">
                     <input
                         type="checkbox"
                         onClick={(e) => this.handleToggle(e, item)}
@@ -337,7 +336,7 @@ class Table extends Component {
     renderToggleAll() {
         return (
             <th className="one wide checkbox">
-                <div className="ui fitted toggle checkbox">
+                <div className="ui fitted checkbox">
                     <input
                         type="checkbox"
                         onClick={() => this.toggleSelectAll()}

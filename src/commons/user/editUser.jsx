@@ -112,7 +112,7 @@ function EditUser(props) {
                         name="Guidelines for A Drop in the Ocean"
                         label={`User confirmation of reading the guidelines.
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
-                        Click here to read the guidelines</a>.`}
+                        Click here to read the guidelines.</a>`}
                         id="readTerms"
                     >
                         {readTerms}
@@ -122,7 +122,7 @@ function EditUser(props) {
                         name="Guidelines for A Drop in the Ocean"
                         label={`I confirm that I have read the guidelines for A Drop in the Ocean.
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
-                        Click here to read the guidelines</a>.`}
+                        Click here to read the guidelines.</a>`}
                         id="readTerms"
                     >
                         {readTerms}
