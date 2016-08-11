@@ -30,15 +30,15 @@ const validateRecipients = (props) => (
 
 const Recipients = (props) => (
     <div>
-        <div  style={{ marginTop: 20 }} className="ui large header">Message</div>
+        <div style={{ marginTop: 20 }} className="ui large header">Message</div>
         <List>
             <ListItem
-                name="Message medium"
+                name="Type"
                 icon="send"
                 content={props.medium}
             />
             {props.medium === 'SMS' && <ListItem
-                name="Message sender"
+                name="Sender"
                 icon="user"
                 content={props.sender}
             />}
@@ -48,7 +48,7 @@ const Recipients = (props) => (
                 content={props.message}
             />}
             {props.medium === 'EMAIL' && <ListItem
-                name="Message subject"
+                name="Subject"
                 icon="mail"
                 content={props.subject}
             />}
