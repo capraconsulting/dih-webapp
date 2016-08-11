@@ -32,14 +32,6 @@ export function getErrorMessageForTripSubmission(trip, destination) {
         Please select a start date that corresponds with that, but do
         not hesitate to add any note regarding the time period in the
         "Additional information" field`;
-    } else if (trip.endDate) { // Trip too short
-        const timeDiff = moment(trip.endDate).diff(moment(trip.startDate), 'days');
-        if (destination && timeDiff < destination.minimumTripDurationInDays) {
-            msg = `Trip duration has to be longer
-            than ${destination.minimumTripDurationInDays} days for this destination.
-            If you're unsure of the length of your stay, don't set any end date, and
-            explain your situation in the "Additional information" field at the bottom.`;
-        }
     }
     return msg;
 }
