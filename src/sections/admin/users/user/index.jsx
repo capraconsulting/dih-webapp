@@ -1,10 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import moment from 'moment';
 import { retrieve, update, destroy } from '../../../../actions/userActions';
 import { retrieve as retrieveAccount } from '../../../../actions/accountActions';
 import { pushNotification } from '../../../../actions/notificationActions';
 import Segment from '../../../../commons/Segment';
+import Segments from '../../../../commons/Segments';
 import Header from '../../../../commons/pageHeader';
 import Navbar from '../../../../commons/navbar';
 
@@ -75,24 +77,28 @@ class User extends Component {
             .then(() => browserHistory.push(`/admin/users/${userId}`));
     }
 
+    prepareInitialValues(user) {
+        return { ...user, birth: moment(user.birth).format('YYYY-MM-DD') };
+    }
+
     render() {
         return (
-            <Segment clearing loading={this.state.loading}>
-                <Header
-                    icon="user"
-                    content={`${this.props.user.firstname} ${this.props.user.lastname}`}
-                    subContent="Manage user"
-                />
-                <Navbar pages={this.state.pages} />
-                <Segment clearing>
-                    {React.cloneElement(this.props.children, {
-                        initialValues: this.props.user,
-                        user: this.props.user,
-                        showAdminFields: true,
-                        onSubmit: e => this.onUpdate(e)
-                    })}
+            <Segments loading={this.state.loading}>
+                <Segment>
+                    <Header
+                        icon="user"
+                        content={`${this.props.user.firstname} ${this.props.user.lastname}`}
+                        subContent="Manage user"
+                    />
                 </Segment>
-            </Segment>
+                <Navbar pages={this.state.pages} />
+                {React.cloneElement(this.props.children, {
+                    initialValues: this.prepareInitialValues(this.props.user),
+                    user: this.props.user,
+                    showAdminFields: true,
+                    onSubmit: e => this.onUpdate(e)
+                })}
+            </Segments>
         );
     }
 }
