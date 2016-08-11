@@ -105,9 +105,9 @@ class TripsTable extends Component {
 
     prepareLinkPrefix() {
         if (this.props.role === USER_ROLES.MODERATOR) {
-            return '/coordinator/users/';
+            return '/coordinator/trips/';
         }
-        return '/admin/users/';
+        return '/admin/trips/';
     }
 
     prepareTableContent(trips) {
@@ -131,7 +131,8 @@ class TripsTable extends Component {
             }
 
             if (!this.props.destinationId) {
-                row.destination = trip.destination.name;
+                if (trip.destination) row.destination = trip.destination.name;
+                else row.destination = 'No preferance';
             }
 
             return row;
@@ -142,8 +143,7 @@ class TripsTable extends Component {
         if (!this.props.userId) {
             return {
                 columnName: 'fullName',
-                prefix: this.prepareLinkPrefix(),
-                suffix: '/trips'
+                prefix: this.prepareLinkPrefix()
             };
         }
         return {
@@ -174,7 +174,6 @@ class TripsTable extends Component {
                     status: TRIP_STATUS_LABELS
                 }}
                 itemKey="id"
-                linkKey={this.props.userId ? 'id' : 'userId'}
                 link={this.linkElement()}
             />
         );

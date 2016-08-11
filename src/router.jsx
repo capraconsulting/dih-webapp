@@ -22,9 +22,9 @@ import SignupTrip from './sections/trips/signup';
 import Trips from './sections/trips/';
 import Trip from './sections/trips/trip';
 
-import EditTrip from './sections/trips/trip/editTrip';
 import CancelTrip from './sections/trips/trip/cancelTrip';
 import TripInfo from './commons/trip/tripInfo';
+import EditTrip from './commons/trip/editTrip';
 
 // Coordinator
 import CoordinatorDestinations from './sections/coordinator/destinations';
@@ -49,6 +49,7 @@ import DestinationsTable from './sections/admin/destinations/destinationsTable';
 import AddDestination from './sections/admin/destinations/addDestination';
 
 import AdminTrip from './sections/admin/trips/trip';
+import TripStatus from './sections/admin/trips/trip/tripStatus';
 
 import AdminTrips from './sections/admin/trips';
 import AdminTripsAll from './sections/admin/trips/allTrips';
@@ -148,7 +149,9 @@ export default(
                     <Route name="Trip requests" path="requests" component={AdminTripsRequests} />
                 </Route>
                 <Route path="admin/trips/:tripId" component={AdminTrip}>
-                    <IndexRoute component={TripInfo} />
+                    <IndexRoute component={TripStatus} />
+                    <Route name="user" path="user" component={ViewUser} />
+                    <Route name="edit" path="edit" component={EditTrip} />
                 </Route>
                 <Route name="Not found" path="*" component={NotFound} />
             </Route>
