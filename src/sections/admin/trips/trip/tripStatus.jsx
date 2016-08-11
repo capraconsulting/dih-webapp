@@ -158,13 +158,23 @@ class UpdateTripStatus extends Component {
                                 <Button onClick={e => this.toggleForm(e)}>
                                     Cancel
                                 </Button>
-                                <Button type="submit" color="green" onClick={(e) => this.handleSubmit(e)}>
+                                <Button
+                                    type="submit"
+                                    color="green"
+                                    onClick={(e) => this.handleSubmit(e)}
+                                >
                                     Update status
                                 </Button>
                             </div>
                         </Form>
                     </div>
-                    <Button style={this.createStyle(true)} type="submit" fluid color="primary" onClick={(e) => this.toggleForm(e)}>
+                    <Button
+                        style={this.createStyle(true)}
+                        type="submit"
+                        fluid
+                        color="primary"
+                        onClick={(e) => this.toggleForm(e)}
+                    >
                         Change status
                     </Button>
                 </Segment>
