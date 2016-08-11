@@ -62,7 +62,8 @@ class Sidebar extends Component {
                 <SidebarMenuItem uri="/trips/signup" itemName="Sign up for a trip" />
             </SidebarMenuGroup>
 
-            {this.props.account.role === USER_ROLES.MODERATOR &&
+            {(this.props.account.role === USER_ROLES.MODERATOR ||
+            this.props.account.role === USER_ROLES.ADMIN) &&
                 <SidebarMenuGroup groupName="Coordinator" icon="comments">
                     <SidebarMenuItem uri="/coordinator/destinations" itemName="My destinations" />
                 </SidebarMenuGroup>
