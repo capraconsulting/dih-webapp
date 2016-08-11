@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import moment from 'moment';
 import { list } from '../../../actions/destinationActions';
 import Table from '../../../commons/table';
@@ -41,7 +40,6 @@ class DestinationsList extends Component {
             id: value.id,
             name: value.name,
             minimumTripDurationInDays: value.minimumTripDurationInDays,
-            countOfActiveVolunteers: value.countOfActiveVolunteers,
             isActive: value.isActive,
             startDate: value.startDate ?
                 moment(value.startDate).format('YYYY-MM-DD') : 'Not set',
@@ -58,7 +56,6 @@ class DestinationsList extends Component {
                     dateFields={this.dateFields}
                     columnNames={{
                         name: 'Name',
-                        countOfActiveVolunteers: '# Volunteers',
                         isActive: 'Status',
                         startDate: 'Active from',
                         endDate: 'Active to',
@@ -71,7 +68,6 @@ class DestinationsList extends Component {
                     }}
                     responsivePriority={[
                         'name',
-                        'countOfActiveVolunteers',
                         'isActive',
                         'minimumTripDurationInDays',
                         'endDate',
