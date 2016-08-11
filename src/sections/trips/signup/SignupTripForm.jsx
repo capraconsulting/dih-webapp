@@ -40,6 +40,7 @@ function SignupTripForm(props) {
                     label="Date you wish to start your trip"
                     minDate={moment()}
                     maxDate={maxDate || moment(endDate.value)}
+                    placeholder="YYYY-MM-DD"
                 >
                     {startDate}
                 </DateField>
@@ -47,6 +48,7 @@ function SignupTripForm(props) {
                     label="Date you wish to end your trip (optional)"
                     minDate={moment(startDate.value) || moment()}
                     maxDate={maxDate}
+                    placeholder="YYYY-MM-DD"
                 >
                     {endDate}
                 </DateField>
@@ -56,44 +58,52 @@ function SignupTripForm(props) {
 
     renderDateFields();
     return (
-        <Form
-            id="signUpTripForm"
-            errorMessage={errorMessage}
-            successMessage={successMessage}
-            handleSubmit={handleSubmit}
-        >
-            <SelectField
-                label="Destination"
-                icon="marker"
-                values={props.destinations}
-                nullValue="No destination preference"
-                placeholder="Select a destination"
-                allowNullValue
-                valueLabel="name"
-                valueKey="id"
-                onInput={(event) => {
-                    const destId = parseInt(event.target.value, 10);
-                    selectedDestination = props.destinations.filter(e => e.id === destId)[0];
-                    renderDateFields(); // Updates date limits based on destination
-                }}
+        <div>
+            <div className="ui message">
+                For more information about our <strong>destinations</strong>,
+                click <a href="http://www.drapenihavet.no/en/our-work/">here</a>.
+                If you're unsure of how long you'll want to stay, just leave
+                the <strong>Date you wish to end your trip</strong> field open
+            </div>
+            <Form
+                id="signUpTripForm"
+                errorMessage={errorMessage}
+                successMessage={successMessage}
+                handleSubmit={handleSubmit}
             >
-                {destinationId}
-            </SelectField>
-            {dateFields}
-            <TextField type="text" rows={3} label="Additional information / questions">
-                {notes}
-            </TextField>
-            <Button
-                type="submit"
-                color="primary"
-                fluid
-                disabled={isFetching}
-                loading={isFetching}
-                id="submit"
-            >
-                Sign up
-            </Button>
-        </Form>
+                <SelectField
+                    label="Destination"
+                    icon="marker"
+                    values={props.destinations}
+                    nullValue="No destination preference"
+                    placeholder="Select a destination"
+                    allowNullValue
+                    valueLabel="name"
+                    valueKey="id"
+                    onInput={(event) => {
+                        const destId = parseInt(event.target.value, 10);
+                        selectedDestination = props.destinations.filter(e => e.id === destId)[0];
+                        renderDateFields(); // Updates date limits based on destination
+                    }}
+                >
+                    {destinationId}
+                </SelectField>
+                {dateFields}
+                <TextField type="text" rows={3} label="Additional information / questions">
+                    {notes}
+                </TextField>
+                <Button
+                    type="submit"
+                    color="primary"
+                    fluid
+                    disabled={isFetching}
+                    loading={isFetching}
+                    id="submit"
+                >
+                    Sign up
+                </Button>
+            </Form>
+        </div>
     );
 }
 
