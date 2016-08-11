@@ -32,26 +32,25 @@ class UsersTableContainer extends Component {
                 action: this.sendMessage = this.sendMessage.bind(this)
             }
         ];
-        this.dateFields = { from: 'birth', to: 'birth' };
         this.filterValues = [
             {
                 value: USER_ROLES.USER,
                 label: 'User',
-                color: 'green',
+                color: 'empty',
                 group: 'Filter by user role',
                 field: 'role'
             },
             {
                 value: USER_ROLES.MODERATOR,
-                label: 'Moderator',
-                color: 'yellow',
+                label: 'Coordinator',
+                color: 'grey',
                 group: 'Filter by user role',
                 field: 'role'
             },
             {
                 value: USER_ROLES.ADMIN,
-                label: 'Admin',
-                color: 'red',
+                label: 'Administrator',
+                color: 'black',
                 group: 'Filter by user role',
                 field: 'role'
             }

@@ -68,13 +68,13 @@ exports.KEY_CODES = {
 
 export const TRIP_STATUS_LABELS = {
     PENDING: (
-        <div className="ui blue label">
+        <div className="ui empty label">
             <i className="circle icon"></i>
             Pending
         </div>
     ),
     ACCEPTED: (
-        <div className="ui teal label">
+        <div className="ui yellow label">
             <i className="circle icon"></i>
             Accepted
         </div>
@@ -86,13 +86,13 @@ export const TRIP_STATUS_LABELS = {
         </div>
     ),
     ACTIVE: (
-        <div className="ui yellow label">
+        <div className="ui olive label">
             <i className="circle icon"></i>
             Active
         </div>
     ),
     CLOSED: (
-        <div className="ui gray label">
+        <div className="ui black label">
             <i className="circle icon"></i>
             Closed
         </div>
@@ -104,13 +104,13 @@ export const TRIP_STATUS_LABELS = {
         </div>
     ),
     LEFT: (
-        <div className="ui orange label">
+        <div className="ui grey label">
             <i className="circle icon"></i>
             Left
         </div>
     ),
     'NO SHOW': (
-        <div className="ui black label">
+        <div className="ui orange label">
             <i className="circle icon"></i>
             No show
         </div>
@@ -134,19 +134,19 @@ export const BOOLEAN_LABELS = {
 
 export const ROLE_LABELS = {
     USER: (
-        <div className="ui blue label">
+        <div className="ui empty label">
             <i className="user icon"></i>
             User
         </div>
     ),
     MODERATOR: (
-        <div className="ui teal label">
+        <div className="ui grey label">
             <i className="user icon"></i>
             Coordinator
         </div>
     ),
     ADMIN: (
-        <div className="ui orange label">
+        <div className="ui black label">
             <i className="user icon"></i>
             Administrator
         </div>

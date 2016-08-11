@@ -3,11 +3,69 @@ import moment from 'moment';
 import { USER_ROLES, TRIP_STATUS_LABELS, TRIP_STATUSES } from '../../constants';
 import Table from '../../commons/table';
 
-class TripRequestsTable extends Component {
+class TripsTable extends Component {
     constructor(props) {
         super(props);
         this.dateFields = { from: 'startDate', to: 'endDate' };
         this.rowCounterLabels = { prefix: 'Showing', suffix: 'trips' };
+        this.filters = [
+            {
+                color: 'empty',
+                label: 'Pending',
+                value: TRIP_STATUSES.PENDING,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'teal',
+                label: 'Accepted',
+                value: TRIP_STATUSES.ACCEPTED,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'olive',
+                label: 'Active',
+                value: TRIP_STATUSES.ACTIVE,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'green',
+                label: 'Present',
+                value: TRIP_STATUSES.PRESENT,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'grey',
+                label: 'Left',
+                value: TRIP_STATUSES.LEFT,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'red',
+                label: 'Rejected',
+                value: TRIP_STATUSES.REJECTED,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'black',
+                label: 'Closed',
+                value: TRIP_STATUSES.CLOSED,
+                group: 'Trip status',
+                field: 'status'
+            },
+            {
+                color: 'orange',
+                label: 'No show',
+                value: TRIP_STATUSES.NOSHOW,
+                group: 'Trip status',
+                field: 'status'
+            }
+        ];
     }
     getTrips() {
         let trips = this.props.trips;
@@ -107,6 +165,7 @@ class TripRequestsTable extends Component {
                     'startDate',
                     'endDate'
                 ]}
+                filters={this.filters}
                 dateFields={this.dateFields}
                 rowCounter={this.rowCounterLabels}
                 columnNames={this.prepareTableHeaders()}
@@ -122,7 +181,7 @@ class TripRequestsTable extends Component {
 }
 
 
-TripRequestsTable.propTypes = {
+TripsTable.propTypes = {
     trips: PropTypes.array.isRequired,
     userId: PropTypes.number,
     destinationId: PropTypes.number,
@@ -130,4 +189,4 @@ TripRequestsTable.propTypes = {
     requestsOnly: PropTypes.bool
 };
 
-export default TripRequestsTable;
+export default TripsTable;

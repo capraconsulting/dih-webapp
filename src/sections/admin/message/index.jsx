@@ -1,6 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+import Header from '../../../commons/pageHeader';
+import Segment from '../../../commons/Segment';
+import Segments from '../../../commons/Segments';
 import Steps from '../../../commons/Steps';
 import Step from '../../../commons/Steps/Step';
 import { list } from '../../../actions/userActions';
@@ -117,8 +120,15 @@ class Compose extends Component {
 
     render() {
         return (
-            <div className="ui segments">
-                <div className="ui segment">
+            <Segments>
+                <Segment>
+                    <Header
+                        content="Send messages"
+                        subContent="Send email or SMS to users"
+                        icon="send"
+                    />
+                </Segment>
+                <Segment blue>
                     <Steps numberOfSteps="four" >
                         <Step
                             title="Recipients"
@@ -149,8 +159,8 @@ class Compose extends Component {
                             icon="send"
                         />
                     </Steps>
-                </div>
-                <div className="ui blue clearing segment">
+                </Segment>
+                <Segment blue clearing>
                     {React.cloneElement(this.props.children, {
                         recipients: this.props.recipients,
                         users: this.props.users,
@@ -173,8 +183,8 @@ class Compose extends Component {
                         onReset: e => this.onReset(e),
                         addRecipients: this.handlers.addRecipients
                     })}
-                </div>
-            </div>
+                </Segment>
+            </Segments>
         );
     }
 }
