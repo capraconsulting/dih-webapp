@@ -18,6 +18,17 @@ export const USER_ROLES = {
 };
 
 /**
+* The possible genders a user can have
+* @type {object}
+* @property {string} MALE - male
+* @property {string} FEMALE - female
+*/
+export const GENDERS = {
+    MALE: 'MALE',
+    FEMALE: 'FEMALE'
+};
+
+/**
 * The possible roles a user can have.
 * @type {object}
 * @property {string} PENDING - The trip is requested by a user but not handled by an admin

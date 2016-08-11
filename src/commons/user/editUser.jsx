@@ -9,11 +9,13 @@ import InputField from '../Form/InputField';
 import SelectField from '../Form/SelectField';
 import TextField from '../Form/TextField';
 import ToggleField from '../Form/ToggleField';
-import { USER_ROLES } from '../../constants';
+import { USER_ROLES, GENDERS } from '../../constants';
 import { emailIsValid } from '../../helpers';
 
 const fields = [
-    'firstname', 'lastname', 'email', 'role', 'birth', 'notes', 'volunteerInfo', 'readTerms'
+    'firstname', 'lastname', 'phoneNumber', 'email', 'role', 'birth',
+    'notes', 'volunteerInfo', 'readTerms', 'addressLine1', 'addressLine2',
+    'postalCode', 'city', 'country'
 ];
 
 const validate = values => {
@@ -47,7 +49,10 @@ const renderIfAdmin = (props, elementForAdmin, elementForUser) => {
 
 function EditUser(props) {
     const {
-        fields: { firstname, lastname, email, role, birth, notes, volunteerInfo, readTerms },
+        fields: { firstname, lastname, email, phoneNumber,
+            role, birth, notes, volunteerInfo, readTerms,
+            addressLine1, addressLine2, postalCode, city, country
+        },
         handleSubmit,
         errorMessage,
         isFetching
@@ -66,10 +71,28 @@ function EditUser(props) {
                 <InputField label="Last name" type="text" required>
                     {lastname}
                 </InputField>
+                <SelectField
+                    label="Gender"
+                    values={Object.keys(GENDERS).map((k) => ({ gender: GENDERS[k] }))}
+                    placeholder="Select your gender"
+                    valueLabel="gender"
+                    valueKey="gender"
+                >
+                    {role}
+                </SelectField>
+                <DateField
+                    label="Date of birth"
+                    placeholder="YYYY-MM-DD"
+                    required
+                >
+                    {birth}
+                </DateField>
                 <InputField label="E-mail" type="email" required>
                     {email}
                 </InputField>
-
+                <InputField label="Phone number" type="tel" required>
+                    {phoneNumber}
+                </InputField>
                 {renderIfAdmin(props,
                     <SelectField
                         label="Role"
@@ -82,13 +105,40 @@ function EditUser(props) {
                     </SelectField>
                 )}
 
-                <DateField
-                    label="Date of birth"
-                    placeholder="YYYY-MM-DD"
-                    required
+                <InputField
+                    label="Address line 1"
+                    placeholder="Your Address"
+                    type="text"
                 >
-                    {birth}
-                </DateField>
+                {addressLine1}
+                </InputField>
+                <InputField
+                    label="Address line 2"
+                    placeholder="Second adress line in case you have a long address"
+                    type="text"
+                >
+                {addressLine2}
+                </InputField>
+                <InputField
+                    label="Postal code"
+                    type="text"
+                >
+                {postalCode}
+                </InputField>
+                <InputField
+                    label="City"
+                    type="text"
+                >
+                {city}
+                </InputField>
+                <InputField
+                    label="Country of residence"
+                    placeholder="Where you live"
+                    type="text"
+                >
+                {country}
+                </InputField>
+
                 <TextField
                     rows={3}
                     label="Occupation and experience"
