@@ -9,6 +9,7 @@ const Header = (props) => (
             <i className="content big icon" onClick={(e) => props.toggleSidebar(e)} ></i>}
         <div>
             <Breadcrumbs
+                excludes={['Main']}
                 routes={props.routes}
                 params={props.params}
             />

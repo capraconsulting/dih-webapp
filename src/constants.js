@@ -109,7 +109,7 @@ export const TRIP_STATUS_LABELS = {
             Left
         </div>
     ),
-    NOSHOW: (
+    'NO SHOW': (
         <div className="ui orange label">
             <i className="circle icon"></i>
             No show

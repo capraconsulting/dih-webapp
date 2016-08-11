@@ -85,7 +85,7 @@ class Trips extends React.Component {
                 {
                     id: value.id,
                     status: value.status,
-                    destinationName: value.destination.name,
+                    destinationName: value.destination.name || 'No destination preferance',
                     startDate: moment(value.startDate).format('YYYY-MM-DD'),
                     endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Not set'
                 }
