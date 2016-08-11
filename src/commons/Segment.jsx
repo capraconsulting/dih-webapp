@@ -5,6 +5,7 @@ const createClasses = (props) => {
     const classes = ['ui', 'segment'];
     if (props.clearing) classes.push('clearing');
     if (props.blue) classes.push('blue');
+    if (props.center) classes.push('center aligned');
     return classes;
 };
 
@@ -19,6 +20,7 @@ const Segment = (props) => (
 Segment.propTypes = {
     clearing: PropTypes.bool,
     blue: PropTypes.bool,
+    center: PropTypes.bool,
     children: PropTypes.object,
     loading: PropTypes.bool
 };

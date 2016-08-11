@@ -131,7 +131,7 @@ class Dropdown extends Component {
         if (!this.state.selected) {
             selected = _.last(items);
         } else {
-            selected = items[items.indexOf(this.state.selected.id) - 1];
+            selected = items[items.indexOf(this.state.selected[this.props.valueKey]) - 1];
             if (!selected) selected = _.last(items);
         }
         selected = _.filter(this.props.children, data =>
@@ -147,7 +147,7 @@ class Dropdown extends Component {
         if (!this.state.selected) {
             selected = _.head(items);
         } else {
-            selected = items[items.indexOf(this.state.selected.id) + 1];
+            selected = items[items.indexOf(this.state.selected[this.props.valueKey]) + 1];
             if (!selected) selected = _.head(items);
         }
         selected = _.filter(this.props.children, data =>
@@ -213,7 +213,10 @@ class Dropdown extends Component {
                     <div
                         className={this.state.search.length > 0 ? 'text filtered' : 'text'}
                     >
-                        {this.props.icon && <i className={`${this.props.icon} icon`}></i>}
+                        {this.state.selected.icon &&
+                            <i className={`${this.state.selected.icon} icon`}></i>}
+                        {(this.props.icon && !this.state.selected.icon) &&
+                            <i className={`${this.props.icon} icon`}></i>}
                         {this.state.selected[this.props.label]}
                     </div>}
                 {!this.state.selected &&
