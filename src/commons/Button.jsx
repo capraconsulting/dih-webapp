@@ -22,7 +22,7 @@ import React, { PropTypes } from 'react';
 */
 
 const createClasses = (props) => {
-    const classes = ['ui', 'button'];
+    const classes = ['large', 'ui', 'button'];
     if (props.fluid) classes.push('fluid');
     if (props.loading) classes.push('loading');
     if (props.right) classes.push('right floated');
