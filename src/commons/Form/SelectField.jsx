@@ -36,6 +36,7 @@ const SelectField = (props) => (
             fluid
             search
             selection
+            noInitalValue={props.noInitalValue}
             value={props.children.value}
             disabled={props.disabled}
             placeholder={props.placeholder}
@@ -66,6 +67,7 @@ SelectField.propTypes = {
     valueLabel: PropTypes.string.isRequired,
     allowNullValue: PropTypes.bool,
     search: PropTypes.bool,
+    noInitalValue: PropTypes.bool,
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,

@@ -25,7 +25,7 @@ export default function (state = initialState, action) {
             ...state,
             isFetching: false
         };
-    case actionTypes.GET_TRIP_SUCCESS:
+    case actionTypes.GET_TRIP_SUCCESS: {
         const newState = {
             ...state,
             isFetching: false,
@@ -34,6 +34,7 @@ export default function (state = initialState, action) {
         if (!newState.trip.destination) newState.trip.destination = {};
         if (!newState.trip.user) newState.trip.user = {};
         return newState;
+    }
     case actionTypes.GET_TRIPS_SUCCESS:
         return {
             ...state,

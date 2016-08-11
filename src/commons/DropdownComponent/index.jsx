@@ -68,11 +68,14 @@ class Dropdown extends Component {
 
     getIntialValue(props) {
         let selected = null;
+        if (props.noInitalValue) return null;
         if (props.initialValue) {
             selected = _.filter(props.children, data =>
                 (data.props.item[props.valueKey] === props.initialValue));
         }
-        if (selected) selected = selected[0].props.item;
+        if (selected) {
+            if (selected.length) selected = selected[0].props.item;
+        }
         return selected;
     }
 
@@ -253,6 +256,7 @@ Dropdown.propTypes = {
     initialValue: PropTypes.string,
     label: PropTypes.string,
     error: PropTypes.bool,
+    noInitalValue: PropTypes.bool,
     disabled: PropTypes.bool,
     onSelect: PropTypes.func,
     fluid: PropTypes.bool,
