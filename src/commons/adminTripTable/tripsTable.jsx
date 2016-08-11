@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import _ from 'lodash';
-import { USER_ROLES, TRIP_STATUS_LABELS } from '../../constants';
+import { USER_ROLES, TRIP_STATUS_LABELS, TRIP_STATUSES } from '../../constants';
 import Table from '../../commons/table';
+
 
 class TripsTable extends Component {
     constructor(props) {
