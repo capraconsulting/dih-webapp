@@ -37,13 +37,14 @@ class Trip extends Component {
                     uri: `/admin/trips/${this.props.params.tripId}`
                 },
                 {
-                    name: 'User',
-                    uri: `/admin/trips/${this.props.params.tripId}/user`
-                },
-                {
                     name: 'Edit',
                     uri: `/admin/trips/${this.props.params.tripId}/edit`
+                },
+                {
+                    name: 'User',
+                    uri: `/admin/trips/${this.props.params.tripId}/user`
                 }
+
             ]
         };
         this.handlers = createHandlers(this.props.dispatch);

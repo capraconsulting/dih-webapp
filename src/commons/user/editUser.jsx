@@ -4,7 +4,6 @@ import { reduxForm } from 'redux-form';
 import Form from '../Form';
 import Button from '../Button';
 import Segment from '../Segment';
-import DateField from '../Form/DateField';
 import InputField from '../Form/InputField';
 import SelectField from '../Form/SelectField';
 import TextField from '../Form/TextField';
@@ -87,13 +86,13 @@ function EditUser(props) {
                     </SelectField>
                 )}
 
-                <DateField
-                    label="Date of birth"
+                <InputField
+                    label="Date of birth (YYYY-MM-DD)"
                     placeholder="YYYY-MM-DD"
                     required
                 >
                     {birth}
-                </DateField>
+                </InputField>
                 <TextField
                     rows={3}
                     label="Work and experience"
