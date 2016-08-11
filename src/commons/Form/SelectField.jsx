@@ -21,6 +21,11 @@ import DropdownItem from '../DropdownComponent/DropdownItem';
 *
 */
 
+const addNullValue = (props) => {
+    if (!props.allowNullValue) return props.values;
+    return [...props.values, { [props.valueKey]: null, [props.valueLabel]: props.nullValue }];
+};
+
 const SelectField = (props) => (
     <div className="field">
         <label>
@@ -31,15 +36,18 @@ const SelectField = (props) => (
             fluid
             search
             selection
+            noInitalValue={props.noInitalValue}
+            value={props.children.value}
             disabled={props.disabled}
             placeholder={props.placeholder}
             error={props.children.touched && props.children.error}
             label={props.valueLabel}
             icon={props.icon}
+            initialValue={props.children.initialValue}
             valueKey={props.valueKey}
             onSelect={props.children.onChange}
         >
-        {props.values.map(value => (
+        {addNullValue(props).map(value => (
             <DropdownItem
                 item={value}
                 key={value[props.valueKey]}
@@ -52,7 +60,6 @@ const SelectField = (props) => (
     </div>
 );
 
-
 SelectField.propTypes = {
     children: PropTypes.object.isRequired,
     values: PropTypes.array.isRequired,
@@ -60,6 +67,7 @@ SelectField.propTypes = {
     valueLabel: PropTypes.string.isRequired,
     allowNullValue: PropTypes.bool,
     search: PropTypes.bool,
+    noInitalValue: PropTypes.bool,
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,

@@ -4,11 +4,11 @@ import { reduxForm } from 'redux-form';
 import Form from '../Form';
 import Button from '../Button';
 import Segment from '../Segment';
-import DateField from '../Form/DateField';
 import InputField from '../Form/InputField';
 import SelectField from '../Form/SelectField';
 import TextField from '../Form/TextField';
 import ToggleField from '../Form/ToggleField';
+import DateField from '../Form/DateField';
 import { USER_ROLES, GENDERS } from '../../constants';
 import { emailIsValid } from '../../helpers';
 
@@ -138,7 +138,6 @@ function EditUser(props) {
                 >
                 {country}
                 </InputField>
-
                 <TextField
                     rows={3}
                     label="Occupation and experience"
@@ -162,7 +161,7 @@ function EditUser(props) {
                         name="Guidelines for A Drop in the Ocean"
                         label={`User confirmation of reading the guidelines.
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
-                        Click here to read the guidelines</a>.`}
+                        Click here to read the guidelines.</a>`}
                         id="readTerms"
                     >
                         {readTerms}
@@ -172,7 +171,7 @@ function EditUser(props) {
                         name="Guidelines for A Drop in the Ocean"
                         label={`I confirm that I have read the guidelines for A Drop in the Ocean.
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
-                        Click here to read the guidelines</a>.`}
+                        Click here to read the guidelines.</a>`}
                         id="readTerms"
                     >
                         {readTerms}

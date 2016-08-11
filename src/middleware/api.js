@@ -57,10 +57,10 @@ export default store => next => action => { // eslint-disable-line
         )
         .catch(err => {
             notification.level = 'error';
-            notification.message = err.data.message || 'There was an error.';
+            notification.message = err.data && err.data.message || 'There was an error.';
             next(notification);
             return next({
-                error: err.data.message || 'There was an error.',
+                error: notification.message,
                 type: errorType
             });
         });

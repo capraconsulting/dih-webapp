@@ -55,12 +55,12 @@ class Recipients extends Component {
     }
 
     generateLoadingMessage() {
-        let message = `Sending ${this.props.medium.toLowerCase()}´s`;
+        let message = `Sending ${this.props.medium.toLowerCase()}s`;
         if (this.props.sent && !this.props.sending) {
             if (this.props.response.errors) {
-                message = `There was an error sending ${this.props.medium.toLowerCase()}´s`;
+                message = `There was an error sending ${this.props.medium.toLowerCase()}'s`;
             } else {
-                message = `${this.props.medium.toLowerCase()}´s sent!`;
+                message = 'Sent!';
             }
         }
         return message;

@@ -26,7 +26,8 @@ const DropdownItem = (props) => (
         onClick={() => props.handleSelect(props.item)}
         className={createClasses(props).join(' ')}
     >
-        {props.icon && <i className={`${props.item.icon || props.icon} icon`}></i>}
+        {props.item.icon && <i className={`${props.item.icon} icon`}></i>}
+        {props.icon && !props.item.icon && <i className={`${props.icon} icon`}></i>}
         {props.item[props.label]}
     </div>
 );

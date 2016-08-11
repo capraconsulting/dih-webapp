@@ -34,8 +34,8 @@ const ViewUser = (props) => (
             <ListItem
                 name="Birthday"
                 icon="birthday"
-                content={props.user.birth ? `${moment(props.user.birth).calendar()}
-                (${moment(props.user.birth).fromNow(true)} old)` : 'Not set'}
+                content={props.user.birth ? `${moment(props.user.birth).format('MMMM Do YYYY')}
+                (${moment().diff(moment(props.user.birth), 'years')} years old)` : 'Not set'}
             />
             <ListItem
                 name="E-mail"
