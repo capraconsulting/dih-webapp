@@ -57,12 +57,13 @@ function ComposeMessage(props) {
             handleSubmit={handleSubmit}
         >
             <SelectField
-                label="Message medium"
+                label="Message type"
                 values={messageMediums}
-                placeholder="Select a message medium"
+                placeholder="Email or SMS?"
                 valueLabel="name"
                 defaultValue=""
                 valueKey="medium"
+                required
             >
                 {medium}
             </SelectField>
