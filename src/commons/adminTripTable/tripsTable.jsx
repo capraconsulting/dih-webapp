@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import { USER_ROLES, TRIP_STATUS_LABELS, TRIP_STATUSES } from '../../constants';
+import _ from 'lodash';
+import { USER_ROLES, TRIP_STATUS_LABELS } from '../../constants';
 import Table from '../../commons/table';
 
 class TripsTable extends Component {
@@ -67,6 +68,7 @@ class TripsTable extends Component {
             }
         ];
     }
+
     getTrips() {
         let trips = this.props.trips;
         if (this.props.userId) {
@@ -112,8 +114,8 @@ class TripsTable extends Component {
 
     prepareTableContent(trips) {
         let filteredTrips = trips;
-        if (this.props.requestsOnly) {
-            filteredTrips = trips.filter(trip => (trip.status === TRIP_STATUSES.PENDING));
+        if (this.props.statuses) {
+            filteredTrips = trips.filter(trip => _.includes(this.props.statuses, trip.status));
         }
 
         return filteredTrips.map(trip => {
@@ -186,7 +188,7 @@ TripsTable.propTypes = {
     userId: PropTypes.number,
     destinationId: PropTypes.number,
     role: PropTypes.string,
-    requestsOnly: PropTypes.bool
+    statuses: PropTypes.array
 };
 
 export default TripsTable;
