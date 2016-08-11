@@ -13,52 +13,49 @@ class DestinationsList extends Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
+        this.dateFields = { from: 'startDate', to: 'endDate' };
+        this.filters = [
+            {
+                value: true,
+                label: 'Active',
+                color: 'green',
+                group: 'Filter by status',
+                field: 'isActive'
+            },
+            {
+                value: false,
+                label: 'Inactive',
+                color: 'red',
+                group: 'Filter by status',
+                field: 'isActive'
+            }
+        ];
     }
 
     componentDidMount() {
         this.handlers();
     }
 
-    normalizeTripObjectsForTable(items) {
-        const cleanObjects = [];
-        _.mapKeys(items, value => {
-            cleanObjects.push({
-                id: value.id,
-                name: value.name,
-                minimumTripDurationInDays: value.minimumTripDurationInDays,
-                countOfActiveVolunteers: value.countOfActiveVolunteers,
-                isActive: value.isActive,
-                startDate: value.startDate ?
-                    moment(value.startDate).format('YYYY-MM-DD') : 'Not set',
-                endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Forever'
-            });
-        });
-        return cleanObjects;
+    prepareTableContent(items) {
+        return items.map(value => ({
+            id: value.id,
+            name: value.name,
+            minimumTripDurationInDays: value.minimumTripDurationInDays,
+            countOfActiveVolunteers: value.countOfActiveVolunteers,
+            isActive: value.isActive,
+            startDate: value.startDate ?
+                moment(value.startDate).format('YYYY-MM-DD') : 'Not set',
+            endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Forever'
+        }));
     }
 
     render() {
-        const dateFields = { from: 'startDate', to: 'endDate' };
-        const filterValues = [
-            {
-                value: 'no',
-                label: 'Show inactive only',
-                color: 'red',
-                group: 'Filter by destination status',
-                field: 'isActive'
-            },
-            {
-                value: 'yes',
-                label: 'Show active only',
-                color: 'green',
-                group: 'Filter by destination status',
-                field: 'isActive'
-            }
-        ];
         return (
             <Segment loading={this.props.destinations.length < 1}>
                 <Table
                     search
-                    filters={filterValues}
+                    filters={this.filters}
+                    dateFields={this.dateFields}
                     columnNames={{
                         name: 'Name',
                         countOfActiveVolunteers: '# Volunteers',
@@ -67,7 +64,6 @@ class DestinationsList extends Component {
                         endDate: 'Active to',
                         minimumTripDurationInDays: 'Minimum trip duration'
                     }}
-                    dateFields={dateFields}
                     itemKey="id"
                     link={{
                         columnName: 'name',
@@ -84,7 +80,7 @@ class DestinationsList extends Component {
                     labels={{
                         isActive: BOOLEAN_LABELS
                     }}
-                    items={this.normalizeTripObjectsForTable(this.props.destinations)}
+                    items={this.prepareTableContent(this.props.destinations)}
                 />
             </Segment>
         );

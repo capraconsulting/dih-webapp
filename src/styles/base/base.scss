@@ -126,6 +126,18 @@ body {
   color: #ccc !important;
 }
 
+.ui.segments > .segment {
+  border-top: none;
+}
+
+.ui.steps {
+  margin-top: 0;
+}
+
+.ui.header {
+  margin-top: 0;
+}
+
 //------------------------------------------------
 //	SHAME, SHAME, SHAME
 // -----------------------------------------------
