@@ -141,6 +141,7 @@ class UpdateTripStatus extends Component {
                                 placeholder={this.createSelectObject(this.props.trip.status).label}
                                 icon={this.createSelectObject(this.props.trip.status).icon}
                                 values={this.allowedActions(this.props.trip.status)}
+                                noInitalValue
                                 valueLabel="label"
                                 valueKey="status"
                             >
