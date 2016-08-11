@@ -41,6 +41,7 @@ function SignupTripForm(props) {
                     minDate={moment()}
                     maxDate={maxDate || moment(endDate.value)}
                     placeholder="YYYY-MM-DD"
+                    required
                 >
                     {startDate}
                 </DateField>
@@ -85,11 +86,17 @@ function SignupTripForm(props) {
                         selectedDestination = props.destinations.filter(e => e.id === destId)[0];
                         renderDateFields(); // Updates date limits based on destination
                     }}
+                    required
                 >
                     {destinationId}
                 </SelectField>
                 {dateFields}
-                <TextField type="text" rows={3} label="Additional information / questions">
+                <TextField
+                    type="text"
+                    rows={3}
+                    label="Additional information / questions"
+                    required
+                >
                     {notes}
                 </TextField>
                 <Button
