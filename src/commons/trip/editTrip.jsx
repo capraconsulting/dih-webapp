@@ -55,7 +55,7 @@ function EditTrip(props) {
             <Segment>
                 <h3>You cannot edit this trip</h3>
                 <p>
-                    The status of this trip is {props.trip.status}, which means
+                    The status of this trip is {props.trip.status.toLowerCase()}, which means
                     it cannot be edited.
                 </p>
                 <p>
