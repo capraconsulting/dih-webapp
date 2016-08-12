@@ -6,9 +6,9 @@ import { pushNotification } from '../actions/notificationActions';
 
 const colours = {
     success: '97, 184, 50',
-    error: '#cb020c',
-    warning: '#fb8c1b',
-    info: '#2d5c89'
+    error: '203, 2, 12',
+    warning: '251, 140, 27',
+    info: '45, 92, 137'
 };
 
 const createStyle = (isMobile) => {
@@ -70,7 +70,11 @@ const createStyle = (isMobile) => {
         Dismiss: {
             DefaultStyle: {
                 top: '24px',
-                right: '15px'
+                right: '15px',
+                backgroundColor: 'rgba(1,1,1, 0.3)',
+                width: '16px',
+                height: '16px',
+                paddingTop: '1px'
             }
         }
     };
@@ -95,8 +99,14 @@ class NotificationContainer extends Component {
     componentWillReceiveProps(newProps) {
         if (newProps.isMobile === this.state.isMobile) {
             const { message, level } = newProps.notification;
+
+            let notificationIcon = 'info';
+            if (level === 'error') notificationIcon = 'remove';
+            else if (level === 'success') notificationIcon = 'checkmark';
+            else if (level === 'warning') notificationIcon = 'warning';
+
             this.notificationSystem.addNotification({
-                message: `<i class="info icon"></i> ${message}`,
+                message: `<i class="${notificationIcon} icon"></i> ${message}`,
                 level,
                 position: 'tc',
                 autoDismiss: 7
