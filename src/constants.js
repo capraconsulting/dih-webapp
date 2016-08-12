@@ -46,6 +46,7 @@ export const USER_MEDICAL_DEGREES = {
     NURSE: 'Nurse',
     MIDWIFE: 'Midwife',
     PSYCHOLOGIST: 'Psychologist',
+    PHYSICAL_THERAPIST: 'Physical therapist',
     OTHER: 'Other'
 };
 
