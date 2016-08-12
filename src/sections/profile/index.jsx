@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import moment from 'moment';
+
 import { update, retrieve } from '../../actions/accountActions';
 import { pushNotification } from '../../actions/notificationActions';
 import Header from '../../commons/pageHeader';
@@ -37,6 +39,7 @@ class Profile extends Component {
                 }
             ]
         };
+        this.handlers.retrieve();
     }
 
     componentDidMount() {
@@ -50,6 +53,10 @@ class Profile extends Component {
         .then(() => browserHistory.push('/profile'));
     }
 
+    prepareInitialValues(account) {
+        return { ...account, birth: moment(account.birth).format('YYYY-MM-DD') };
+    }
+
     render() {
         return (
             <Segments>
@@ -57,12 +64,12 @@ class Profile extends Component {
                     <Header
                         icon="child"
                         content="Profile"
-                        subContent="View and edit your profile"
+                        subContent="View and edit information about yourself"
                     />
                 </Segment>
                 <Navbar pages={this.state.pages} />
                 {React.cloneElement(this.props.children, {
-                    initialValues: this.props.account,
+                    initialValues: this.prepareInitialValues(this.props.account),
                     user: this.props.account,
                     showAdminFields: false,
                     onSubmit: e => this.onUpdate(e)

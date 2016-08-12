@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import { TRAVEL_METHODS } from '../../constants';
+import { TRAVEL_METHODS, TRIP_STATUS_LABELS } from '../../constants';
 import List from '../list';
 import Segment from '../Segment';
 import ListItem from '../list/listItem';
@@ -15,7 +15,7 @@ const TripInfo = (props) => (
             <ListItem
                 name="Status"
                 icon="circle"
-                content={props.trip.status}
+                content={TRIP_STATUS_LABELS[props.trip.status]}
             />
             <ListItem
                 name="Start date"
@@ -64,7 +64,7 @@ const TripInfo = (props) => (
                 content={props.trip.hotel}
             />
             <FluidListItem
-                name="Notes"
+                name="Additional information"
                 icon="info circle"
                 content={props.trip.notes}
             />

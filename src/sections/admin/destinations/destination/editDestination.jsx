@@ -55,7 +55,7 @@ class EditDestination extends Component {
 
     render() {
         return (
-            <Segment loading={this.state.loading} >
+            <Segment loading={this.state.loading} clearing>
                 <EditDestinationForm
                     initialValues={this.props.destination}
                     destination={this.props.destination}

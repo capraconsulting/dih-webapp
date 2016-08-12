@@ -18,7 +18,7 @@ export default store => next => action => { // eslint-disable-line
     API.interceptors.response.use(response => (
         Promise.resolve(response)
     ), error => {
-        if (error.status >= 400 && error.status < 500) {
+        if (error.status === 401) {
             store.dispatch(logout()); // Errors lead to logout
         }
         return Promise.reject(error);
@@ -57,10 +57,10 @@ export default store => next => action => { // eslint-disable-line
         )
         .catch(err => {
             notification.level = 'error';
-            notification.message = err.data.message || 'There was an error.';
+            notification.message = err.data && err.data.message || 'There was an error.';
             next(notification);
             return next({
-                error: err.data.message || 'There was an error.',
+                error: notification.message,
                 type: errorType
             });
         });

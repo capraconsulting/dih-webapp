@@ -94,6 +94,7 @@ body {
     box-shadow: none;
     border-radius: 0px;
     border: none;
+    margin: 0px;
  }
 
 .ui.segments .ui.inverted.blue.segment {
@@ -124,6 +125,18 @@ body {
 
 .react-datepicker .react-datepicker__day--disabled {
   color: #ccc !important;
+}
+
+.ui.segments > .segment {
+  border-top: none;
+}
+
+.ui.steps {
+  margin-top: 0;
+}
+
+.ui.header {
+  margin-top: 0;
 }
 
 //------------------------------------------------

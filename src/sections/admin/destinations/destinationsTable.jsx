@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import moment from 'moment';
 import { list } from '../../../actions/destinationActions';
 import Table from '../../../commons/table';
@@ -13,52 +12,60 @@ class DestinationsList extends Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
-    }
-
-    componentDidMount() {
-        this.handlers();
-    }
-
-    normalizeTripObjectsForTable(items) {
-        const cleanObjects = [];
-        _.mapKeys(items, value => {
-            cleanObjects.push({
-                id: value.id,
-                name: value.name,
-                minimumTripDurationInDays: value.minimumTripDurationInDays,
-                countOfActiveVolunteers: value.countOfActiveVolunteers,
-                isActive: value.isActive,
-                startDate: value.startDate ?
-                    moment(value.startDate).format('YYYY-MM-DD') : 'Not set',
-                endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Forever'
-            });
-        });
-        return cleanObjects;
-    }
-
-    render() {
-        const dateFields = { from: 'startDate', to: 'endDate' };
-        const filterValues = [
+        this.state = {
+            loading: true
+        };
+        this.dateFields = { from: 'startDate', to: 'endDate' };
+        this.filters = [
             {
-                value: 'no',
-                label: 'Show inactive only',
-                color: 'red',
-                group: 'Filter by destination status',
+                value: true,
+                label: 'Active',
+                color: 'green',
+                group: 'Filter by status',
                 field: 'isActive'
             },
             {
-                value: 'yes',
-                label: 'Show active only',
-                color: 'green',
-                group: 'Filter by destination status',
+                value: false,
+                label: 'Inactive',
+                color: 'red',
+                group: 'Filter by status',
                 field: 'isActive'
             }
         ];
+    }
+
+    componentDidMount() {
+        this.handlers()
+            .then(() => {
+                this.setState({ loading: false });
+            });
+    }
+
+    prepareTableContent(items) {
+        return items.map(value => ({
+            id: value.id,
+            name: value.name,
+            minimumTripDurationInDays: value.minimumTripDurationInDays,
+            countOfActiveVolunteers: value.countOfActiveVolunteers,
+            isActive: value.isActive,
+            startDate: value.startDate ?
+                moment(value.startDate).format('YYYY-MM-DD') : 'Not set',
+            endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Forever'
+        }));
+    }
+
+    render() {
         return (
-            <Segment loading={this.props.destinations.length < 1}>
+            <Segment loading={this.state.loading}>
                 <Table
                     search
-                    filters={filterValues}
+                    loading={this.state.loading}
+                    filters={this.filters}
+                    emptyState={{
+                        title: 'No destinations',
+                        message: 'Could not find any destinations.'
+                    }}
+                    dateFields={this.dateFields}
                     columnNames={{
                         name: 'Name',
                         countOfActiveVolunteers: '# Volunteers',
@@ -67,7 +74,6 @@ class DestinationsList extends Component {
                         endDate: 'Active to',
                         minimumTripDurationInDays: 'Minimum trip duration'
                     }}
-                    dateFields={dateFields}
                     itemKey="id"
                     link={{
                         columnName: 'name',
@@ -84,7 +90,7 @@ class DestinationsList extends Component {
                     labels={{
                         isActive: BOOLEAN_LABELS
                     }}
-                    items={this.normalizeTripObjectsForTable(this.props.destinations)}
+                    items={this.prepareTableContent(this.props.destinations)}
                 />
             </Segment>
         );
