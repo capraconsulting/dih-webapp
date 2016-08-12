@@ -14,11 +14,9 @@ function CancelTrip(props) {
         <Segment>
             <h3>Do you really want to cancel your trip to {props.trip.destination.name}?</h3>
             <p>
-                You can cancel your trip at any time - we don't ask questions.
-                If you at a later time want to go on a
-                trip again, just go to the <Link to="/trips/signup">
-                    trip sign-up page
-                </Link>.
+                You can cancel your trip at any time - we don't ask questions. If you at a later
+                time want to go on a trip again, just go to
+                the <Link to="/trips/signup">sign up for a trip</Link> page.
             </p>
             <p>
                 If you're unsure about your trip, or have any questions at all,
