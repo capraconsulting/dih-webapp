@@ -105,7 +105,7 @@ const ViewUser = (props) => (
             <ListItem
                 name="Languages"
                 icon="talk"
-                content={props.user.languages ? props.user.languages.join(', ') : 'Not set'}
+                content={props.user.languages}
             />
             <FluidListItem
                 name="Occupation and experience"

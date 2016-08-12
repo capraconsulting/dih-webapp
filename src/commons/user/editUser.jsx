@@ -15,7 +15,7 @@ const fields = [
     'firstname', 'lastname', 'gender', 'phoneNumber', 'email', 'role', 'birth',
     'notes', 'volunteerInfo', 'readTerms', 'addressLine1', 'addressLine2',
     'postalCode', 'city', 'country', 'medicalDegree', 'medicalDegreeLicenseNumber',
-    'nationality'
+    'nationality', 'languages'
 ];
 
 const validate = values => {
@@ -57,7 +57,8 @@ function EditUser(props) {
         fields: { firstname, lastname, email, phoneNumber, gender,
             role, birth, notes, volunteerInfo, readTerms,
             addressLine1, addressLine2, postalCode, city, country,
-            medicalDegree, medicalDegreeLicenseNumber, nationality
+            medicalDegree, medicalDegreeLicenseNumber, nationality,
+            languages
         },
         handleSubmit,
         errorMessage,
@@ -180,6 +181,13 @@ function EditUser(props) {
                     {medicalDegreeLicenseNumber}
                     </InputField>
                 )}
+                <InputField
+                    label="Languages"
+                    type="text"
+                    placeholder="What languages do you speak?"
+                >
+                {languages}
+                </InputField>
                 <TextField
                     rows={3}
                     label="Occupation and experience"
