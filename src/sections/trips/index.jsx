@@ -104,7 +104,10 @@ class Trips extends React.Component {
                 <Segment>
                     <Header
                         content="Trips"
-                        subContent="View and edit your trips"
+                        subContent={`
+                            Here you can see all your upcoming, current and earlier trips.
+                            Click on a trip to add travel and accommodation details. It
+                            is important to register all details about your trip before departure.`}
                         icon="plane"
                     />
                 </Segment>
