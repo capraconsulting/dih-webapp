@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
+import { Link } from 'react-router';
 import moment from 'moment';
 import Form from '../Form';
 import Button from '../Button';
@@ -8,7 +9,7 @@ import DateField from '../Form/DateField';
 import InputField from '../Form/InputField';
 import SelectField from '../Form/SelectField';
 import TextField from '../Form/TextField';
-import { TRAVEL_METHODS } from '../../constants';
+import { TRAVEL_METHODS, USER_ROLES, TRIP_STATUSES } from '../../constants';
 
 const fields = [
     'startDate',
@@ -22,6 +23,13 @@ const fields = [
     'arrivalDate',
     'destinationId'
 ];
+
+const notAllowedToEdit = props => (
+        props.trip.user.role !== USER_ROLES.ADMIN &&
+        (props.trip.status === TRIP_STATUSES.CLOSED ||
+        props.trip.status === TRIP_STATUSES.REJECTED ||
+        props.trip.status === TRIP_STATUSES.LEFT)
+);
 
 function EditTrip(props) {
     const {
@@ -42,6 +50,26 @@ function EditTrip(props) {
         errorMessage,
         isFetching
     } = props;
+
+    if (notAllowedToEdit(props)) {
+        return (
+            <Segment>
+                <h3>You cannot edit this trip</h3>
+                <p>
+                    The status of this trip is {props.trip.status.toLowerCase()}, which means
+                    it cannot be edited.
+                </p>
+                <p>
+                    Remember that you can always sign up for a new trip.
+                    Head over to the <Link to="/trips/signup">trip signup page.</Link>.
+                </p>
+                <p>
+                    If you have any questions, just send us an e-mail
+                    at <a href="mailto:frivillig@drapenihavet.no">frivillig@drapenihavet.no</a>.
+                </p>
+            </Segment>
+        );
+    }
 
     return (
         <Segment>

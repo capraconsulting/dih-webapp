@@ -15,6 +15,9 @@ class Trips extends React.Component {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
         this.dateFields = { from: 'startDate', to: 'endDate' };
+        this.state = {
+            loading: true
+        };
         this.filters = [
             {
                 color: 'empty',
@@ -76,7 +79,10 @@ class Trips extends React.Component {
     }
 
     componentDidMount() {
-        this.handlers();
+        this.handlers()
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     normalizeTripObjectsForTable(items) {
@@ -105,7 +111,7 @@ class Trips extends React.Component {
                         icon="plane"
                     />
                 </Segment>
-                <Segment blue loading={this.props.trips.length < 1}>
+                <Segment blue loading={this.state.loading}>
                     <Table
                         columnNames={{
                             destinationName: 'Destination',
@@ -114,6 +120,11 @@ class Trips extends React.Component {
                             status: 'Status'
                         }}
                         itemKey="id"
+                        loading={this.state.loading}
+                        emptyState={{
+                            title: 'No trips',
+                            message: 'You need to signup for a trip.'
+                        }}
                         link={{
                             columnName: 'destinationName',
                             prefix: '/trips/'
