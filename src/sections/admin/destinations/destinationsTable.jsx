@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import moment from 'moment';
 import { list } from '../../../actions/destinationActions';
 import Table from '../../../commons/table';
@@ -13,6 +12,9 @@ class DestinationsList extends Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
+        this.state = {
+            loading: true
+        };
         this.dateFields = { from: 'startDate', to: 'endDate' };
         this.filters = [
             {
@@ -33,7 +35,10 @@ class DestinationsList extends Component {
     }
 
     componentDidMount() {
-        this.handlers();
+        this.handlers()
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     prepareTableContent(items) {
@@ -51,10 +56,15 @@ class DestinationsList extends Component {
 
     render() {
         return (
-            <Segment loading={this.props.destinations.length < 1}>
+            <Segment loading={this.state.loading}>
                 <Table
                     search
+                    loading={this.state.loading}
                     filters={this.filters}
+                    emptyState={{
+                        title: 'No destinations',
+                        message: 'Could not find any destinations.'
+                    }}
                     dateFields={this.dateFields}
                     columnNames={{
                         name: 'Name',
