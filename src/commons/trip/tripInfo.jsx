@@ -64,7 +64,7 @@ const TripInfo = (props) => (
                 content={props.trip.hotel}
             />
             <FluidListItem
-                name="Notes"
+                name="Additional information"
                 icon="info circle"
                 content={props.trip.notes}
             />

@@ -63,7 +63,7 @@ class Profile extends Component {
                     <Header
                         icon="child"
                         content="Profile"
-                        subContent="View and edit your profile"
+                        subContent="View and edit information about yourself"
                     />
                 </Segment>
                 <Navbar pages={this.state.pages} />
