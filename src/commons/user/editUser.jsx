@@ -67,6 +67,11 @@ function EditUser(props) {
 
     return (
         <Segment>
+            <div className="ui message">
+                Fields marked with <span className="required">*</span> are
+                <strong> required</strong>, but we appreciate that you make your
+                profile as detailed as possible.
+            </div>
             <Form
                 id="editUserForm"
                 errorMessage={errorMessage}
@@ -190,8 +195,8 @@ function EditUser(props) {
                 </InputField>
                 <TextField
                     rows={3}
-                    label="Occupation and experience"
-                    placeholder="What do you work with, and what experience do you have?"
+                    label="Work and experience"
+                    placeholder="Fill in your occupation, work experience and/or other information you find relevant"
                     required
                 >
                     {volunteerInfo}
@@ -213,6 +218,7 @@ function EditUser(props) {
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
                         Click here to read the guidelines.</a>`}
                         id="readTerms"
+                        required
                     >
                         {readTerms}
                     </ToggleField>
@@ -223,6 +229,7 @@ function EditUser(props) {
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
                         Click here to read the guidelines.</a>`}
                         id="readTerms"
+                        required
                     >
                         {readTerms}
                     </ToggleField>

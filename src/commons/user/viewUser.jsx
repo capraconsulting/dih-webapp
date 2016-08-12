@@ -108,8 +108,8 @@ const ViewUser = (props) => (
                 content={props.user.languages}
             />
             <FluidListItem
-                name="Occupation and experience"
-                icon="student"
+                name="Work and experience"
+                icon="building outline"
                 content={props.user.volunteerInfo}
             />
             {renderIfAdmin(props,
