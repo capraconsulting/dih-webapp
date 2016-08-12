@@ -8,11 +8,14 @@ import InputField from '../Form/InputField';
 import SelectField from '../Form/SelectField';
 import TextField from '../Form/TextField';
 import ToggleField from '../Form/ToggleField';
-import { USER_ROLES } from '../../constants';
+import { USER_ROLES, GENDERS, USER_MEDICAL_DEGREES, COUNTRIES } from '../../constants';
 import { emailIsValid } from '../../helpers';
 
 const fields = [
-    'firstname', 'lastname', 'email', 'role', 'birth', 'notes', 'volunteerInfo', 'readTerms'
+    'firstname', 'lastname', 'gender', 'phoneNumber', 'email', 'role', 'birth',
+    'notes', 'volunteerInfo', 'readTerms', 'addressLine1', 'addressLine2',
+    'postalCode', 'city', 'country', 'medicalDegree', 'medicalDegreeLicenseNumber',
+    'nationality', 'languages'
 ];
 
 const validate = values => {
@@ -44,9 +47,19 @@ const renderIfAdmin = (props, elementForAdmin, elementForUser) => {
     return elementForUser || '';
 };
 
+const renderIfFieldIsFilled = (field, element) => {
+    if (field.value && field.value.length > 0) return element;
+    return '';
+};
+
 function EditUser(props) {
     const {
-        fields: { firstname, lastname, email, role, birth, notes, volunteerInfo, readTerms },
+        fields: { firstname, lastname, email, phoneNumber, gender,
+            role, birth, notes, volunteerInfo, readTerms,
+            addressLine1, addressLine2, postalCode, city, country,
+            medicalDegree, medicalDegreeLicenseNumber, nationality,
+            languages
+        },
         handleSubmit,
         errorMessage,
         isFetching
@@ -70,10 +83,40 @@ function EditUser(props) {
                 <InputField label="Last name" type="text" required>
                     {lastname}
                 </InputField>
+                <SelectField
+                    label="Gender"
+                    values={Object.keys(GENDERS).map((k) => ({ gender: GENDERS[k] }))}
+                    placeholder="Select your gender"
+                    valueLabel="gender"
+                    valueKey="gender"
+                >
+                    {gender}
+                </SelectField>
+                <InputField
+                    label="Date of birth (YYYY-MM-DD)"
+                    placeholder="YYYY-MM-DD"
+                    required
+                >
+                    {birth}
+                </InputField>
                 <InputField label="E-mail" type="email" required>
                     {email}
                 </InputField>
-
+                <InputField label="Phone number" type="tel" required>
+                    {phoneNumber}
+                </InputField>
+                <SelectField
+                    label="Nationality"
+                    values={Object.keys(COUNTRIES).map(key =>
+                        ({ icon: `${key.toLowerCase()} flag`,
+                        country: COUNTRIES[key] }))}
+                    placeholder="Where you're originally from"
+                    valueLabel="country"
+                    valueKey="country"
+                    search
+                >
+                    {nationality}
+                </SelectField>
                 {renderIfAdmin(props,
                     <SelectField
                         label="Role"
@@ -87,11 +130,68 @@ function EditUser(props) {
                 )}
 
                 <InputField
-                    label="Date of birth (YYYY-MM-DD)"
-                    placeholder="YYYY-MM-DD"
-                    required
+                    label="Address line 1"
+                    placeholder="Your Address"
+                    type="text"
                 >
-                    {birth}
+                {addressLine1}
+                </InputField>
+                <InputField
+                    label="Address line 2"
+                    placeholder="Second adress line in case you have a long address"
+                    type="text"
+                >
+                {addressLine2}
+                </InputField>
+                <InputField
+                    label="Postal code"
+                    type="text"
+                >
+                {postalCode}
+                </InputField>
+                <InputField
+                    label="City"
+                    type="text"
+                >
+                {city}
+                </InputField>
+                <SelectField
+                    label="Country of residence"
+                    values={Object.keys(COUNTRIES).map(key =>
+                        ({ icon: `${key.toLowerCase()} flag`,
+                        country: COUNTRIES[key] }))}
+                    placeholder="Where you live"
+                    valueLabel="country"
+                    valueKey="country"
+                    search
+                >
+                {country}
+                </SelectField>
+                <SelectField
+                    label="Medical degree"
+                    values={Object.keys(USER_MEDICAL_DEGREES).map((k) =>
+                        ({ degree: USER_MEDICAL_DEGREES[k] }))}
+                    placeholder="Select your medical degree if you have one"
+                    valueLabel="degree"
+                    valueKey="degree"
+                >
+                    {medicalDegree}
+                </SelectField>
+                {renderIfFieldIsFilled(medicalDegree,
+                    <InputField
+                        label="License number of medical degree"
+                        placeholder="License number or description"
+                        type="text"
+                    >
+                    {medicalDegreeLicenseNumber}
+                    </InputField>
+                )}
+                <InputField
+                    label="Languages"
+                    type="text"
+                    placeholder="What languages do you speak?"
+                >
+                {languages}
                 </InputField>
                 <TextField
                     rows={3}
