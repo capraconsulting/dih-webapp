@@ -27,7 +27,8 @@ const fields = [
 const notAllowedToEdit = props => (
         props.trip.user.role !== USER_ROLES.ADMIN &&
         (props.trip.status === TRIP_STATUSES.CLOSED ||
-        props.trip.status === TRIP_STATUSES.REJECTED)
+        props.trip.status === TRIP_STATUSES.REJECTED ||
+        props.trip.status === TRIP_STATUSES.LEFT)
 );
 
 function EditTrip(props) {
