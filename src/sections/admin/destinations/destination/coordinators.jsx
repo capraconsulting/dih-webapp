@@ -1,10 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+
+import CoordinatorForm from './coordinatorForm';
 import Segment from '../../../../commons/Segment';
 import Table from '../../../../commons/table';
+
 import { retrieve, update } from '../../../../actions/destinationActions';
 import { pushNotification } from '../../../../actions/notificationActions';
+
+import { BOOLEAN_LABELS } from '../../../../constants';
 
 const createHandlers = (dispatch) => (
     {
@@ -25,13 +30,9 @@ class Coordinators extends Component {
         super(props);
         this.dateFields = { from: 'startDate', to: 'endDate' };
         this.state = {
+            active: false,
             loading: false
         };
-        this.actions = [
-            {
-                action: this.handleClick = this.handleClick.bind(this)
-            }
-        ];
         this.handlers = createHandlers(this.props.dispatch);
     }
 
@@ -57,31 +58,20 @@ class Coordinators extends Component {
         ));
     }
 
-    handleClick(data) {
+    handleSubmit(data) {
         const user = data;
-        let message = '';
+        user.userId = parseInt(user.userId, 10);
 
-        user.userId = parseInt(user.id, 10);
-
-        if (user.isActive) {
-            user.endDate = moment();
-            if (user.startDate > user.endDate) user.startDate = moment().subtract(1, 'days');
-
-            message = 'Coordinator has been marked as inactive';
-        } else {
-            user.endDate = null;
-            if (user.startDate > moment()) user.startDate = moment();
-
-            message = 'Coordinator has been marked as active';
-        }
+        if (!user.endDate) user.endDate = null;
 
         const payload = {
             users: [user],
-            id: this.props.params.destinationId
+            id: this.props.destination.id
         };
 
         this.handlers.update(payload)
         .then(response => {
+            const message = 'Coordinator added';
             const { error } = response;
             if (!error) {
                 this.handlers.notification(message, 'success');
@@ -95,6 +85,10 @@ class Coordinators extends Component {
     render() {
         return (
             <Segment loading={this.state.loading}>
+                <CoordinatorForm
+                    destination={this.props.destination}
+                    onSubmit={e => { this.handleSubmit(e); }}
+                />
                 <Table
                     search
                     dateFields={this.dateFields}
@@ -113,28 +107,7 @@ class Coordinators extends Component {
                     ]}
                     itemKey="id"
                     items={this.normalizeCoordinatorObjectsForTable(this.props.destination.users)}
-                    labels={{
-                        isActive: {
-                            true: {
-                                html: (
-                                    <div className="ui green label">
-                                        <i className="checkmark icon"></i>
-                                        Active
-                                    </div>
-                                ),
-                                action: this.handleClick
-                            },
-                            false: {
-                                html: (
-                                    <div className="ui red label">
-                                        <i className="remove icon"></i>
-                                        Inactive
-                                    </div>
-                                ),
-                                action: this.handleClick
-                            }
-                        }
-                    }}
+                    labels={{ isActive: BOOLEAN_LABELS }}
                     responsivePriority={[
                         'fullName',
                         'phoneNumber',
