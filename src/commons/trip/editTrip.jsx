@@ -161,17 +161,17 @@ function EditTrip(props) {
                 }
                 {travelMethod.value === TRAVEL_METHODS.OTHER &&
                     <TextField
-                        label="Other travel information"
+                        label="Other travel information (method of travel, arrival place and time)"
                         id="otherTravelInformation"
-                        placeholder="Describe how you're going to travel to the destination"
                         required
+                        rows="4"
                     >
                         {otherTravelInformation}
                     </TextField>
                 }
 
                 <InputField
-                    label="Hotel you're going to stay at"
+                    label="Where are you going to stay? (Hotel name, camping, private, etc.)"
                     type="text"
                     id="hotel"
                     required
@@ -180,8 +180,9 @@ function EditTrip(props) {
                 </InputField>
 
                 <TextField
-                    label="Notes"
+                    label="Additional information"
                     id="notes"
+                    rows="3"
                 >
                     {notes || ''}
                 </TextField>

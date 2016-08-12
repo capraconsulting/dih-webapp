@@ -110,7 +110,7 @@ class Trip extends React.Component {
                     <Header
                         icon="plane"
                         content={`Trip to ${this.props.destination.name}`}
-                        subContent="Manage your trip"
+                        subContent="View and edit information about your trip. When the trip gets approved, make sure to add as much additional info as possible"
                     />
                 </Segment>
                 <Navbar pages={this.state.pages} />
