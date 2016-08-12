@@ -170,6 +170,10 @@ class TripsTable extends Component {
                     'endDate',
                     'medicalDegree'
                 ]}
+                emptyState={{
+                    title: 'No trips',
+                    message: 'Could not find any trips.'
+                }}
                 filters={this.filters}
                 dateFields={this.dateFields}
                 rowCounter={this.rowCounterLabels}
