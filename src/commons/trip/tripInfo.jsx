@@ -17,7 +17,7 @@ const TripInfo = (props) => (
                 icon="circle"
                 content={TRIP_STATUS_LABELS[props.trip.status]}
             />
-            <ListItem
+            <FluidListItem
                 name="Comment on status"
                 icon="tag"
                 content={props.trip.statusComment}
