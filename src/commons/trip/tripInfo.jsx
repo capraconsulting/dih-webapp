@@ -18,6 +18,11 @@ const TripInfo = (props) => (
                 content={TRIP_STATUS_LABELS[props.trip.status]}
             />
             <ListItem
+                name="Comment on status"
+                icon="tag"
+                content={props.trip.statusComment}
+            />
+            <ListItem
                 name="Start date"
                 icon="calendar"
                 content={props.trip.startDate ?
