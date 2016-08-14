@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import SignupTripForm from './SignupTripForm';
 import Header from '../../../commons/pageHeader';
 import Segments from '../../../commons/Segments';
@@ -83,6 +83,7 @@ class SignupTripFormContainer extends Component {
                 isFetching: false,
                 successMessage: success
             });
+            browserHistory.push('/trips');
         });
     }
 
