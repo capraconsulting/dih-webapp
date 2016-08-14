@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
+import moment from 'moment';
 
 import Form from '../Form';
 import Button from '../Button';
@@ -34,6 +35,9 @@ const validate = values => {
     if (!values.birth) {
         errors.birth = 'Required';
     }
+    if (values.birth && !moment(values.birth).isValid()) {
+        errors.birth = 'The date has to be written on the format YYYY-MM-DD';
+    }
     if (!values.volunteerInfo) {
         errors.volunteerInfo = 'Required. Please tell us about yourself!';
     }
@@ -51,6 +55,7 @@ const renderIfFieldIsFilled = (field, element) => {
     if (field.value && field.value.length > 0) return element;
     return '';
 };
+let firstRenderIsDone = false; // Set to true on first render
 
 function EditUser(props) {
     const {
@@ -64,6 +69,14 @@ function EditUser(props) {
         errorMessage,
         isFetching
     } = props;
+
+    if (!birth.valid && !firstRenderIsDone) {
+        birth.value = ''; // Remove 'Invalid date' for new users
+    }
+
+    if (!firstRenderIsDone) {
+        firstRenderIsDone = true;
+    }
 
     return (
         <Segment>
@@ -97,12 +110,17 @@ function EditUser(props) {
                     placeholder="YYYY-MM-DD"
                     required
                 >
-                    {birth}
+                {birth}
                 </InputField>
                 <InputField label="E-mail" type="email" required>
                     {email}
                 </InputField>
-                <InputField label="Phone number" type="tel" required>
+                <InputField
+                    label="Phone number (include the country code in front of the number)"
+                    type="tel"
+                    placeholder="+0012345678"
+                    required
+                >
                     {phoneNumber}
                 </InputField>
                 <SelectField
@@ -196,7 +214,8 @@ function EditUser(props) {
                 <TextField
                     rows={3}
                     label="Work and experience"
-                    placeholder="Fill in your occupation, work experience and/or other information you find relevant"
+                    placeholder={`Fill in your occupation, work experience and/or
+                    other information you find relevant`}
                     required
                 >
                     {volunteerInfo}
