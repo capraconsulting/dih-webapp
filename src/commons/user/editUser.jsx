@@ -95,14 +95,22 @@ function EditUser(props) {
                 <InputField
                     label="Date of birth (YYYY-MM-DD)"
                     placeholder="YYYY-MM-DD"
-                    required
+                    required={props.user.role !== USER_ROLES.ADMIN}
                 >
                     {birth}
                 </InputField>
-                <InputField label="E-mail" type="email" required>
+                <InputField
+                    label="E-mail"
+                    type="email"
+                    required={props.user.role !== USER_ROLES.ADMIN}
+                >
                     {email}
                 </InputField>
-                <InputField label="Phone number" type="tel" required>
+                <InputField
+                    label="Phone number"
+                    type="tel"
+                    required={props.user.role !== USER_ROLES.ADMIN}
+                >
                     {phoneNumber}
                 </InputField>
                 <SelectField
@@ -197,7 +205,7 @@ function EditUser(props) {
                     rows={3}
                     label="Work and experience"
                     placeholder="Fill in your occupation, work experience and/or other information you find relevant"
-                    required
+                    required={props.user.role !== USER_ROLES.ADMIN}
                 >
                     {volunteerInfo}
                 </TextField>
@@ -218,7 +226,6 @@ function EditUser(props) {
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
                         Click here to read the guidelines.</a>`}
                         id="readTerms"
-                        required
                     >
                         {readTerms}
                     </ToggleField>
@@ -229,7 +236,7 @@ function EditUser(props) {
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
                         Click here to read the guidelines.</a>`}
                         id="readTerms"
-                        required
+                        required={props.user.role !== USER_ROLES.ADMIN}
                     >
                         {readTerms}
                     </ToggleField>
@@ -256,7 +263,8 @@ EditUser.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     isFetching: PropTypes.bool,
     submitting: PropTypes.bool.isRequired,
-    showAdminFields: PropTypes.bool
+    showAdminFields: PropTypes.bool,
+    user: PropTypes.object
 };
 
 export default reduxForm({
