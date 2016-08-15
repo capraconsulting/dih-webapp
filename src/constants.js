@@ -1,4 +1,6 @@
 import React from 'react';
+
+const countries = require('json!./countries.json'); // eslint-disable-line
 /**
 * All constants used trouought the application.
 * @module components/constants
@@ -15,6 +17,37 @@ export const USER_ROLES = {
     USER: 'USER',
     MODERATOR: 'MODERATOR',
     ADMIN: 'ADMIN'
+};
+
+/**
+* The possible genders a user can have
+* @type {object}
+* @property {string} MALE - male
+* @property {string} FEMALE - female
+*/
+export const GENDERS = {
+    MALE: 'MALE',
+    FEMALE: 'FEMALE'
+};
+
+/**
+* The possible medical degrees a user can have
+* @type {object}
+* @property {string} DOCTOR - doctor
+* @property {string} PARAMEDIC - paramedic
+* @property {string} NURSE - nurse
+* @property {string} MIDWIFE - midwife
+* @property {string} PSYCHOLOGIST - psychologist
+* @property {string} OTHER - Other
+*/
+export const USER_MEDICAL_DEGREES = {
+    DOCTOR: 'Doctor',
+    PARAMEDIC: 'Paramedic',
+    NURSE: 'Nurse',
+    MIDWIFE: 'Midwife',
+    PSYCHOLOGIST: 'Psychologist',
+    PHYSICAL_THERAPIST: 'Physical therapist',
+    OTHER: 'Other'
 };
 
 /**
@@ -51,6 +84,8 @@ exports.TRAVEL_METHODS = {
     PLANE: 'PLANE',
     OTHER: 'OTHER'
 };
+
+exports.COUNTRIES = countries;
 
 exports.KEY_CODES = {
     BREAK: 3,

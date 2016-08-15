@@ -32,6 +32,9 @@ class UsersTableContainer extends Component {
                 action: this.sendMessage = this.sendMessage.bind(this)
             }
         ];
+        this.state = {
+            loading: true
+        };
         this.filterValues = [
             {
                 value: USER_ROLES.USER,
@@ -58,7 +61,10 @@ class UsersTableContainer extends Component {
     }
 
     componentDidMount() {
-        this.handlers.list();
+        this.handlers.list()
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     prepareTableContent(items) {
@@ -84,10 +90,15 @@ class UsersTableContainer extends Component {
                         icon="users"
                     />
                 </Segment>
-                <Segment blue loading={this.props.users.length < 1}>
+                <Segment blue loading={this.state.loading}>
                     <Table
                         search
                         select
+                        loading={this.state.loading}
+                        emptyState={{
+                            title: 'No users',
+                            message: 'Could not find any users.'
+                        }}
                         selected={this.selected}
                         actions={this.actions}
                         filters={this.filterValues}

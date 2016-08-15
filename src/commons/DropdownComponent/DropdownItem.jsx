@@ -21,13 +21,21 @@ const createClasses = (props) => {
     return classes;
 };
 
+const createIconClassnames = elem => {
+    if (elem && elem.indexOf('flag') !== -1) return elem;
+    else if (elem) return `${elem} icon`;
+    return '';
+};
+
 const DropdownItem = (props) => (
     <div
         onClick={() => props.handleSelect(props.item)}
         className={createClasses(props).join(' ')}
     >
-        {props.item.icon && <i className={`${props.item.icon} icon`}></i>}
-        {props.icon && !props.item.icon && <i className={`${props.icon} icon`}></i>}
+        {props.icon ?
+            <i className={createIconClassnames(props.icon)}></i> :
+            <i className={createIconClassnames(props.item.icon)}></i>
+        }
         {props.item[props.label]}
     </div>
 );

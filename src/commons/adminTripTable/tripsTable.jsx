@@ -99,7 +99,7 @@ class TripsTable extends Component {
         if (!this.props.destinationId) {
             headers.destination = 'Destination';
         }
-
+        headers.medicalDegree = 'Medical degree';
         headers.startDate = 'Start date';
         headers.endDate = 'End date';
         headers.status = 'Status';
@@ -125,7 +125,8 @@ class TripsTable extends Component {
                 userId: trip.userId,
                 startDate: moment(trip.startDate).format('YYYY-MM-DD'),
                 endDate: trip.endDate ? moment(trip.endDate).format('YYYY-MM-DD') : 'Not set',
-                status: trip.status
+                status: trip.status,
+                medicalDegree: trip.user.medicalDegree
             };
 
             if (!this.props.userId) {
@@ -166,8 +167,13 @@ class TripsTable extends Component {
                     'status',
                     'phoneNumber',
                     'startDate',
-                    'endDate'
+                    'endDate',
+                    'medicalDegree'
                 ]}
+                emptyState={{
+                    title: 'No trips',
+                    message: 'Could not find any trips.'
+                }}
                 filters={this.filters}
                 dateFields={this.dateFields}
                 rowCounter={this.rowCounterLabels}

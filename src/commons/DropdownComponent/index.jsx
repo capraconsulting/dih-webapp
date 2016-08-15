@@ -26,6 +26,13 @@ import './dropdown.scss';
 * onSelect - function: called when selected value is changed
 */
 
+const createIconClassnames = elem => {
+    if (elem && elem.indexOf('flag') !== -1) return elem;
+    else if (elem) return `${elem} icon`;
+    return '';
+};
+
+
 class Dropdown extends Component {
     constructor(props) {
         super(props);
@@ -217,9 +224,9 @@ class Dropdown extends Component {
                         className={this.state.search.length > 0 ? 'text filtered' : 'text'}
                     >
                         {this.state.selected.icon &&
-                            <i className={`${this.state.selected.icon} icon`}></i>}
+                            <i className={createIconClassnames(this.state.selected.icon)}></i>}
                         {(this.props.icon && !this.state.selected.icon) &&
-                            <i className={`${this.props.icon} icon`}></i>}
+                            <i className={createIconClassnames(this.props.icon)}></i>}
                         {this.state.selected[this.props.label]}
                     </div>}
                 {!this.state.selected &&
@@ -227,7 +234,7 @@ class Dropdown extends Component {
                         className={this.state.search.length > 0 ? 'text filtered' : 'text'}
                     >
                         {(this.props.icon && !this.props.button) &&
-                            <i className={`${this.props.icon} icon`} />}
+                            <i className={createIconClassnames(this.props.icon)} />}
                         {this.props.placeholder}
                     </div>}
                 <div

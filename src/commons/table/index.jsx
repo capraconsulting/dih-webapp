@@ -32,6 +32,9 @@ import './table.scss';
 *
 * select (optional): Boolean. Add as a parameter if you want the table to have toggle fields
 *
+* loading (optional): Boolean. Add as a parameter if you want to specify if the table is loading data
+* default: false, used together with emptyState
+*
 * actions (optional): Array. Add as a parameter if you want the table to be searchable
 * Array must contain {name, icon, action}.
 * Action.action is a function that returns the selected values.
@@ -369,8 +372,8 @@ class Table extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {rows.map(item =>
-                            this.renderRow(
+                        {(!this.props.loading && rows.length > 0) &&
+                            rows.map(item => this.renderRow(
                                 this.props.columnNames,
                                 this.props.itemKey,
                                 item,
@@ -378,6 +381,16 @@ class Table extends Component {
                         }
                     </tbody>
                 </table>
+                {(!this.props.loading && rows.length === 0 && this.props.emptyState) &&
+                    <div className="ui center aligned segment">
+                        <h2 className="ui icon header">
+                            <i className="meh icon"></i>
+                            <div className="content">{this.props.emptyState.title}
+                                <div className="sub header">{this.props.emptyState.message}</div>
+                            </div>
+                        </h2>
+                    </div>
+                }
             </div>
         );
     }
@@ -393,8 +406,10 @@ Table.propTypes = {
     actions: PropTypes.array,
     selected: PropTypes.array,
     select: PropTypes.bool,
+    loading: PropTypes.bool,
     search: PropTypes.bool,
     rowCounter: PropTypes.object,
+    emptyState: PropTypes.object,
     labels: PropTypes.object,
     filters: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string.isRequired,

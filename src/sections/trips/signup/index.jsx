@@ -92,8 +92,11 @@ class SignupTripFormContainer extends Component {
                 <Segment>
                     <Header
                         icon="plane"
-                        subContent={`Sign up for a trip by filling in the form below,
-                        we will get back to you for further information as fast as we can!`}
+                        subContent={`
+                            Sign up for a trip by filling in the form below.
+                            We will reply to your request within a few days.
+                            Note that your trip is not approved until you receive
+                            an approval email from our administrators!`}
                         content="Sign up for a trip"
                     />
                 </Segment>
