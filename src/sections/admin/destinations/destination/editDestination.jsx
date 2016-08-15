@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import moment from 'moment';
 import Segment from '../../../../commons/Segment';
 import EditDestinationForm from './editDestinationForm';
@@ -50,6 +51,7 @@ class EditDestination extends Component {
             const message = 'Destination updated';
             const { error } = response;
             if (!error) this.handlers.notification(message, 'success');
+            browserHistory.push('/admin/destinations');
         });
     }
 
