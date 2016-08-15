@@ -71,6 +71,10 @@ class CoordinatorForm extends Component {
         return styles;
     }
 
+    handleUserChange(data) {
+        console.log(data);
+    }
+
     render() {
         const {
             fields: { userId, startDate, endDate },
@@ -88,6 +92,7 @@ class CoordinatorForm extends Component {
                             valueLabel="name"
                             valueKey="id"
                             required
+                            onChange={(e) => this.handleUserChange(e)}
                         >
                             {userId}
                         </SelectField>
