@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import Editor from '../../../commons/Editor';
 import Header from '../../../commons/pageHeader';
 import Button from '../../../commons/Button';
@@ -51,6 +52,7 @@ class Email extends Component {
                 const message = 'Email template saved!';
                 const { error } = response;
                 if (!error) this.handlers.notification(message, 'success');
+                browserHistory.push(`/admin/destinations/${this.props.destination.id}`);
             });
     }
 
@@ -85,7 +87,8 @@ class Email extends Component {
 }
 
 const mapStateToProps = store => ({
-    email: store.emailState.email
+    email: store.emailState.email,
+    destination: store.destinationState.destination
 });
 
 Email.contextTypes = {
@@ -95,7 +98,8 @@ Email.contextTypes = {
 Email.propTypes = {
     dispatch: PropTypes.func.isRequired,
     email: PropTypes.object.isRequired,
-    params: PropTypes.object.isRequired
+    params: PropTypes.object.isRequired,
+    destination: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(Email);

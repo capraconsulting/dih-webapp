@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import Header from '../../../../commons/pageHeader';
 import Segments from '../../../../commons/Segments';
@@ -64,6 +65,7 @@ class Trip extends Component {
                 const message = 'Trip changes saved!';
                 const { error } = response;
                 if (!error) this.handlers.notification(message, 'success');
+                browserHistory.push('/admin/trips');
                 return this.handlers.retrieve(this.props.params.tripId);
             });
     }
