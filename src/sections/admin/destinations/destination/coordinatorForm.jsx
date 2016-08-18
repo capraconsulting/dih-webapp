@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import _ from 'lodash';
+import { reduxForm, change } from 'redux-form';
 import moment from 'moment';
 
 import { USER_ROLES } from '../../../../constants';
@@ -11,8 +12,16 @@ import SelectField from '../../../../commons/Form/SelectField';
 
 import { list } from '../../../../actions/userActions';
 
-const createHandlers = (dispatch) => () => dispatch(list());
-
+const createHandlers = (dispatch) => (
+    {
+        list() {
+            return dispatch(list());
+        },
+        updateField(field, value) {
+            return dispatch(change('AddCoordinatorForm', field, value));
+        }
+    }
+);
 const fields = [
     'userId',
     'startDate',
@@ -36,12 +45,13 @@ class CoordinatorForm extends Component {
         this.handlers = createHandlers(this.props.dispatch);
         this.state = {
             active: false,
-            loading: false
+            loading: false,
+            coordinator: null
         };
     }
 
     componentDidMount() {
-        this.handlers();
+        this.handlers.list();
     }
 
     filterModerators(items) {
@@ -71,8 +81,19 @@ class CoordinatorForm extends Component {
         return styles;
     }
 
-    handleUserChange(data) {
-        console.log(data);
+    handleUserChange(user) {
+        let coordinator = null;
+        const coordinators = this.props.destination.users;
+        coordinator = _.filter(coordinators, data => (data.id === user.id));
+        coordinator = coordinator[0];
+        this.setState({ coordinator });
+        if (coordinator) {
+            this.handlers.updateField('startDate', coordinator.destinationCoordinator.startDate);
+            this.handlers.updateField('endDate', coordinator.destinationCoordinator.endDate);
+        } else {
+            this.handlers.updateField('startDate', '');
+            this.handlers.updateField('endDate', '');
+        }
     }
 
     render() {
@@ -92,7 +113,7 @@ class CoordinatorForm extends Component {
                             valueLabel="name"
                             valueKey="id"
                             required
-                            onChange={(e) => this.handleUserChange(e)}
+                            onInput={user => this.handleUserChange(user)}
                         >
                             {userId}
                         </SelectField>
@@ -110,19 +131,19 @@ class CoordinatorForm extends Component {
                         </DateField>
                         <div className="two ui buttons">
                             <Button onClick={e => this.toggleForm(e)}>
-                                Cancel
+                                Close
                             </Button>
                             <Button
                                 type="submit"
                                 color="green"
                             >
-                                Add coordinator
+                                {this.state.coordinator ? 'Update coordinator' : 'Add coordinator'}
                             </Button>
                         </div>
                     </Form>
                 </div>
                 <Button
-                    style={this.createStyle(true)}
+                    style={{ ...this.createStyle(true), 'margin-bottom': '15px' }}
                     fluid
                     color="primary"
                     onClick={(e) => this.toggleForm(e)}
@@ -135,10 +156,12 @@ class CoordinatorForm extends Component {
 }
 
 const mapStateToProps = store => ({
-    users: store.userState.users
+    users: store.userState.users,
+    destination: store.destinationState.destination
 });
 
 CoordinatorForm.propTypes = {
+    destination: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,

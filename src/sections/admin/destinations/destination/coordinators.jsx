@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-
 import CoordinatorForm from './coordinatorForm';
 import Segment from '../../../../commons/Segment';
 import Table from '../../../../commons/table';
@@ -30,7 +29,6 @@ class Coordinators extends Component {
         super(props);
         this.dateFields = { from: 'startDate', to: 'endDate' };
         this.state = {
-            active: false,
             loading: false
         };
         this.handlers = createHandlers(this.props.dispatch);
