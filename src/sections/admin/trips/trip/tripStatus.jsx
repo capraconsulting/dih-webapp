@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import _ from 'lodash';
 import TextField from '../../../../commons/Form/TextField';
 import SelectField from '../../../../commons/Form/SelectField';
@@ -110,6 +111,12 @@ class UpdateTripStatus extends Component {
             statusComment: this.props.fields.statusComment.value,
             id: this.props.trip.id
         };
+        if (body.status === TRIP_STATUSES.LEFT) {
+            body.dateLeft = moment();
+        }
+        if (body.status === TRIP_STATUSES.PRESENT) {
+            body.dateArrived = moment();
+        }
         this.handlers.update(body)
             .then(() => this.handlers.retrieve(this.props.params.tripId))
             .then(response => {

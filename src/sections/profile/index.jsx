@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import moment from 'moment';
 
+import { DATE_FORMAT } from '../../constants';
 import { update, retrieve } from '../../actions/accountActions';
 import { pushNotification } from '../../actions/notificationActions';
 import Header from '../../commons/pageHeader';
@@ -47,14 +48,20 @@ class Profile extends Component {
     }
 
     onUpdate(data) {
-        this.handlers.update(data)
+        this.handlers.update({
+            ...data,
+            birth: moment(data.birth).toString()
+        })
         .then(() => this.handlers.retrieve())
         .then(() => this.handlers.notification('Profile is updated.', 'success'))
         .then(() => browserHistory.push('/profile'));
     }
 
     prepareInitialValues(account) {
-        return { ...account, birth: moment(account.birth).format('YYYY-MM-DD') };
+        return {
+            ...account,
+            birth: moment(account.birth).format(DATE_FORMAT)
+        };
     }
 
     render() {
