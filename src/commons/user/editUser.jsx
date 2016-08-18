@@ -32,6 +32,12 @@ const validate = values => {
     if (!values.firstname) {
         errors.firstname = 'Required';
     }
+    if (!values.phoneNumber) {
+        errors.phoneNumber = 'Required';
+    }
+    if (values.phoneNumber && values.phoneNumber[0] !== '+') {
+        errors.phoneNumber = 'The country code needs to start with a plus-sign, i.e. +47.';
+    }
     if (!values.birth) {
         errors.birth = 'Required';
     }
