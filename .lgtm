@@ -1,2 +1,2 @@
-approvals = 4
+approvals = 2
 pattern = "(?i):shipit:|:\\+1:|LGTM"
