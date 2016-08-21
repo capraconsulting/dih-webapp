@@ -71,6 +71,9 @@ function EditTrip(props) {
         );
     }
 
+    const maxDate = this.props.destination.endDate ?
+            moment(this.props.destination.endDate) : null;
+
     return (
         <Segment>
             <Form
@@ -82,6 +85,7 @@ function EditTrip(props) {
                     label="Start date. This can only be changed by an admin.
                     Contact us if you have problems!"
                     minDate={moment()}
+                    maxDate={maxDate}
                     id="startDate"
                     allowNullValue
                     disabled={!props.editAdmin}
@@ -91,8 +95,7 @@ function EditTrip(props) {
                 <DateField
                     label="End date (optional)"
                     minDate={moment(startDate.value) || moment()}
-                    maxDate={props.destination.endDate ?
-                            moment(props.destination.endDate) : null}
+                    maxDate={maxDate}
                     allowNullValue
                     id="endDate"
                 >
@@ -101,8 +104,7 @@ function EditTrip(props) {
                 <DateField
                     label="Date of arrival at destination"
                     minDate={moment(startDate.value) || moment()}
-                    maxDate={props.destination.endDate ?
-                            moment(props.destination.endDate) : null}
+                    maxDate={moment(endDate.value)}
                     allowNullValue
                     id="arrivalDate"
                     required

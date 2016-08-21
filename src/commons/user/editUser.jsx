@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
+import moment from 'moment';
 
 import Form from '../Form';
 import Button from '../Button';
@@ -31,8 +32,17 @@ const validate = values => {
     if (!values.firstname) {
         errors.firstname = 'Required';
     }
+    if (!values.phoneNumber) {
+        errors.phoneNumber = 'Required';
+    }
+    if (values.phoneNumber && values.phoneNumber[0] !== '+') {
+        errors.phoneNumber = 'The country code needs to start with a plus-sign, i.e. +47.';
+    }
     if (!values.birth) {
         errors.birth = 'Required';
+    }
+    if (values.birth && !moment(values.birth).isValid()) {
+        errors.birth = 'The date has to be written on the format YYYY-MM-DD';
     }
     if (!values.volunteerInfo) {
         errors.volunteerInfo = 'Required. Please tell us about yourself!';
@@ -51,6 +61,7 @@ const renderIfFieldIsFilled = (field, element) => {
     if (field.value && field.value.length > 0) return element;
     return '';
 };
+let firstRenderIsDone = false; // Set to true on first render
 
 function EditUser(props) {
     const {
@@ -64,6 +75,14 @@ function EditUser(props) {
         errorMessage,
         isFetching
     } = props;
+
+    if (!birth.valid && !firstRenderIsDone) {
+        birth.value = ''; // Remove 'Invalid date' for new users
+    }
+
+    if (!firstRenderIsDone) {
+        firstRenderIsDone = true;
+    }
 
     return (
         <Segment>
@@ -95,14 +114,24 @@ function EditUser(props) {
                 <InputField
                     label="Date of birth (YYYY-MM-DD)"
                     placeholder="YYYY-MM-DD"
-                    required
+                    required={props.user.role !== USER_ROLES.ADMIN}
                 >
-                    {birth}
+                {birth}
                 </InputField>
-                <InputField label="E-mail" type="email" required>
+                <InputField
+                    label="E-mail"
+                    type="email"
+                    required={props.user.role !== USER_ROLES.ADMIN}
+                >
                     {email}
                 </InputField>
-                <InputField label="Phone number" type="tel" required>
+                <InputField
+                    label="Phone number (include the country code in front of the number)"
+                    type="tel"
+                    placeholder="+0012345678"
+                    required={props.user.role !== USER_ROLES.ADMIN}
+
+                >
                     {phoneNumber}
                 </InputField>
                 <SelectField
@@ -197,7 +226,7 @@ function EditUser(props) {
                     rows={3}
                     label="Work and experience"
                     placeholder="Fill in your occupation, work experience and/or other information you find relevant"
-                    required
+                    required={props.user.role !== USER_ROLES.ADMIN}
                 >
                     {volunteerInfo}
                 </TextField>
@@ -218,7 +247,6 @@ function EditUser(props) {
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
                         Click here to read the guidelines.</a>`}
                         id="readTerms"
-                        required
                     >
                         {readTerms}
                     </ToggleField>
@@ -229,7 +257,7 @@ function EditUser(props) {
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
                         Click here to read the guidelines.</a>`}
                         id="readTerms"
-                        required
+                        required={props.user.role !== USER_ROLES.ADMIN}
                     >
                         {readTerms}
                     </ToggleField>
@@ -256,7 +284,8 @@ EditUser.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     isFetching: PropTypes.bool,
     submitting: PropTypes.bool.isRequired,
-    showAdminFields: PropTypes.bool
+    showAdminFields: PropTypes.bool,
+    user: PropTypes.object
 };
 
 export default reduxForm({

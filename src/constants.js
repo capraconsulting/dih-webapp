@@ -6,6 +6,13 @@ const countries = require('json!./countries.json'); // eslint-disable-line
 * @module components/constants
 */
 
+
+/**
+* Preferred format of moment dates
+* @type {string} Date format
+*/
+export const DATE_FORMAT = 'YYYY-MM-DD';
+
 /**
 * The possible roles a user can have.
 * @type {object}

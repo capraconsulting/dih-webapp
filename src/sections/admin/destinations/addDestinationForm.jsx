@@ -1,11 +1,14 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
+import moment from 'moment';
 
 import Button from '../../../commons/Button';
 import Form from '../../../commons/Form';
 import InputField from '../../../commons/Form/InputField';
+import DateField from '../../../commons/Form/DateField';
 
-const fields = ['name', 'minimumTripDurationInDays'];
+
+const fields = ['name', 'minimumTripDurationInDays', 'startDate', 'endDate'];
 
 const validate = values => {
     const errors = {};
@@ -15,9 +18,10 @@ const validate = values => {
     return errors;
 };
 
+
 function AddDestinationForm(props) {
     const {
-        fields: { name, minimumTripDurationInDays },
+        fields: { name, startDate, endDate, minimumTripDurationInDays },
         errorMessage,
         handleSubmit,
         isFetching
@@ -32,6 +36,21 @@ function AddDestinationForm(props) {
             <InputField label="Name" type="text" required>
                 {name}
             </InputField>
+            <DateField
+                label="Destination start date"
+                minDate={moment()}
+                id="startDate"
+            >
+                {startDate}
+            </DateField>
+            <DateField
+                label="End date (optional)"
+                minDate={startDate.value ? moment(startDate.value) : moment()}
+                allowNullValue
+                id="endDate"
+            >
+                {endDate}
+            </DateField>
             <InputField
                 label="Minium trip duration (in days)"
                 type="number"

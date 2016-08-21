@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
+import moment from 'moment';
 
-import { TRAVEL_METHODS, TRIP_STATUS_LABELS } from '../../constants';
+import { TRAVEL_METHODS, TRIP_STATUS_LABELS, TRIP_STATUSES } from '../../constants';
 import List from '../list';
 import Segment from '../Segment';
 import ListItem from '../list/listItem';
 import FluidListItem from '../list/fluidListItem';
-import moment from 'moment';
 
 const MOMENT_FORMAT = 'YYYY-MM-DD';
 
@@ -16,6 +16,11 @@ const TripInfo = (props) => (
                 name="Status"
                 icon="circle"
                 content={TRIP_STATUS_LABELS[props.trip.status]}
+            />
+            <FluidListItem
+                name="Comment on status"
+                icon="tag"
+                content={props.trip.statusComment}
             />
             <ListItem
                 name="Start date"
@@ -30,10 +35,17 @@ const TripInfo = (props) => (
                     moment(props.trip.endDate).format(MOMENT_FORMAT) : 'Not set'}
             />
             <ListItem
-                name="Date of arrival at destination"
+                name="Date the volunteer arrived at the destination"
+                hidden={props.trip.status !== TRIP_STATUSES.PRESENT &&
+                props.trip.status !== TRIP_STATUSES.LEFT}
                 icon="calendar"
-                content={props.trip.arrivalDate ?
-                    moment(props.trip.arrivalDate).format(MOMENT_FORMAT) : 'Not set'}
+                content={moment(props.trip.dateArrived).format(MOMENT_FORMAT)}
+            />
+            <ListItem
+                name="Date the volunteer left the destination"
+                hidden={props.trip.status !== TRIP_STATUSES.LEFT}
+                icon="calendar"
+                content={moment(props.trip.dateLeft).format(MOMENT_FORMAT)}
             />
             <ListItem
                 name="Method of travel"
