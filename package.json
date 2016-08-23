@@ -70,7 +70,7 @@
     "wdio-junit-reporter": "~0.1.0",
     "wdio-sauce-service": "~0.2.2",
     "wdio-selenium-standalone-service": "~0.0.5",
-    "webdriverio": "~4.2.7",
+    "webdriverio": "~4.2.8",
     "webpack": "~1.13.1",
     "webpack-dev-middleware": "~1.6.1",
     "webpack-hot-middleware": "~2.12.0"
