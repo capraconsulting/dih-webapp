@@ -16,7 +16,7 @@ const fields = [
     'firstname', 'lastname', 'gender', 'phoneNumber', 'email', 'role', 'birth',
     'notes', 'volunteerInfo', 'readTerms', 'addressLine1', 'addressLine2',
     'postalCode', 'city', 'country', 'medicalDegree', 'medicalDegreeLicenseNumber',
-    'nationality', 'languages'
+    'nationality', 'languages', 'emergencyContactInfo'
 ];
 
 const validate = values => {
@@ -69,7 +69,7 @@ function EditUser(props) {
             role, birth, notes, volunteerInfo, readTerms,
             addressLine1, addressLine2, postalCode, city, country,
             medicalDegree, medicalDegreeLicenseNumber, nationality,
-            languages
+            languages, emergencyContactInfo
         },
         handleSubmit,
         errorMessage,
@@ -229,6 +229,14 @@ function EditUser(props) {
                     required={props.user.role !== USER_ROLES.ADMIN}
                 >
                     {volunteerInfo}
+                </TextField>
+
+                <TextField
+                    rows={3}
+                    label="Emergency contact information"
+                    placeholder="Name and phone number of your emergency contact."
+                >
+                    {emergencyContactInfo}
                 </TextField>
 
                 {renderIfAdmin(props,
