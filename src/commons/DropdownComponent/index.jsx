@@ -86,7 +86,10 @@ class Dropdown extends Component {
         return selected;
     }
 
-    toggleMenu() {
+    toggleMenu(sel) {
+        const selected = sel || this.state.selected;
+        this.props.onSelect(selected[this.props.valueKey]);
+        this.props.onInput(selected);
         const focus = !this.state.active;
         this.setState({
             visible: !this.state.visible,
@@ -130,8 +133,7 @@ class Dropdown extends Component {
 
     handleSelect(selected) {
         this.setState({ selected });
-        this.props.onSelect(selected[this.props.valueKey]);
-        this.toggleMenu();
+        this.toggleMenu(selected);
     }
 
     selectedPrevious() {
@@ -266,6 +268,7 @@ Dropdown.propTypes = {
     noInitalValue: PropTypes.bool,
     disabled: PropTypes.bool,
     onSelect: PropTypes.func,
+    onInput: PropTypes.func,
     fluid: PropTypes.bool,
     top: PropTypes.bool,
     selection: PropTypes.bool,

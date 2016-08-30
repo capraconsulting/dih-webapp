@@ -46,6 +46,7 @@ const SelectField = (props) => (
             initialValue={props.children.initialValue}
             valueKey={props.valueKey}
             onSelect={props.children.onChange}
+            onInput={props.onInput}
         >
         {addNullValue(props).map(value => (
             <DropdownItem
@@ -66,6 +67,7 @@ SelectField.propTypes = {
     valueKey: PropTypes.string.isRequired,
     valueLabel: PropTypes.string.isRequired,
     allowNullValue: PropTypes.bool,
+    onInput: PropTypes.bool,
     search: PropTypes.bool,
     noInitalValue: PropTypes.bool,
     label: PropTypes.string.isRequired,

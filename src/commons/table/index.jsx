@@ -244,11 +244,24 @@ class Table extends Component {
             );
         }
         if (labels && labels[columnNameKey]) {
-            element = (
-                <td className={this.createTableDataClass(columnNameKey).join(' ')}>
-                    {labels[columnNameKey][item[columnNameKey]]}
-                </td>
-            );
+            const label = labels[columnNameKey][item[columnNameKey]];
+            if (label.html) {
+                element = (
+                    <td className={this.createTableDataClass(columnNameKey).join(' ')}>
+                        <div onClick={() => label.action(item)}>
+                            {label.html}
+                        </div>
+                    </td>
+                );
+            } else {
+                element = (
+                    <td
+                        className={this.createTableDataClass(columnNameKey).join(' ')}
+                    >
+                        {label}
+                    </td>
+                );
+            }
         }
         return element;
     }
