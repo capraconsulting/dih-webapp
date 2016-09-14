@@ -112,6 +112,11 @@ const ViewUser = (props) => (
                 icon="building outline"
                 content={props.user.volunteerInfo}
             />
+            <FluidListItem
+                name="Emergency contact information"
+                icon="warning circle"
+                content={props.user.emergencyContactInfo}
+            />
             {renderIfAdmin(props,
                 <ListItem
                     name="Has the user confirmed that he/she has read the guidelines?"
