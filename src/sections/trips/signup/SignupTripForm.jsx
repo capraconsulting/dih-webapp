@@ -81,8 +81,8 @@ function SignupTripForm(props) {
                     allowNullValue
                     valueLabel="name"
                     valueKey="id"
-                    onInput={(event) => {
-                        const destId = parseInt(event.target.value, 10);
+                    onChange={(destination) => {
+                        const destId = parseInt(destination.id, 10);
                         selectedDestination = props.destinations.filter(e => e.id === destId)[0];
                         renderDateFields(); // Updates date limits based on destination
                     }}
