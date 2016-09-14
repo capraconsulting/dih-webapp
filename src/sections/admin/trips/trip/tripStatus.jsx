@@ -138,6 +138,8 @@ class UpdateTripStatus extends Component {
     }
 
     render() {
+        const isDisabled = this.props.trip.destinationId === null
+            && this.props.fields.status.value === TRIP_STATUSES.ACCEPTED;
         return (
             <div>
                 <Segment>
@@ -161,6 +163,10 @@ class UpdateTripStatus extends Component {
                             >
                                 {this.props.fields.statusComment}
                             </TextField>
+                            {isDisabled && <div className="ui message">
+                                In order to set this trip to accepted you have
+                                to assign a destination to this trip.
+                            </div>}
                             <div className="two ui buttons">
                                 <Button onClick={e => this.toggleForm(e)}>
                                     Cancel
@@ -169,6 +175,7 @@ class UpdateTripStatus extends Component {
                                     type="submit"
                                     color="green"
                                     onClick={(e) => this.handleSubmit(e)}
+                                    disabled={isDisabled}
                                 >
                                     Update status
                                 </Button>
