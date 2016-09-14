@@ -89,7 +89,7 @@ class Dropdown extends Component {
     toggleMenu(sel) {
         const selected = sel || this.state.selected;
         this.props.onSelect(selected[this.props.valueKey]);
-        this.props.onInput(selected);
+        if (this.props.onInput) this.props.onInput(selected);
         const focus = !this.state.active;
         this.setState({
             visible: !this.state.visible,
