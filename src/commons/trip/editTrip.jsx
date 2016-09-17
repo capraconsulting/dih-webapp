@@ -71,8 +71,7 @@ function EditTrip(props) {
         );
     }
 
-    const maxDate = this.props.destination.endDate ?
-            moment(this.props.destination.endDate) : null;
+    const maxDate = props.destination.endDate ? moment(props.destination.endDate) : null;
 
     return (
         <Segment>
