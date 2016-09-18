@@ -87,15 +87,17 @@ class Trips extends React.Component {
 
     normalizeTripObjectsForTable(items) {
         return items.filter(value => (value.status !== TRIP_STATUSES.CLOSED))
-            .map(value => (
-                {
+            .map(value => {
+                const trip = {
                     id: value.id,
                     status: value.status,
-                    destinationName: value.destination.name || 'No destination preferance',
                     startDate: moment(value.startDate).format('YYYY-MM-DD'),
                     endDate: value.endDate ? moment(value.endDate).format('YYYY-MM-DD') : 'Not set'
-                }
-            ));
+                };
+                if (value.destination) trip.destinationName = value.destination.name;
+                else trip.destinationName = 'No destination preference';
+                return trip;
+            });
     }
 
     render() {
