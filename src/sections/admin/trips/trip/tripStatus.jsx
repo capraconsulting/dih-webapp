@@ -156,6 +156,21 @@ class UpdateTripStatus extends Component {
             <div>
                 <Segment>
                     <div className="update-status-form" style={this.createStyle()}>
+                        <h2 className="ui sub header">
+                            Change trip status
+                        </h2>
+                        <p>
+                            Be advised that status changes determine which e-mails
+                            are sent to the user. When the
+                            previous status is pending and
+                            new status is either accpeted or rejected, the system
+                            will dispatch an e-mail with information.
+                        </p>
+                        <p>
+                            In case you are changing the status because of a previous error,
+                            be advised of when e-mails are sent, and please ensure that
+                            the user gets the necessary information.
+                        </p>
                         <Form>
                             <SelectField
                                 label="Status"
