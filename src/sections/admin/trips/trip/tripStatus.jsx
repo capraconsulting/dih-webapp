@@ -87,7 +87,7 @@ class UpdateTripStatus extends Component {
     }
 
     allowedActions(status) {
-        if (this.props.user.role === USER_ROLES.ADMIN) {
+        if (this.props.account.role === USER_ROLES.ADMIN) {
             return this.createSelectOptionsForAdmin();
         }
         const statuses = [this.createSelectObject(TRIP_STATUSES.CLOSED)];
@@ -216,7 +216,8 @@ UpdateTripStatus.propTypes = {
     onSubmit: PropTypes.func,
     params: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    fields: PropTypes.object.isRequired
+    fields: PropTypes.object.isRequired,
+    account: PropTypes.object.isRequired
 };
 
 export default connect()(reduxForm({
