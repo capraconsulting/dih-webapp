@@ -56,6 +56,7 @@ class SignupTripFormContainer extends Component {
         });
         const trip = data;
         trip.wishStartDate = data.startDate; // Cannot be null. Field is not used anymore.
+        if (trip.endDate && trip.endDate.length === 0) delete trip.endDate;
         if (trip.endDate && trip.destinationId) {
             const destId = parseInt(trip.destinationId, 10);
             const destination = this.props.destinations.filter(e => e.id === destId)[0];

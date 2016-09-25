@@ -136,7 +136,7 @@ class TripsTable extends Component {
 
             if (!this.props.destinationId) {
                 if (trip.destination) row.destination = trip.destination.name;
-                else row.destination = 'No preferance';
+                else row.destination = 'No preference';
             }
 
             return row;

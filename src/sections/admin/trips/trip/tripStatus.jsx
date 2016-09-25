@@ -9,7 +9,7 @@ import Form from '../../../../commons/Form';
 import Segment from '../../../../commons/Segment';
 import Button from '../../../../commons/Button';
 import TripInfo from '../../../../commons/trip/tripInfo';
-import { TRIP_STATUSES } from '../../../../constants';
+import { TRIP_STATUSES, USER_ROLES } from '../../../../constants';
 import { retrieve, update } from '../../../../actions/tripActions';
 import { pushNotification } from '../../../../actions/notificationActions';
 
@@ -77,7 +77,19 @@ class UpdateTripStatus extends Component {
         return defaultValue;
     }
 
+    createSelectOptionsForAdmin() {
+        const options = [];
+        const statuses = Object.keys(TRIP_STATUSES);
+        _.forEach(statuses, value => {
+            options.push(this.createSelectObject(value));
+        });
+        return options;
+    }
+
     allowedActions(status) {
+        if (this.props.user.role === USER_ROLES.ADMIN) {
+            return this.createSelectOptionsForAdmin();
+        }
         const statuses = [this.createSelectObject(TRIP_STATUSES.CLOSED)];
         switch (status) {
         case TRIP_STATUSES.PENDING:
@@ -138,6 +150,8 @@ class UpdateTripStatus extends Component {
     }
 
     render() {
+        const isDisabled = this.props.trip.destinationId === null
+            && this.props.fields.status.value === TRIP_STATUSES.ACCEPTED;
         return (
             <div>
                 <Segment>
@@ -161,6 +175,10 @@ class UpdateTripStatus extends Component {
                             >
                                 {this.props.fields.statusComment}
                             </TextField>
+                            {isDisabled && <div className="ui message">
+                                In order to set this trip to accepted you have
+                                to assign a destination to this trip.
+                            </div>}
                             <div className="two ui buttons">
                                 <Button onClick={e => this.toggleForm(e)}>
                                     Cancel
@@ -169,6 +187,7 @@ class UpdateTripStatus extends Component {
                                     type="submit"
                                     color="green"
                                     onClick={(e) => this.handleSubmit(e)}
+                                    disabled={isDisabled}
                                 >
                                     Update status
                                 </Button>
@@ -193,6 +212,7 @@ class UpdateTripStatus extends Component {
 
 UpdateTripStatus.propTypes = {
     trip: PropTypes.object,
+    user: PropTypes.object.isRequired,
     onSubmit: PropTypes.func,
     params: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,

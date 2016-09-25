@@ -109,8 +109,11 @@ class Trip extends React.Component {
                 <Segment>
                     <Header
                         icon="plane"
-                        content={`Trip to ${this.props.destination.name}`}
-                        subContent="View and edit information about your trip. When the trip gets approved, make sure to add as much additional info as possible"
+                        content={`${this.props.destination.name ?
+                            `Trip to ${this.props.destination.name}` :
+                            'Trip with destination yet to be determined'}`}
+                        subContent={`View and edit information about your trip.
+When the trip gets approved, make sure to add as much additional info as possible`}
                     />
                 </Segment>
                 <Navbar pages={this.state.pages} />
@@ -118,6 +121,7 @@ class Trip extends React.Component {
                     initialValues: this.props.trip,
                     trip: this.props.trip,
                     destination: this.props.destination,
+                    destinations: this.props.destinations,
                     onSubmit: e => this.onUpdate(e),
                     onCancel: e => this.onCancel(e)
                 })}
@@ -129,7 +133,8 @@ class Trip extends React.Component {
 
 const mapStateToProps = store => ({
     trip: store.tripState.trip,
-    destination: store.tripState.trip.destination
+    destination: store.tripState.trip.destination,
+    destinations: store.destinationState.destinations
 });
 
 Trip.propTypes = {
@@ -137,6 +142,7 @@ Trip.propTypes = {
     params: PropTypes.object.isRequired,
     trip: PropTypes.object.isRequired,
     destination: PropTypes.object.isRequired,
+    destinations: PropTypes.array.isRequired,
     children: PropTypes.object.isRequired
 };
 
