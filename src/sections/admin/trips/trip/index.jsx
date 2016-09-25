@@ -71,14 +71,14 @@ class Trip extends Component {
     }
 
     render() {
-        const headerTitle = `Trip to ${this.props.destination.name}`;
-
         return (
             <Segments loading={this.state.loading} >
                 <Segment>
                     <Header
                         icon="plane"
-                        content={headerTitle}
+                        content={`${this.props.destination.name ?
+                            `Trip to ${this.props.destination.name}` :
+                            'Trip with destination yet to be determined'}`}
                         subContent="Manage trip"
                     />
                 </Segment>
