@@ -81,7 +81,7 @@
     "json-loader": "^0.5.4",
     "lodash": "4.13.1",
     "moment": "2.13.0",
-    "normalize.css": "4.2.0",
+    "normalize.css": "5.0.0",
     "raven-js": "3.3.0",
     "react": "15.1.0",
     "react-addons-update": "15.1.0",
