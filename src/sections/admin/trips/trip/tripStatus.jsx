@@ -87,7 +87,7 @@ class UpdateTripStatus extends Component {
     }
 
     allowedActions(status) {
-        if (this.props.user.role === USER_ROLES.ADMIN) {
+        if (this.props.account.role === USER_ROLES.ADMIN) {
             return this.createSelectOptionsForAdmin();
         }
         const statuses = [this.createSelectObject(TRIP_STATUSES.CLOSED)];
@@ -150,10 +150,27 @@ class UpdateTripStatus extends Component {
     }
 
     render() {
+        const isDisabled = this.props.trip.destinationId === null
+            && this.props.fields.status.value === TRIP_STATUSES.ACCEPTED;
         return (
             <div>
                 <Segment>
                     <div className="update-status-form" style={this.createStyle()}>
+                        <h2 className="ui sub header">
+                            Change trip status
+                        </h2>
+                        <p>
+                            Be advised that status changes determine which e-mails
+                            are sent to the user. When the
+                            previous status is pending and
+                            new status is either accpeted or rejected, the system
+                            will dispatch an e-mail with information.
+                        </p>
+                        <p>
+                            In case you are changing the status because of a previous error,
+                            be advised of when e-mails are sent, and please ensure that
+                            the user gets the necessary information.
+                        </p>
                         <Form>
                             <SelectField
                                 label="Status"
@@ -173,6 +190,10 @@ class UpdateTripStatus extends Component {
                             >
                                 {this.props.fields.statusComment}
                             </TextField>
+                            {isDisabled && <div className="ui message">
+                                In order to set this trip to accepted you have
+                                to assign a destination to this trip.
+                            </div>}
                             <div className="two ui buttons">
                                 <Button onClick={e => this.toggleForm(e)}>
                                     Cancel
@@ -181,6 +202,7 @@ class UpdateTripStatus extends Component {
                                     type="submit"
                                     color="green"
                                     onClick={(e) => this.handleSubmit(e)}
+                                    disabled={isDisabled}
                                 >
                                     Update status
                                 </Button>
@@ -209,7 +231,8 @@ UpdateTripStatus.propTypes = {
     onSubmit: PropTypes.func,
     params: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    fields: PropTypes.object.isRequired
+    fields: PropTypes.object.isRequired,
+    account: PropTypes.object.isRequired
 };
 
 export default connect()(reduxForm({
