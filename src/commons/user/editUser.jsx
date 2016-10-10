@@ -16,10 +16,12 @@ const fields = [
     'firstname', 'lastname', 'gender', 'phoneNumber', 'email', 'role', 'birth',
     'notes', 'volunteerInfo', 'readTerms', 'addressLine1', 'addressLine2',
     'postalCode', 'city', 'country', 'medicalDegree', 'medicalDegreeLicenseNumber',
-    'nationality', 'languages', 'emergencyContactInfo'
+    'nationality', 'languages'
 ];
 
-const validate = values => {
+const validate = (values, component) => {
+    const disableValidation = component.disableValidation || false;
+    if (disableValidation) return {};
     const errors = {};
     if (!values.email) {
         errors.email = 'Required';
@@ -69,7 +71,7 @@ function EditUser(props) {
             role, birth, notes, volunteerInfo, readTerms,
             addressLine1, addressLine2, postalCode, city, country,
             medicalDegree, medicalDegreeLicenseNumber, nationality,
-            languages, emergencyContactInfo
+            languages
         },
         handleSubmit,
         errorMessage,
@@ -231,14 +233,6 @@ function EditUser(props) {
                     {volunteerInfo}
                 </TextField>
 
-                <TextField
-                    rows={3}
-                    label="Emergency contact information"
-                    placeholder="Name and phone number of your emergency contact."
-                >
-                    {emergencyContactInfo}
-                </TextField>
-
                 {renderIfAdmin(props,
                     <TextField
                         rows={3}
@@ -293,6 +287,7 @@ EditUser.propTypes = {
     isFetching: PropTypes.bool,
     submitting: PropTypes.bool.isRequired,
     showAdminFields: PropTypes.bool,
+    disableValidation: PropTypes.bool,
     user: PropTypes.object
 };
 
