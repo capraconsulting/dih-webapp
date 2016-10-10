@@ -73,8 +73,8 @@ function EditTrip(props) {
 
     let maxDate;
     if (props.trip.destinationId !== null) {
-        maxDate = this.props.destination.endDate ?
-            moment(this.props.destination.endDate) : null;
+        maxDate = props.destination.endDate ?
+            moment(props.destination.endDate) : null;
     }
 
     return (

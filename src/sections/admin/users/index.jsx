@@ -25,6 +25,7 @@ class UsersTableContainer extends Component {
     constructor(props) {
         super(props);
         this.handlers = createHandlers(this.props.dispatch);
+        this.rowCounterLabels = { prefix: 'Showing', suffix: 'users' };
         this.actions = [
             {
                 name: 'Send message',
@@ -103,6 +104,7 @@ class UsersTableContainer extends Component {
                         actions={this.actions}
                         filters={this.filterValues}
                         dateFields={this.dateFields}
+                        rowCounter={this.rowCounterLabels}
                         labels={{
                             role: ROLE_LABELS
                         }}

@@ -71,14 +71,14 @@ class Trip extends Component {
     }
 
     render() {
-        const headerTitle = `Trip to ${this.props.destination.name}`;
-
         return (
             <Segments loading={this.state.loading} >
                 <Segment>
                     <Header
                         icon="plane"
-                        content={headerTitle}
+                        content={`${this.props.destination.name ?
+                            `Trip to ${this.props.destination.name}` :
+                            'Trip with destination yet to be determined'}`}
                         subContent="Manage trip"
                     />
                 </Segment>
@@ -88,6 +88,7 @@ class Trip extends Component {
                     trip: this.props.trip,
                     editAdmin: true,
                     user: this.props.user,
+                    account: this.props.account,
                     destination: this.props.destination,
                     destinations: this.props.destinations,
                     onSubmit: e => this.onUpdate(e)
@@ -101,7 +102,8 @@ const mapStateToProps = store => ({
     destinations: store.destinationState.destinations,
     destination: store.tripState.trip.destination,
     trip: store.tripState.trip,
-    user: store.tripState.trip.user
+    user: store.tripState.trip.user,
+    account: store.accountState.account
 });
 
 Trip.propTypes = {
@@ -111,7 +113,8 @@ Trip.propTypes = {
     dispatch: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired,
     trip: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    account: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(Trip);
