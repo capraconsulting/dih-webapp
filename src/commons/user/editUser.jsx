@@ -19,7 +19,9 @@ const fields = [
     'nationality', 'languages'
 ];
 
-const validate = values => {
+const validate = (values, component) => {
+    const disableValidation = component.disableValidation || false;
+    if (disableValidation) return {};
     const errors = {};
     if (!values.email) {
         errors.email = 'Required';
@@ -285,6 +287,7 @@ EditUser.propTypes = {
     isFetching: PropTypes.bool,
     submitting: PropTypes.bool.isRequired,
     showAdminFields: PropTypes.bool,
+    disableValidation: PropTypes.bool,
     user: PropTypes.object
 };
 
