@@ -42,6 +42,7 @@ class AdminTripTable extends Component {
                     userId={this.props.userId}
                     destinationId={this.props.destinationId}
                     role={this.props.role}
+                    isAdmin
                     statuses={this.props.statuses}
                 />
             </Segment>
