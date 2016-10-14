@@ -96,6 +96,7 @@ class User extends Component {
                     initialValues: this.prepareInitialValues(this.props.user),
                     user: this.props.user,
                     showAdminFields: true,
+                    disableValidation: true,
                     onSubmit: e => this.onUpdate(e)
                 })}
             </Segments>
