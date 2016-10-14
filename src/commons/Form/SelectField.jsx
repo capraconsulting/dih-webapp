@@ -53,6 +53,7 @@ const SelectField = (props) => (
                 item={value}
                 key={value[props.valueKey]}
                 label={props.valueLabel}
+                icon={value.icon}
             />
         ))}
         </Dropdown>
