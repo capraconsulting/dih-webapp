@@ -150,6 +150,12 @@ class TripsTable extends Component {
                 prefix: this.prepareLinkPrefix()
             };
         }
+        if (this.props.isAdmin) {
+            return {
+                columnName: 'destination',
+                prefix: this.prepareLinkPrefix()
+            };
+        }
         return {
             columnName: 'destination',
             prefix: '/trips/'
@@ -195,7 +201,8 @@ TripsTable.propTypes = {
     userId: PropTypes.number,
     destinationId: PropTypes.number,
     role: PropTypes.string,
-    statuses: PropTypes.array
+    statuses: PropTypes.array,
+    isAdmin: PropTypes.bool
 };
 
 export default TripsTable;
