@@ -21,6 +21,9 @@ const createHandlers = (dispatch) => (
         },
         notification(message, level) {
             return dispatch(pushNotification(message, level));
+        },
+        delete(data) {
+            return dispatch(delete(data));
         }
     }
 );
@@ -37,6 +40,10 @@ class Profile extends Component {
                 {
                     name: 'Edit',
                     uri: '/profile/edit'
+                },
+                {
+                    name: 'Delete',
+                    uri: '/profile/delete'
                 }
             ]
         };
@@ -55,6 +62,12 @@ class Profile extends Component {
         .then(() => this.handlers.retrieve())
         .then(() => this.handlers.notification('Profile is updated.', 'success'))
         .then(() => browserHistory.push('/profile'));
+    }
+
+    onDelete() {
+        this.handlers.delete({})
+        .then(() => this.handlers.notification('Profile is deleted.', 'success'))
+        .then(() => browserHistory.push('/login'));
     }
 
     prepareInitialValues(account) {
@@ -79,7 +92,8 @@ class Profile extends Component {
                     initialValues: this.prepareInitialValues(this.props.account),
                     user: this.props.account,
                     showAdminFields: false,
-                    onSubmit: e => this.onUpdate(e)
+                    onSubmit: e => this.onUpdate(e),
+                    onDelete: e => this.onDelete(e)
                 })}
             </Segments>
         );
