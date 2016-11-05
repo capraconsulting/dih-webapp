@@ -2,37 +2,45 @@ import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 
 import Form from '../Form';
+import ToggleField from '../Form/ToggleField';
 import Button from '../Button';
 import Segment from '../Segment';
+
+const fields = ['isActive'];
 
 
 function DeleteUser(props) {
     const {
+        fields: { isActive },
         handleSubmit,
         errorMessage,
         isFetching
     } = props;
-
     return (
         <Segment>
-            <div className="ui message">
-                If you do
-            </div>
             <Form
                 id="deleteUserForm"
                 errorMessage={errorMessage}
                 handleSubmit={handleSubmit}
             >
-
+                <ToggleField
+                    name="I confirm that I want to delete my account"
+                    label={`Deleting your account means that you will have to register again
+                    if you want to go on a new trip. Toggling this button and confirming will
+                    delete your account, and log you out.`}
+                    id="isActive"
+                >
+                    {isActive}
+                </ToggleField>
                 <Button
                     type="submit"
                     color="red"
                     fluid
-                    disabled={isFetching}
+                    disabled={!isActive.value}
                     loading={isFetching}
                     id="submit"
                 >
-                    Delete user
+                    Confirm deletion
                 </Button>
             </Form>
         </Segment>
@@ -51,5 +59,6 @@ DeleteUser.propTypes = {
 };
 
 export default reduxForm({
-    form: 'deleteUserForm'
+    form: 'deleteUserForm',
+    fields
 })(DeleteUser);
