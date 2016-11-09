@@ -17,6 +17,7 @@ import ForgotPasswordConfirm from './sections/forgotPassword/confirm';
 import Profile from './sections/profile';
 import ViewUser from './commons/user/viewUser';
 import EditUser from './commons/user/editUser';
+import DeleteUser from './commons/user/deleteUser';
 
 import SignupTrip from './sections/trips/signup';
 import Trips from './sections/trips/';
@@ -81,6 +82,7 @@ export default(
                 <Route name="My profile" path="/profile" component={Profile} >
                     <IndexRoute name="View profile" component={ViewUser} />
                     <Route name="Edit profile" path="edit" component={EditUser} />
+                    <Route name="Delete profile" path="delete" component={DeleteUser} />
                 </Route>
                 <Route name="Trips" path="/trips">
                     <IndexRoute component={Trips} />
