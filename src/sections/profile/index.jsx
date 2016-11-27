@@ -37,6 +37,10 @@ class Profile extends Component {
                 {
                     name: 'Edit',
                     uri: '/profile/edit'
+                },
+                {
+                    name: 'Delete',
+                    uri: '/profile/delete'
                 }
             ]
         };
@@ -48,6 +52,18 @@ class Profile extends Component {
     }
 
     onUpdate(data) {
+        if (data.isActive !== 'undefined'
+        && data.isActive !== null
+        && data.isActive) { // isActive is defined and set to true
+            // Because it's inverted before it's handed to views
+            // So that the toggle works as we want in DeleteUser
+            const deactivatedUser = data;
+            deactivatedUser.isActive = false;
+            this.handlers.update(deactivatedUser)
+            .then(() => this.handlers.notification('Profile is deleted', 'success'))
+            .then(() => browserHistory.push('/login'));
+            return;
+        }
         this.handlers.update({
             ...data,
             birth: moment(data.birth).toString()
@@ -60,7 +76,8 @@ class Profile extends Component {
     prepareInitialValues(account) {
         return {
             ...account,
-            birth: moment(account.birth).format(DATE_FORMAT)
+            birth: moment(account.birth).format(DATE_FORMAT),
+            isActive: !account.isActive
         };
     }
 

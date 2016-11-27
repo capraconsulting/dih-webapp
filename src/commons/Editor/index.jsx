@@ -1,12 +1,14 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component, PropTypes } from 'react';
-import Draft from 'draft-js';
+import Draft, { EditorState } from 'draft-js';
 import BlockStyleControls from './BlockStyleControls';
 import InlineStyleControls from './InlineStyleControls';
 import { getBlockStyle, htmlToContent, findEntities, draftRawToHtml } from './helpers';
 import { styleMap } from './constants';
 import Link from './Link';
 import './editor.scss';
+import 'draft-js/dist/Draft.css';
+import { stateFromHTML } from 'draft-js-import-html';
 
 const decorator = new Draft.CompositeDecorator([{
     strategy: findEntities.bind(null, 'link'),
@@ -16,10 +18,10 @@ const decorator = new Draft.CompositeDecorator([{
 class DraftEditor extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
-            editorState: props.html ? Draft.EditorState.createWithContent(
-                Draft.ContentState.createFromBlockArray(htmlToContent(props.html)), decorator
-            ) : Draft.EditorState.createEmpty(decorator)
+            editorState: props.html ? EditorState.createWithContent(stateFromHTML(props.html))
+            : EditorState.createEmpty(decorator)
         };
         this.focus = () => this.refs.editor.focus();
         this.onChange = (editorState) => {
