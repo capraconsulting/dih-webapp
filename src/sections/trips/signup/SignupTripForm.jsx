@@ -76,9 +76,7 @@ function SignupTripForm(props) {
                     label="Destination"
                     icon="marker"
                     values={props.destinations}
-                    nullValue="No destination preference"
                     placeholder="Select a destination"
-                    allowNullValue
                     valueLabel="name"
                     valueKey="id"
                     onChange={(destination) => {
