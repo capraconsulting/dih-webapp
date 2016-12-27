@@ -37,7 +37,7 @@ function SignupTripForm(props) {
         dateFields = (
             <div>
                 <DateField
-                    label="Date you wish to start your trip"
+                    label="First date available to commence full-time volunteering"
                     minDate={moment()}
                     maxDate={maxDate || moment(endDate.value)}
                     placeholder="YYYY-MM-DD"
@@ -46,7 +46,7 @@ function SignupTripForm(props) {
                     {startDate}
                 </DateField>
                 <DateField
-                    label="Date you wish to end your trip (optional)"
+                    label="Expected end date for full-time volunteering"
                     minDate={moment(startDate.value) || moment()}
                     maxDate={maxDate}
                     placeholder="YYYY-MM-DD"
