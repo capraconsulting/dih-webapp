@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
+import { reset } from 'redux-form';
+import _ from 'lodash';
 import SignupTripForm from './SignupTripForm';
 import Header from '../../../commons/pageHeader';
 import Segments from '../../../commons/Segments';
@@ -9,7 +11,7 @@ import { create } from '../../../actions/tripActions';
 import { list } from '../../../actions/destinationActions';
 import { pushNotification } from '../../../actions/notificationActions';
 import { getErrorMessageForTripSubmission } from '../../../helpers';
-import { reset } from 'redux-form';
+import { TRIP_STATUSES } from '../../../constants';
 
 const createHandlers = dispatch => ({
     create(data) {
@@ -48,6 +50,20 @@ class SignupTripFormContainer extends Component {
         const account = this.props.account;
         return account.readTerms && account.firstname &&
                account.lastname && account.birth && account.volunteerInfo;
+    }
+
+    userAlreadyHasOpenTrips() {
+        // Boolean method that determines if the user already has
+        // a trip request submitted for another destination,
+        // that has status PENIDNG, ACCEPTED or ACTIVE.
+        // It is used to disable multiple open trip requests
+        const openTripStatuses = [TRIP_STATUSES.PENDING,
+            TRIP_STATUSES.ACCEPTED,
+            TRIP_STATUSES.ACTIVE];
+        const openTrips = this.props.accountTrips.filter(
+            trip => openTripStatuses.includes(trip.status)
+        );
+        return openTrips.length > 0;
     }
 
     handleSubmit(data) {
@@ -103,15 +119,6 @@ class SignupTripFormContainer extends Component {
                     />
                 </Segment>
                 <Segment loading={this.state.loading} blue>
-                    {this.userAllowedToSignUp() &&
-                        <SignupTripForm
-                            destinations={this.props.destinations.filter(val => (val.isActive))}
-                            onSubmit={e => { this.handleSubmit(e); }}
-                            errorMessage={this.state.errorMessage}
-                            isFetching={this.state.isFetching}
-                            successMessage={this.state.successMessage}
-                        />
-                    }
                     {!this.userAllowedToSignUp() &&
                         <div>
                             <h3>We would like to know you better!</h3>
@@ -125,6 +132,38 @@ class SignupTripFormContainer extends Component {
                             </p>
                         </div>
                     }
+                    {this.userAllowedToSignUp() && !this.userAlreadyHasOpenTrips() &&
+                        <SignupTripForm
+                            destinations={this.props.destinations.filter(val => (val.isActive))}
+                            onSubmit={e => { this.handleSubmit(e); }}
+                            errorMessage={this.state.errorMessage}
+                            isFetching={this.state.isFetching}
+                            successMessage={this.state.successMessage}
+                        />
+                    }
+                    {this.userAlreadyHasOpenTrips() &&
+                        <div>
+                            <h3>You already have a trip request submitted</h3>
+                            <p>
+                                To be able to keep up with the applications, we only allow one
+                                active trip request per user. An "active trip request",
+                                is a request with one of
+                                the following statues: Accepted, active or pending.
+                            </p>
+                            <p>
+                                If you did a mistake in the previous trip request, you can
+                                change it under <Link to="/profile/trips">your trips</Link>.
+                                If your trip request is for the wrong destination, you can cancel
+                                it under <Link to="/profile/trips">your trips</Link>,
+                                then come back here to submit a new trip request.
+                            </p>
+                            <p>
+                                If you have any problems or questions,
+                                just send us an
+                                <a href="mailto:frivillig@drapenihavet.no"> email</a>.
+                            </p>
+                        </div>
+                    }
                 </Segment>
             </Segments>
         );
@@ -133,13 +172,15 @@ class SignupTripFormContainer extends Component {
 
 const mapStateToProps = store => ({
     destinations: store.destinationState.destinations,
-    account: store.accountState.account
+    account: store.accountState.account,
+    accountTrips: store.accountState.trips
 });
 
 SignupTripFormContainer.propTypes = {
     dispatch: PropTypes.func.isRequired,
     destinations: PropTypes.array.isRequired,
-    account: PropTypes.object.isRequired
+    account: PropTypes.object.isRequired,
+    accountTrips: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps)(SignupTripFormContainer);
