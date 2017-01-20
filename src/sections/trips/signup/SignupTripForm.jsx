@@ -17,6 +17,7 @@ const validate = values => { // eslint-disable-line
     if (values.endDate && values.startDate > values.endDate) {
         errors.endDate = 'Must be a date after the start date';
     }
+    if (!values.destinationId) errors.destinationId = 'You have to select a destination';
     return errors;
 };
 
