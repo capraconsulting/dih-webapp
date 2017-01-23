@@ -51,7 +51,9 @@ class Sidebar extends Component {
     render() {
         return (<div className={this.getClasses().join(' ')}>
             <div className="item brand">
-                <img src="/logo.png" alt="logo" />
+                <a href="https://www.drapenihavet.no/en/home/">
+                    <img src="/logo.png" alt="logo" />
+                </a>
                 Dråpen i Havet
             </div>
 
