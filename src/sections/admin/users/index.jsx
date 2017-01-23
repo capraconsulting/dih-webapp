@@ -8,7 +8,7 @@ import Table from '../../../commons/table';
 import Header from '../../../commons/pageHeader';
 import { list } from '../../../actions/userActions';
 import { addRecipients } from '../../../actions/messageActions';
-import { USER_ROLES, ROLE_LABELS } from '../../../constants';
+import { USER_ROLES, ROLE_LABELS, USER_MEDICAL_DEGREES } from '../../../constants';
 
 const createHandlers = (dispatch) => (
     {
@@ -57,6 +57,55 @@ class UsersTableContainer extends Component {
                 color: 'black',
                 group: 'Filter by user role',
                 field: 'role'
+            },
+            {
+                value: USER_MEDICAL_DEGREES.DOCTOR,
+                label: 'Doctor',
+                color: 'blue',
+                group: 'Filter by user degree',
+                field: 'medicalDegree'
+            },
+            {
+                value: USER_MEDICAL_DEGREES.PARAMEDIC,
+                label: USER_MEDICAL_DEGREES.PARAMEDIC,
+                color: 'yellow',
+                group: 'Filter by user degree',
+                field: 'medicalDegree'
+            },
+            {
+                value: USER_MEDICAL_DEGREES.NURSE,
+                label: USER_MEDICAL_DEGREES.NURSE,
+                color: 'red',
+                group: 'Filter by user degree',
+                field: 'medicalDegree'
+            },
+            {
+                value: USER_MEDICAL_DEGREES.MIDWIFE,
+                label: USER_MEDICAL_DEGREES.MIDWIFE,
+                color: 'green',
+                group: 'Filter by user degree',
+                field: 'medicalDegree'
+            },
+            {
+                value: USER_MEDICAL_DEGREES.PSYCHOLOGIST,
+                label: USER_MEDICAL_DEGREES.PSYCHOLOGIST,
+                color: 'grey',
+                group: 'Filter by user degree',
+                field: 'medicalDegree'
+            },
+            {
+                value: USER_MEDICAL_DEGREES.PHYSICAL_THERAPIST,
+                label: USER_MEDICAL_DEGREES.PHYSICAL_THERAPIST,
+                color: 'purple',
+                group: 'Filter by user degree',
+                field: 'medicalDegree'
+            },
+            {
+                value: USER_MEDICAL_DEGREES.OTHER,
+                label: USER_MEDICAL_DEGREES.OTHER,
+                color: 'black',
+                group: 'Filter by user degree',
+                field: 'medicalDegree'
             }
         ];
     }
