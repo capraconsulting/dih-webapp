@@ -110,7 +110,11 @@ export default(
                     <Route path=":destinationId" component={Destination}>
                         <IndexRoute component={DestinationVolunteers} />
                         <Route name="Edit destination" path="edit" component={EditDestination} />
-                        <Route name="Emails" path="emails" component={DestinationEmails} />
+                        <Route
+                            name="Destination emails"
+                            path="emails"
+                            component={DestinationEmails}
+                        />
                         <Route
                             name="Add volunteer"
                             path="addvolunteer"
@@ -128,8 +132,9 @@ export default(
                     <IndexRoute component={Users} />
                     <Route path=":userId" component={User}>
                         <IndexRoute component={ViewUser} />
-                        <Route name="Edit" path="edit" component={EditUser} />
-                        <Route name="Trips" path="trips" component={TripsForUser} />
+                        <Route name="Edit user" path="edit" component={EditUser} />
+                        <Route name="Delete user" path="delete" component={DeleteUser} />
+                        <Route name="See user trips" path="trips" component={TripsForUser} />
                     </Route>
                 </Route>
 

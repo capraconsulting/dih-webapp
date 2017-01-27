@@ -38,12 +38,16 @@ class Trip extends Component {
                     uri: `/admin/trips/${this.props.params.tripId}`
                 },
                 {
-                    name: 'Edit',
+                    name: 'Edit trip',
                     uri: `/admin/trips/${this.props.params.tripId}/edit`
                 },
                 {
                     name: 'User',
                     uri: `/admin/trips/${this.props.params.tripId}/user`
+                },
+                {
+                    name: 'Edit user',
+                    uri: `/admin/users/${this.props.user.id}/edit`
                 }
 
             ]

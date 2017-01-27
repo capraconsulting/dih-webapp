@@ -24,10 +24,18 @@ function DeleteUser(props) {
                 handleSubmit={handleSubmit}
             >
                 <ToggleField
-                    name="I confirm that I want to delete my account"
-                    label={`Deleting your account means that you will have to register again
-                    if you want to go on a new trip. Toggling this button and confirming will
-                    delete your account, and log you out.`}
+                    name={!props.showAdminFields ? 'I confirm that I want to delete my account'
+                        : 'Confirm that you want to delete this account'
+                    }
+                    label={!props.showAdminFields ?
+                        `Deleting your account means that you will have to register again
+                        if you want to go on a new trip. Toggling this button and confirming will
+                        delete your account, and log you out.`
+                        : `Deleting an account means that the user will have to register again
+                        if he/she wants to go on a new trip. Toggling this button and confirming
+                        will delete this account. The system will send the user a short
+                        email informing about the change.`
+                    }
                     id="isActive"
                 >
                     {isActive}

@@ -46,6 +46,10 @@ class User extends Component {
                     uri: `/admin/users/${this.props.params.userId}/edit`
                 },
                 {
+                    name: 'Delete',
+                    uri: `/admin/users/${this.props.params.userId}/delete`
+                },
+                {
                     name: 'Trips',
                     uri: `/admin/users/${this.props.params.userId}/trips`
                 }
@@ -62,6 +66,19 @@ class User extends Component {
 
     onUpdate(user) {
         const userId = parseInt(this.props.params.userId, 10);
+
+        if (user.isActive !== 'undefined'
+        && user.isActive !== null
+        && user.isActive) {
+            // Check if isActive is defined and set to true
+            // Because it's inverted before it's handed to views
+            // So that the toggle works as we want in DeleteUser
+            this.handlers.update({ ...user, id: userId, isActive: false })
+            .then(() => this.handlers.notification('The user profile is deleted', 'success'))
+            .then(() => browserHistory.push('/admin/users'));
+            return;
+        }
+
         this.handlers.update({ id: userId, ...user })
             .then(response => {
                 const message = 'User changes saved!';
@@ -78,7 +95,11 @@ class User extends Component {
     }
 
     prepareInitialValues(user) {
-        return { ...user, birth: moment(user.birth).format('YYYY-MM-DD') };
+        return {
+            ...user,
+            birth: moment(user.birth).format('YYYY-MM-DD'),
+            isActive: !user.isActive // Inverted to work with form toggle
+        };
     }
 
     render() {
