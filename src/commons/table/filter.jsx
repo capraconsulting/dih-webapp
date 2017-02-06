@@ -5,7 +5,7 @@ class Filter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeFilter: null,
+            activeFilter: this.props.value || null,
             visible: false,
             active: false
         };
@@ -131,6 +131,7 @@ class Filter extends Component {
 
 Filter.propTypes = {
     filters: PropTypes.array.isRequired,
+    value: PropTypes.object,
     onChange: PropTypes.func.isRequired
 };
 

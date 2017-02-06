@@ -96,6 +96,7 @@ class UsersTableContainer extends Component {
                         search
                         select
                         loading={this.state.loading}
+                        location={this.props.location}
                         emptyState={{
                             title: 'No users',
                             message: 'Could not find any users.'
@@ -141,7 +142,8 @@ const mapStateToProps = store => ({
 
 UsersTableContainer.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    users: PropTypes.array.isRequired
+    users: PropTypes.array.isRequired,
+    location: PropTypes.object
 };
 
 export default connect(mapStateToProps)(UsersTableContainer);

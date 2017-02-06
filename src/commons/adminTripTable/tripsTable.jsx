@@ -167,6 +167,7 @@ class TripsTable extends Component {
         return (
             <Table
                 search
+                location={this.props.location}
                 responsivePriority={[
                     'fullName',
                     'destination',
@@ -202,6 +203,7 @@ TripsTable.propTypes = {
     destinationId: PropTypes.number,
     role: PropTypes.string,
     statuses: PropTypes.array,
+    location: PropTypes.object,
     isAdmin: PropTypes.bool
 };
 

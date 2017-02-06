@@ -1,19 +1,21 @@
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 import DateFilter from './dateFilter';
 
 class DateInterval extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            fromDate: null,
-            toDate: null
+            fromDate: this.props.fromDate ? moment(this.props.fromDate) : null,
+            toDate: this.props.toDate ? moment(this.props.toDate) : null
         };
     }
 
     updateDate(date, field) {
         const data = {
-            fromDate: this.state.fromDate,
-            toDate: this.state.toDate
+            fromDate: this.state.fromDate || null,
+            toDate: this.state.toDate || null
         };
         this.setState({ [field]: date });
         data[field] = date;
@@ -41,6 +43,8 @@ class DateInterval extends Component {
 }
 
 DateInterval.propTypes = {
+    fromDate: PropTypes.String,
+    toDate: PropTypes.String,
     onChange: PropTypes.func.isRequired
 };
 
