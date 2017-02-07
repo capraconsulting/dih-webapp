@@ -61,6 +61,7 @@ class DestinationsList extends Component {
                     search
                     loading={this.state.loading}
                     filters={this.filters}
+                    location={this.props.location}
                     emptyState={{
                         title: 'No destinations',
                         message: 'Could not find any destinations.'
@@ -103,6 +104,7 @@ const mapStateToProps = store => ({
 
 DestinationsList.propTypes = {
     dispatch: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired,
     destinations: PropTypes.array.isRequired
 };
 

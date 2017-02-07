@@ -54,15 +54,22 @@ import './table.scss';
 class Table extends Component {
     constructor(props) {
         super(props);
+        let settings = {};
+
+        if (this.props.location) {
+            console.log(this.props.location);
+            settings = JSON.parse(window.localStorage.getItem(this.props.location.pathname)) || {};
+        }
+
         this.state = {
             sorted: props.itemKey,
-            order: 'ascending',
+            order: settings.order || 'ascending',
             selected: props.selected || [],
             selectedAll: false,
-            searchText: '',
-            activeFilter: null,
-            fromDate: null,
-            toDate: null
+            searchText: settings.searchText || '',
+            activeFilter: settings.activeFilter || null,
+            fromDate: settings.fromDate || null,
+            toDate: settings.toDate || null
         };
     }
 
@@ -136,15 +143,50 @@ class Table extends Component {
 
     applyFilters(initialArray) {
         let array = initialArray;
+        const { activeFilter, fromDate, toDate } = this.state;
 
         // Filter
-        if (this.state.activeFilter) array = this.filter(array);
+        if (activeFilter) {
+            array = this.filter(array);
+        }
         // Date interval
-        if (this.state.fromDate || this.state.toDate) array = this.filterDate(array);
+        if (fromDate || toDate) {
+            array = this.filterDate(array);
+        }
         // Search
         array = this.search(array);
         // Sort
         return this.sort(array);
+    }
+
+    setSettings() {
+        const { order, activeFilter, fromDate, toDate, searchText } = this.state;
+        const settings = {};
+
+        if (order === 'descending') {
+            settings.order = order;
+        }
+
+        if (searchText.length) {
+            settings.searchText = searchText;
+        }
+
+        if (order === 'descending') {
+            settings.order = order;
+        }
+            // Filter
+        if (activeFilter) {
+            settings.activeFilter = activeFilter;
+        }
+            // Date interval  || toDate
+        if (fromDate) {
+            settings.fromDate = fromDate;
+        }
+
+        if (toDate) {
+            settings.toDate = toDate;
+        }
+        window.localStorage.setItem(this.props.location.pathname, JSON.stringify(settings));
     }
 
     handleSearchChange(searchText) {
@@ -305,12 +347,15 @@ class Table extends Component {
                 {this.props.filters &&
                     <Filter
                         filters={this.props.filters}
+                        value={this.state.activeFilter}
                         onChange={data => this.handleFilterChange(data)}
                     />
                 }
 
                 {this.props.dateFields &&
                     <DateInterval
+                        fromDate={this.state.fromDate}
+                        toDate={this.state.toDate}
                         onChange={
                             (fromDate, toDate) => this.handleDateFilterChange(fromDate, toDate)
                         }
@@ -353,6 +398,9 @@ class Table extends Component {
 
     render() {
         const rows = this.applyFilters(this.props.items);
+        if (this.props.location) {
+            this.setSettings();
+        }
 
         return (
             <div>
@@ -405,10 +453,12 @@ Table.propTypes = {
     responsivePriority: PropTypes.array,
     actions: PropTypes.array,
     selected: PropTypes.array,
+    getSettings: PropTypes.func,
     select: PropTypes.bool,
     loading: PropTypes.bool,
     search: PropTypes.bool,
     rowCounter: PropTypes.object,
+    location: PropTypes.object,
     emptyState: PropTypes.object,
     labels: PropTypes.object,
     filters: PropTypes.arrayOf(PropTypes.shape({
