@@ -44,7 +44,7 @@ class DateFilter extends Component {
 
     render() {
         const { date, datePrefix } = this.props;
-
+        console.log(date);
         let label = `${this.props.datePrefix} date`;
         if (date) label = `${datePrefix}: ${date.format('YYYY-MM-DD')}`;
 

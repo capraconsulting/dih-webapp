@@ -40,6 +40,7 @@ class AdminTripTable extends Component {
                 <TripsTable
                     trips={this.props.trips}
                     userId={this.props.userId}
+                    location={this.props.location}
                     destinationId={this.props.destinationId}
                     role={this.props.role}
                     isAdmin
@@ -58,6 +59,7 @@ AdminTripTable.propTypes = {
     trips: PropTypes.array.isRequired,
     dispatch: PropTypes.func.isRequired,
     userId: PropTypes.number,
+    location: PropTypes.object,
     destinationId: PropTypes.number,
     role: PropTypes.string,
     statuses: PropTypes.array
