@@ -4,7 +4,6 @@ import Header from '../../../../commons/pageHeader';
 import Navbar from '../../../../commons/navbar';
 import Segments from '../../../../commons/Segments';
 import Segment from '../../../../commons/Segment';
-// import ViewUser from '../../../../commons/user/viewUser';
 import { retrieve } from '../../../../actions/tripActions';
 import { pushNotification } from '../../../../actions/notificationActions';
 
@@ -30,10 +29,6 @@ class User extends Component {
                     uri: `/coordinator/trips/${this.props.params.tripId}`
                 },
                 {
-                    name: 'Change trip status',
-                    uri: `/coordinator/trips/${this.props.params.tripId}/edit`
-                },
-                {
                     name: 'View user',
                     uri: `/coordinator/trips/${this.props.params.tripId}/user`
                 }
@@ -55,7 +50,7 @@ class User extends Component {
                 <Segment>
                     <Header
                         icon="user"
-                        content={`Trip to ${this.props.trip.destination}`}
+                        content={`Trip to ${this.props.trip.destination.name}`}
                         subContent={
                             `For user ${this.props.user.firstname} ${this.props.user.lastname}`
                         }
