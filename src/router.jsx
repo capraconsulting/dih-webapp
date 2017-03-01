@@ -93,12 +93,13 @@ export default(
                         <Route name="Cancel" path="cancel" component={CancelTrip} />
                     </Route>
                 </Route>
+
                 <Route name="Destinations" path="coordinator/destinations">
                     <IndexRoute component={CoordinatorDestinations} />
                     <Route path=":destinationId" component={CoordinatorDestination} />
                 </Route>
-                <Route name="Users" path="coordinator/trips/:tripId" component={CoordinatorTrip}>
-                    <IndexRoute component={TripInfo} />
+                <Route name="Trips" path="coordinator/trips/:tripId" component={CoordinatorTrip}>
+                    <IndexRoute component={TripStatus} />
                     <Route
                         name="View user"
                         path="user"

@@ -59,7 +59,8 @@ class User extends Component {
                 <Navbar pages={this.state.pages} />
                 {React.cloneElement(this.props.children, {
                     user: this.props.user,
-                    trip: this.props.trip
+                    trip: this.props.trip,
+                    account: this.props.account
                 })}
             </Segments>
         );
@@ -68,7 +69,8 @@ class User extends Component {
 
 const mapStateToProps = store => ({
     trip: store.tripState.trip,
-    user: store.tripState.trip.user
+    user: store.tripState.trip.user,
+    account: store.accountState.account
 });
 
 User.propTypes = {
@@ -76,6 +78,7 @@ User.propTypes = {
     params: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
     trip: PropTypes.object.isRequired,
+    account: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired
 };
 
