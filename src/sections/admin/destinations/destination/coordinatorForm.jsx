@@ -109,7 +109,7 @@ class CoordinatorForm extends Component {
                         <SelectField
                             label="Coordinator"
                             values={this.filterModerators(this.props.users)}
-                            placeholder="Select an user"
+                            placeholder="Select a user"
                             valueLabel="name"
                             valueKey="id"
                             required
@@ -151,7 +151,7 @@ class CoordinatorForm extends Component {
                     color="primary"
                     onClick={(e) => this.toggleForm(e)}
                 >
-                    Add or manage coordiantor
+                    Add or manage coordinator
                 </Button>
             </div>
         );
