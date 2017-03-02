@@ -130,7 +130,8 @@ class CoordinatorForm extends Component {
                             {endDate}
                         </DateField>
                         {this.state.coordinator && <div className="ui message info">
-                            {`You are now updating the coordinator ${this.state.coordinator.fullName}`}
+                            {`You are now updating the coordinator
+                                ${this.state.coordinator.fullName}`}
                         </div>}
                         <div className="two ui buttons">
                             <Button onClick={e => this.toggleForm(e)}>
