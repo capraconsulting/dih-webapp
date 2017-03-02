@@ -99,7 +99,7 @@ export default(
                     <Route path=":destinationId" component={CoordinatorDestination} />
                 </Route>
                 <Route name="Trips" path="coordinator/trips/:tripId" component={CoordinatorTrip}>
-                    <IndexRoute component={TripStatus} />
+                    <IndexRoute component={TripInfo} />
                     <Route
                         name="View user"
                         path="user"
