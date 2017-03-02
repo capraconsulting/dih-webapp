@@ -30,8 +30,8 @@ import EditTrip from './commons/trip/editTrip';
 // Coordinator
 import CoordinatorDestinations from './sections/coordinator/destinations';
 import CoordinatorDestination from './sections/coordinator/destinations/destination';
-import CoordinatorUser from './sections/coordinator/users/user';
-import EditNotes from './sections/coordinator/users/user/notes';
+import CoordinatorTrip from './sections/coordinator/trips/trip';
+import EditNotes from './sections/coordinator/trips/trip/notes';
 
 // admin
 import Users from './sections/admin/users';
@@ -93,12 +93,18 @@ export default(
                         <Route name="Cancel" path="cancel" component={CancelTrip} />
                     </Route>
                 </Route>
+
                 <Route name="Destinations" path="coordinator/destinations">
                     <IndexRoute component={CoordinatorDestinations} />
                     <Route path=":destinationId" component={CoordinatorDestination} />
                 </Route>
-                <Route name="Users" path="coordinator/users/:userId" component={CoordinatorUser}>
-                    <IndexRoute component={ViewUser} />
+                <Route name="Trips" path="coordinator/trips/:tripId" component={CoordinatorTrip}>
+                    <IndexRoute component={TripInfo} />
+                    <Route
+                        name="View user"
+                        path="user"
+                        component={ViewUser}
+                    />
                     <Route name="Notes" path="notes" component={EditNotes} />
                 </Route>
 

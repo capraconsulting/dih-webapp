@@ -86,10 +86,12 @@ class UpdateTripStatus extends Component {
         return options;
     }
 
-    allowedActions(status) {
+    getAllowedActions(status) {
+        // Admins can do everything
         if (this.props.account.role === USER_ROLES.ADMIN) {
             return this.createSelectOptionsForAdmin();
         }
+        // Moderators can only follow the defined flow
         const statuses = [this.createSelectObject(TRIP_STATUSES.CLOSED)];
         switch (status) {
         case TRIP_STATUSES.PENDING:
@@ -118,8 +120,9 @@ class UpdateTripStatus extends Component {
     handleSubmit(e) {
         e.preventDefault();
         e.stopPropagation();
+        const selectedStatus = this.props.fields.status.value;
         const body = {
-            status: this.props.fields.status.value,
+            status: (selectedStatus !== '' ? selectedStatus : this.props.trip.status),
             statusComment: this.props.fields.statusComment.value,
             id: this.props.trip.id
         };
@@ -181,7 +184,7 @@ class UpdateTripStatus extends Component {
                                 label="Status"
                                 placeholder={this.createSelectObject(this.props.trip.status).label}
                                 icon={this.createSelectObject(this.props.trip.status).icon}
-                                values={this.allowedActions(this.props.trip.status)}
+                                values={this.getAllowedActions(this.props.trip.status)}
                                 noInitalValue
                                 valueLabel="label"
                                 valueKey="status"

@@ -17,7 +17,7 @@ class Destination extends Component {
             loading: true
         };
         this.handlers = createHandlers(this.props.dispatch);
-        this.statuses = [
+        this.statuses = [ // Trips with these statuses will be shown
             TRIP_STATUSES.ACTIVE,
             TRIP_STATUSES.PRESENT,
             TRIP_STATUSES.LEFT,
