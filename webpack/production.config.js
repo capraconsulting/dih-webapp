@@ -51,6 +51,10 @@ config.module.loaders = [
         loader: ExtractTextPlugin.extract('style-loader', '!css-loader')
     },
     {
+        test: /\.json$/,
+        loader: 'json-loader'
+    },
+    {
         test: /\.jsx?$/, // Matches both .js and .jsx
         exclude: /node_modules/,
         loader: 'babel',
