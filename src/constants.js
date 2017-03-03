@@ -1,6 +1,5 @@
 import React from 'react';
-
-const countries = require('json!./countries.json'); // eslint-disable-line
+import countries from './countries.json';
 /**
 * All constants used trouought the application.
 * @module components/constants
