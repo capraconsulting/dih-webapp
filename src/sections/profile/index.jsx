@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import moment from 'moment';
-
 import { DATE_FORMAT } from '../../constants';
 import { update, retrieve } from '../../actions/accountActions';
 import { pushNotification } from '../../actions/notificationActions';
@@ -11,23 +10,9 @@ import Navbar from '../../commons/navbar';
 import Segment from '../../commons/Segment';
 import Segments from '../../commons/Segments';
 
-const createHandlers = (dispatch) => (
-    {
-        retrieve() {
-            return dispatch(retrieve());
-        },
-        update(data) {
-            return dispatch(update(data));
-        },
-        notification(message, level) {
-            return dispatch(pushNotification(message, level));
-        }
-    }
-);
 class Profile extends Component {
     constructor(props) {
         super(props);
-        this.handlers = createHandlers(this.props.dispatch);
         this.state = {
             pages: [
                 {
@@ -44,11 +29,10 @@ class Profile extends Component {
                 }
             ]
         };
-        this.handlers.retrieve();
     }
 
     componentDidMount() {
-        this.handlers.retrieve();
+        this.props.retrieve();
     }
 
     onUpdate(data) {
@@ -59,25 +43,25 @@ class Profile extends Component {
             // So that the toggle works as we want in DeleteUser
             const deactivatedUser = data;
             deactivatedUser.isActive = false;
-            this.handlers.update(deactivatedUser)
-            .then(() => this.handlers.notification('Profile is deleted', 'success'))
+            this.props.update(deactivatedUser)
+            .then(() => this.props.pushNotification('Profile is deleted', 'success'))
             .then(() => browserHistory.push('/login'));
             return;
         }
-        this.handlers.update({
+        this.props.update({
             ...data,
             birth: moment(data.birth).toString()
         })
-        .then(() => this.handlers.retrieve())
-        .then(() => this.handlers.notification('Profile is updated.', 'success'))
+        .then(() => this.props.retrieve())
+        .then(() => this.props.pushNotification('Profile is updated.', 'success'))
         .then(() => browserHistory.push('/profile'));
     }
 
     prepareInitialValues(account) {
         return {
             ...account,
-            birth: moment(account.birth).format(DATE_FORMAT),
-            isActive: !account.isActive
+            isActive: !account.isActive,
+            birth: account.birth ? moment(account.birth, 'YYYY-MM-DD').format(DATE_FORMAT) : ''
         };
     }
 
@@ -107,10 +91,18 @@ const mapStateToProps = store => ({
     account: store.accountState.account
 });
 
+const mapStateToDispatch = {
+    retrieve,
+    update,
+    pushNotification
+};
+
 Profile.propTypes = {
     children: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    retrieve: PropTypes.func.isRequired,
+    update: PropTypes.func.isRequired,
+    pushNotification: PropTypes.func.isRequired,
     account: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, mapStateToDispatch)(Profile);

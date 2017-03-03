@@ -17,7 +17,7 @@ const Segments = (props) => (
 
 Segments.propTypes = {
     clearing: PropTypes.bool,
-    children: PropTypes.object,
+    children: PropTypes.node,
     loading: PropTypes.bool
 };
 
