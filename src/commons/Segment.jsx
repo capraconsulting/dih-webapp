@@ -21,7 +21,7 @@ Segment.propTypes = {
     clearing: PropTypes.bool,
     blue: PropTypes.bool,
     center: PropTypes.bool,
-    children: PropTypes.object,
+    children: PropTypes.node,
     loading: PropTypes.bool
 };
 

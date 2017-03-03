@@ -13,8 +13,14 @@ import React, { PropTypes } from 'react';
 *
 */
 
+const createClasses = (props) => {
+    const classes = ['field'];
+    if (props.children.touched && props.children.error) classes.push('error');
+    return classes;
+};
+
 const ToggleField = props => (
-    <div className="field">
+    <div className={createClasses(props).join(' ')}>
         <label htmlFor={props.id}>
             {props.name}
             {props.required && <span className="required"> *</span>}

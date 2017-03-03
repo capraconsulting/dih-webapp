@@ -37,13 +37,16 @@ const validate = (values, component) => {
     if (!values.phoneNumber) {
         errors.phoneNumber = 'Required';
     }
+    if (!values.readTerms) {
+        errors.readTerms = 'Required';
+    }
     if (values.phoneNumber && values.phoneNumber[0] !== '+') {
         errors.phoneNumber = 'The country code needs to start with a plus-sign, i.e. +47.';
     }
     if (!values.birth) {
         errors.birth = 'Required';
     }
-    if (values.birth && !moment(values.birth).isValid()) {
+    if (values.birth && !moment(values.birth, 'YYYY-MM-DD', true).isValid()) {
         errors.birth = 'The date has to be written on the format YYYY-MM-DD';
     }
     if (!values.volunteerInfo) {
@@ -63,7 +66,6 @@ const renderIfFieldIsFilled = (field, element) => {
     if (field.value && field.value.length > 0) return element;
     return '';
 };
-let firstRenderIsDone = false; // Set to true on first render
 
 function EditUser(props) {
     const {
@@ -77,14 +79,6 @@ function EditUser(props) {
         errorMessage,
         isFetching
     } = props;
-
-    if (!birth.valid && !firstRenderIsDone) {
-        birth.value = ''; // Remove 'Invalid date' for new users
-    }
-
-    if (!firstRenderIsDone) {
-        firstRenderIsDone = true;
-    }
 
     return (
         <Segment>
@@ -116,6 +110,7 @@ function EditUser(props) {
                 <InputField
                     label="Date of birth (YYYY-MM-DD)"
                     placeholder="YYYY-MM-DD"
+                    type="text"
                     required={props.user.role !== USER_ROLES.ADMIN}
                 >
                 {birth}
@@ -227,7 +222,8 @@ function EditUser(props) {
                 <TextField
                     rows={3}
                     label="Work and experience"
-                    placeholder="Fill in your occupation, work experience and/or other information you find relevant"
+                    placeholder="Fill in your occupation,
+                    work experience and/or other information you find relevant"
                     required={props.user.role !== USER_ROLES.ADMIN}
                 >
                     {volunteerInfo}
