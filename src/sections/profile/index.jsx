@@ -61,7 +61,7 @@ class Profile extends Component {
         return {
             ...account,
             isActive: !account.isActive,
-            birth: account.birth ? moment(account.birth, 'YYYY-MM-DD').format(DATE_FORMAT) : ''
+            birth: account.birth ? moment(account.birth, DATE_FORMAT).format(DATE_FORMAT) : ''
         };
     }
 

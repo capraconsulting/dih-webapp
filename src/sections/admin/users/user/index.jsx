@@ -9,6 +9,7 @@ import Segment from '../../../../commons/Segment';
 import Segments from '../../../../commons/Segments';
 import Header from '../../../../commons/pageHeader';
 import Navbar from '../../../../commons/navbar';
+import { DATE_FORMAT } from '../../../../constants';
 
 const createHandlers = (dispatch) => (
     {
@@ -97,7 +98,7 @@ class User extends Component {
     prepareInitialValues(user) {
         return {
             ...user,
-            birth: moment(user.birth).format('YYYY-MM-DD'),
+            birth: user.birth ? moment(user.birth, DATE_FORMAT).format(DATE_FORMAT) : '',
             isActive: !user.isActive // Inverted to work with form toggle
         };
     }
