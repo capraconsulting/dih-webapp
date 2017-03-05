@@ -69,7 +69,7 @@
     "wdio": "~0.3.3",
     "wdio-cucumber-framework": "~0.1.0",
     "wdio-junit-reporter": "~0.1.0",
-    "wdio-sauce-service": "~0.2.2",
+    "wdio-sauce-service": "~0.3.1",
     "wdio-selenium-standalone-service": "~0.0.5",
     "webdriverio": "~4.1.1",
     "webpack": "~1.13.1",
