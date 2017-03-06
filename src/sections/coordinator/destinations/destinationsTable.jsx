@@ -13,7 +13,7 @@ class DestinationsTable extends Component {
         this.handlers = createHandlers(this.props.dispatch);
         this.state = {
             loading: true
-        }
+        };
         this.filterValues = [
             {
                 value: 'yes',

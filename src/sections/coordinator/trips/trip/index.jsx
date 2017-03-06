@@ -4,7 +4,6 @@ import Header from '../../../../commons/pageHeader';
 import Navbar from '../../../../commons/navbar';
 import Segments from '../../../../commons/Segments';
 import Segment from '../../../../commons/Segment';
-// import ViewUser from '../../../../commons/user/viewUser';
 import { retrieve } from '../../../../actions/tripActions';
 import { pushNotification } from '../../../../actions/notificationActions';
 
@@ -30,10 +29,6 @@ class User extends Component {
                     uri: `/coordinator/trips/${this.props.params.tripId}`
                 },
                 {
-                    name: 'Change trip status',
-                    uri: `/coordinator/trips/${this.props.params.tripId}/edit`
-                },
-                {
                     name: 'View user',
                     uri: `/coordinator/trips/${this.props.params.tripId}/user`
                 }
@@ -55,7 +50,7 @@ class User extends Component {
                 <Segment>
                     <Header
                         icon="user"
-                        content={`Trip to ${this.props.trip.destination}`}
+                        content={`Trip to ${this.props.trip.destination.name}`}
                         subContent={
                             `For user ${this.props.user.firstname} ${this.props.user.lastname}`
                         }
@@ -64,7 +59,8 @@ class User extends Component {
                 <Navbar pages={this.state.pages} />
                 {React.cloneElement(this.props.children, {
                     user: this.props.user,
-                    trip: this.props.trip
+                    trip: this.props.trip,
+                    account: this.props.account
                 })}
             </Segments>
         );
@@ -73,7 +69,8 @@ class User extends Component {
 
 const mapStateToProps = store => ({
     trip: store.tripState.trip,
-    user: store.tripState.trip.user
+    user: store.tripState.trip.user,
+    account: store.accountState.account
 });
 
 User.propTypes = {
@@ -81,6 +78,7 @@ User.propTypes = {
     params: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
     trip: PropTypes.object.isRequired,
+    account: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired
 };
 

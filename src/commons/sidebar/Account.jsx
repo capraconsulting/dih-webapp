@@ -13,6 +13,12 @@ const Account = (props) => (
             <a onClick={props.onLogout} className="item">
                 Logout
             </a>
+            <a
+                href="https://docs.google.com/document/d/1Mp4V6ljP-TgCTstW_ZamJ-EuGM9J6JfYfVraKi7IO4Y/pub"
+                className="item"
+            >
+                Help
+            </a>
         </div>
     </div>
 );

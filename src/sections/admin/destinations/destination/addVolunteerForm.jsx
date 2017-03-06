@@ -39,7 +39,7 @@ function AddVolunteerForm(props) {
                 label="Volunteer"
                 icon="users"
                 values={props.users}
-                placeholder="Select an user"
+                placeholder="Select a user"
                 valueLabel="fullName"
                 valueKey="id"
                 required
