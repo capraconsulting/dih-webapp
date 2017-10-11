@@ -34,9 +34,6 @@ Name your branches in the following way, where `#num` is a task ID on GitHub:
     * Comments where the code does not explain itself
     * Inline documentation (jsdoc)
     * Any relevant documentation added to GitHub Wiki
-* If you've worked on the appreciate
-    * At least 80% test coverage
-    * All tests run OK
 
 ## Setup
 
