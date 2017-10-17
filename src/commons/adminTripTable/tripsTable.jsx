@@ -94,8 +94,8 @@ class TripsTable extends Component {
         if (!this.props.userId) {
             headers.fullName = 'Name';
             headers.phoneNumber = 'Phone number';
+            headers.email = 'Email';
         }
-
         if (!this.props.destinationId) {
             headers.destination = 'Destination';
         }
@@ -134,6 +134,7 @@ class TripsTable extends Component {
             if (!this.props.userId) {
                 row.fullName = trip.user.fullName;
                 row.phoneNumber = trip.user.phoneNumber;
+                row.email = trip.user.email;
             }
 
             if (!this.props.destinationId) {
