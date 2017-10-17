@@ -4,6 +4,7 @@
   "description": "Webapp for DiH-project",
   "main": "public/index.html",
   "scripts": {
+    "start": "./node_modules/babel-cli/bin/babel-node.js webpack/server",
     "start:dev": "./node_modules/babel-cli/bin/babel-node.js webpack/server",
     "test": "npm run lint && npm run start:dev | npm run test:e2e",
     "lint": "eslint --ignore-path .gitignore .",
