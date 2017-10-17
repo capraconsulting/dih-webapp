@@ -1,6 +1,6 @@
 {
   "name": "dih-webapp",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Webapp for DiH-project",
   "main": "public/index.html",
   "scripts": {
