@@ -94,11 +94,12 @@ class TripsTable extends Component {
         if (!this.props.userId) {
             headers.fullName = 'Name';
             headers.phoneNumber = 'Phone number';
+            headers.email = 'Email';
         }
-
         if (!this.props.destinationId) {
             headers.destination = 'Destination';
         }
+        headers.email = "Email";
         headers.medicalDegree = 'Medical degree';
         headers.startDate = 'Start date';
         headers.endDate = 'End date';
@@ -126,12 +127,14 @@ class TripsTable extends Component {
                 startDate: moment(trip.startDate).format('YYYY-MM-DD'),
                 endDate: trip.endDate ? moment(trip.endDate).format('YYYY-MM-DD') : 'Not set',
                 status: trip.status,
-                medicalDegree: trip.user.medicalDegree
+                medicalDegree: trip.user.medicalDegree,
+                email: trip.user.email
             };
 
             if (!this.props.userId) {
                 row.fullName = trip.user.fullName;
                 row.phoneNumber = trip.user.phoneNumber;
+                row.email = trip.user.email;
             }
 
             if (!this.props.destinationId) {

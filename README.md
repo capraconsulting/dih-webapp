@@ -8,22 +8,32 @@ __Build status:__
 
 
 ## Workflow
+Want to contribute? Do the following:
 
-1. Get a task on JIRA by talking to you teammates and looking at the sprint backlog.
+1. Pick a task from the Issues-page. Want something easy to start with? Look at those labeled "up-for-grabs"
 2. Create a new branch  from the `dev`-branch, naming it using our branch naming strategy described below.
 3. Code away and commit often. Try to follow [good commit practice](http://chris.beams.io/posts/git-commit/). Remember to write tests (and run them).
-4. When you're done (see definition of done on GitHub), create a pull request with reference to the JIRA-issue (preferably a link) and an overview of what the pull request is about. Await code review (you can tag people or yell for them on Slack to get your review faster).
+4. When you're done (see definition of done below), create a pull request with reference to the GitHub-issue (preferably a link) and an overview of what the pull request is about. Await code review (you can tag people or yell for them on Slack to get your review faster).
 5. When you've reworked your code after the code review, the pull request will be merged.
 
 ### Branch naming strategy
-The project has a strategy for what to name our branches, so that changes in them are easily traceable to user stories and issues in our issue tracking system JIRA. Another reason for having a naming strategy is that it makes it easy to find distinct types of proposed changes, as well as what's being worked on.
+The project has a strategy for what to name our branches, so that changes in them are easily traceable to user stories and issues in our issue tracking system GitHub. Another reason for having a naming strategy is that it makes it easy to find distinct types of proposed changes, as well as what's being worked on.
 
-Name your branches in the following way, where `DIH-num` is a task ID on JIRA:
+Name your branches in the following way, where `#num` is a task ID on GitHub:
 
-* If it's a feature (new functionality) name the branch `feature/DIH-num`.
-* If it's a bugfix name the branch `bugfix/DIH_num`.
-* If it's a technical task, name the branch `tech/DIH-num`.
-* If it's a testing task (no implementation), name the branch `test/DIH-num`.
+* If it's a feature (new functionality) name the branch `feature/#num`.
+* If it's a bugfix name the branch `bugfix/#num`.
+* If it's a technical task, name the branch `tech/#num`.
+* If it's a testing task (no implementation), name the branch `test/#num`.
+
+### Definition of Done
+* Approved code review from at least one developer
+* Meets coding standards set for the project
+    * ESLinting OK
+    * Generic code as far as possible
+    * Comments where the code does not explain itself
+    * Inline documentation (jsdoc)
+    * Any relevant documentation added to GitHub Wiki
 
 ## Setup
 
