@@ -173,7 +173,7 @@ class TripsTable extends Component {
                     'fullName',
                     'destination',
                     'status',
-                    'email',
+                    'phoneNumber',
                     'startDate',
                     'endDate',
                     'medicalDegree'
