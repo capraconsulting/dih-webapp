@@ -77,6 +77,7 @@ class Sidebar extends Component {
                     <SidebarMenuItem uri="/admin/destinations" itemName="Destinations" />
                     <SidebarMenuItem uri="/admin/trips" itemName="Trips" />
                     <SidebarMenuItem uri="/admin/message/recipients" itemName="Message" />
+                    <SidebarMenuItem uri="/admin/values" itemName="Admin values" />
                 </SidebarMenuGroup>
             }
             <Account account={this.props.account} onLogout={e => { this.handleLogout(e); }} />
