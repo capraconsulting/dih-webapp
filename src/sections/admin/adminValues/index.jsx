@@ -27,7 +27,7 @@ class AdminValues extends Component {
                 <Segment>
                     <Header
                         content="Admin values"
-                        subContent="Show and edit all admin values"
+                        subContent="Show and edit all admin values, the texts shown on this webpage"
                         icon="configure"
                     />
                 </Segment>

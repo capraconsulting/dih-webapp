@@ -58,6 +58,9 @@ import AdminTripsRequests from './sections/admin/trips/tripRequests';
 import AdminValues from './sections/admin/adminValues';
 import AdminValuesTable from './sections/admin/adminValues/adminValuesTable';
 import AddAdminValue from './sections/admin/adminValues/addAdminValue';
+import AdminValue from './sections/admin/adminValues/adminValue';
+import ViewAdminValue from './sections/admin/adminValues/adminValue/viewAdminValue';
+
 
 import Email from './sections/admin/email';
 import Message from './sections/admin/message';
@@ -170,6 +173,10 @@ export default(
                 <Route name="AdminValues" path="admin/values" component={AdminValues}>
                     <IndexRoute component={AdminValuesTable} />
                     <Route name="new" path="new" component={AddAdminValue} />
+                    <Route path=":adminValueId" component={AdminValue}>
+                        <IndexRoute component={ViewAdminValue} />
+
+                    </Route>
                 </Route>
                 <Route name="Not found" path="*" component={NotFound} />
             </Route>

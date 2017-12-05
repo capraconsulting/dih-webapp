@@ -6,7 +6,7 @@ import Header from '../../../../commons/pageHeader';
 import Segments from '../../../../commons/Segments';
 import Navbar from '../../../../commons/navbar';
 import Segment from '../../../../commons/Segment';
-import { retrieve, update } from '../../../../actions/tripActions';
+import { retrieve, update, list } from '../../../../actions/adminValuesActions';
 import { pushNotification } from '../../../../actions/notificationActions';
 
 const ADMIN_VALUE_TABLE_LOCATION = '/admin/values';
@@ -17,6 +17,9 @@ const createHandlers = (dispatch) => (
         },
         update(body) {
             return dispatch(update(body));
+        },
+        list(){
+            return dispatch(list());
         },
         notification(message, level) {
             return dispatch(pushNotification(message, level));
@@ -65,13 +68,6 @@ class AdminValue extends Component {
     render() {
         return (
             <Segments loading={this.state.loading} >
-                <Segment>
-                    <Header
-                        icon="configure"
-                        content={this.props.adminValue.name}
-                        subContent="Manage admin value"
-                    />
-                </Segment>
                 <Navbar pages={this.state.pages} />
                 {React.cloneElement(this.props.children, {
                     initialValues: this.props.adminValue,
@@ -86,7 +82,8 @@ class AdminValue extends Component {
 }
 
 const mapStateToProps = store => ({
-    account: store.accountState.account
+    account: store.accountState.account,
+    adminValue: store.adminValuesState.adminValue
 });
 
 AdminValue.propTypes = {
@@ -96,5 +93,4 @@ AdminValue.propTypes = {
     adminValue: PropTypes.object.isRequired,
     account: PropTypes.object.isRequired
 };
-
 export default connect(mapStateToProps)(AdminValue);

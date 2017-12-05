@@ -44,7 +44,7 @@ class AdminValuesTable extends Component {
                         value: 'Value'
                     }}
                     link={{
-                        columnName: 'name',
+                        columnName: 'title',
                         prefix: '/admin/values/'
                     }}
                     itemKey="id"

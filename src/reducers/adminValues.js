@@ -4,7 +4,8 @@ const initialState = {
     isFetching: false,
     errorMessage: null,
     successMessage: null,
-    values: []
+    values: [],
+    adminValue: {}
 };
 
 export default function (state = initialState, action) {
@@ -25,7 +26,7 @@ export default function (state = initialState, action) {
         return {
             ...state,
             isFetching: false,
-            user: action.res
+            adminValue: action.res
         };
     case types.POST_ADMIN_VALUE_SUCCESS:
         return {
