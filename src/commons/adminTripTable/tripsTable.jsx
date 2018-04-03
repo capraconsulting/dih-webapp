@@ -99,7 +99,7 @@ class TripsTable extends Component {
         if (!this.props.destinationId) {
             headers.destination = 'Destination';
         }
-        headers.email = "Email";
+        headers.email = 'Email';
         headers.medicalDegree = 'Medical degree';
         headers.startDate = 'Start date';
         headers.endDate = 'End date';
