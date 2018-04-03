@@ -14,12 +14,17 @@ const createTemplatesList = (destination) => {
         {
             id: destination.pendingStatusMailTemplateId,
             name: 'Pending email',
-            description: 'Email sent for users approved a trip.'
+            description: 'Email sent for users pending approval for a trip.'
         },
         {
             id: destination.rejectedStatusMailTemplateId,
             name: 'Rejected email',
-            description: 'Email sent for users approved a trip.'
+            description: 'Email sent for users rejected for a trip.'
+        },
+        {
+          id: destination.leftStatusMailTemplateId,
+          name: 'Left email',
+          description: 'Email sent for users that have left a destination'
         }
     ];
 };
