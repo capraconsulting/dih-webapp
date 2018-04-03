@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import Segment from '../../../commons/Segment';
-import { create } from '../../../actions/adminValuesActions';
-import { pushNotification } from '../../../actions/notificationActions';
+import Segment from '../../../../commons/Segment';
+import { create } from '../../../../actions/adminValuesActions';
+import { pushNotification } from '../../../../actions/notificationActions';
 import AddAdminValueForm from './addAdminValueForm';
 
 const createHandlers = (dispatch) => (

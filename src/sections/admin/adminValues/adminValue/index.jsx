@@ -2,10 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
-import Header from '../../../../commons/pageHeader';
 import Segments from '../../../../commons/Segments';
 import Navbar from '../../../../commons/navbar';
-import Segment from '../../../../commons/Segment';
 import { retrieve, update, list } from '../../../../actions/adminValuesActions';
 import { pushNotification } from '../../../../actions/notificationActions';
 
@@ -18,7 +16,7 @@ const createHandlers = (dispatch) => (
         update(body) {
             return dispatch(update(body));
         },
-        list(){
+        list() {
             return dispatch(list());
         },
         notification(message, level) {

@@ -60,6 +60,7 @@ import AdminValuesTable from './sections/admin/adminValues/adminValuesTable';
 import AddAdminValue from './sections/admin/adminValues/addAdminValue';
 import AdminValue from './sections/admin/adminValues/adminValue';
 import ViewAdminValue from './sections/admin/adminValues/adminValue/viewAdminValue';
+import EditAdminValue from './sections/admin/adminValues/adminValue/editAdminValue';
 
 
 import Email from './sections/admin/email';
@@ -175,7 +176,7 @@ export default(
                     <Route name="new" path="new" component={AddAdminValue} />
                     <Route path=":adminValueId" component={AdminValue}>
                         <IndexRoute component={ViewAdminValue} />
-
+                        <Route name="edit" path="edit" component={EditAdminValue} />
                     </Route>
                 </Route>
                 <Route name="Not found" path="*" component={NotFound} />

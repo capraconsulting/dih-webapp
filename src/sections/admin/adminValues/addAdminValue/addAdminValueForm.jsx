@@ -2,20 +2,20 @@ import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { forEach } from 'lodash';
 
-import Button from '../../../commons/Button';
-import Form from '../../../commons/Form';
-import InputField from '../../../commons/Form/InputField';
-import TextField from '../../../commons/Form/TextField';
+import Button from '../../../../commons/Button';
+import Form from '../../../../commons/Form';
+import InputField from '../../../../commons/Form/InputField';
+import TextField from '../../../../commons/Form/TextField';
 
 
 const fields = ['title', 'description', 'value'];
 
 const validate = values => {
     const errors = {};
-    const requiredErrorMsg = 'Required';
+    const errorMessageForRequiredField = 'Required';
     forEach(fields, value => {
         if (!values[value]) {
-            errors[value] = requiredErrorMsg;
+            errors[value] = errorMessageForRequiredField;
         }
     });
     return errors;
@@ -42,7 +42,7 @@ function AddDestinationForm(props) {
             <TextField label="Value" rows={5} type="text" required>
                 {value}
             </TextField>
-            <TextField label="Description" rows={5} placeholder="Describe the value" required>
+            <TextField rows={5} placeholder="Describe the value" required>
                 {description}
             </TextField>
             <Button

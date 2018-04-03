@@ -6,7 +6,7 @@ const ROOT_ENDPOINT = '/adminvalues';
 export function list() {
     return {
         [CALL_API]: {
-            method: 'get',
+            method: 'GET',
             url: ROOT_ENDPOINT,
             types: [
                 types.GET_ADMIN_VALUES_REQUEST,
@@ -21,7 +21,7 @@ export function list() {
 export function retrieve(id) {
     return {
         [CALL_API]: {
-            method: 'get',
+            method: 'GET',
             url: `${ROOT_ENDPOINT}/${id}`,
             types: [
                 types.GET_ADMIN_VALUE_REQUEST,
@@ -36,7 +36,7 @@ export function retrieve(id) {
 export function create(data) {
     return {
         [CALL_API]: {
-            method: 'post',
+            method: 'POST',
             url: ROOT_ENDPOINT,
             types: [
                 types.POST_ADMIN_VALUE_REQUEST,
@@ -52,7 +52,7 @@ export function create(data) {
 export function update(data) {
     return {
         [CALL_API]: {
-            method: 'put',
+            method: 'PUT',
             url: `${ROOT_ENDPOINT}/${data.id}`,
             types: [
                 types.PUT_ADMIN_VALUE_REQUEST,

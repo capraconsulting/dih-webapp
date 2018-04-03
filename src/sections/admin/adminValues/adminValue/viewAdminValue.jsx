@@ -9,19 +9,19 @@ const ViewAdminValue = (props) => (
     <Segment>
         <List>
             <ListItem
-                name="First name"
-                icon="user"
+                name="Title of value"
+                icon="edit"
                 content={props.adminValue.title}
             />
-            <ListItem
-                name="Last name"
-                icon="user"
-                content={props.adminValue.value}
+            <FluidListItem
+                name="Description of the value"
+                icon="quote left"
+                content={props.adminValue.description}
             />
             <FluidListItem
-                name="Work and experience"
-                icon="building outline"
-                content={props.adminValue.description}
+                name="Value, i.e. what the value is"
+                icon="keyboard"
+                content={props.adminValue.value}
             />
         </List>
     </Segment>
