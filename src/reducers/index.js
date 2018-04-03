@@ -9,6 +9,7 @@ import emailReducer from './email';
 import messageReducer from './message';
 import notificationReducer from './notification';
 import tripReducer from './trips';
+import adminValuesReducer from './adminValues';
 
 export default combineReducers({
     accountState: accountReducer,
@@ -19,5 +20,6 @@ export default combineReducers({
     emailState: emailReducer,
     messageState: messageReducer,
     form: formReducer,
-    authenticationState: authenticationReducer
+    authenticationState: authenticationReducer,
+    adminValuesState: adminValuesReducer
 });
