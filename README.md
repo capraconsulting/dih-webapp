@@ -60,3 +60,11 @@ On the webapp we have end-to-end tests with Selenium, but the tests are run in [
 The results can be viewed in your account on Sauce Labs.
 
 `npm test` wil run both linter and end-to-end tests. You can run only end-to-end tests with `npm run test:e2e`.
+
+## Code documentation
+
+### Project structure
+The idea is to organize the project in the following fashion:
+
+- `commons` contains common components. If a component consists of multiple components, create a folder for it which contains all the needed parts. The main component is exported as `index.jsx`.
+- `sections` is organized around the routes in the webapp, i.e. components associated with the `admin`-routes is placed in `sections/admin`. The main view for the route is in `index.jsx` in the correspondig folder. Components used in that view, which are not common, is placed in the same folder.
