@@ -4,7 +4,10 @@ __Build status:__
 
 | `dev` | `master`|
 | :--  |:--|
-|[![CircleCI](https://circleci.com/gh/capraconsulting/dih-webapp/tree/dev.svg?style=svg&circle-token=a63cb3349231317b6f5e6d298f3f49a82a7f382a)](https://circleci.com/gh/capraconsulting/dih-webapp/tree/dev)|[![CircleCI](https://circleci.com/gh/capraconsulting/dih-webapp/tree/master.svg?style=svg&circle-token=a63cb3349231317b6f5e6d298f3f49a82a7f382a)](https://circleci.com/gh/capraconsulting/dih-webapp/tree/master)|
+|[![CircleCI](https://circleci.com/gh/dropsintheocean/dih-webapp/tree/dev.svg?style=svg&circle-token=a63cb3349231317b6f5e6d298f3f49a82a7f382a)](https://circleci.com/gh/dropsintheocean/dih-webapp/tree/dev)|[![CircleCI](https://circleci.com/gh/dropsintheocean/dih-webapp/tree/master.svg?style=svg&circle-token=a63cb3349231317b6f5e6d298f3f49a82a7f382a)](https://circleci.com/gh/dropsintheocean/dih-webapp/tree/master)|
+
+## Contribute
+Dråpen i Havet/A Drop in the Ocean is a volunteer organization. If you want to contribute, take a look at the issues or contact the head of the organization Trude, at trude [@] drapenihavet [dot] no.
 
 
 ## Workflow
