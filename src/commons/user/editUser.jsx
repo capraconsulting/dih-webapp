@@ -13,10 +13,27 @@ import { USER_ROLES, GENDERS, USER_MEDICAL_DEGREES, COUNTRIES } from '../../cons
 import { emailIsValid } from '../../helpers';
 
 const fields = [
-    'firstname', 'lastname', 'gender', 'phoneNumber', 'email', 'role', 'birth',
-    'notes', 'volunteerInfo', 'readTerms', 'addressLine1', 'addressLine2',
-    'postalCode', 'city', 'country', 'medicalDegree', 'medicalDegreeLicenseNumber',
-    'nationality', 'languages', 'emergencyContactInfo'
+    'firstname',
+    'lastname',
+    'gender',
+    'phoneNumber',
+    'email',
+    'role',
+    'birth',
+    'notes',
+    'volunteerInfo',
+    'readTerms',
+    'addressLine1',
+    'addressLine2',
+    'postalCode',
+    'city',
+    'country',
+    'medicalDegree',
+    'medicalDegreeLicenseNumber',
+    'nationality',
+    'languages',
+    'emergencyContactInfo',
+    'agreesToPrivacyTerms'
 ];
 
 const validate = (values, component) => {
@@ -69,11 +86,28 @@ const renderIfFieldIsFilled = (field, element) => {
 
 function EditUser(props) {
     const {
-        fields: { firstname, lastname, email, phoneNumber, gender,
-            role, birth, notes, volunteerInfo, readTerms,
-            addressLine1, addressLine2, postalCode, city, country,
-            medicalDegree, medicalDegreeLicenseNumber, nationality,
-            languages, emergencyContactInfo
+        fields: {
+            firstname,
+            lastname,
+            email,
+            phoneNumber,
+            gender,
+            role,
+            birth,
+            notes,
+            volunteerInfo,
+            readTerms,
+            addressLine1,
+            addressLine2,
+            postalCode,
+            city,
+            country,
+            medicalDegree,
+            medicalDegreeLicenseNumber,
+            nationality,
+            languages,
+            emergencyContactInfo,
+            agreesToPrivacyTerms
         },
         handleSubmit,
         errorMessage,
@@ -84,14 +118,10 @@ function EditUser(props) {
         <Segment>
             <div className="ui message">
                 Fields marked with <span className="required">*</span> are
-                <strong> required</strong>, but we appreciate that you make your
-                profile as detailed as possible.
+                <strong> required</strong>, but we appreciate that you make your profile as detailed
+                as possible.
             </div>
-            <Form
-                id="editUserForm"
-                errorMessage={errorMessage}
-                handleSubmit={handleSubmit}
-            >
+            <Form id="editUserForm" errorMessage={errorMessage} handleSubmit={handleSubmit}>
                 <InputField label="First name" type="text" required>
                     {firstname}
                 </InputField>
@@ -100,7 +130,7 @@ function EditUser(props) {
                 </InputField>
                 <SelectField
                     label="Gender"
-                    values={Object.keys(GENDERS).map((k) => ({ gender: GENDERS[k] }))}
+                    values={Object.keys(GENDERS).map(k => ({ gender: GENDERS[k] }))}
                     placeholder="Select your gender"
                     valueLabel="gender"
                     valueKey="gender"
@@ -113,7 +143,7 @@ function EditUser(props) {
                     type="text"
                     required={props.user.role !== USER_ROLES.ADMIN}
                 >
-                {birth}
+                    {birth}
                 </InputField>
                 <InputField
                     label="E-mail"
@@ -127,15 +157,15 @@ function EditUser(props) {
                     type="tel"
                     placeholder="+0012345678"
                     required={props.user.role !== USER_ROLES.ADMIN}
-
                 >
                     {phoneNumber}
                 </InputField>
                 <SelectField
                     label="Nationality"
-                    values={Object.keys(COUNTRIES).map(key =>
-                        ({ icon: `${key.toLowerCase()} flag`,
-                        country: COUNTRIES[key] }))}
+                    values={Object.keys(COUNTRIES).map(key => ({
+                        icon: `${key.toLowerCase()} flag`,
+                        country: COUNTRIES[key]
+                    }))}
                     placeholder="Where you're originally from"
                     valueLabel="country"
                     valueKey="country"
@@ -143,10 +173,11 @@ function EditUser(props) {
                 >
                     {nationality}
                 </SelectField>
-                {renderIfAdmin(props,
+                {renderIfAdmin(
+                    props,
                     <SelectField
                         label="Role"
-                        values={Object.keys(USER_ROLES).map((k) => ({ role: USER_ROLES[k] }))}
+                        values={Object.keys(USER_ROLES).map(k => ({ role: USER_ROLES[k] }))}
                         placeholder="Select a role"
                         valueLabel="role"
                         valueKey="role"
@@ -155,61 +186,54 @@ function EditUser(props) {
                     </SelectField>
                 )}
 
-                <InputField
-                    label="Address line 1"
-                    placeholder="Your Address"
-                    type="text"
-                >
-                {addressLine1}
+                <InputField label="Address line 1" placeholder="Your Address" type="text">
+                    {addressLine1}
                 </InputField>
                 <InputField
                     label="Address line 2"
                     placeholder="Second adress line in case you have a long address"
                     type="text"
                 >
-                {addressLine2}
+                    {addressLine2}
                 </InputField>
-                <InputField
-                    label="Postal code"
-                    type="text"
-                >
-                {postalCode}
+                <InputField label="Postal code" type="text">
+                    {postalCode}
                 </InputField>
-                <InputField
-                    label="City"
-                    type="text"
-                >
-                {city}
+                <InputField label="City" type="text">
+                    {city}
                 </InputField>
                 <SelectField
                     label="Country of residence"
-                    values={Object.keys(COUNTRIES).map(key =>
-                        ({ icon: `${key.toLowerCase()} flag`,
-                        country: COUNTRIES[key] }))}
+                    values={Object.keys(COUNTRIES).map(key => ({
+                        icon: `${key.toLowerCase()} flag`,
+                        country: COUNTRIES[key]
+                    }))}
                     placeholder="Where you live"
                     valueLabel="country"
                     valueKey="country"
                     search
                 >
-                {country}
+                    {country}
                 </SelectField>
                 <SelectField
                     label="Medical degree"
-                    values={Object.keys(USER_MEDICAL_DEGREES).map((k) =>
-                        ({ degree: USER_MEDICAL_DEGREES[k] }))}
+                    values={Object.keys(USER_MEDICAL_DEGREES).map(k => ({
+                        degree: USER_MEDICAL_DEGREES[k]
+                    }))}
                     placeholder="Select your medical degree if you have one"
                     valueLabel="degree"
                     valueKey="degree"
                 >
                     {medicalDegree}
                 </SelectField>
-                {renderIfFieldIsFilled(medicalDegree,
+                {renderIfFieldIsFilled(
+                    medicalDegree,
                     <InputField
                         label="License number of medical degree"
                         placeholder="License number or description"
                         type="text"
                     >
-                    {medicalDegreeLicenseNumber}
+                        {medicalDegreeLicenseNumber}
                     </InputField>
                 )}
                 <InputField
@@ -217,7 +241,7 @@ function EditUser(props) {
                     type="text"
                     placeholder="What languages do you speak?"
                 >
-                {languages}
+                    {languages}
                 </InputField>
                 <TextField
                     rows={3}
@@ -236,7 +260,8 @@ function EditUser(props) {
                 >
                     {emergencyContactInfo}
                 </TextField>
-                {renderIfAdmin(props,
+                {renderIfAdmin(
+                    props,
                     <TextField
                         rows={3}
                         label="Notes (only visible to administrators and coordinators)"
@@ -245,7 +270,8 @@ function EditUser(props) {
                     </TextField>
                 )}
 
-                {renderIfAdmin(props,
+                {renderIfAdmin(
+                    props,
                     <ToggleField
                         name="Guidelines for A Drop in the Ocean"
                         label={`User confirmation of reading the guidelines.
@@ -254,8 +280,7 @@ function EditUser(props) {
                         id="readTerms"
                     >
                         {readTerms}
-                    </ToggleField>
-                ,
+                    </ToggleField>,
                     <ToggleField
                         name="Guidelines for A Drop in the Ocean"
                         label={`I confirm that I have read the guidelines for A Drop in the Ocean.
@@ -267,7 +292,19 @@ function EditUser(props) {
                         {readTerms}
                     </ToggleField>
                 )}
-
+                <ToggleField
+                    name="Privacy Guidelines"
+                    label={`I confirm that I have read and agree to the privacy terms 
+                    of A Drop in the Ocean.
+                    <a target="_blank" 
+                    href="https://docs.google.com/document/d/e/2PACX-1vTLztU4EHLkqUBnLFc9pTcvH5AWWm76ItkB7Vwnhb-Tic5AFPyxbl9-yBvxJlLSRKfq_ak9snbiEbm0/pub">
+                    Click here to read the terms.
+                    </a>`}
+                    id="readPrivacyTerms"
+                    required
+                >
+                    {agreesToPrivacyTerms}
+                </ToggleField>
                 <Button
                     type="submit"
                     color="green"
