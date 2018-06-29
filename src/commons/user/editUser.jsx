@@ -249,7 +249,7 @@ function EditUser(props) {
                     label="Work and experience"
                     placeholder="Fill in your occupation,
                     work experience and/or other information you find relevant"
-                    required={!userHasAdminRole()}
+                    required={!userHasAdminRole(props)}
                 >
                     {volunteerInfo}
                 </TextField>
@@ -279,7 +279,7 @@ function EditUser(props) {
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
                         Click here to read the guidelines.</a>`}
                         id="readTerms"
-                        required={!userHasAdminRole()}
+                        required={!userHasAdminRole(props)}
                     >
                         {readTerms}
                     </ToggleField>,
@@ -289,7 +289,7 @@ function EditUser(props) {
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
                         Click here to read the guidelines.</a>`}
                         id="readTerms"
-                        required={!userHasAdminRole()}
+                        required={!userHasAdminRole(props)}
                     >
                         {readTerms}
                     </ToggleField>
