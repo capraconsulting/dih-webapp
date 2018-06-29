@@ -72,7 +72,7 @@ function SignUpForm(props) {
                 type="submit"
                 color="primary"
                 fluid
-                disabled={isFetching}
+                disabled={isFetching || !agreesToPrivacyTerms.value}
                 loading={isFetching}
                 id="submit"
             >
