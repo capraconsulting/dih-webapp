@@ -33,7 +33,7 @@ const fields = [
     'nationality',
     'languages',
     'emergencyContactInfo',
-    'agreesToPrivacyTerms'
+    'readPrivacyTerms'
 ];
 
 const validate = (values, component) => {
@@ -78,6 +78,7 @@ const renderIfAdmin = (props, elementForAdmin, elementForUser) => {
     }
     return elementForUser || '';
 };
+const userHasAdminRole = (props) => props.user.role !== USER_ROLES.ADMIN;
 
 const renderIfFieldIsFilled = (field, element) => {
     if (field.value && field.value.length > 0) return element;
@@ -107,7 +108,7 @@ function EditUser(props) {
             nationality,
             languages,
             emergencyContactInfo,
-            agreesToPrivacyTerms
+            readPrivacyTerms
         },
         handleSubmit,
         errorMessage,
@@ -248,7 +249,7 @@ function EditUser(props) {
                     label="Work and experience"
                     placeholder="Fill in your occupation,
                     work experience and/or other information you find relevant"
-                    required={props.user.role !== USER_ROLES.ADMIN}
+                    required={!userHasAdminRole()}
                 >
                     {volunteerInfo}
                 </TextField>
@@ -278,6 +279,7 @@ function EditUser(props) {
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
                         Click here to read the guidelines.</a>`}
                         id="readTerms"
+                        required={!userHasAdminRole()}
                     >
                         {readTerms}
                     </ToggleField>,
@@ -287,7 +289,7 @@ function EditUser(props) {
                         <a target="_blank" rel="noopener noreferrer" href="http://www.drapenihavet.no/en/guidelines">
                         Click here to read the guidelines.</a>`}
                         id="readTerms"
-                        required={props.user.role !== USER_ROLES.ADMIN}
+                        required={!userHasAdminRole()}
                     >
                         {readTerms}
                     </ToggleField>
@@ -303,7 +305,7 @@ function EditUser(props) {
                     id="readPrivacyTerms"
                     required
                 >
-                    {agreesToPrivacyTerms}
+                    {readPrivacyTerms}
                 </ToggleField>
                 <Button
                     type="submit"

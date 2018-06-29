@@ -7,7 +7,7 @@ import InputField from '../../commons/Form/InputField';
 import Button from '../../commons/Button';
 import ToggleField from '../../commons/Form/ToggleField';
 
-const fields = ['email', 'firstname', 'lastname', 'agreesToPrivacyTerms'];
+const fields = ['email', 'firstname', 'lastname', 'readPrivacyTerms'];
 
 const validate = values => {
     const errors = {};
@@ -22,8 +22,8 @@ const validate = values => {
     if (!values.firstname) {
         errors.firstname = 'Required';
     }
-    if (!values.agreesToPrivacyTerms) {
-        errors.agreesToPrivacyTerms = `Required.
+    if (!values.readPrivacyTerms) {
+        errors.readPrivacyTerms = `Required.
         We cannot handle you in our system if you do not agree witht he privacy terms.`;
     }
     return errors;
@@ -31,7 +31,7 @@ const validate = values => {
 
 function SignUpForm(props) {
     const {
-        fields: { email, firstname, lastname, agreesToPrivacyTerms },
+        fields: { email, firstname, lastname, readPrivacyTerms },
         handleSubmit,
         errorMessage,
         successMessage,
@@ -66,13 +66,13 @@ function SignUpForm(props) {
                 id="readPrivacyTerms"
                 required
             >
-                {agreesToPrivacyTerms}
+                {readPrivacyTerms}
             </ToggleField>
             <Button
                 type="submit"
                 color="primary"
                 fluid
-                disabled={isFetching || !agreesToPrivacyTerms.value}
+                disabled={isFetching}
                 loading={isFetching}
                 id="submit"
             >
