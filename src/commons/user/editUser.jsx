@@ -293,12 +293,12 @@ function EditUser(props) {
                     </ToggleField>
                 )}
                 <ToggleField
-                    name="Privacy Guidelines"
-                    label={`I confirm that I have read and agree to the privacy terms 
-                    of A Drop in the Ocean.
+                    name="Privacy Policy"
+                    label={`I agree that my personal information is stored and processed as described in the Privacy
+                    Policy of A Drop in the Ocean.
                     <a target="_blank" 
-                    href="https://docs.google.com/document/d/e/2PACX-1vTLztU4EHLkqUBnLFc9pTcvH5AWWm76ItkB7Vwnhb-Tic5AFPyxbl9-yBvxJlLSRKfq_ak9snbiEbm0/pub">
-                    Click here to read the terms.
+                    href="https://www.drapenihavet.no/en/privacy/">
+                    Click here to read our Privacy Policy.
                     </a>`}
                     id="readPrivacyTerms"
                     required
